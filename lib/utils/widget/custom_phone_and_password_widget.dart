@@ -5,29 +5,22 @@ import 'package:get/get.dart';
 import '../../generated/assets.dart';
 import '../componant/CustomTextFieldWidget.dart';
 
-class TextFieldMobileWidget extends StatefulWidget {
+
+class TextFieldMobileWidget extends StatelessWidget {
+  TextFieldMobileWidget({required this.textEditingController, this.value});
+
   String? value;
   TextEditingController textEditingController = TextEditingController();
-
-  TextFieldMobileWidget({required this.textEditingController, required this.value});
-
-  @override
-  _TextFieldMobileWidgetState createState() => _TextFieldMobileWidgetState();
-}
-class _TextFieldMobileWidgetState extends State<TextFieldMobileWidget> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return FromTextShared(
         labelText: 'mobile_number'.tr,
         maxLength: 11,
         onChanged: (value) {
-          widget.value = value;
+          value = value;
         },
         onSaved: (String? value){
-          widget.value = value!;
+          value = value!;
         },
         isPassword: false,
         onTapValidator: (value) {
@@ -42,10 +35,11 @@ class _TextFieldMobileWidgetState extends State<TextFieldMobileWidget> {
         width: 25,
         height: 25,
         keyboardType: TextInputType.number,
-        Controller: widget.textEditingController,
+        Controller: textEditingController,
         hintText: 'mobile_number'.tr);
   }
 }
+
 
 class TextFieldPasswordWidget extends StatefulWidget {
   TextFieldPasswordWidget({required this.textEditingController,required this.isPassword});
@@ -87,3 +81,5 @@ class _TextFieldPasswordWidgetState extends State<TextFieldPasswordWidget> {
     );
   }
 }
+
+

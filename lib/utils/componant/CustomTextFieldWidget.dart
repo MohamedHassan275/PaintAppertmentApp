@@ -132,7 +132,7 @@ class FromTextShared extends StatelessWidget {
         maxLines: maxLines,
         minLines: 1,
         maxLength: maxLength,
-        style: TextStyle(fontSize: 15, color: Themes.ColorApp8),
+        style: const TextStyle(fontSize: 15, color: Themes.ColorApp8),
         validator: onTapValidator,
         obscureText: isPassword!,
         keyboardType: keyboardType,

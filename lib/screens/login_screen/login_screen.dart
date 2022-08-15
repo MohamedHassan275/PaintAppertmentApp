@@ -7,6 +7,7 @@ import '../../generated/assets.dart';
 import '../../utils/constant/Themes.dart';
 import '../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../utils/widget/custom_phone_and_password_widget.dart';
+import '../register_screen/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -130,7 +131,7 @@ class CreateAccountFromLoginWidget extends StatelessWidget {
                 width: 5,
               ),
               InkWell(
-             //   onTap: () => Get.to(RegisterScreen()),
+                onTap: () => Get.to(const RegisterScreen()),
                 child: Text(
                   'create_account'.tr,
                   style: const TextStyle(
