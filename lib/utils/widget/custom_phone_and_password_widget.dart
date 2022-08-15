@@ -15,6 +15,9 @@ class TextFieldMobileWidget extends StatefulWidget {
   _TextFieldMobileWidgetState createState() => _TextFieldMobileWidgetState();
 }
 class _TextFieldMobileWidgetState extends State<TextFieldMobileWidget> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return FromTextShared(
