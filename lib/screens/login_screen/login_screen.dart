@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/screens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 
 import '../../generated/assets.dart';
@@ -23,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String? mobilePhone, password,firebase_token;
   TextEditingController MobilePhone = new TextEditingController();
   TextEditingController Password = new TextEditingController();
-
+  GlobalKey<FormState> form = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -49,18 +50,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
               ),),
-              SizedBox(height: heightValue*1.2,),
-              TextFieldMobileWidget(textEditingController: MobilePhone, value: mobilePhone,),
-              SizedBox(height: heightValue*.7,),
-              TextFieldPasswordWidget(textEditingController: Password, isPassword: isPassword),
-              SizedBox(height: heightValue * 1,),
-              const ForgetPasswordWidget(),
-              SizedBox(height: heightValue * .2,),
-              CirclerProgressIndicatorWidget(isLoading: false),
-              SizedBox(height: heightValue * 1,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: CustomButtonImage(title: 'login'.tr, hight: 55, onTap: (){}),
+              Form(
+                key: form,
+                child: Column(
+                  children: [
+                    SizedBox(height: heightValue*1.2,),
+                    TextFieldMobileWidget(textEditingController: MobilePhone, value: mobilePhone,),
+                    SizedBox(height: heightValue*.7,),
+                    TextFieldPasswordWidget(textEditingController: Password, isPassword: isPassword),
+                    SizedBox(height: heightValue * 1,),
+                    const ForgetPasswordWidget(),
+                    SizedBox(height: heightValue * .2,),
+                    CirclerProgressIndicatorWidget(isLoading: false),
+                    SizedBox(height: heightValue * 1,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: CustomButtonImage(title: 'login'.tr, hight: 55, onTap: (){
+                        if (form.currentState!.validate()){
+                          Get.to(const HomeMainScreen());
+                        }
+                      }),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: heightValue * 1,),
               const CreateAccountFromLoginWidget(),

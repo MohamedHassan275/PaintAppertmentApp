@@ -31,6 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isPassword = true;
   bool isConfirmPassword = true;
   bool isCheckAccepted = false;
+  GlobalKey<FormState> form = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -56,193 +57,203 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   fontWeight: FontWeight.w700,
                 ),),
               SizedBox(height: heightValue*1.2,),
-              FromTextRegisterShared(
-                  labelText: 'first_name'.tr,
-                  readOnly: false,
-                  isPassword: false,
-                  onTapValidator: (value) {
-                    if (value!.isEmpty) {
-                      return 'must_not_empty'.tr;
-                    }
-                    return null;
-                  },
-                  keyboardType: TextInputType.text,
-                  Controller: FirstName,
-                  hintText: 'first_name'.tr),
-              SizedBox(
-                height: heightValue * 1,
-              ),
-              FromTextRegisterShared(
-                  labelText: 'last_name'.tr,
-                  readOnly: false,
-                  onTapValidator: (value) {
-                    if (value!.isEmpty) {
-                      return 'must_not_empty'.tr;
-                    }
-                    return null;
-                  },
-                  isPassword: false,
-                  keyboardType: TextInputType.text,
-                  Controller: LastName,
-                  hintText: 'last_name'.tr),
-              SizedBox(
-                height: heightValue * 1,
-              ),
-              FromTextRegisterShared(
-                  labelText: 'email_address'.tr,
-                  onTapValidator: (value) {
-                    if (value!.isEmpty) {
-                      return 'must_not_empty'.tr;
-                    } else if (!(value.contains("@"))) {
-                      return 'not_valid'.tr;
-                    }
-                    return null;
-                  },
-                  readOnly: false,
-                  isPassword: false,
-                  keyboardType: TextInputType.emailAddress,
-                  Controller: Email,
-                  hintText: 'email_address'.tr),
-              SizedBox(
-                height: heightValue * 1,
-              ),
-              FromTextRegisterShared(
-                //  textAlign: TextAlign.center,
-                labelText: 'password'.tr,
-                onTapFunction: () {
-                  setState(() {
-                    FocusScope.of(context).unfocus();
-                    FocusScope.of(context)
-                        .requestFocus(_focusNodePassword);
-                  });
-                },
-                readOnly: false,
-                focusNode: _focusNodePassword,
-                isPassword: isPassword,
-                onTapValidator: (value) {
-                  if (value!.isEmpty) {
-                    return 'must_not_empty'.tr;
-                  } else if (value.length <= 5) {
-                    return 'short_password'.tr;
-                  }
-                  return null;
-                },
-                suffixIcon: isPassword
-                    ? Icons.visibility_sharp
-                    : Icons.visibility_off,
-                onTapsuffixIcon: () {
-                  setState(() {
-                    isPassword = !isPassword;
-                  });
-                },
-                keyboardType: TextInputType.text,
-                maxLines: 1,
-                Controller: Password,
-                hintText: 'password'.tr,
-              ),
-              SizedBox(
-                height: heightValue * 1,
-              ),
-              FromTextRegisterShared(
-                //  textAlign: TextAlign.center,
-                labelText: 'confirm_password'.tr,
-                onTapFunction: () {
-                  setState(() {
-                    FocusScope.of(context).unfocus();
-                    FocusScope.of(context).requestFocus(
-                        _focusNodeConfirmPassword);
-                  });
-                },
-                readOnly: false,
-                focusNode: _focusNodeConfirmPassword,
-                isPassword: isConfirmPassword,
-                onTapValidator: (value) {
-                  if (value!.isEmpty) {
-                    return 'must_not_empty'.tr;
-                  } else if (value.length <= 5) {
-                    return 'short_password'.tr;
-                  } else if (!(value
-                      .contains(Password.text))) {
-                    return 'Password_does_not_match'.tr;
-                  }
-                  return null;
-                },
-                suffixIcon: isConfirmPassword
-                    ? Icons.visibility_sharp
-                    : Icons.visibility_off,
-                onTapsuffixIcon: () {
-                  setState(() {
-                    isConfirmPassword = !isConfirmPassword;
-                  });
-                },
-                keyboardType: TextInputType.text,
-                maxLines: 1,
-                Controller: ConfirmPassword,
-                hintText: 'confirm_password'.tr,
-              ),
-              SizedBox(
-                height: heightValue * 1,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 25),
-                child: Row(
-                  children: [
-                    Theme(
-                        data: ThemeData(
-                            unselectedWidgetColor:
-                            Themes.ColorApp1),
-                        child: Checkbox(
-                            value: isCheckAccepted,
-                            tristate: false,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(5)),
-                            side: const BorderSide(
-                                color: Themes.ColorApp1,
-                                width: 2.0),
-                            activeColor: Themes.ColorApp1,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isCheckAccepted = value!;
-                              });
-                            })),
-                    InkWell(
-                      onTap: () {
-                        // _modalBottomSheetMenu();
-                      },
-                      child: Text(
-                        "agree_to_terms".tr,
-                        style: const TextStyle(
-                          color: Themes.ColorApp1,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: heightValue * .2,
-              ),
-              CirclerProgressIndicatorWidget(isLoading: false),
-              SizedBox(
-                height: heightValue * .5,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 25, vertical: 15),
-                child: CustomButtonImage(
-                    hight: 50,
-                    title: 'register'.tr,
-                    onTap: () {
-                      // isCheckAccepted == true ? controller.createAccount(widget.mobilePhone, FirstName.text,
-                      //     LastName.text, Email.text, Password.text) : CustomFlutterToast('agree_to_terms2'.tr);
-                      isCheckAccepted == true ? CustomFlutterToast('تم تسجيلك بنجاح') :CustomFlutterToast('agree_to_terms2'.tr);
-                    }
-                ),
-              ),
+             Form(
+               key: form,
+               child: Column(
+                 children: [
+                   FromTextRegisterShared(
+                       labelText: 'first_name'.tr,
+                       readOnly: false,
+                       isPassword: false,
+                       onTapValidator: (value) {
+                         if (value!.isEmpty) {
+                           return 'must_not_empty'.tr;
+                         }
+                         return null;
+                       },
+                       keyboardType: TextInputType.text,
+                       Controller: FirstName,
+                       hintText: 'first_name'.tr),
+                   SizedBox(
+                     height: heightValue * 1,
+                   ),
+                   FromTextRegisterShared(
+                       labelText: 'last_name'.tr,
+                       readOnly: false,
+                       onTapValidator: (value) {
+                         if (value!.isEmpty) {
+                           return 'must_not_empty'.tr;
+                         }
+                         return null;
+                       },
+                       isPassword: false,
+                       keyboardType: TextInputType.text,
+                       Controller: LastName,
+                       hintText: 'last_name'.tr),
+                   SizedBox(
+                     height: heightValue * 1,
+                   ),
+                   FromTextRegisterShared(
+                       labelText: 'email_address'.tr,
+                       onTapValidator: (value) {
+                         if (value!.isEmpty) {
+                           return 'must_not_empty'.tr;
+                         } else if (!(value.contains("@"))) {
+                           return 'not_valid'.tr;
+                         }
+                         return null;
+                       },
+                       readOnly: false,
+                       isPassword: false,
+                       keyboardType: TextInputType.emailAddress,
+                       Controller: Email,
+                       hintText: 'email_address'.tr),
+                   SizedBox(
+                     height: heightValue * 1,
+                   ),
+                   FromTextRegisterShared(
+                     //  textAlign: TextAlign.center,
+                     labelText: 'password'.tr,
+                     onTapFunction: () {
+                       setState(() {
+                         FocusScope.of(context).unfocus();
+                         FocusScope.of(context)
+                             .requestFocus(_focusNodePassword);
+                       });
+                     },
+                     readOnly: false,
+                     focusNode: _focusNodePassword,
+                     isPassword: isPassword,
+                     onTapValidator: (value) {
+                       if (value!.isEmpty) {
+                         return 'must_not_empty'.tr;
+                       } else if (value.length <= 5) {
+                         return 'short_password'.tr;
+                       }
+                       return null;
+                     },
+                     suffixIcon: isPassword
+                         ? Icons.visibility_sharp
+                         : Icons.visibility_off,
+                     onTapsuffixIcon: () {
+                       setState(() {
+                         isPassword = !isPassword;
+                       });
+                     },
+                     keyboardType: TextInputType.text,
+                     maxLines: 1,
+                     Controller: Password,
+                     hintText: 'password'.tr,
+                   ),
+                   SizedBox(
+                     height: heightValue * 1,
+                   ),
+                   FromTextRegisterShared(
+                     //  textAlign: TextAlign.center,
+                     labelText: 'confirm_password'.tr,
+                     onTapFunction: () {
+                       setState(() {
+                         FocusScope.of(context).unfocus();
+                         FocusScope.of(context).requestFocus(
+                             _focusNodeConfirmPassword);
+                       });
+                     },
+                     readOnly: false,
+                     focusNode: _focusNodeConfirmPassword,
+                     isPassword: isConfirmPassword,
+                     onTapValidator: (value) {
+                       if (value!.isEmpty) {
+                         return 'must_not_empty'.tr;
+                       } else if (value.length <= 5) {
+                         return 'short_password'.tr;
+                       } else if (!(value
+                           .contains(Password.text))) {
+                         return 'Password_does_not_match'.tr;
+                       }
+                       return null;
+                     },
+                     suffixIcon: isConfirmPassword
+                         ? Icons.visibility_sharp
+                         : Icons.visibility_off,
+                     onTapsuffixIcon: () {
+                       setState(() {
+                         isConfirmPassword = !isConfirmPassword;
+                       });
+                     },
+                     keyboardType: TextInputType.text,
+                     maxLines: 1,
+                     Controller: ConfirmPassword,
+                     hintText: 'confirm_password'.tr,
+                   ),
+                   SizedBox(
+                     height: heightValue * 1,
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.symmetric(
+                         horizontal: 25),
+                     child: Row(
+                       children: [
+                         Theme(
+                             data: ThemeData(
+                                 unselectedWidgetColor:
+                                 Themes.ColorApp1),
+                             child: Checkbox(
+                                 value: isCheckAccepted,
+                                 tristate: false,
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius:
+                                     BorderRadius.circular(5)),
+                                 side: const BorderSide(
+                                     color: Themes.ColorApp1,
+                                     width: 2.0),
+                                 activeColor: Themes.ColorApp1,
+                                 onChanged: (bool? value) {
+                                   setState(() {
+                                     isCheckAccepted = value!;
+                                   });
+                                 })),
+                         InkWell(
+                           onTap: () {
+                             // _modalBottomSheetMenu();
+                           },
+                           child: Text(
+                             "agree_to_terms".tr,
+                             style: const TextStyle(
+                               color: Themes.ColorApp1,
+                               fontWeight: FontWeight.w400,
+                               fontSize: 15,
+                             ),
+                           ),
+                         ),
+                       ],
+                     ),
+                   ),
+                   SizedBox(
+                     height: heightValue * .2,
+                   ),
+                   CirclerProgressIndicatorWidget(isLoading: false),
+                   SizedBox(
+                     height: heightValue * .5,
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.symmetric(
+                         horizontal: 25, vertical: 15),
+                     child: CustomButtonImage(
+                         hight: 50,
+                         title: 'register'.tr,
+                         onTap: () {
+                           // isCheckAccepted == true ? controller.createAccount(widget.mobilePhone, FirstName.text,
+                           //     LastName.text, Email.text, Password.text) : CustomFlutterToast('agree_to_terms2'.tr);
+                           if(form.currentState!.validate()){
+                             isCheckAccepted == true ? CustomFlutterToast('تم تسجيلك بنجاح') :
+                             CustomFlutterToast('agree_to_terms2'.tr);
+                           }
+                         }
+                     ),
+                   ),
+                 ],
+               ),
+             ),
               SizedBox(
                 height: heightValue * .5,
               ),

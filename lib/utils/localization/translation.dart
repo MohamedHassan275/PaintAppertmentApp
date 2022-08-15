@@ -21,6 +21,7 @@ class MyTranslation extends Translations{
       "forget_password" : "نسيت كلمه المرور ؟",
       "login" : "تسجيل دخول",
       "not_account" : "ليس لديك حساب ؟",
+      "must_not_empty" : "يجب ألا يكون هذا فارغًا",
       "create_account" : "انشاء حساب",
       "forget_password2" : "نسيت كلمه المرور",
       "forget_code" : "كود الاسترجاع",
