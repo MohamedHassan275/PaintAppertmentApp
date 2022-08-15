@@ -228,7 +228,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               CirclerProgressIndicatorWidget(isLoading: false),
               SizedBox(
-                height: heightValue * 1,
+                height: heightValue * .5,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
