@@ -33,7 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(child: SingleChildScrollView(
         child: Container(
           color: Themes.whiteColor,
-          height: Get.height,
           width: Get.width,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
