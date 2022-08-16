@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               'خدامات الاكثر طلبا',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 15,
+                                fontSize: 19,
                                 overflow: TextOverflow.fade,
                                 color: Themes.ColorApp15,
                               ),
@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               'خدامات منزلية',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 15,
+                                fontSize: 19,
                                 overflow: TextOverflow.fade,
                                 color: Themes.ColorApp15,
                               ),
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               'خدامات متنوعة',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 15,
+                                fontSize: 19,
                                 overflow: TextOverflow.fade,
                                 color: Themes.ColorApp15,
                               ),

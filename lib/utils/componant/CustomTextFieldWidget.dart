@@ -77,6 +77,90 @@ Widget SharedFromTextField({
     );
 
 
+class FromTextProfileShared extends StatelessWidget {
+  Function()? onTapFunction;
+  String? Function(String? value)? onTapValidator;
+  Function(String)? onChanged;
+  Function()? onTapsuffixIcon;
+  Function? validator;
+  TextEditingController? Controller;
+  int? maxLines;
+  int? maxLength;
+  double? width;
+  double? height;
+  TextInputType? keyboardType;
+  IconData? suffixIcon;
+  FocusNode? focusNode;
+  String? labelText;
+  String? hintText;
+  TextAlign? textAlign = TextAlign.start;
+  bool? isPassword = false;
+
+  FromTextProfileShared(
+      { this.onTapFunction,
+        this.onTapValidator,
+        this.onChanged,
+        this.onTapsuffixIcon,
+        this.validator,
+        required this.Controller,
+        this.maxLines,
+        this.maxLength,
+        this.focusNode,
+        this.width,
+        this.height,
+        required this.keyboardType,
+        this.suffixIcon,
+        this.labelText,
+        required this.hintText,
+        this.textAlign,
+        this.isPassword});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: TextFormField(
+        onChanged: onChanged,
+        onTap: onTapFunction,
+        focusNode: focusNode,
+        controller: Controller,
+        maxLines: maxLines,
+        minLines: 1,
+        maxLength: maxLength,
+        textInputAction: TextInputAction.next,
+        style: TextStyle(fontSize: 15, color: Themes.ColorApp8),
+        validator: onTapValidator,
+        obscureText: isPassword!,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+            hintText: hintText,
+            filled: true,
+            fillColor: Colors.white,
+            suffixIcon: suffixIcon != null
+                ? IconButton(
+              icon: Icon(suffixIcon),
+              color: Themes.ColorApp1,
+              onPressed: onTapsuffixIcon,
+            )
+                : null,
+            focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide(color: Themes.ColorApp9, width: 1)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide(color: Themes.ColorApp2, width: 1)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide(color: Themes.ColorApp2, width: 1)),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide(color: Themes.ColorApp2, width: 1)),
+            labelText: labelText),
+      ),
+    );
+  }
+}
+
 class FromTextShared extends StatelessWidget {
   Function()? onTapFunction;
   String? Function(String? value)? onTapValidator;

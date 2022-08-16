@@ -44,18 +44,18 @@ class RequestMyServiceScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 1.5,),
-                  CustomTextFieldWidget(title: 'distance_appertment', keyboardType: TextInputType.number, textEditingController: DistanceApperment),
-                  SizedBox(
-                    height: height * .5,
-                  ),
-                  CustomTextFieldWidget(title: 'room_number', keyboardType: TextInputType.number, textEditingController: RoomNumber),
-                  SizedBox(
-                    height: height * .5,
-                  ),
-                  CustomTextFieldWidget(title: 'rest_room', keyboardType: TextInputType.number, textEditingController: RestRoom),
-                  SizedBox(
-                    height: height * .5,
-                  ),
+                  // CustomTextFieldWidget(title: 'distance_appertment', keyboardType: TextInputType.number, textEditingController: DistanceApperment),
+                  // SizedBox(
+                  //   height: height * .5,
+                  // ),
+                  // CustomTextFieldWidget(title: 'room_number', keyboardType: TextInputType.number, textEditingController: RoomNumber),
+                  // SizedBox(
+                  //   height: height * .5,
+                  // ),
+                  // CustomTextFieldWidget(title: 'rest_room', keyboardType: TextInputType.number, textEditingController: RestRoom),
+                  // SizedBox(
+                  //   height: height * .5,
+                  // ),
                   CustomTextFieldWidget(title: 'first_name', keyboardType: TextInputType.text, textEditingController: FirstName),
                   SizedBox(
                     height: height * .5,

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/screens/change_profile_user_screen/change_profile_user_screen.dart';
 import 'package:pain_appertment/screens/home_main_screen/home_main_controller.dart';
 import 'package:pain_appertment/screens/home_main_screen/home_main_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -92,7 +93,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             // ),
                             SettingCategory(
                                 onTap: () =>
-                                    Get.off(const HomeMainScreen()),
+                                    Get.off(const ChangeProfileUserScreen()),
                                 title: 'profile_setting'.tr,
                                 imageTitle: Assets.imagesProfileMenuIcon,
                                 heightValue: heightValue),
