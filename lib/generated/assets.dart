@@ -14,6 +14,7 @@ class Assets {
   static const String iconsTermsConditionsImage = 'assets/icons/terms_conditions_image.png';
   static const String iconsTwitterImage = 'assets/icons/twitter_image.png';
   static const String iconsWhatsUpImage = 'assets/icons/whats_up_image.png';
+  static const String imagesAboutAppImage = 'assets/images/about_app_image.png';
   static const String imagesAcceptedOfferPrice = 'assets/images/accepted_offer_price.png';
   static const String imagesBackgroundIntro = 'assets/images/background_intro.png';
   static const String imagesButtonRegister = 'assets/images/button_register.png';
@@ -21,6 +22,12 @@ class Assets {
   static const String imagesIconHome2 = 'assets/images/icon_home2.png';
   static const String imagesLogoApp = 'assets/images/logo_app.png';
   static const String imagesMyOrderHome = 'assets/images/my_order_home.png';
+  static const String imagesMyOrderHome2 = 'assets/images/my_order_home2.png';
+  static const String imagesPrivacyImage = 'assets/images/privacy_image.png';
+  static const String imagesProfileMenuIcon = 'assets/images/profile_menu_icon.png';
   static const String imagesSettingHomeIcon = 'assets/images/setting_home_icon.png';
+  static const String imagesShare = 'assets/images/share.png';
+  static const String imagesSnapshatImage = 'assets/images/snapshat_image.png';
+  static const String imagesTermsConditionsImage = 'assets/images/terms_conditions_image.png';
 
 }

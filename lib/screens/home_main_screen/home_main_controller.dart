@@ -16,8 +16,8 @@ class HomeMainController extends GetxController{
   List<BottomNavigationBarItem> bottomNavigationBarItem = [
     BottomNavigationBarItem(icon: Image.asset(Assets.imagesIconHome2,width: 30,height: 30,color: Themes.ColorApp11),label: 'home'.tr,
     activeIcon: Image.asset(Assets.imagesIconHome2,width: 30,height: 30,color: Themes.ColorApp1)),
-    BottomNavigationBarItem(icon: Image.asset(Assets.imagesMyOrderHome,width: 30,height: 30,color: Themes.ColorApp11),label: 'my_order'.tr,
-        activeIcon: Image.asset(Assets.imagesMyOrderHome,width: 30,height: 30,color: Themes.ColorApp1)),
+    BottomNavigationBarItem(icon: Image.asset(Assets.imagesMyOrderHome,width: 30,height: 30),label: 'my_order'.tr,
+        activeIcon: Image.asset(Assets.imagesMyOrderHome2,width: 30,height: 30)),
     BottomNavigationBarItem(icon: Image.asset(Assets.imagesSettingHomeIcon,width: 30,height: 30,color: Themes.ColorApp11),label: 'setting'.tr,
         activeIcon: Image.asset(Assets.imagesSettingHomeIcon,width: 30,height: 30,color: Themes.ColorApp1)),
   ];
