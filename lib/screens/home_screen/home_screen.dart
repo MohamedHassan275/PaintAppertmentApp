@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/screens/details_service_screen/details_service_screen.dart';
 import 'package:pain_appertment/screens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/screens/home_screen/home_controller.dart';
 import 'package:pain_appertment/screens/request_service_screen/request_service_screen.dart';
@@ -88,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: GestureDetector(
                                       onTap: (){
                                         //  CustomFlutterToast('${homeUserResponseModel!.categories!.length}');
-                                      //  Get.to(CategoryDetailsScreen(categories: homeUserResponseModel!.categories![index],));
+                                       Get.to(const DetailsServiceScreen());
                                       },
                                       child: Card(
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -160,6 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onTap: (){
                                         //  CustomFlutterToast('${homeUserResponseModel!.categories!.length}');
                                         //  Get.to(CategoryDetailsScreen(categories: homeUserResponseModel!.categories![index],));
+                                        Get.to(const DetailsServiceScreen());
                                       },
                                       child: Card(
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -231,6 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onTap: (){
                                         //  CustomFlutterToast('${homeUserResponseModel!.categories!.length}');
                                         //  Get.to(CategoryDetailsScreen(categories: homeUserResponseModel!.categories![index],));
+                                        Get.to(const DetailsServiceScreen());
                                       },
                                       child: Card(
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
