@@ -18,6 +18,9 @@ class Assets {
   static const String imagesBackgroundIntro = 'assets/images/background_intro.png';
   static const String imagesButtonRegister = 'assets/images/button_register.png';
   static const String imagesCompleteRegister = 'assets/images/complete_register.png';
+  static const String imagesIconHome2 = 'assets/images/icon_home2.png';
   static const String imagesLogoApp = 'assets/images/logo_app.png';
+  static const String imagesMyOrderHome = 'assets/images/my_order_home.png';
+  static const String imagesSettingHomeIcon = 'assets/images/setting_home_icon.png';
 
 }
