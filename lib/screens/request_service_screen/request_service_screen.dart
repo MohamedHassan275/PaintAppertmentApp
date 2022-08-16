@@ -19,6 +19,11 @@ class RequestServiceScreen extends StatefulWidget {
 
 class _RequestServiceScreenState extends State<RequestServiceScreen> {
 
+  TextEditingController DistanceApperment = TextEditingController();
+  TextEditingController RoomNumber = TextEditingController();
+  TextEditingController RestRoom = TextEditingController();
+  TextEditingController Country = TextEditingController();
+  TextEditingController State = TextEditingController();
   TextEditingController FirstName = TextEditingController();
   TextEditingController MobilePhone = TextEditingController();
   TextEditingController LastName = TextEditingController();
@@ -40,7 +45,7 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                 children: [
                   SizedBox(height: height * 1.5,),
                   const Text(
-                    'طلب خدمة من الشركة من فضلك ',
+                    'طلب عرض سعر  لتكاليف شقتك',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 19,
@@ -48,22 +53,45 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                       color: Themes.ColorApp15,
                     ),
                   ),
-                  SizedBox(height: height * 1,),
+                  SizedBox(height: height * 1.5,),
+                  CustomTextFieldWidget(title: 'distance_appertment', keyboardType: TextInputType.number, textEditingController: DistanceApperment),
+                  SizedBox(
+                    height: height * .5,
+                  ),
+                  CustomTextFieldWidget(title: 'room_number', keyboardType: TextInputType.number, textEditingController: RoomNumber),
+                  SizedBox(
+                    height: height * .5,
+                  ),
+                  CustomTextFieldWidget(title: 'rest_room', keyboardType: TextInputType.number, textEditingController: RestRoom),
+                  SizedBox(
+                    height: height * .5,
+                  ),
                   CustomTextFieldWidget(title: 'first_name', keyboardType: TextInputType.text, textEditingController: FirstName),
                   SizedBox(
-                    height: height * 1,
+                    height: height * .5,
                   ),
                   CustomTextFieldWidget(title: 'last_name', keyboardType: TextInputType.text, textEditingController: LastName),
                   SizedBox(
-                    height: height * 1,
+                    height: height * .5,
                   ),
                   CustomTextFieldWidget(title: 'mobile_number', keyboardType: TextInputType.number, textEditingController: MobilePhone,maxLength: 11),
                   SizedBox(
-                    height: height * 1,
+                    height: height * .5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(child: CustomTextFieldWidget(title: 'country', keyboardType: TextInputType.text, textEditingController: Country)),
+                      Expanded(child: CustomTextFieldWidget(title: 'state', keyboardType: TextInputType.text, textEditingController: State)),
+                    ],
+                  ),
+                  SizedBox(
+                    height: height * .7,
                   ),
                   CirclerProgressIndicatorWidget(isLoading: false),
                   SizedBox(height: height * .7,),
-                  CustomButtonImage(title: 'send', hight: 50, onTap: ()=> controller.sendRequestService())
+                  CustomButtonImage(title: 'request_price2', hight: 50, onTap: ()=> controller.sendRequestService()),
+                  SizedBox(height: height * 1,),
                 ],
               ),
             ),

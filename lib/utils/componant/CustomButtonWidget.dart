@@ -129,7 +129,7 @@ class CustomButtonImage extends StatelessWidget {
                 image: AssetImage(Assets.imagesButtonRegister)
             )),
         child: Center(
-          child: Text(title,style: const TextStyle(
+          child: Text(title.tr,style: const TextStyle(
             color: Themes.whiteColor,
             fontSize: 16,
             fontWeight: FontWeight.w400,
