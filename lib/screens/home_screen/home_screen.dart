@@ -65,17 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: const [
                             Text(
-                              'خدامات الشركة',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                                overflow: TextOverflow.fade,
-                                color: Themes.ColorApp15,
-                              ),
-                            ),
-                           Spacer(),
-                            Text(
-                              'المزيد',
+                              'خدامات الاكثر طلبا',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 15,
@@ -85,68 +75,207 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: height * .5,),
-                        GridView.builder(
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 1.0, mainAxisSpacing: 1.0),
-                            itemCount: service.serviceCompanyModel.length,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 7,horizontal: 5),
-                                  child: GestureDetector(
-                                    onTap: (){
-                                      //  CustomFlutterToast('${homeUserResponseModel!.categories!.length}');
-                                    //  Get.to(CategoryDetailsScreen(categories: homeUserResponseModel!.categories![index],));
-                                    },
-                                    child: Container(
-                                      height: 150,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        color: Themes.ColorApp14,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(15),
-                                              child: FadeInImage(
-                                                image: AssetImage(service.serviceCompanyModel[index].image),
-                                                fit: BoxFit.fill,
-                                                height: 50,
-                                                width: 50,
-                                                placeholder:  const AssetImage(Assets.imagesLogoApp),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: height * .3,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                service.serviceCompanyModel[index].title,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  overflow: TextOverflow.fade,
-                                                  color: Themes.ColorApp8,
+                        SizedBox(height: height * .3,),
+                        SizedBox(
+                          height: 150,
+                          child: ListView.builder(
+                              itemCount: service.serviceCompanyModel.length,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 5),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        //  CustomFlutterToast('${homeUserResponseModel!.categories!.length}');
+                                      //  Get.to(CategoryDetailsScreen(categories: homeUserResponseModel!.categories![index],));
+                                      },
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                       color: Themes.whiteColor,
+                                        elevation: 2,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(15),
+                                                child: FadeInImage(
+                                                  image: AssetImage(service.serviceCompanyModel[index].image),
+                                                  fit: BoxFit.fill,
+                                                  height: 100,
+                                                  width: 150,
+                                                  placeholder:  const AssetImage(Assets.imagesLogoApp),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(
+                                                height: height * .5,
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  service.serviceCompanyModel[index].title,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 15,
+                                                    overflow: TextOverflow.fade,
+                                                    color: Themes.ColorApp8,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                              );
-                            }),
-                        SizedBox(height: height * 1.5,),
-                        CustomButtonImage(title: 'طلب خدمة ', hight: 50, onTap: ()=> Get.to(const RequestServiceScreen()))
+                                    )
+                                );
+                              }),
+                        ),
+                        SizedBox(height: height * 1,),
+                        Row(
+                          children: const [
+                            Text(
+                              'خدامات منزلية',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                overflow: TextOverflow.fade,
+                                color: Themes.ColorApp15,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: height * .3,),
+                        SizedBox(
+                          height: 150,
+                          child: ListView.builder(
+                              itemCount: service.serviceCompanyModel.length,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 5),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        //  CustomFlutterToast('${homeUserResponseModel!.categories!.length}');
+                                        //  Get.to(CategoryDetailsScreen(categories: homeUserResponseModel!.categories![index],));
+                                      },
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                        color: Themes.whiteColor,
+                                        elevation: 2,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(15),
+                                                child: FadeInImage(
+                                                  image: AssetImage(service.serviceCompanyModel[index].image),
+                                                  fit: BoxFit.fill,
+                                                  height: 100,
+                                                  width: 150,
+                                                  placeholder:  const AssetImage(Assets.imagesLogoApp),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: height * .5,
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  service.serviceCompanyModel[index].title,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 15,
+                                                    overflow: TextOverflow.fade,
+                                                    color: Themes.ColorApp8,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                );
+                              }),
+                        ),
+                        SizedBox(height: height * 1,),
+                        Row(
+                          children: const [
+                            Text(
+                              'خدامات متنوعة',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                overflow: TextOverflow.fade,
+                                color: Themes.ColorApp15,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: height * .3,),
+                        SizedBox(
+                          height: 150,
+                          child: ListView.builder(
+                              itemCount: service.serviceCompanyModel.length,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 5),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        //  CustomFlutterToast('${homeUserResponseModel!.categories!.length}');
+                                        //  Get.to(CategoryDetailsScreen(categories: homeUserResponseModel!.categories![index],));
+                                      },
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                        color: Themes.whiteColor,
+                                        elevation: 2,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(15),
+                                                child: FadeInImage(
+                                                  image: AssetImage(service.serviceCompanyModel[index].image),
+                                                  fit: BoxFit.fill,
+                                                  height: 100,
+                                                  width: 150,
+                                                  placeholder:  const AssetImage(Assets.imagesLogoApp),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: height * .5,
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  service.serviceCompanyModel[index].title,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 15,
+                                                    overflow: TextOverflow.fade,
+                                                    color: Themes.ColorApp8,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                );
+                              }),
+                        ),
+                        SizedBox(height: height * 1,),
+                       // CustomButtonImage(title: 'طلب خدمة ', hight: 50, onTap: ()=> Get.to(const RequestServiceScreen()))
                       ],
                     ),
                   ),),

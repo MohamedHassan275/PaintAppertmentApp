@@ -23,6 +23,7 @@ class Assets {
   static const String imagesLogoApp = 'assets/images/logo_app.png';
   static const String imagesMyOrderHome = 'assets/images/my_order_home.png';
   static const String imagesMyOrderHome2 = 'assets/images/my_order_home2.png';
+  static const String imagesOrderPriceImage = 'assets/images/order_price_image.png';
   static const String imagesPrivacyImage = 'assets/images/privacy_image.png';
   static const String imagesProfileMenuIcon = 'assets/images/profile_menu_icon.png';
   static const String imagesSettingHomeIcon = 'assets/images/setting_home_icon.png';

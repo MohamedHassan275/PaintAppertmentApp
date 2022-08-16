@@ -28,8 +28,8 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
             homeMainController.navigationItem[homeMainController.index];
           },
           currentIndex: homeMainController.index,
-          selectedFontSize: 13,
-          unselectedFontSize: 13,
+          selectedFontSize: 11,
+          unselectedFontSize: 11,
           type: BottomNavigationBarType.fixed,
           selectedIconTheme: const IconThemeData(color: Themes.ColorApp1),
           unselectedIconTheme: const IconThemeData(color: Themes.ColorApp11),

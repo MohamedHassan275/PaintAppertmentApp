@@ -40,7 +40,7 @@ class MyTranslation extends Translations{
       "register_complete" : "تم تسجيل دخولك بنجاح",
       "home" : "الرئيسيه",
       "my_order" : "طلباتي",
-      "request_order_company" : "طلبات اسعار الشركات",
+      "request_order_company" : "طلبات عرض سعر ",
       "setting" : "الاعدادات",
       "account_number" : "رقم الحساب",
       "my_account" : "حسابي",
