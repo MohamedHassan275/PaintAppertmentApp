@@ -61,35 +61,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                key: form,
                child: Column(
                  children: [
-                   FromTextRegisterShared(
-                       labelText: 'first_name'.tr,
-                       readOnly: false,
-                       isPassword: false,
-                       onTapValidator: (value) {
-                         if (value!.isEmpty) {
-                           return 'must_not_empty'.tr;
-                         }
-                         return null;
-                       },
-                       keyboardType: TextInputType.text,
-                       Controller: FirstName,
-                       hintText: 'first_name'.tr),
+                   CustomTextFieldWidget(title: 'first_name', keyboardType: TextInputType.text, textEditingController: FirstName,),
                    SizedBox(
                      height: heightValue * 1,
                    ),
-                   FromTextRegisterShared(
-                       labelText: 'last_name'.tr,
-                       readOnly: false,
-                       onTapValidator: (value) {
-                         if (value!.isEmpty) {
-                           return 'must_not_empty'.tr;
-                         }
-                         return null;
-                       },
-                       isPassword: false,
-                       keyboardType: TextInputType.text,
-                       Controller: LastName,
-                       hintText: 'last_name'.tr),
+                   CustomTextFieldWidget(title: 'last_name', keyboardType: TextInputType.text, textEditingController: LastName,),
+                   SizedBox(
+                     height: heightValue * 1,
+                   ),
+                   CustomTextFieldWidget(title: 'mobile_number', keyboardType: TextInputType.number, textEditingController: MobilePhone,maxLength: 11),
                    SizedBox(
                      height: heightValue * 1,
                    ),

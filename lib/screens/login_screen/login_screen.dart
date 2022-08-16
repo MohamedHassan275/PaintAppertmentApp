@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     SizedBox(height: heightValue*1.2,),
-                    TextFieldMobileWidget(textEditingController: MobilePhone, value: mobilePhone,),
+                    TextFieldMobileWidget(textEditingController: MobilePhone,),
                     SizedBox(height: heightValue*.7,),
                     TextFieldPasswordWidget(textEditingController: Password, isPassword: isPassword),
                     SizedBox(height: heightValue * 1,),

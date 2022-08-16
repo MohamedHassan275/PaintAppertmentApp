@@ -6,10 +6,41 @@ import '../../generated/assets.dart';
 import '../componant/CustomTextFieldWidget.dart';
 
 
-class TextFieldMobileWidget extends StatelessWidget {
-  TextFieldMobileWidget({required this.textEditingController, this.value});
+class CustomTextFieldWidget extends StatelessWidget {
+  CustomTextFieldWidget({required this.title, required this.textEditingController,required this.keyboardType,this.maxLength});
 
-  String? value;
+  late String title;
+  int? maxLength;
+  TextEditingController textEditingController = TextEditingController();
+  TextInputType? keyboardType;
+  @override
+  Widget build(BuildContext context) {
+    return FromTextShared2(
+        labelText: title.tr,
+        maxLength: maxLength,
+        onChanged: (value) {
+          value = value;
+        },
+        onSaved: (String? value){
+          value = value!;
+        },
+        onTapValidator: (value) {
+          if (value!.isEmpty) {
+            return 'must_not_empty'.tr;
+          } else if (!(value.length > 10)) {
+            return 'not_valid'.tr;
+          }
+          return null;
+        },
+        keyboardType: keyboardType,
+        Controller: textEditingController,
+        hintText: title.tr);
+  }
+}
+
+class TextFieldMobileWidget extends StatelessWidget {
+  TextFieldMobileWidget({required this.textEditingController});
+
   TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -22,7 +53,6 @@ class TextFieldMobileWidget extends StatelessWidget {
         onSaved: (String? value){
           value = value!;
         },
-        isPassword: false,
         onTapValidator: (value) {
           if (value!.isEmpty) {
             return 'must_not_empty'.tr;
@@ -40,7 +70,6 @@ class TextFieldMobileWidget extends StatelessWidget {
   }
 }
 
-
 class TextFieldPasswordWidget extends StatefulWidget {
   TextFieldPasswordWidget({required this.textEditingController,required this.isPassword});
   bool isPassword = false;
@@ -56,7 +85,6 @@ class _TextFieldPasswordWidgetState extends State<TextFieldPasswordWidget> {
     return FromTextShared(
       //  textAlign: TextAlign.center,
       labelText: 'password'.tr,
-      isPassword: widget.isPassword,
       onTapsuffixIcon: () {
         setState(() {
           widget.isPassword = !widget.isPassword;

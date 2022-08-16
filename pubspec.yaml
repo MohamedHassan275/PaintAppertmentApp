@@ -41,6 +41,7 @@ dependencies:
   permission_handler: ^9.2.0
   shared_preferences:
   url_launcher:
+  carousel_slider: ^4.0.0
   easy_localization: ^3.0.0
   flutter_launch: ^0.3.0
   flutter_screenutil: ^5.0.0+2
