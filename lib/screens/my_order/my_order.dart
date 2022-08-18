@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/details_service_screen/details_service_screen.dart';
+import 'package:pain_appertment/screens/my_order/my_current_order_screen/my_current_order_screen.dart';
+import 'package:pain_appertment/screens/my_order/my_previous_order_screen/my_previous_order_screen.dart';
+import 'package:pain_appertment/screens/my_order/my_waiting_order_screen/my_waiting_order_screen.dart';
 import 'package:pain_appertment/screens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/screens/setting_screen/setting_screen.dart';
 
@@ -19,7 +22,7 @@ class _MyOrderState extends State<MyOrder> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -40,7 +43,6 @@ class _MyOrderState extends State<MyOrder> {
                         color: Themes.whiteColor),
                     tabs: [
                       Tab(text: 'request_offer_price2'.tr),
-                      Tab(text: 'my_active_requests'.tr),
                       Tab(text: 'my_active_current'.tr),
                       Tab(text: 'my_previous_requests'.tr),
                     ],
@@ -51,10 +53,9 @@ class _MyOrderState extends State<MyOrder> {
           ),
         ),
         body: const TabBarView(children: <Widget>[
-          DetailsServiceScreen(),
-          SettingScreen(),
-          RequestMyServiceScreen(),
-          RequestServiceScreen(),
+          MyWaitingOrderScreen(),
+          MyCurrentOrderScreen(),
+          MyPreviousOrderScreen(),
         ]),
       ),
     );

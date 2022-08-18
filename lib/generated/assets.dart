@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String iconsDistanceIcon = 'assets/icons/distance_icon.png';
   static const String iconsHomeIcon = 'assets/icons/home_icon.png';
   static const String iconsInstagramImage = 'assets/icons/instagram_image.png';
   static const String iconsLanguageImage = 'assets/icons/language_image.png';
@@ -13,16 +14,19 @@ class Assets {
   static const String iconsShare = 'assets/icons/share.png';
   static const String iconsTermsConditionsImage = 'assets/icons/terms_conditions_image.png';
   static const String iconsTwitterImage = 'assets/icons/twitter_image.png';
+  static const String iconsWalletMenuIcon = 'assets/icons/wallet_menu_icon.png';
   static const String iconsWhatsUpImage = 'assets/icons/whats_up_image.png';
   static const String imagesAboutAppImage = 'assets/images/about_app_image.png';
   static const String imagesAcceptedOfferPrice = 'assets/images/accepted_offer_price.png';
   static const String imagesBackgroundIntro = 'assets/images/background_intro.png';
   static const String imagesButtonRegister = 'assets/images/button_register.png';
   static const String imagesCompleteRegister = 'assets/images/complete_register.png';
+  static const String imagesFactoryNamIcon = 'assets/images/factory_nam_icon.png';
   static const String imagesIconHome2 = 'assets/images/icon_home2.png';
   static const String imagesLogoApp = 'assets/images/logo_app.png';
   static const String imagesMyOrderHome = 'assets/images/my_order_home.png';
   static const String imagesMyOrderHome2 = 'assets/images/my_order_home2.png';
+  static const String imagesOfferPrice = 'assets/images/offer_price.png';
   static const String imagesOrderPriceImage = 'assets/images/order_price_image.png';
   static const String imagesPrivacyImage = 'assets/images/privacy_image.png';
   static const String imagesProfileMenuIcon = 'assets/images/profile_menu_icon.png';
