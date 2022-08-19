@@ -146,17 +146,6 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    'Payment_completed_successfully'.tr,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                      color: Themes.ColorApp17,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: heightValue * .5,
-                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [

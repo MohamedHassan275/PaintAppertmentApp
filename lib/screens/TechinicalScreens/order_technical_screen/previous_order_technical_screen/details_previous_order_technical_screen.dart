@@ -79,11 +79,11 @@ class DetailsPreviousOrderTechnicalScreen extends StatelessWidget {
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'name'.tr, 'احمد محمد'),
+                                  DetailsOrder(widthValue, 'name_client'.tr, 'احمد محمد'),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'rate'.tr, 'جيد'),
+                                  DetailsOrder(widthValue, 'mobile_number'.tr, '0115043662'),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),

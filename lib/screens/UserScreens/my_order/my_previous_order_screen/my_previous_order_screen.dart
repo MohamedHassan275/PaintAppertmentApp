@@ -93,7 +93,8 @@ class MyPreviousOrderItem extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
+                        //  Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
+                          const Icon(Icons.timer,size: 15,color: Themes.ColorApp1,),
                           SizedBox(width: widthValue * 1,),
                           Text(
                             '${previousOrder.executionDate}',
