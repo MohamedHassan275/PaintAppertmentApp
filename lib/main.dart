@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/screens/splash_screen/splash_screen.dart';
+import 'package:pain_appertment/screens/UserScreens/splash_screen/splash_screen.dart';
 import 'package:pain_appertment/utils/localization/translation.dart';
 import 'package:pain_appertment/utils/servies/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';

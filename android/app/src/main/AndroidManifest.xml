@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.appertment.pain_appertment">
    <application
-        android:label="pain_appertment"
+        android:label="شطب شقتك"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
