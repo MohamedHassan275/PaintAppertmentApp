@@ -15,7 +15,6 @@ class DetailsPreviousOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
     var widthValue = Get.width * 0.024;
-    MyPreviousOrderController myPreviousOrderController = Get.put(MyPreviousOrderController());
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async{
