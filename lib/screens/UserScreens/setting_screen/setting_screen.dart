@@ -1,10 +1,10 @@
 
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_controller.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../generated/assets.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
@@ -26,7 +26,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: Get.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,10 +129,10 @@ class _SettingScreenState extends State<SettingScreen> {
 
 class SettingCategory extends StatelessWidget {
   SettingCategory(
-      {required this.onTap,
+      {Key? key, required this.onTap,
         required this.title,
         required this.imageTitle,
-        required this.heightValue});
+        required this.heightValue}) : super(key: key);
 
   double? heightValue;
   String? imageTitle, title;
@@ -176,17 +176,10 @@ class SettingCategory extends StatelessWidget {
 }
 
 class ContactWithUs extends StatelessWidget {
-  ContactWithUs({required this.heightValue, required this.widthValue});
+  ContactWithUs({Key? key, required this.heightValue, required this.widthValue}) : super(key: key);
 
   double? heightValue, widthValue;
 
-  _launchURL(url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +190,7 @@ class ContactWithUs extends StatelessWidget {
         children: [
           Text(
             'to_communicate'.tr,
-            style: TextStyle(
+            style: const TextStyle(
               color: Themes.ColorApp8,
               fontSize: 20,
               fontWeight: FontWeight.w500,
@@ -259,7 +252,7 @@ class ContactWithUs extends StatelessWidget {
 
 class ChangeLanguageBottomSheetItem extends StatefulWidget {
   double? heightValue;
-  ChangeLanguageBottomSheetItem({required this.heightValue});
+  ChangeLanguageBottomSheetItem({Key? key, required this.heightValue}) : super(key: key);
 
   @override
   State<ChangeLanguageBottomSheetItem> createState() => _ChangeLanguageBottomSheetItemState();
@@ -275,7 +268,7 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: Get.width,
       height: 325,
       child: Padding(
@@ -302,7 +295,7 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
             ),
             Text(
               'chose_language'.tr,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Themes.ColorApp1,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -352,7 +345,7 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
 
 
 class ContactWithUsItem extends StatelessWidget {
-  ContactWithUsItem({required this.onTap, required this.imageTitle});
+  ContactWithUsItem({Key? key, required this.onTap, required this.imageTitle}) : super(key: key);
 
   String? imageTitle;
   VoidCallback? onTap;
