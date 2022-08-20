@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/generated/assets.dart';
+import 'package:pain_appertment/screens/UserScreens/details_service_screen/details_service_controller.dart';
 import 'package:pain_appertment/screens/UserScreens/home_screen/home_controller.dart';
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
@@ -110,6 +111,86 @@ class DetailsServiceScreen extends StatelessWidget {
                               ),
                             ),
                           ))),
+                        SizedBox(height: height * 1.5,),
+                        const Text(
+                          'تقييمات العميل',
+                          maxLines: 3,
+                          overflow: TextOverflow.fade,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            overflow: TextOverflow.fade,
+                            color: Themes.ColorApp15,
+                          ),
+                        ),
+                        SizedBox(height: height * .7,),
+                        GetBuilder<DetailsServiceController>(
+                          init: DetailsServiceController(),
+                          builder: (controller) => SizedBox(
+                            height: 215,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: controller.rateClientServiceModel.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) => Card(
+                                elevation: 3,
+                                color: Themes.whiteColor,
+                                child: Container(
+                                  height: 200,
+                                  width: 200,
+                                  color: Themes.whiteColor,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '${controller.rateClientServiceModel[index].nameClient}',
+                                        maxLines: 3,
+                                        overflow: TextOverflow.fade,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
+                                          overflow: TextOverflow.fade,
+                                          color: Themes.ColorApp15,
+                                        ),
+                                      ),
+                                      SizedBox(height: height * .5,),
+                                      Text(
+                                        '${controller.rateClientServiceModel[index].dateTime}',
+                                        maxLines: 3,
+                                        overflow: TextOverflow.fade,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
+                                          overflow: TextOverflow.fade,
+                                          color: Themes.ColorApp15,
+                                        ),
+                                      ),
+                                      SizedBox(height: height * .5,),
+                                      StarRating(
+                                        color: Themes.ColorApp13,
+                                        onRatingChanged: (rating) => controller.rateClientServiceModel[index].rateClient = rating,
+                                        rating: controller.rateClientServiceModel[index].rateClient!,
+                                      ),
+                                      SizedBox(height: height * .5,),
+                                      Text(
+                                        '${controller.rateClientServiceModel[index].comment}',
+                                        maxLines: 3,
+                                        overflow: TextOverflow.fade,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
+                                          overflow: TextOverflow.fade,
+                                          color: Themes.ColorApp15,
+                                        ),
+                                      ),
+                                      SizedBox(height: height * 1.5,),
+                                    ],
+                                  ),
+                                ),
+                              ),),
+                          ),
+                        ),
                         SizedBox(height: height * 3.5,),
                         CustomButtonImage(title: 'request_price2'.tr, hight: 50, onTap: () => Get.to(const RequestMyServiceScreen())),
                         SizedBox(height: height * 1,),
@@ -173,5 +254,53 @@ class Appbarwidget extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+typedef RatingChangeCallback = void Function(double rating);
+
+class StarRating extends StatelessWidget {
+  final int starCount;
+  final double rating;
+  final RatingChangeCallback? onRatingChanged;
+  final Color? color;
+
+  const StarRating(
+      {Key? key, this.starCount = 5, this.rating = .0, this.onRatingChanged, this.color}) : super(key: key);
+
+  Widget buildStar(BuildContext context, int index) {
+    Icon icon;
+    if (index >= rating) {
+      icon = Icon(
+        Icons.star_border,
+        color: Theme.of(context).buttonColor,
+        size: 17,
+      );
+    } else if (index > rating - 1 && index < rating) {
+      icon = Icon(
+        Icons.star_half,
+        color: color ?? Theme.of(context).primaryColor,
+        size: 17,
+      );
+    } else {
+      icon = Icon(
+        Icons.star,
+        color: color ?? Theme.of(context).primaryColor,
+        size: 17,
+      );
+    }
+    return InkResponse(
+      onTap:
+      onRatingChanged == null ? null : () => onRatingChanged!(index + 1.0),
+      child: icon,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+        children:
+        List.generate(starCount, (index) => buildStar(context, index)));
   }
 }
