@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/screens/UserScreens/details_service_image_screen/details_service_image_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_screen/details_service_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/home_screen/home_controller.dart';
@@ -277,7 +278,184 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               }),
                         ),
-                        SizedBox(height: height * 1,),
+                        SizedBox(height: height * 1.5,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                             const Text(
+                              'صور اسقف جبس بورد',
+                              maxLines: 3,
+                              overflow: TextOverflow.fade,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                overflow: TextOverflow.fade,
+                                color: Themes.ColorApp15,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => Get.to(const DetailsServiceImageScreen()),
+                              child: const Text(
+                                'المزيد',
+                                maxLines: 3,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  overflow: TextOverflow.fade,
+                                  color: Themes.ColorApp15,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: height* .7,),
+                        SizedBox(
+                            height: 215,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: 3,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) => Card(
+                                  elevation: 2,
+                                  color: Themes.whiteColor,
+                                  child: Container(
+                                    height: 200,
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: FadeInImage(
+                                        height: 200,
+                                        width: 300,
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(service.sliderModel[index].image),
+                                        placeholder: AssetImage(Assets.imagesLogoApp),
+                                      ),
+                                    ),
+                                  ),
+                                ))),
+                        SizedBox(height: height * 1.5,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              ' صور تشطيبات كهرباء ',
+                              maxLines: 3,
+                              overflow: TextOverflow.fade,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                overflow: TextOverflow.fade,
+                                color: Themes.ColorApp15,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => Get.to(const DetailsServiceImageScreen()),
+                              child: const Text(
+                                'المزيد',
+                                maxLines: 3,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  overflow: TextOverflow.fade,
+                                  color: Themes.ColorApp15,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: height* .7,),
+                        SizedBox(
+                            height: 215,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: 3,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) => Card(
+                                  elevation: 2,
+                                  color: Themes.whiteColor,
+                                  child: Container(
+                                    height: 200,
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: FadeInImage(
+                                        height: 200,
+                                        width: 300,
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(service.sliderModel[index].image),
+                                        placeholder: AssetImage(Assets.imagesLogoApp),
+                                      ),
+                                    ),
+                                  ),
+                                ))),
+                        SizedBox(height: height * 1.5,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              ' صور تشطيبات سباكة ',
+                              maxLines: 3,
+                              overflow: TextOverflow.fade,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                overflow: TextOverflow.fade,
+                                color: Themes.ColorApp15,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () =>  Get.to(const DetailsServiceImageScreen()),
+                              child: const Text(
+                                'المزيد',
+                                maxLines: 3,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  overflow: TextOverflow.fade,
+                                  color: Themes.ColorApp15,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: height* .7,),
+                        SizedBox(
+                            height: 215,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: 3,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) => Card(
+                                  elevation: 2,
+                                  color: Themes.whiteColor,
+                                  child: Container(
+                                    height: 200,
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: FadeInImage(
+                                        height: 200,
+                                        width: 300,
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(service.sliderModel[index].image),
+                                        placeholder: AssetImage(Assets.imagesLogoApp),
+                                      ),
+                                    ),
+                                  ),
+                                ))),
+                        SizedBox(height: height* 1.5,),
                        // CustomButtonImage(title: 'طلب خدمة ', hight: 50, onTap: ()=> Get.to(const RequestServiceScreen()))
                       ],
                     ),

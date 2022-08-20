@@ -21,6 +21,9 @@ class HomeController extends GetxController {
    SliderModel(Assets.imagesLogoApp),
    SliderModel(Assets.imagesLogoApp),
    SliderModel(Assets.imagesLogoApp),
+   SliderModel(Assets.imagesLogoApp),
+   SliderModel(Assets.imagesLogoApp),
+   SliderModel(Assets.imagesLogoApp),
  ].obs;
 
 

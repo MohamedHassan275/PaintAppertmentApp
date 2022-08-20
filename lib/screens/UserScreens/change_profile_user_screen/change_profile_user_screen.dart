@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
@@ -31,48 +33,7 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Stack(
-              children: [
-                Container(
-                  height: 119,
-                  width: Get.width,
-                  decoration: const BoxDecoration(
-                      color: Themes.ColorApp14,
-                      borderRadius: const BorderRadius.only(
-                          topRight: const Radius.circular(25),
-                          topLeft: Radius.circular(25))),
-                  child: Center(
-                    child: Text(
-                      'account_information'.tr,
-                      style: const TextStyle(
-                        color: Themes.ColorApp15,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: height * 2.3,
-                  left: width * 1.5,
-                  child: GestureDetector(
-                    onTap: () => Get.off(const HomeMainScreen()),
-                    child: const CircleAvatar(
-                      backgroundColor: Themes.ColorApp5,
-                      child: const Icon(
-                        // Get.find<StorageService>()
-                        //     .activeLocale
-                        //     .languageCode ==
-                        //     "en"
-                        //     ? Icons.keyboard_arrow_right:
-                        Icons.keyboard_arrow_left,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
+           Appbarwidget(width: width,height: height),
             SizedBox(
               height: height * 1.5,
             ),
@@ -193,21 +154,71 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
   }
 }
 
+class Appbarwidget extends StatelessWidget {
+  Appbarwidget({Key? key,required this.width, required this.height}) : super(key: key);
+   double height,width;
+  @override
+  Widget build(BuildContext context) {
+    return  Stack(
+      children: [
+        Container(
+          height: 119,
+          width: Get.width,
+          decoration: const BoxDecoration(
+              color: Themes.ColorApp14,
+              borderRadius: BorderRadius.only(
+                  topRight:  Radius.circular(25),
+                  topLeft: Radius.circular(25))),
+          child: Center(
+            child: Text(
+              'account_information'.tr,
+              style: const TextStyle(
+                color: Themes.ColorApp15,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: height * 2.3,
+          left: width * 1.5,
+          child: GestureDetector(
+            onTap: () => Get.off(const HomeMainScreen()),
+            child: const CircleAvatar(
+              backgroundColor: Themes.ColorApp5,
+              child:  Icon(
+                // Get.find<StorageService>()
+                //     .activeLocale
+                //     .languageCode ==
+                //     "en"
+                //     ? Icons.keyboard_arrow_right:
+                Icons.keyboard_arrow_left,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
 class UserDetailsWidget extends StatelessWidget {
   // ProfileUserResponseModel? profileUserResponseModel;
   double heightValue, widthValue;
-  TextEditingController FirstName = new TextEditingController();
-  TextEditingController LastName = new TextEditingController();
-  TextEditingController MobilePhone = new TextEditingController();
-  TextEditingController Email = new TextEditingController();
+  TextEditingController FirstName = TextEditingController();
+  TextEditingController LastName =  TextEditingController();
+  TextEditingController MobilePhone =  TextEditingController();
+  TextEditingController Email =  TextEditingController();
 
   UserDetailsWidget(
-      {required this.FirstName,
+      {Key? key, required this.FirstName,
       required this.LastName,
       required this.Email,
       required this.MobilePhone,
       required this.widthValue,
-      required this.heightValue});
+      required this.heightValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
