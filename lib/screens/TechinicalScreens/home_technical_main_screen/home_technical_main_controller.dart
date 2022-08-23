@@ -7,6 +7,7 @@ import 'package:pain_appertment/screens/TechinicalScreens/setting_technical_scre
 
 import '../../../utils/constant/Themes.dart';
 import '../order_technical_screen/current_order_technical_screen/current_order_technical_screen.dart';
+import '../order_technical_screen/new_order_technical_screen/new_order_technical_screen.dart';
 import '../order_technical_screen/previous_order_technical_screen/previous_order_technical_screen.dart';
 
 class HomeTechincalMainController extends GetxController {
@@ -19,7 +20,7 @@ class HomeTechincalMainController extends GetxController {
     update();
   }
 
-  List<Widget> screenList = [const CurrentOrderTechnicalScreen(), const CurrentOrderTechnicalScreen(), const PreviousOrderTechnicalScreen(), const SettingTechnicalScreen()];
+  List<Widget> screenList = [const NewOrderTechnicalScreen(), const CurrentOrderTechnicalScreen(), const PreviousOrderTechnicalScreen(), const SettingTechnicalScreen()];
  // List<Widget> screenList = [const CurrentOrderTechnicalScreen(), const CurrentOrderTechnicalScreen(), const PreviousOrderTechnicalScreen(), const SettingTechnicalScreen()];
 
   List<BottomNavigationBarItem> navigationList = [

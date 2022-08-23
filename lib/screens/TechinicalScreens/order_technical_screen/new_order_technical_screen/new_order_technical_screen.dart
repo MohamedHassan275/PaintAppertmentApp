@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/current_order_technical_screen/current_order_technical_controller.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/current_order_technical_screen/details_current_order_technical_screen.dart';
+import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/new_order_technical_screen/details_new_order_technical_screen.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../model/MyWaitingOrderModel.dart';
@@ -82,53 +83,21 @@ class MySendOrderListItem extends StatelessWidget {
                     const SizedBox(
                       width: 15,
                       height: 15,
-                      child: CircleAvatar(
-                        backgroundColor: Themes.ColorApp13,
+                      child:  CircleAvatar(
+                        backgroundColor: Themes.ColorApp9,
                       ),
                     ),
-                    SizedBox(width: widthValue * 1,),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'address'.tr,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp2,
-                            ),
-                          ),
-                          SizedBox(width: widthValue * .7,),
-                          const Text(
-                            'القاهرة مدينة نصر',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp1,
-                            ),
-                          ),
-                        ],
+                    SizedBox(
+                      width: widthValue * 1,
+                    ),
+                    Text(
+                      'waiting_send_offer_price'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                        color: Themes.ColorApp9,
                       ),
                     ),
-                    SizedBox(width: widthValue * 1,),
-                    // Text(
-                    //   '${currentOrder.offerCost}',
-                    //   style: TextStyle(
-                    //     fontWeight: FontWeight.w500,
-                    //     fontSize: 14,
-                    //     color: Themes.ColorApp1,
-                    //   ),
-                    // ),
-                    // SizedBox(width: widthValue * .5,),
-                    // Text(
-                    //   'sar'.tr,
-                    //   style: TextStyle(
-                    //     fontWeight: FontWeight.w500,
-                    //     fontSize: 14,
-                    //     color: Themes.ColorApp1,
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -137,7 +106,7 @@ class MySendOrderListItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: GestureDetector(
                   onTap: (){
-                    Get.to(DetailsCurrentOrderTechnicalScreen(newOrder: currentOrder));
+                    Get.to(DetailsNewOrderTechnicalScreen(newOrder: currentOrder));
                   },
                   child: Container(
                     width: Get.width,

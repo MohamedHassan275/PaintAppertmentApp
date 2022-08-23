@@ -126,9 +126,9 @@ class _SettingScreenState extends State<SettingScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:  [
-                        const Text(
-                          'to_communicate_payment',
-                          style: TextStyle(
+                        Text(
+                          'to_communicate_payment'.tr,
+                          style: const TextStyle(
                             color: Themes.ColorApp8,
                             fontSize: 17,
                             fontWeight: FontWeight.w400,

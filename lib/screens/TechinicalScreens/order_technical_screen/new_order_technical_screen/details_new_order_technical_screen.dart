@@ -173,7 +173,7 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                 SizedBox(height: heightValue * .7,),
                                 CustomTextFieldWidget(title: 'value_order', keyboardType: TextInputType.text, textEditingController: valueOrder),
                                 SizedBox(height: heightValue * .5,),
-                                CirclerProgressIndicatorWidget(isLoading:  true),
+                                CirclerProgressIndicatorWidget(isLoading:  false),
                                 SizedBox(height: heightValue * .7,),
                                 CustomButtonImage(title: 'button_value_order'.tr, hight: 50, onTap: (){
                                   // CustomFlutterToast(currentOrder.id.toString());

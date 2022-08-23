@@ -170,7 +170,7 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                               SizedBox(height: heightValue * .7,),
                               CustomTextFieldWidget(title: 'rate_technical', keyboardType: TextInputType.text, textEditingController: rateTechnical),
                               SizedBox(height: heightValue * .5,),
-                              CirclerProgressIndicatorWidget(isLoading:  true),
+                              CirclerProgressIndicatorWidget(isLoading:  false),
                               SizedBox(height: heightValue * .7,),
                               CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
                                 // CustomFlutterToast(currentOrder.id.toString());
