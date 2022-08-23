@@ -92,84 +92,6 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      color: Themes.ColorApp14,
-                                      borderRadius: BorderRadius.circular(25)
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'request_price'.tr,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18,
-                                            color: Themes.ColorApp17,
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              '${25}',
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16,
-                                                color: Themes.ColorApp1,
-                                              ),
-                                            ),
-                                            SizedBox(width: widthValue* .3,),
-                                            Text(
-                                              'sar'.tr,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16,
-                                                color: Themes.ColorApp1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'order_will_be_received'.tr,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 15,
-                                            color: Themes.ColorApp8,
-                                          ),
-                                        ),
-                                        SizedBox(width: widthValue * .5,),
-                                        Text(
-                                          '${widget.newOrder.executionDate}',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 15,
-                                            color: Themes.ColorApp8,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: heightValue * .6,
-                                    ),
-                                  ],
-                                ),
                                 SizedBox(height: heightValue * .7,),
                                 CustomTextFieldWidget(title: 'value_order', keyboardType: TextInputType.text, textEditingController: valueOrder),
                                 SizedBox(height: heightValue * .5,),
@@ -187,8 +109,9 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                   // }
                                   Get.to(const HomeTechincalMainScreen());
                                 }),
+                                SizedBox(height: heightValue * 1,),
                               ],
-                            )
+                            ),
                         ),
                       ),
                     ),
