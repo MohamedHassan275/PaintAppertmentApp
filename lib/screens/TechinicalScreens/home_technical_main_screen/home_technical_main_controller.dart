@@ -19,12 +19,14 @@ class HomeTechincalMainController extends GetxController {
     update();
   }
 
-  List<Widget> screenList = [const CurrentOrderTechnicalScreen(), const PreviousOrderTechnicalScreen(), const SettingTechnicalScreen()];
+  List<Widget> screenList = [const CurrentOrderTechnicalScreen(), const CurrentOrderTechnicalScreen(), const PreviousOrderTechnicalScreen(), const SettingTechnicalScreen()];
  // List<Widget> screenList = [const CurrentOrderTechnicalScreen(), const CurrentOrderTechnicalScreen(), const PreviousOrderTechnicalScreen(), const SettingTechnicalScreen()];
 
   List<BottomNavigationBarItem> navigationList = [
     // BottomNavigationBarItem(label: 'home'.tr,icon: Image.asset(Assets.imagesFactoryNamIcon,width: 30,height: 30,color: Themes.ColorApp11),
     //   activeIcon: Image.asset(Assets.imagesFactoryNamIcon,width: 30,height: 30,color: Themes.ColorApp11),),
+    BottomNavigationBarItem(label: 'my_new_order'.tr,icon: Image.asset(Assets.imagesMyOrderHome,width: 30,height: 30),
+      activeIcon: Image.asset(Assets.imagesMyOrderHome2,width: 30,height: 30),),
 
     BottomNavigationBarItem(label: 'my_active_current'.tr,icon: Image.asset(Assets.imagesMyOrderHome,width: 30,height: 30),
       activeIcon: Image.asset(Assets.imagesMyOrderHome2,width: 30,height: 30),),

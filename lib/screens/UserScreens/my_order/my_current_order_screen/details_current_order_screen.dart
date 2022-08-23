@@ -8,6 +8,7 @@ import '../../../../utils/componant/CustomButtonWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 import '../../../../utils/servies/storage_service.dart';
 import '../../../../utils/widget/custom_circler_progress_indicator_widget.dart';
+import '../../../../utils/widget/custom_phone_and_password_widget.dart';
 import '../../home_main_screen/home_main_screen.dart';
 
 class DetailsMyCurrentOrder extends StatefulWidget {
@@ -26,6 +27,8 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
     super.initState();
     Get.put(StorageService());
   }
+
+  TextEditingController rateTechnical = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -96,7 +99,7 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                 height: heightValue * .7,
                               ),
                               Container(
-                                height: 50,
+                                height: 60,
                                 decoration: BoxDecoration(
                                     color: Themes.ColorApp14,
                                     borderRadius: BorderRadius.circular(25)
@@ -108,33 +111,24 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'request_price'.tr,
+                                        'details'.tr,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 18,
                                           color: Themes.ColorApp17,
                                         ),
                                       ),
-                                      Row(
-                                        children: [
-                                          const Text(
-                                            '${25}',
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16,
-                                              color: Themes.ColorApp1,
-                                            ),
+                                      SizedBox(width: widthValue * .2,),
+                                      const  Expanded(
+                                        child: Text(
+                                          'تفاصيل تفاصيل تفاصيل تفاصيل تفاصيل تفاصيل',
+                                           maxLines: 2,
+                                          style:  TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                            color: Themes.ColorApp1,
                                           ),
-                                          SizedBox(width: widthValue* .3,),
-                                          Text(
-                                            'sar'.tr,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16,
-                                              color: Themes.ColorApp1,
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -173,9 +167,12 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                   ),
                                 ],
                               ),
-                              CirclerProgressIndicatorWidget(isLoading:  false),
                               SizedBox(height: heightValue * .7,),
-                              CustomButtonImage(title: 'received_order'.tr, hight: 50, onTap: (){
+                              CustomTextFieldWidget(title: 'rate_technical', keyboardType: TextInputType.text, textEditingController: rateTechnical),
+                              SizedBox(height: heightValue * .5,),
+                              CirclerProgressIndicatorWidget(isLoading:  true),
+                              SizedBox(height: heightValue * .7,),
+                              CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
                                 // CustomFlutterToast(currentOrder.id.toString());
                                 // CustomFlutterToast(currentOrder.executionDate);
                                 // CustomFlutterToast(myCurrentOrderController.formattedDateCurrent);
@@ -187,31 +184,6 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                 // }
                                 Get.to(const HomeMainScreen());
                               }),
-                              SizedBox(height: heightValue * 1,),
-                              GestureDetector(
-                                onTap: (){
-                                  //   CustomFlutterToast(currentOrder.id.toString());
-                                  // CustomFlutterToast(currentOrder.executionDate);
-                                  // CustomFlutterToast(myCurrentOrderController.formattedDateCurrent);
-                                //  controller.CancelOrder(currentOrder.id.toString());
-                                  //   Get.find<MyCurrentOrderController>().CancelOrder('${currentOrder.id}');
-                                  Get.to(const HomeMainScreen());
-                                },
-                                child: Container(
-                                  width: Get.width,
-                                  height: 50,
-                                  child: Center(
-                                    child:  Text(
-                                      'cancel_order'.tr,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16,
-                                        color: Themes.ColorApp9,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
                               SizedBox(height: heightValue * 2,)
                             ],
                           )

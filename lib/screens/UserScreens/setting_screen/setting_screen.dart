@@ -119,6 +119,52 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   ContactWithUs(
                       heightValue: heightValue, widthValue: widthValue),
+                  SizedBox(height: heightValue * 1.5,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child:  Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        const Text(
+                          'to_communicate_payment',
+                          style: TextStyle(
+                            color: Themes.ColorApp8,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(height: heightValue*.5,),
+                        const Text(
+                          '011560333232',
+                          style: TextStyle(
+                            color: Themes.ColorApp1,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(height: heightValue*.5,),
+                        const Text(
+                          '011560333232',
+                          style: TextStyle(
+                            color: Themes.ColorApp1,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(height: heightValue*.5,),
+                        const Text(
+                          '011560333232',
+                          style: TextStyle(
+                            color: Themes.ColorApp1,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: heightValue * 1,),
                 ],
               ),
             ),

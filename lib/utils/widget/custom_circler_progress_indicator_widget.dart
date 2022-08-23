@@ -12,6 +12,8 @@ class CirclerProgressIndicatorWidget extends StatelessWidget {
     return Visibility(
       visible: isLoading,
       child: Container(
+        width: 25,
+          height: 25,
           decoration: const BoxDecoration(
             // image: DecorationImage(
             //     image: AssetImage(Assets
