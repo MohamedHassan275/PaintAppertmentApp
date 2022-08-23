@@ -33,7 +33,7 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
       body: SafeArea(
         child: Column(
           children: [
-           Appbarwidget(width: width,height: height),
+            Appbarwidget(width: width, height: height),
             SizedBox(
               height: height * 1.5,
             ),
@@ -129,6 +129,9 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
               MobilePhone: MobilePhone,
             ),
             SizedBox(
+              height: height * .5,
+            ),
+            SizedBox(
               height: height * 2.5,
             ),
             CirclerProgressIndicatorWidget(isLoading: false),
@@ -155,11 +158,13 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
 }
 
 class Appbarwidget extends StatelessWidget {
-  Appbarwidget({Key? key,required this.width, required this.height}) : super(key: key);
-   double height,width;
+  Appbarwidget({Key? key, required this.width, required this.height})
+      : super(key: key);
+  double height, width;
+
   @override
   Widget build(BuildContext context) {
-    return  Stack(
+    return Stack(
       children: [
         Container(
           height: 119,
@@ -167,8 +172,7 @@ class Appbarwidget extends StatelessWidget {
           decoration: const BoxDecoration(
               color: Themes.ColorApp14,
               borderRadius: BorderRadius.only(
-                  topRight:  Radius.circular(25),
-                  topLeft: Radius.circular(25))),
+                  topRight: Radius.circular(25), topLeft: Radius.circular(25))),
           child: Center(
             child: Text(
               'account_information'.tr,
@@ -187,7 +191,7 @@ class Appbarwidget extends StatelessWidget {
             onTap: () => Get.off(const HomeMainScreen()),
             child: const CircleAvatar(
               backgroundColor: Themes.ColorApp5,
-              child:  Icon(
+              child: Icon(
                 // Get.find<StorageService>()
                 //     .activeLocale
                 //     .languageCode ==
@@ -208,17 +212,21 @@ class UserDetailsWidget extends StatelessWidget {
   // ProfileUserResponseModel? profileUserResponseModel;
   double heightValue, widthValue;
   TextEditingController FirstName = TextEditingController();
-  TextEditingController LastName =  TextEditingController();
-  TextEditingController MobilePhone =  TextEditingController();
-  TextEditingController Email =  TextEditingController();
+  TextEditingController LastName = TextEditingController();
+  TextEditingController MobilePhone = TextEditingController();
+  TextEditingController Email = TextEditingController();
+  TextEditingController Country = TextEditingController();
+  TextEditingController State = TextEditingController();
 
   UserDetailsWidget(
-      {Key? key, required this.FirstName,
+      {Key? key,
+      required this.FirstName,
       required this.LastName,
       required this.Email,
       required this.MobilePhone,
       required this.widthValue,
-      required this.heightValue}) : super(key: key);
+      required this.heightValue})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -294,6 +302,24 @@ class UserDetailsWidget extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             Controller: Email,
             hintText: 'email_address'.tr),
+        SizedBox(
+          height: heightValue * 1,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Expanded(
+                child: CustomTextFieldWidget(
+                    title: 'country',
+                    keyboardType: TextInputType.text,
+                    textEditingController: Country)),
+            Expanded(
+                child: CustomTextFieldWidget(
+                    title: 'state',
+                    keyboardType: TextInputType.text,
+                    textEditingController: State)),
+          ],
+        ),
       ],
     );
   }

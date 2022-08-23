@@ -66,6 +66,10 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                   SizedBox(
                     height: height * .5,
                   ),
+                  CustomTextFieldWidget(title: 'details_service', keyboardType: TextInputType.text, textEditingController: RestRoom),
+                  SizedBox(
+                    height: height * .5,
+                  ),
                   CustomTextFieldWidget(title: 'first_name', keyboardType: TextInputType.text, textEditingController: FirstName),
                   SizedBox(
                     height: height * .5,
