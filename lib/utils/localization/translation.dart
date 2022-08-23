@@ -64,7 +64,7 @@ class MyTranslation extends Translations{
       "waiting_send_offer_price" : "بانتظار ارسال عرض السعر",
       "order_details" : "تفاصيل الطلب",
       "request_type" : "اسم الخدمة : ",
-      "quantity" : "مساحة الشقة ",
+      "distance_appertment" : "مساحة الشقة ",
       "cost_of_bid" : "تكلفه العرض المقدم",
       "request_currently" : "حاليا يتم تجهيز طلبك",
       "received" : "تم الاستلام",
