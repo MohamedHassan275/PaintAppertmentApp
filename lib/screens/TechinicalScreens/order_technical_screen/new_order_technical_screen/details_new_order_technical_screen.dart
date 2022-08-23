@@ -185,7 +185,7 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                   // }else {
                                   //   CustomFlutterToast('operation_cannot_be_completed'.tr);
                                   // }
-                                  Get.to(const HomeMainScreen());
+                                  Get.to(const HomeTechincalMainScreen());
                                 }),
                               ],
                             )
