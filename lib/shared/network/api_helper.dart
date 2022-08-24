@@ -4,6 +4,7 @@ import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
 
 import '../../utils/constant/constant.dart';
 import '../logger_helper.dart';
+import 'app_exception.dart';
 
 class APIService {
 
@@ -39,6 +40,7 @@ class APIService {
         String lang = 'ar',
         String? token = '',
         Map<String, dynamic>? query}) async {
+
     LoggerHelper.loggerNoStack.i('Api Call : ' + uri);
     dio.options.headers = {
       'Content-Type': 'application/json',
@@ -60,4 +62,23 @@ class APIService {
     };
     return dio.put(uri, data: data, queryParameters: query);
   }
+
+  void _exceptionCaught(DioError e) {
+    switch (e.type) {
+      case DioErrorType.connectTimeout:
+        throw DioException('Connection Timeout');
+      case DioErrorType.receiveTimeout:
+        throw DioException('Connection Timeout');
+      case DioErrorType.response:
+        throw DioException('${e.response}');
+      case DioErrorType.cancel:
+        throw DioException('request cancelled');
+      case DioErrorType.other:
+        throw DioException('No Internet connection');
+      default:
+        throw Exception('internal error dio');
+    }
+  }
+
+
 }
