@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/current_order_technical_screen/current_order_technical_controller.dart';
+import 'package:pain_appertment/getx_controller/technical_controller/current_order_technical_controller.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/current_order_technical_screen/details_current_order_technical_screen.dart';
 
 import '../../../../generated/assets.dart';

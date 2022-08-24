@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:pain_appertment/screens/UserScreens/home_screen/home_controller.dart';
+import 'package:pain_appertment/getx_controller/user_controller/home_controller.dart';
 import 'package:pain_appertment/utils/constant/Themes.dart';
 
 import '../../../generated/assets.dart';

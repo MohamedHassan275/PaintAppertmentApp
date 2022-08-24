@@ -5,10 +5,10 @@ import 'package:pain_appertment/generated/assets.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_screen/home_technical_screen.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/setting_technical_screen/setting_technical_screen.dart';
 
-import '../../../utils/constant/Themes.dart';
-import '../order_technical_screen/current_order_technical_screen/current_order_technical_screen.dart';
-import '../order_technical_screen/new_order_technical_screen/new_order_technical_screen.dart';
-import '../order_technical_screen/previous_order_technical_screen/previous_order_technical_screen.dart';
+import '../../../../utils/constant/Themes.dart';
+import '../../screens/TechinicalScreens/order_technical_screen/current_order_technical_screen/current_order_technical_screen.dart';
+import '../../screens/TechinicalScreens/order_technical_screen/new_order_technical_screen/new_order_technical_screen.dart';
+import '../../screens/TechinicalScreens/order_technical_screen/previous_order_technical_screen/previous_order_technical_screen.dart';
 
 class HomeTechincalMainController extends GetxController {
   bool Loading = false;

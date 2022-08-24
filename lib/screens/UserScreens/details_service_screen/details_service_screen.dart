@@ -4,8 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/generated/assets.dart';
-import 'package:pain_appertment/screens/UserScreens/details_service_screen/details_service_controller.dart';
-import 'package:pain_appertment/screens/UserScreens/home_screen/home_controller.dart';
+import 'package:pain_appertment/getx_controller/user_controller/details_service_controller.dart';
+import 'package:pain_appertment/getx_controller/user_controller/home_controller.dart';
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 

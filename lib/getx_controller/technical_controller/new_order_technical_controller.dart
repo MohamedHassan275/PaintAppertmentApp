@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-import '../../../../model/MyWaitingOrderModel.dart';
+import '../../../../../model/MyWaitingOrderModel.dart';
 
-class CurrentOrderTechnicalController extends GetxController {
+class MewOrderTechnicalController extends GetxController {
 
   bool Loading = false;
 

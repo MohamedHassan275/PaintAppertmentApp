@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../../controller/OnBoardingController.dart';
+import '../../../../getx_controller/OnBoardingController.dart';
 import '../../../../utils/constant/Themes.dart';
 
 class CustomDots extends StatelessWidget {

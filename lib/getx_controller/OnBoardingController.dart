@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../utils/constant/on_boarding_list.dart';
+import '../../utils/constant/on_boarding_list.dart';
 
 abstract class OnBoardingController extends GetxController {
 

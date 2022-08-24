@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_image_screen/details_service_image_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_screen/details_service_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
-import 'package:pain_appertment/screens/UserScreens/home_screen/home_controller.dart';
+import 'package:pain_appertment/getx_controller/user_controller/home_controller.dart';
 import 'package:pain_appertment/screens/UserScreens/request_service_screen/request_service_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 import 'package:pain_appertment/utils/constant/Themes.dart';

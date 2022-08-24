@@ -5,9 +5,9 @@ import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_current_order_screen/details_current_order_screen.dart';
 
 import '../../../../generated/assets.dart';
+import '../../../../getx_controller/user_controller/my_current_order_controller.dart';
 import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
-import 'my_current_order_controller.dart';
 
 class MyCurrentOrderScreen extends StatelessWidget {
   const MyCurrentOrderScreen({Key? key}) : super(key: key);

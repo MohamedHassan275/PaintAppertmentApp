@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controller/OnBoardingController.dart';
+import '../../../../getx_controller/OnBoardingController.dart';
 import 'custom_page_virw_item.dart';
 
 

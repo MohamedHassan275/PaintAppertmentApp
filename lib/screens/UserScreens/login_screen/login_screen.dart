@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
-import 'package:pain_appertment/screens/UserScreens/login_screen/login_controller.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
+import 'package:pain_appertment/getx_controller/user_controller/login_controller.dart';
 
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/previous_order_technical_screen/details_previous_order_technical_screen.dart';
-import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/previous_order_technical_screen/previous_order_technical_controller.dart';
+import 'package:pain_appertment/getx_controller/technical_controller/previous_order_technical_controller.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../model/MyWaitingOrderModel.dart';

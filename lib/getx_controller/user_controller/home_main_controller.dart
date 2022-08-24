@@ -7,8 +7,8 @@ import 'package:pain_appertment/screens/UserScreens/my_order/my_order.dart';
 import 'package:pain_appertment/screens/UserScreens/setting_screen/setting_screen.dart';
 
 import '../../../utils/constant/Themes.dart';
-import '../home_screen/home_screen.dart';
-import '../request_service_screen/request_service_screen.dart';
+import '../../screens/UserScreens/home_screen/home_screen.dart';
+import '../../screens/UserScreens/request_service_screen/request_service_screen.dart';
 
 class HomeMainController extends GetxController{
   int index = 0;
