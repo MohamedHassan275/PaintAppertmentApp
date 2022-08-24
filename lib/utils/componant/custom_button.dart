@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
-import '../constant/constant.dart';
 import '../constant/style.dart';
 
 class CustomButton extends StatelessWidget {
@@ -37,7 +35,6 @@ class CustomButton extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
-          fontFamily: fontFamily,
           fontWeight: FontWeight.w600,
           fontSize: 17,
         ),

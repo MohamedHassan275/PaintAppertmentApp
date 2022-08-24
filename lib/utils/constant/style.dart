@@ -23,4 +23,3 @@ const Color greyColor = Color(0xff676b6f);
 ///
 /// Text Style
 ///
-const TextStyle btnTextStyle = TextStyle(fontFamily: fontFamily, fontSize: 16, color: whiteColor);

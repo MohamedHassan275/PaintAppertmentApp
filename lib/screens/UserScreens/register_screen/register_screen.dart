@@ -225,8 +225,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                            // isCheckAccepted == true ? controller.createAccount(widget.mobilePhone, FirstName.text,
                            //     LastName.text, Email.text, Password.text) : CustomFlutterToast('agree_to_terms2'.tr);
                            if(form.currentState!.validate()){
-                             isCheckAccepted == true ? CustomFlutterToast('تم تسجيلك بنجاح') :
-                             CustomFlutterToast('agree_to_terms2'.tr);
+                             isCheckAccepted == true ? AppConstants.customFlutterToast('تم تسجيلك بنجاح') :
+                             AppConstants.customFlutterToast('agree_to_terms2'.tr);
                            }
                          }
                      ),
