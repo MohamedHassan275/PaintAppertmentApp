@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
-import 'package:pain_appertment/getx_controller/user_controller//request_service_controller.dart';
+import 'package:pain_appertment/business_logic/user_controller//request_service_controller.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 import 'package:pain_appertment/utils/widget/custom_circler_progress_indicator_widget.dart';
 import 'package:pain_appertment/utils/widget/custom_phone_and_password_widget.dart';

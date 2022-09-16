@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_waiting_order_screen/details_waiting_order_screen.dart';
-import 'package:pain_appertment/getx_controller/user_controller/my_waiting_order_controller.dart';
+import 'package:pain_appertment/business_logic/user_controller/my_waiting_order_controller.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../model/MyWaitingOrderModel.dart';

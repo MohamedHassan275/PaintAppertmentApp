@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../getx_controller//OnBoardingController.dart';
+import '../../../../business_logic//OnBoardingController.dart';
 import '../../../../utils/componant/CustomButtonWidget.dart';
 import '../../login_screen/login_screen.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/getx_controller/technical_controller/home_technical_main_controller.dart';
+import 'package:pain_appertment/business_logic/technical_controller/home_technical_main_controller.dart';
 
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';

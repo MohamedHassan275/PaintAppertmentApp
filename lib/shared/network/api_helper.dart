@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
+import 'package:pain_appertment/utils/constant/api_constant.dart';
 
 import '../../utils/constant/constant.dart';
 import '../logger_helper.dart';
@@ -12,7 +13,7 @@ class APIService {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: AppConstants.baseUrl,
+        baseUrl: ApiConstants.baseUrl,
         receiveDataWhenStatusError: true,
         //to skip exception and continue in code
         validateStatus: (int? status) => true,

@@ -4,8 +4,6 @@ import 'package:pain_appertment/utils/constant/Themes.dart';
 
 
 class AppConstants {
-  // Api Endpoints
-  static const String baseUrl = 'https://halal-location.germaniatek.co/';
 
   static const  String URL = 'https://nebny.net/api/v2/';
   static const String logout = 'are you logout in the application';

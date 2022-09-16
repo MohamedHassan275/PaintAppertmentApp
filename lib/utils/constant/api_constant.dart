@@ -1,7 +1,12 @@
 
-class EndPointApiService {
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pain_appertment/utils/constant/Themes.dart';
 
-  //auth service
+
+class ApiConstants {
+  // Api Endpoints
+  static const String baseUrl = 'https://alsarrh.nebny.net/api/v2';
+
   static const  String login = '/login';
   static const String register = '/step1/register';
   static const String logout = "/logout";
@@ -10,8 +15,6 @@ class EndPointApiService {
   static const String profile = "/profile";
   static const String updateProfile = "/updateprofile";
   static const String changePassword = "/changepassword";
-
-  //user service
   static const String home = "/home";
   static const String showService = "/service";
   static const String setting = "/setting";
@@ -23,17 +26,7 @@ class EndPointApiService {
   static const String acceptOrder = "/order/accept";
   static const String receivedOrder = "/order/received";
 
-  //technical service
-  static String newOrderTechnicalPath = '';
-  static String currentOrderTechnicalPath = '';
-  static String previousOrderTechnicalPath = '';
-  static String profileTechnicalPath = '';
-  static String updateProfileTechnicalPath = '';
-  static String enterServiceMoneyFromTechnical = '';
-
-  // services
-  static String aboutUsPath = '';
-  static String privacyPath = '';
-  static String termsAndConditionalPath = '';
 
 }
+
+

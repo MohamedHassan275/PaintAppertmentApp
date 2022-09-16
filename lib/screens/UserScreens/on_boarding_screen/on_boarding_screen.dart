@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../getx_controller/OnBoardingController.dart';
+import '../../../business_logic/OnBoardingController.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
 import 'Widget/Custom_dots.dart';

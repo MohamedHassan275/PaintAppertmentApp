@@ -1,7 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../getx_controller/OnBoardingController.dart';
+import '../../../../business_logic/OnBoardingController.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utils/componant/CustomButtonWidget.dart';
 import '../../../../utils/constant/on_boarding_list.dart';
