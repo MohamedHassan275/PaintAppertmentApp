@@ -6,7 +6,7 @@ import '../../shared/network/api_helper.dart';
 import '../../utils/constant/api_constant.dart';
 import '../../utils/constant/custom_toast.dart';
 
-class RegisterService{
+class AuthService{
   
   static Future<LoginModel?> getGovernment() async {
     LoginModel? governmentModel;
