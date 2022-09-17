@@ -27,8 +27,6 @@ class CustomTextFieldWidget extends StatelessWidget {
         onTapValidator: (value) {
           if (value!.isEmpty) {
             return 'must_not_empty'.tr;
-          } else if (!(value.length > 10)) {
-            return 'not_valid'.tr;
           }
           return null;
         },

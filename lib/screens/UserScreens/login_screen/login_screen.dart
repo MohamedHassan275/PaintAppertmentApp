@@ -154,6 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
     mobilePhoneController.clear();
     passwordController.clear();
   }
+
 }
 
 class ForgetPasswordWidget extends StatelessWidget {

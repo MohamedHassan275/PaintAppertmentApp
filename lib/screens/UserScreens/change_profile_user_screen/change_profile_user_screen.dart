@@ -1,14 +1,18 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
+import 'package:pain_appertment/utils/constant/constant.dart';
 import 'package:pain_appertment/utils/widget/custom_phone_and_password_widget.dart';
 
 import '../../../generated/assets.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
 import '../../../utils/componant/CustomTextFieldWidget.dart';
 import '../../../utils/constant/Themes.dart';
+import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 
 class ChangeProfileUserScreen extends StatefulWidget {
@@ -24,6 +28,10 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
   TextEditingController LastName = new TextEditingController();
   TextEditingController MobilePhone = new TextEditingController();
   TextEditingController Email = new TextEditingController();
+  TextEditingController Country = TextEditingController();
+  TextEditingController State = TextEditingController();
+
+  GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -31,130 +39,131 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
     var width = Get.width * 0.024;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Appbarwidget(width: width, height: height),
-            SizedBox(
-              height: height * 1.5,
-            ),
-            // controller.ProfileUserModel?.image != null ?
-            // Stack(
-            //         children: [
-            //           image != null
-            //               ? GestureDetector(
-            //                   onTap: () => PickImage(),
-            //                   child: ClipOval(
-            //                     child: Image.file(
-            //                       image!,
-            //                       width: 137,
-            //                       height: 137,
-            //                       fit: BoxFit.fill,
-            //                     ),
-            //                   ),
-            //                 ) :
-            //           GestureDetector(
-            //                   onTap: () => PickImage(),
-            //                   child: ClipOval(
-            //                     child: FadeInImage(
-            //                       image: NetworkImage(
-            //                           '${controller.ProfileUserModel!.image}'),
-            //                       fit: BoxFit.fill,
-            //                       height: 137,
-            //                       width: 137,
-            //                       placeholder: AssetImage(
-            //                           Assets.imagesFactoryImage),
-            //                     ),
-            //                   ),
-            //                 ),
-            //           Positioned(
-            //             bottom: heightValue * .3,
-            //             right: widthValue * 1,
-            //             child: Image.asset(
-            //               Assets.imagesEditIamge,
-            //               fit: BoxFit.cover,
-            //               width: 35,
-            //               height: 35,
-            //             ),
-            //           )
-            //         ],
-            //       ) :
-            Stack(
-              children: [
-                // image != null
-                //     ? GestureDetector(
-                //   onTap: () => PickImage(),
-                //         child: ClipOval(
-                //           child: Image.file(
-                //             image!,
-                //             width: 137,
-                //             height: 137,
-                //             fit: BoxFit.fill,
-                //           ),
-                //         ),
-                //       ) :
-                GestureDetector(
-                  // onTap: () => PickImage(),
-                  child: CircleAvatar(
-                    backgroundColor: Themes.whiteColor,
-                    radius: 75,
-                    child: ClipOval(
-                      child: Image.asset(
-                        Assets.imagesLogoApp,
-                        fit: BoxFit.fill,
-                      ),
+        child: BlocConsumer<ProfileCubit, ProfileState>(
+          listener: (context, state) {
+            _handleLoginListener(context, state);
+          },
+          builder: (context, state) {
+            ProfileCubit profileCubit = ProfileCubit.get(context);
+
+            if (state is ProfileSuccessState) {
+              FirstName.text = state.profileResponseModel?.firstname ?? '';
+              LastName.text = state.profileResponseModel?.lastname ?? '';
+              MobilePhone.text = state.profileResponseModel?.phone ?? '';
+              Email.text = state.profileResponseModel?.email ?? '';
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Appbarwidget(width: width, height: height),
+                    SizedBox(
+                      height: height * 1,
                     ),
-                  ),
+                    Stack(
+                      children: [
+                        GestureDetector(
+                          // onTap: () => PickImage(),
+                          child: CircleAvatar(
+                            backgroundColor: Themes.whiteColor,
+                            radius: 75,
+                            child: ClipOval(
+                              child: Image.asset(
+                                Assets.imagesLogoApp,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: height * 1.5,
+                    ),
+                    UserDetailsWidget(
+                      heightValue: height,
+                      widthValue: width,
+                      FirstName: FirstName,
+                      LastName: LastName,
+                      Email: Email,
+                      MobilePhone: MobilePhone, formKey: formKey,
+                      Country: Country, State: State,
+                    ),
+                    SizedBox(
+                      height: height * .5,
+                    ),
+                    SizedBox(
+                      height: height * 2.5,
+                    ),
+                    state is UpdateProfileLoadingState
+                        ? const CircularProgressIndicator(
+                      color: Themes.ColorApp1,
+                    )
+                        : Container(),
+                    SizedBox(
+                      height: height * 1,
+                    ),
+                    CustomButtonImage(
+                        title: 'save'.tr,
+                        hight: 50,
+                        onTap: () {
+                          if(formKey.currentState!.validate()){
+                            print('user details');
+                            print(AppConstants.tokenSession);
+                            print(FirstName.text);
+                            print(LastName.text);
+                            print(MobilePhone.text);
+                            print(Email.text);
+                            profileCubit.updateProfileUser(FirstName.text, LastName.text, MobilePhone.text, Email.text);
+                          }
+                        }),
+                    SizedBox(height: height *1,)
+                  ],
                 ),
-                // Positioned(
-                //   bottom: heightValue * .3,
-                //   right: widthValue * 1,
-                //   child: Image.asset(
-                //     Assets.imagesEditIamge,
-                //     fit: BoxFit.cover,
-                //     width: 35,
-                //     height: 35,
-                //   ),
-                // )
-              ],
-            ),
-            SizedBox(
-              height: height * 1.5,
-            ),
-            UserDetailsWidget(
-              heightValue: height,
-              widthValue: width,
-              FirstName: FirstName,
-              LastName: LastName,
-              Email: Email,
-              MobilePhone: MobilePhone,
-            ),
-            SizedBox(
-              height: height * .5,
-            ),
-            SizedBox(
-              height: height * 2.5,
-            ),
-            CirclerProgressIndicatorWidget(isLoading: false),
-            SizedBox(
-              height: height * 1,
-            ),
-            CustomButtonImage(
-                title: 'save'.tr,
-                hight: 50,
-                onTap: () {
-                  Get.to(const HomeMainScreen());
-                  // Get.find<ProfileInformationController>().updateProfileUser(
-                  //     FirstName.text.isEmpty ? controller.ProfileUserModel!.firstname : FirstName.text,
-                  //     LastName.text.isEmpty ? controller.ProfileUserModel!.lastname : LastName.text,
-                  //     EmailAddress.text.isEmpty ? controller.ProfileUserModel!.email :EmailAddress.text, '',
-                  //     // image == null ? File(controller.ProfileUserModel!.image!.split('/').last) : image,
-                  //     Get.find<StorageService>().GetToken);
-                })
-          ],
+              );
+            } else if (state is ProfileErrorState) {
+              return Container(
+                width: Get.width,
+                height: Get.height,
+                child: Center(
+                  child: Text('${state.error}'),
+                ),
+              );
+            }
+            return Container(
+              width: Get.width,
+              height: Get.height,
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Themes.ColorApp1,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
+
+  void _handleLoginListener(BuildContext context, ProfileState state) {
+    if (state is ProfileErrorState) {
+      CustomFlutterToast(state.error);
+    } else if (state is UpdateProfileSuccessState) {
+      CustomFlutterToast(state.changeProfileSuccessfully);
+      _clearFormData();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+              (_) => false);
+    }
+  }
+
+  void _clearFormData() {
+    FirstName.clear();
+    LastName.clear();
+    MobilePhone.clear();
+    Email.clear();
+  }
+
+
 }
 
 class Appbarwidget extends StatelessWidget {
@@ -167,7 +176,7 @@ class Appbarwidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 119,
+          height: 75,
           width: Get.width,
           decoration: const BoxDecoration(
               color: Themes.ColorApp14,
@@ -185,7 +194,7 @@ class Appbarwidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: height * 2.3,
+          top: height * 1.0,
           left: width * 1.5,
           child: GestureDetector(
             onTap: () => Get.off(const HomeMainScreen()),
@@ -218,109 +227,117 @@ class UserDetailsWidget extends StatelessWidget {
   TextEditingController Country = TextEditingController();
   TextEditingController State = TextEditingController();
 
+  GlobalKey<FormState> formKey = GlobalKey();
+
   UserDetailsWidget(
       {Key? key,
+      required this.formKey,
       required this.FirstName,
       required this.LastName,
       required this.Email,
       required this.MobilePhone,
+      required this.Country,
+      required this.State,
       required this.widthValue,
       required this.heightValue})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: FromTextProfileShared(
-                    labelText: 'first_name'.tr,
-                    isPassword: false,
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: FromTextProfileShared(
+                      labelText: 'first_name'.tr,
+                      isPassword: false,
+                      onTapValidator: (value) {
+                        if (value!.isEmpty) {
+                          return 'must_not_empty'.tr;
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        // profileUserResponseModel?.firstname= value;
+                      },
+                      keyboardType: TextInputType.text,
+                      Controller: FirstName,
+                      hintText: ''),
+                ),
+                SizedBox(
+                  height: widthValue * 1.5,
+                ),
+                Expanded(
+                  child: FromTextProfileShared(
+                    labelText: 'last_name'.tr,
                     onTapValidator: (value) {
                       if (value!.isEmpty) {
                         return 'must_not_empty'.tr;
                       }
                       return null;
                     },
-                    onChanged: (value) {
-                      // profileUserResponseModel?.firstname= value;
-                    },
+                    isPassword: false,
                     keyboardType: TextInputType.text,
-                    Controller: FirstName,
-                    hintText: ''),
-              ),
-              SizedBox(
-                height: widthValue * 1.5,
-              ),
+                    Controller: LastName,
+                    hintText: 'last_name'.tr,
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: heightValue * 1,
+          ),
+          CustomTextFieldWidget(
+              title: 'mobile_number',
+              textEditingController: MobilePhone,
+              keyboardType: TextInputType.number,
+              maxLength: 11),
+          SizedBox(
+            height: heightValue * 1,
+          ),
+          FromTextRegisterShared(
+              labelText: 'email_address'.tr,
+              readOnly: false,
+              onTapValidator: (value) {
+                if (value!.isEmpty) {
+                  return 'must_not_empty'.tr;
+                } else if (!(value.contains("@"))) {
+                  return 'not_valid'.tr;
+                }
+                return null;
+              },
+              isPassword: false,
+              keyboardType: TextInputType.emailAddress,
+              Controller: Email,
+              hintText: 'email_address'.tr),
+          SizedBox(
+            height: heightValue * 1,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
               Expanded(
-                child: FromTextProfileShared(
-                  labelText: 'last_name'.tr,
-                  onTapValidator: (value) {
-                    if (value!.isEmpty) {
-                      return 'must_not_empty'.tr;
-                    }
-                    return null;
-                  },
-                  isPassword: false,
-                  keyboardType: TextInputType.text,
-                  Controller: LastName,
-                  hintText: 'last_name'.tr,
-                ),
-              )
+                  child: CustomTextFieldWidget(
+                      title: 'country',
+                      keyboardType: TextInputType.text,
+                      textEditingController: Country)),
+              Expanded(
+                  child: CustomTextFieldWidget(
+                      title: 'state',
+                      keyboardType: TextInputType.text,
+                      textEditingController: State)),
             ],
           ),
-        ),
-        SizedBox(
-          height: heightValue * 1,
-        ),
-        CustomTextFieldWidget(
-            title: 'mobile_number',
-            textEditingController: MobilePhone,
-            keyboardType: TextInputType.number,
-            maxLength: 11),
-        SizedBox(
-          height: heightValue * 1,
-        ),
-        FromTextRegisterShared(
-            labelText: 'email_address'.tr,
-            readOnly: false,
-            onTapValidator: (value) {
-              if (value!.isEmpty) {
-                return 'must_not_empty'.tr;
-              } else if (!(value.contains("@"))) {
-                return 'not_valid'.tr;
-              }
-              return null;
-            },
-            isPassword: false,
-            keyboardType: TextInputType.emailAddress,
-            Controller: Email,
-            hintText: 'email_address'.tr),
-        SizedBox(
-          height: heightValue * 1,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-                child: CustomTextFieldWidget(
-                    title: 'country',
-                    keyboardType: TextInputType.text,
-                    textEditingController: Country)),
-            Expanded(
-                child: CustomTextFieldWidget(
-                    title: 'state',
-                    keyboardType: TextInputType.text,
-                    textEditingController: State)),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

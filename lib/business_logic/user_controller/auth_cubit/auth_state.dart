@@ -16,3 +16,9 @@ class ErrorLoginState extends AuthState {
   String? error;
   ErrorLoginState(this.error);
 }
+
+class LoginoutSuccessState extends AuthState {
+  String? changeProfileSuccessfully;
+  LoginoutSuccessState(this.changeProfileSuccessfully);
+
+}

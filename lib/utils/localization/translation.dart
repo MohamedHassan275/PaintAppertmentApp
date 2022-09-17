@@ -18,6 +18,7 @@ class MyTranslation extends Translations{
       "welcome_back" : "اهلا بيك",
       "mobile_number" : "رقم الموبيل",
       "password" : "كلمة المرور",
+      "logout" : "تسجيل خروج",
       "forget_password" : "نسيت كلمه المرور ؟",
       "login" : "تسجيل دخول",
       "not_account" : "ليس لديك حساب ؟",

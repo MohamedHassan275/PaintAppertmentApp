@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_main_cubit/home_main_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/setting_cubit/setting_cubit.dart';
 import 'package:pain_appertment/screens/UserScreens/splash_screen/splash_screen.dart';
 import 'package:pain_appertment/shared/logger_helper.dart';
 import 'package:pain_appertment/shared/network/api_helper.dart';
@@ -35,7 +37,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       BlocProvider(
+        create: (context) => SettingCubit(),
+      ),
+      BlocProvider(
         create: (context) => HomeMainCubit(),
+      ),
+      BlocProvider(
+        create: (context) => ProfileCubit(),
       ),
       BlocProvider(
         create: (context) => AuthCubit(),

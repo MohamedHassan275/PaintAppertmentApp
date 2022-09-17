@@ -114,7 +114,7 @@ class Categories {
 }
 
 class Services {
-  int? id;
+  String? id;
   String? name;
   String? image;
 

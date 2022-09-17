@@ -1,5 +1,7 @@
 
 import 'package:dio/dio.dart';
+import 'package:pain_appertment/model/setting_model.dart';
+import 'package:pain_appertment/utils/constant/constant.dart';
 
 import '../../model/login_model.dart';
 import '../../shared/network/api_helper.dart';
@@ -8,17 +10,18 @@ import '../../utils/constant/custom_toast.dart';
 
 class SettingService{
   
-  static Future<LoginModel?> getGovernment() async {
-    LoginModel? governmentModel;
+  static Future<SettingModel?> showSettingUser() async {
+    SettingModel? settingModel;
     
     try {
       
-      Response response = await APIService.getData(uri: ApiConstants.login,token: ApiConstants.login);
+      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.setting,token: AppConstants.tokenSession,
+      lang: 'ar');
 
    //   print(AppLocalStorage.token);
       if(response.statusCode == 200){
         print(response.data);
-        return LoginModel.fromJson(response.data);
+        return SettingModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
       }
@@ -34,7 +37,7 @@ class SettingService{
         print(e.message);
       }
     }
-    return governmentModel;
+    return settingModel;
   }
 
 

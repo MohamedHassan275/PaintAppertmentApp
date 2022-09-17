@@ -8,7 +8,7 @@ class ApiConstants {
   static const String baseUrl = 'https://alsarrh.nebny.net/api/v2';
 
   static const  String login = '/login';
-  static const String register = '/step1/register';
+  static const String register = '/register';
   static const String logout = "/logout";
   static const String activeCode = "/activcode";
   static const String changePasswordForgetPassword = "/rechangepass";

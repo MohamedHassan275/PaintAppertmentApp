@@ -22,7 +22,6 @@ class HomeCubit extends Cubit<HomeState> {
     HomeService.getHomeUser().then((value){
       if(value?.success == true){
         emit(HomeSuccessState(value?.data));
-        CustomFlutterToast(value?.data?.categories!.length);
       }else {
         emit(HomeErrorState(value?.message));
       }
