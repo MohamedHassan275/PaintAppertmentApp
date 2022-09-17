@@ -8,12 +8,16 @@ import '../../utils/constant/custom_toast.dart';
 
 class AuthService{
   
-  static Future<LoginModel?> getGovernment() async {
-    LoginModel? governmentModel;
-    
+  static Future<LoginModel?> setLogin(String phone,String password,String fcmToken) async {
+    LoginModel? loginModel;
+
     try {
       
-      Response response = await APIService.getData(uri: ApiConstants.login,token: ApiConstants.login);
+      Response response = await APIService.postData(uri: ApiConstants.baseUrl,token: ApiConstants.login,data: {
+        "phone" : phone,
+        "password" : password,
+        "fcm_token" : fcmToken,
+      });
 
    //   print(AppLocalStorage.token);
       if(response.statusCode == 200){
@@ -21,6 +25,7 @@ class AuthService{
         return LoginModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
+        CustomFlutterToast(response.data['message']);
       }
     }on DioError catch (e){
       if (e.response != null) {
@@ -34,7 +39,7 @@ class AuthService{
         print(e.message);
       }
     }
-    return governmentModel;
+    return loginModel;
   }
 
 

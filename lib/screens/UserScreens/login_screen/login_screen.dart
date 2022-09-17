@@ -1,12 +1,16 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 import 'package:pain_appertment/business_logic/user_controller/login_controller.dart';
+import 'package:sizer/sizer.dart';
 
+import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
+import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
 import '../register_screen/register_screen.dart';
@@ -19,70 +23,133 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   bool showProgressbar = true;
   bool isPassword = true;
-  String? mobilePhone, password,firebase_token;
-  TextEditingController MobilePhone = new TextEditingController();
-  TextEditingController Password = new TextEditingController();
+  TextEditingController mobilePhoneController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
   GlobalKey<FormState> form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
     var widthValue = Get.width * 0.024;
     return Scaffold(
-      body: SafeArea(child: SingleChildScrollView(
+      body: SafeArea(
+          child: SingleChildScrollView(
         child: Container(
-          color: Themes.whiteColor,
-          width: Get.width,
-          child: GetBuilder<LoginController>(
-            init: LoginController(),
-            builder: (controller) => Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: heightValue * 2.5,),
-                Image.asset(
-                  Assets.imagesLogoApp,
-                  fit: BoxFit.contain,
-                  height: 150,
-                ),
-                SizedBox(height: heightValue * 1,),
-                Text('login'.tr,textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                  ),),
-                Form(
-                  key: controller.form,
-                  child: Column(
-                    children: [
-                      SizedBox(height: heightValue*1.2,),
-                      TextFieldMobileWidget(textEditingController: MobilePhone,),
-                      SizedBox(height: heightValue*.7,),
-                      TextFieldPasswordWidget(textEditingController: Password, isPassword: isPassword),
-                      SizedBox(height: heightValue * 1,),
-                      const ForgetPasswordWidget(),
-                      SizedBox(height: heightValue * .2,),
-                      CirclerProgressIndicatorWidget(isLoading: false),
-                      SizedBox(height: heightValue * 1,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: CustomButtonImage(title: 'login'.tr, hight: 55, onTap: (){
-                          controller.checkLoginUser(MobilePhone.text, Password.text);
-                        }),
+            color: Themes.whiteColor,
+            width: Get.width,
+            child: BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                _handleLoginListener(context, state);
+              },
+              builder: (context, state) {
+                AuthCubit authCubit = AuthCubit.get(context);
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: heightValue * 2.5,
+                    ),
+                    Image.asset(
+                      Assets.imagesLogoApp,
+                      fit: BoxFit.contain,
+                      height: 150,
+                    ),
+                    SizedBox(
+                      height: heightValue * 1,
+                    ),
+                    Text(
+                      'login'.tr,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
                       ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: heightValue * 1,),
-                const CreateAccountFromLoginWidget(),
-                SizedBox(height: heightValue * 1,)
-              ],
-            ),
-          ),
-        ),
+                    ),
+                    Form(
+                      key: form,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: heightValue * 1.2,
+                          ),
+                          TextFieldMobileWidget(
+                            textEditingController: mobilePhoneController,
+                          ),
+                          SizedBox(
+                            height: heightValue * .7,
+                          ),
+                          TextFieldPasswordWidget(
+                              textEditingController: passwordController,
+                              isPassword: isPassword),
+                          SizedBox(
+                            height: heightValue * 1,
+                          ),
+                          const ForgetPasswordWidget(),
+                          SizedBox(
+                            height: heightValue * .2,
+                          ),
+                          CirclerProgressIndicatorWidget(isLoading: false),
+                          SizedBox(
+                            height: heightValue * 1,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: CustomButtonImage(
+                                title: 'login'.tr,
+                                hight: 55,
+                                onTap: () {
+                                  if (form.currentState!.validate()) {
+                                    authCubit.setLoginUser(
+                                        mobilePhoneController.text,
+                                        passwordController.text, '');
+                                  }
+                                }),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: heightValue * 1,
+                    ),
+                    const CreateAccountFromLoginWidget(),
+                    SizedBox(
+                      height: heightValue * 1,
+                    )
+                  ],
+                );
+              },
+            )),
       )),
     );
+  }
+
+  void _handleLoginListener(BuildContext context, AuthState state) {
+    if (state is ErrorLoginState) {
+      CustomFlutterToast(state.error);
+    } else if (state is LoginSuccessState) {
+      // CustomFlutterToast(state.loginModel?.user?.token);
+      // CustomFlutterToast(state.loginModel?.user?.userName);
+      // CustomFlutterToast(state.loginModel?.user?.phoneNumber);
+      // CustomFlutterToast(state.loginModel?.user?.userEmail);
+      //  CacheHelper().setToken('${state.loginModel?.user?.token}');
+      _clearFormData();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+          (_) => false);
+    }else {
+      SpinKitDoubleBounce(
+        color: Themes.ColorApp9,
+        size: 50.0.sp,
+      );
+    }
+  }
+
+  void _clearFormData() {
+    mobilePhoneController.clear();
+    passwordController.clear();
   }
 }
 
@@ -97,13 +164,13 @@ class ForgetPasswordWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
-              child: Text('forget_password'.tr,
-                  textAlign: TextAlign.start,
-                  style: const TextStyle(
-                    color: Themes.ColorApp15,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 17,
-                  )),
+            child: Text('forget_password'.tr,
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  color: Themes.ColorApp15,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 17,
+                )),
             //  onTap: () =>  Get.to(ForgetPasswordByMobile())
           ),
         ],
@@ -118,8 +185,7 @@ class CreateAccountFromLoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
         width: Get.width,
         height: 50,
@@ -129,8 +195,7 @@ class CreateAccountFromLoginWidget extends StatelessWidget {
         ),
         child: Center(
           child: Row(
-            mainAxisAlignment:
-            MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'not_account'.tr,
@@ -150,8 +215,7 @@ class CreateAccountFromLoginWidget extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 16,
                     color: Themes.ColorApp6,
-                    fontWeight:
-                    FontWeight.bold,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
