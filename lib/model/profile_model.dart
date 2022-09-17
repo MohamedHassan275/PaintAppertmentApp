@@ -31,6 +31,8 @@ class ProfileResponseModel {
   String? email;
   String? phone;
   String? image;
+  String? governorate;
+  String? city;
 
   ProfileResponseModel(
       {this.id,
@@ -40,6 +42,8 @@ class ProfileResponseModel {
         this.lastname,
         this.email,
         this.phone,
+        this.governorate,
+        this.city,
         this.image});
 
   ProfileResponseModel.fromJson(Map<String, dynamic> json) {
@@ -50,6 +54,8 @@ class ProfileResponseModel {
     lastname = json['lastname'];
     email = json['email'];
     phone = json['phone'];
+    governorate = json['governorate'];
+    city = json['city'];
     image = json['image'];
   }
 
@@ -62,6 +68,8 @@ class ProfileResponseModel {
     data['lastname'] = this.lastname;
     data['email'] = this.email;
     data['phone'] = this.phone;
+    data['governorate'] = this.governorate;
+    data['city'] = this.city;
     data['image'] = this.image;
     return data;
   }

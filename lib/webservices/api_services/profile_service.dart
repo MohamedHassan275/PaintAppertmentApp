@@ -41,7 +41,8 @@ class ProfileService{
   }
 
 
-  static Future<ResponseUserModel?> changeProfileUser(String firstName,String lastName,String phone,String email) async {
+  static Future<ResponseUserModel?> changeProfileUser(String firstName,String lastName,String phone,
+      String email,String governorate,String city) async {
     ResponseUserModel? responseUserModel;
 
     try {
@@ -52,6 +53,8 @@ class ProfileService{
         "lastname": lastName,
         "phone": phone,
         "email": email,
+        "governorate": governorate,
+        "city": city,
       });
 
       //   print(AppLocalStorage.token);

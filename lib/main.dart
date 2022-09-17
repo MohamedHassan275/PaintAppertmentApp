@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/user_controller/add_order_cubit/add_order_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_main_cubit/home_main_cubit.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
+      BlocProvider(
+        create: (context) => AddOrderCubit(),
+      ),
       BlocProvider(
         create: (context) => CurrentOrdersCubit(),
       ),

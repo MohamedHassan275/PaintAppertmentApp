@@ -29,9 +29,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
   }
 
-  updateProfileUser(String firstName,String lastName,String phone,String email){
+  updateProfileUser(String firstName,String lastName,String phone,String email,String governorate,String city){
     emit(UpdateProfileLoadingState());
-    ProfileService.changeProfileUser(firstName, lastName, phone, email).then((value){
+    ProfileService.changeProfileUser(firstName, lastName, phone, email,governorate,city).then((value){
       if(value?.success == true){
         CustomFlutterToast(value?.message);
         emit(UpdateProfileSuccessState(value?.message));

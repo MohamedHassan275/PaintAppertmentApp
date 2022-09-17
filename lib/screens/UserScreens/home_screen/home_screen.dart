@@ -114,8 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           onTap: (){
                                               CustomFlutterToast(category.services![index].id.toString());
 
-                                            homeCubit.showProductDetails(category.services![index].id.toString());
-                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsServiceScreen()));
+                                         //   homeCubit.showProductDetails(category.services![index].id.toString());
+                                          //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsServiceScreen()));
                                           },
                                           child: Column(
                                             children: [

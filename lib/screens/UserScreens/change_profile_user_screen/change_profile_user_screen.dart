@@ -28,8 +28,8 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
   TextEditingController LastName = new TextEditingController();
   TextEditingController MobilePhone = new TextEditingController();
   TextEditingController Email = new TextEditingController();
-  TextEditingController Country = TextEditingController();
-  TextEditingController State = TextEditingController();
+  TextEditingController Government = TextEditingController();
+  TextEditingController City = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -51,6 +51,8 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
               LastName.text = state.profileResponseModel?.lastname ?? '';
               MobilePhone.text = state.profileResponseModel?.phone ?? '';
               Email.text = state.profileResponseModel?.email ?? '';
+              Government.text = state.profileResponseModel?.governorate ?? '';
+              City.text = state.profileResponseModel?.city ?? '';
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -85,7 +87,7 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
                       LastName: LastName,
                       Email: Email,
                       MobilePhone: MobilePhone, formKey: formKey,
-                      Country: Country, State: State,
+                      Country: Government, State: City,
                     ),
                     SizedBox(
                       height: height * .5,
@@ -112,7 +114,8 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
                             print(LastName.text);
                             print(MobilePhone.text);
                             print(Email.text);
-                            profileCubit.updateProfileUser(FirstName.text, LastName.text, MobilePhone.text, Email.text);
+                            profileCubit.updateProfileUser(FirstName.text, LastName.text, MobilePhone.text, Email.text,
+                            Government.text,City.text);
                           }
                         }),
                     SizedBox(height: height *1,)
