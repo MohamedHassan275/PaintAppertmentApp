@@ -46,7 +46,8 @@ class TextFieldMobileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FromTextShared(
         labelText: 'mobile_number'.tr,
-        maxLength: 11,
+        maxLength: 12,
+        isPassword: false,
         onChanged: (value) {
           value = value;
         },
@@ -85,6 +86,7 @@ class _TextFieldPasswordWidgetState extends State<TextFieldPasswordWidget> {
     return FromTextShared(
       //  textAlign: TextAlign.center,
       labelText: 'password'.tr,
+      isPassword: widget.isPassword,
       onTapsuffixIcon: () {
         setState(() {
           widget.isPassword = !widget.isPassword;

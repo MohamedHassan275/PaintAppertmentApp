@@ -1,10 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/business_logic/user_controller/home_main_controller.dart';
+import 'package:pain_appertment/business_logic/user_controller/home_main_cubit/home_main_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
+import '../../../utils/constant/constant.dart';
+import '../../../utils/servies/storage_service.dart';
 
 class HomeMainScreen extends StatefulWidget {
   const HomeMainScreen({Key? key}) : super(key: key);
@@ -14,13 +18,37 @@ class HomeMainScreen extends StatefulWidget {
 }
 
 class _HomeMainScreenState extends State<HomeMainScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      loadData();
+      AppConstants.tokenSession = Get.find<StorageService>().GetToken != null ? AppConstants.tokenSession = Get.find<StorageService>().GetToken : '';
+      print('token is ${AppConstants.tokenSession}');
+    });
+  }
+
+  loadData() {
+    BlocProvider.of<HomeCubit>(context, listen: false).getHomeUser();
+
+    // BlocProvider.of<AddProductCubit>(context, listen: false)
+    //     .getMyProducts(refresh: true);
+
+    // BlocProvider.of<AddProductCubit>(context, listen: false)
+    //     .getMyProductUser();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     var widthValue = Get.width * 0.024;
     var heightValue = Get.height * 0.024;
-    return GetBuilder<HomeMainController>(
-      init: HomeMainController(),
-      builder: (homeMainController)=> Scaffold(
+    return BlocBuilder<HomeMainCubit,HomeMainState>(builder: (context, state) {
+      HomeMainCubit homeMainCubit = HomeMainCubit.get(context);
+      final state = context.read<HomeCubit>().state;
+      return  Scaffold(
         appBar: AppBar(
             backgroundColor: Themes.ColorApp1,
             toolbarHeight: 75,
@@ -60,24 +88,24 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
               )
             ]
         ),
-        body: homeMainController.navigationItem[homeMainController.index],
+        body: homeMainCubit.navigationItem[homeMainCubit.index],
         bottomNavigationBar: BottomNavigationBar(
-          items: homeMainController.bottomNavigationBarItem,
+          items: homeMainCubit.bottomNavigationBarItem,
           onTap: (value){
             setState(() {
-              homeMainController.index = value;
+              homeMainCubit.index = value;
             });
-            homeMainController.navigationItem[homeMainController.index];
+            homeMainCubit.navigationItem[homeMainCubit.index];
           },
-          currentIndex: homeMainController.index,
+          currentIndex: homeMainCubit.index,
           selectedFontSize: 11,
           unselectedFontSize: 11,
           type: BottomNavigationBarType.fixed,
           selectedIconTheme: const IconThemeData(color: Themes.ColorApp1),
           unselectedIconTheme: const IconThemeData(color: Themes.ColorApp11),
         ),
-      ),
-    );
+      );
+    },);
   }
 }
 

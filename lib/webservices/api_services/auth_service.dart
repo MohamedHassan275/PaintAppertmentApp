@@ -13,7 +13,7 @@ class AuthService{
 
     try {
       
-      Response response = await APIService.postData(uri: ApiConstants.baseUrl,token: ApiConstants.login,data: {
+      Response response = await APIService.postData(uri: ApiConstants.login,data: {
         "phone" : phone,
         "password" : password,
         "fcm_token" : fcmToken,

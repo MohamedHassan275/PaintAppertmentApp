@@ -173,6 +173,7 @@ class FromTextShared extends StatelessWidget {
   int? maxLength;
   double? width;
   double? height;
+  bool? isPassword;
   TextInputType? keyboardType;
   IconData? suffixIcon;
   FocusNode? focusNode;
@@ -188,6 +189,7 @@ class FromTextShared extends StatelessWidget {
         this.onTapsuffixIcon,
         this.onSaved,
         this.validator,
+        this.isPassword,
         required this.Controller,
         this.maxLines,
         this.maxLength,
@@ -208,6 +210,7 @@ class FromTextShared extends StatelessWidget {
       child: TextFormField(
         onChanged: onChanged,
         onSaved: onSaved,
+        obscureText: isPassword!,
         onTap: onTapFunction,
         focusNode: focusNode,
         controller: Controller,

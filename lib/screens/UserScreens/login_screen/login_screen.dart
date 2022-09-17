@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 import 'package:pain_appertment/business_logic/user_controller/login_controller.dart';
+import 'package:pain_appertment/utils/servies/storage_service.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
@@ -94,6 +95,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: heightValue * 1,
                           ),
+                          state is LoginLoadingState
+                              ? const CircularProgressIndicator(
+                                  color: Themes.ColorApp1,
+                                )
+                              : Container(),
+                          SizedBox(
+                            height: heightValue * 1,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: CustomButtonImage(
@@ -103,7 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (form.currentState!.validate()) {
                                     authCubit.setLoginUser(
                                         mobilePhoneController.text,
-                                        passwordController.text, '');
+                                        passwordController.text,
+                                        '');
                                   }
                                 }),
                           ),
@@ -129,21 +139,14 @@ class _LoginScreenState extends State<LoginScreen> {
     if (state is ErrorLoginState) {
       CustomFlutterToast(state.error);
     } else if (state is LoginSuccessState) {
-      // CustomFlutterToast(state.loginModel?.user?.token);
-      // CustomFlutterToast(state.loginModel?.user?.userName);
-      // CustomFlutterToast(state.loginModel?.user?.phoneNumber);
-      // CustomFlutterToast(state.loginModel?.user?.userEmail);
-      //  CacheHelper().setToken('${state.loginModel?.user?.token}');
+      CustomFlutterToast(state.loginResponseModel?.accesstoken);
+      Get.find<StorageService>()
+          .SetToken('${state.loginResponseModel?.accesstoken}');
       _clearFormData();
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const HomeMainScreen()),
           (_) => false);
-    }else {
-      SpinKitDoubleBounce(
-        color: Themes.ColorApp9,
-        size: 50.0.sp,
-      );
     }
   }
 

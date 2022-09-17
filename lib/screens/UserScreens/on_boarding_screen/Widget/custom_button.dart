@@ -7,14 +7,15 @@ import '../../../../business_logic//OnBoardingController.dart';
 import '../../../../utils/componant/CustomButtonWidget.dart';
 import '../../login_screen/login_screen.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends GetView<OnBoardingControllerImp> {
+
+
   @override
   Widget build(BuildContext context) {
     final double valueHight = Get.height * .024;
     final double valueWidth = Get.width * .024;
 
-    return GetBuilder<OnBoardingControllerImp>(
-        builder: (controller) => Positioned(
+    return Positioned(
       left: 0,
       right: 0,
       bottom: valueHight * 4.5,
@@ -37,6 +38,6 @@ class CustomButton extends StatelessWidget {
           ),
         ),
       ),
-    ));
+    );
   }
 }

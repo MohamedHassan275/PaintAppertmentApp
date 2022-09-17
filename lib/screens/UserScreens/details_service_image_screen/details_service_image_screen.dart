@@ -4,15 +4,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:pain_appertment/business_logic/user_controller/home_controller.dart';
 import 'package:pain_appertment/utils/constant/Themes.dart';
 
 import '../../../generated/assets.dart';
+import '../../../model/home_model.dart';
 import '../home_main_screen/home_main_screen.dart';
 
 class DetailsServiceImageScreen extends StatefulWidget {
-  const DetailsServiceImageScreen({Key? key}) : super(key: key);
-
+   DetailsServiceImageScreen({Key? key,required this.gallery}) : super(key: key);
+   Gallery? gallery;
   @override
   _DetailsServiceImageScreenState createState() => _DetailsServiceImageScreenState();
 }
@@ -23,22 +23,23 @@ class _DetailsServiceImageScreenState extends State<DetailsServiceImageScreen> {
     var width = Get.width * 0.024;
     var height = Get.height * 0.024;
     return Scaffold(
-      body: GetBuilder<HomeController>(
-        init: HomeController(),
-        builder: (service) => SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              color: Themes.whiteColor,
-              child: Column(
-                children: [
-                  Appbarwidget(width: width, height: height),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListView.builder(
-                      itemCount: service.sliderModel.length,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            color: Themes.whiteColor,
+            child: Column(
+              children: [
+                Appbarwidget(width: width, height: height, gallery: widget.gallery,),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListView.builder(
+                      itemCount: widget.gallery?.images!.length,
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                         elevation: 2,
                         color: Themes.whiteColor,
                         child: Container(
@@ -53,26 +54,27 @@ class _DetailsServiceImageScreenState extends State<DetailsServiceImageScreen> {
                               height: 200,
                               width: 300,
                               fit: BoxFit.fill,
-                              image: AssetImage(service.sliderModel[index].image),
+                              image: NetworkImage('${widget.gallery?.images![index].image}'),
                               placeholder: const AssetImage(Assets.imagesLogoApp),
                             ),
                           ),
                         ),
                       )),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
-      ),
+      )
     );
   }
 }
 
+
 class Appbarwidget extends StatelessWidget {
-  Appbarwidget({Key? key,required this.width, required this.height}) : super(key: key);
+  Appbarwidget({Key? key,required this.gallery, required this.width, required this.height}) : super(key: key);
   double height,width;
+  Gallery? gallery;
   @override
   Widget build(BuildContext context) {
     return  Stack(
@@ -85,10 +87,10 @@ class Appbarwidget extends StatelessWidget {
               borderRadius: BorderRadius.only(
                   topRight:  Radius.circular(25),
                   topLeft: Radius.circular(25))),
-          child: const Center(
+          child:  Center(
             child: Text(
-              'صور اسقف جبس بورد',
-              style: TextStyle(
+              '${gallery?.title}',
+              style: const TextStyle(
                 color: Themes.ColorApp15,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,

@@ -8,6 +8,7 @@ import '../../../generated/assets.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
 import '../../../utils/componant/CustomTextFieldWidget.dart';
 import '../../../utils/constant/Themes.dart';
+import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
 
@@ -225,8 +226,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                            // isCheckAccepted == true ? controller.createAccount(widget.mobilePhone, FirstName.text,
                            //     LastName.text, Email.text, Password.text) : CustomFlutterToast('agree_to_terms2'.tr);
                            if(form.currentState!.validate()){
-                             isCheckAccepted == true ? AppConstants.customFlutterToast('تم تسجيلك بنجاح') :
-                             AppConstants.customFlutterToast('agree_to_terms2'.tr);
+                             isCheckAccepted == true ? CustomFlutterToast('تم تسجيلك بنجاح') :
+                             CustomFlutterToast('agree_to_terms2'.tr);
                            }
                          }
                      ),
