@@ -243,7 +243,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     if( isCheckAccepted == true){
                                       authCubit.setRegisterUser(FirstName.text, LastName.text, MobilePhone.text,
                                           Email.text, Password.text, '');
-                                      CustomFlutterToast('تم تسجيلك بنجاح');
+                                     // CustomFlutterToast('تم تسجيلك بنجاح');
                                     }
                                     CustomFlutterToast('agree_to_terms2'.tr);
                                   }
@@ -272,7 +272,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (state is ErrorLoginState) {
       CustomFlutterToast(state.error);
     } else if (state is LoginSuccessState) {
-      CustomFlutterToast(state.loginResponseModel?.accesstoken);
+     // CustomFlutterToast(state.loginResponseModel?.accesstoken);
       Get.find<StorageService>()
           .SetToken('${state.loginResponseModel?.accesstoken}');
       _clearFormData();

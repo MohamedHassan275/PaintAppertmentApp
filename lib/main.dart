@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_main_cubit/home_main_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/orders_cubit/orders_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/setting_cubit/setting_cubit.dart';
 import 'package:pain_appertment/screens/UserScreens/splash_screen/splash_screen.dart';
@@ -15,6 +17,8 @@ import 'package:pain_appertment/utils/servies/services.dart';
 import 'package:pain_appertment/utils/servies/storage_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +40,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
+      BlocProvider(
+        create: (context) => CurrentOrdersCubit(),
+      ),
+      BlocProvider(
+        create: (context) => PreviousOrdersCubit(),
+      ),
+      BlocProvider(
+        create: (context) => OrdersCubit(),
+      ),
       BlocProvider(
         create: (context) => SettingCubit(),
       ),

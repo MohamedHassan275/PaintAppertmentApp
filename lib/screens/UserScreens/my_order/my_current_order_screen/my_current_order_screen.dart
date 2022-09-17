@@ -1,47 +1,86 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
+import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_current_order_screen/details_current_order_screen.dart';
 
+import '../../../../business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import '../../../../generated/assets.dart';
 import '../../../../business_logic/user_controller/my_current_order_controller.dart';
 import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 
-class MyCurrentOrderScreen extends StatelessWidget {
+class MyCurrentOrderScreen extends StatefulWidget {
   const MyCurrentOrderScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MyCurrentOrderScreen> createState() => _MyCurrentOrderScreenState();
+}
+
+class _MyCurrentOrderScreenState extends State<MyCurrentOrderScreen> {
+
+  void loadData(){
+    BlocProvider.of<CurrentOrdersCubit>(context).getCurrentOrderUser();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
     var widthValue = Get.width * 0.024;
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: GetBuilder<MyCurrentOrderController>(
-                  init: MyCurrentOrderController(),
-                  builder: (controller) {
-                    if(controller.Loading){
-                      return LoadingWidget(data: '');
-                    }
-                    return controller.currentOrder.isNotEmpty ?
-                    ListView.builder(
-                      itemCount: controller.currentOrder.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                          child: MySendOrderListItem(currentOrder: controller.currentOrder[index], heightValue: heightValue,widthValue: widthValue,),
+      body: RefreshIndicator(
+        onRefresh: () async{
+          loadData();
+        },
+        child: SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: BlocBuilder<CurrentOrdersCubit,CurrentOrdersState>(
+                    builder: (context, state) {
+                      if(state is CurrentOrdersSuccessfullyState){
+                        return state.orderResponseModel!.isNotEmpty ?
+                        ListView.builder(
+                          itemCount: state.orderResponseModel!.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                              child: MySendOrderListItem(currentOrder: state.orderResponseModel![index], heightValue: heightValue,widthValue: widthValue,),
+                            );
+                          },) : NoItemOFList();
+                      }else if (state is CurrentOrdersErrorState){
+                        return Container(
+                          width: Get.width,
+                          height: Get.height,
+                          child:  const Center(
+                            child:Text(''),
+                          ),
                         );
-                      },) : NoItemOFList();
-                  },),
-              ),
-            ),)
+                      }
+                      return  Container(
+                        width: Get.width,
+                        height: Get.height,
+                        child: const Center(
+                          child: CircularProgressIndicator(color: Themes.ColorApp1,),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),)
+        ),
       ),
     );
   }
@@ -50,7 +89,7 @@ class MyCurrentOrderScreen extends StatelessWidget {
 class MySendOrderListItem extends StatelessWidget {
   MySendOrderListItem({Key? key,required this.currentOrder,required this.widthValue,required this.heightValue}) : super(key: key);
   double heightValue,widthValue;
-  MyWaitingOrderModel currentOrder;
+  OrderResponseModel currentOrder;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -79,39 +118,22 @@ class MySendOrderListItem extends StatelessWidget {
                 child: Row(
                   children: [
                     const SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: CircleAvatar(
-                        backgroundColor: Themes.ColorApp13,
-                      ),
-                    ),
-                    SizedBox(width: widthValue * 1,),
-                    Text(
-                      'request_currently'.tr,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
+                      child: Icon(
+                        Icons.location_on,
                         color: Themes.ColorApp1,
                       ),
                     ),
-                    SizedBox(width: widthValue * 1,),
-                    // Text(
-                    //   '${currentOrder.offerCost}',
-                    //   style: TextStyle(
-                    //     fontWeight: FontWeight.w500,
-                    //     fontSize: 14,
-                    //     color: Themes.ColorApp1,
-                    //   ),
-                    // ),
-                    // SizedBox(width: widthValue * .5,),
-                    // Text(
-                    //   'sar'.tr,
-                    //   style: TextStyle(
-                    //     fontWeight: FontWeight.w500,
-                    //     fontSize: 14,
-                    //     color: Themes.ColorApp1,
-                    //   ),
-                    // ),
+                    SizedBox(
+                      width: widthValue * .5,
+                    ),
+                    Text(
+                      '${currentOrder.governorate} ${currentOrder.city}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                        color: Themes.ColorApp15,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -201,7 +223,7 @@ class NoItemOFList extends StatelessWidget {
 class CompanyDetails extends StatelessWidget {
   CompanyDetails(this.myCurrentOrderModel);
 
-  MyWaitingOrderModel? myCurrentOrderModel;
+  OrderResponseModel? myCurrentOrderModel;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -232,9 +254,9 @@ class CompanyDetails extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: widthValue *1,),
-                  Text(
-                    '${myCurrentOrderModel!.company}',
-                    style: const TextStyle(
+                  const Text(
+                    'شطب شقتك',
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: Themes.ColorApp1,
@@ -274,7 +296,7 @@ class CompanyDetails extends StatelessWidget {
                       ),
                       SizedBox(width: widthValue * .2,),
                       Text(
-                        '${myCurrentOrderModel!.castingType}',
+                        '${myCurrentOrderModel!.service ?? ''}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
@@ -300,7 +322,7 @@ class CompanyDetails extends StatelessWidget {
                       ),
                       SizedBox(width: widthValue * .2,),
                       Text(
-                        '${myCurrentOrderModel!.qtyM}',
+                        '${myCurrentOrderModel!.flatArea}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
@@ -317,7 +339,7 @@ class CompanyDetails extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '${myCurrentOrderModel!.address}',
+                        '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.city}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,

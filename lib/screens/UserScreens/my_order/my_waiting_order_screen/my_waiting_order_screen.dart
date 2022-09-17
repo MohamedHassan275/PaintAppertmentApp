@@ -1,51 +1,89 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_waiting_order_screen/details_waiting_order_screen.dart';
 import 'package:pain_appertment/business_logic/user_controller/my_waiting_order_controller.dart';
 
+import '../../../../business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
+import '../../../../business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import '../../../../generated/assets.dart';
 import '../../../../model/MyWaitingOrderModel.dart';
+import '../../../../model/order_model.dart';
 import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 
-class MyWaitingOrderScreen extends StatelessWidget {
+class MyWaitingOrderScreen extends StatefulWidget {
   const MyWaitingOrderScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MyWaitingOrderScreen> createState() => _MyWaitingOrderScreenState();
+}
+
+class _MyWaitingOrderScreenState extends State<MyWaitingOrderScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
     var widthValue = Get.width * 0.024;
-    return RefreshIndicator(
-      onRefresh: () async{},
-      child: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: GetBuilder<MyWaitingOrderController>(
-                  init: MyWaitingOrderController(),
-                  builder: (controller) {
-                    if(controller.Loading){
-                      return LoadingWidget(data: '');
-                    }
-                    return controller.myWaitingOrderModel.isNotEmpty ?
-                    ListView.builder(
-                      itemCount: controller.myWaitingOrderModel.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                          child: MyWaitingOrderItem(MyNewOder: controller.myWaitingOrderModel[index],
-                            heightValue: heightValue,widthValue: widthValue,),
+    return Scaffold(
+      body: RefreshIndicator(
+        onRefresh: () async{
+          loadData();
+        },
+        child: SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: BlocBuilder<OrdersCubit,OrdersState>(
+                    builder: (context, state) {
+                      if(state is OrdersSuccessfullyState){
+                        return state.orderResponseModel!.isNotEmpty ?
+                        ListView.builder(
+                          itemCount: state.orderResponseModel!.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                              child: MyWaitingOrderItem(MyNewOder: state.orderResponseModel![index],
+                                heightValue: heightValue,widthValue: widthValue,),
+                            );
+                          },): NoItemOFList();
+                      }else if (state is OrdersErrorState){
+                        return Container(
+                          width: Get.width,
+                          height: Get.height,
+                          child:  const Center(
+                            child:Text(''),
+                          ),
                         );
-                      },): NoItemOFList();
-                  },),
-              ),
-            ),)
+                      }
+                      return  Container(
+                        width: Get.width,
+                        height: Get.height,
+                        child: const Center(
+                          child: CircularProgressIndicator(color: Themes.ColorApp1,),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),)
+        ),
       ),
     );
+  }
+  void loadData(){
+    BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
   }
 }
 
@@ -102,7 +140,7 @@ class MyWaitingOrderItem extends StatelessWidget {
       required this.heightValue})
       : super(key: key);
   double heightValue, widthValue;
-  MyWaitingOrderModel MyNewOder;
+  OrderResponseModel MyNewOder;
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +160,8 @@ class MyWaitingOrderItem extends StatelessWidget {
               SizedBox(
                 height: heightValue * 1,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
                 child: Divider(
                   height: 10,
                   color: Themes.ColorApp2,
@@ -136,22 +174,21 @@ class MyWaitingOrderItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Row(
                   children: [
-                    SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: CircleAvatar(
-                        backgroundColor: Themes.ColorApp9,
+                    const SizedBox(
+                      child: Icon(
+                          Icons.location_on,
+                        color: Themes.ColorApp1,
                       ),
                     ),
                     SizedBox(
-                      width: widthValue * 1,
+                      width: widthValue * .5,
                     ),
                     Text(
-                      'waiting_send_offer_price'.tr,
-                      style: TextStyle(
+                      '${MyNewOder.governorate} ${MyNewOder.city}',
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
-                        color: Themes.ColorApp9,
+                        color: Themes.ColorApp15,
                       ),
                     ),
                   ],
@@ -164,7 +201,7 @@ class MyWaitingOrderItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: GestureDetector(
                   onTap: () {
-                     Get.to(DetailsWaitingOrderScreen(newOrder: MyNewOder,));
+                     Get.to(DetailsWaitingOrderScreen(orderResponseModel: MyNewOder,));
                   },
                   child: Container(
                     width: Get.width,
@@ -176,7 +213,7 @@ class MyWaitingOrderItem extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'order_details'.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
                           color: Themes.ColorApp1,
@@ -200,7 +237,7 @@ class MyWaitingOrderItem extends StatelessWidget {
 class CompanyDetails extends StatelessWidget {
   CompanyDetails(this.myCurrentOrderModel);
 
-  MyWaitingOrderModel? myCurrentOrderModel;
+  OrderResponseModel? myCurrentOrderModel;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
 
@@ -221,7 +258,7 @@ class CompanyDetails extends StatelessWidget {
                   color: Themes.ColorApp14,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Center(
+                child: const Center(
                   child: Image(
                     image: AssetImage(Assets.imagesFactoryNamIcon),
                     fit: BoxFit.contain,
@@ -233,8 +270,8 @@ class CompanyDetails extends StatelessWidget {
               SizedBox(
                 width: widthValue * 1,
               ),
-              Text(
-                '${myCurrentOrderModel!.company}',
+              const Text(
+                'شطب شقتك',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
@@ -262,7 +299,7 @@ class CompanyDetails extends StatelessWidget {
                         children: [
                           Text(
                             'request_type'.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                               color: Themes.ColorApp2,
@@ -272,8 +309,8 @@ class CompanyDetails extends StatelessWidget {
                             width: widthValue * .2,
                           ),
                           Text(
-                            '${myCurrentOrderModel!.castingType}',
-                            style: TextStyle(
+                            '${myCurrentOrderModel!.service ?? '----'}',
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                               color: Themes.ColorApp1,
@@ -290,7 +327,7 @@ class CompanyDetails extends StatelessWidget {
                         children: [
                           Text(
                             'quantity'.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                               color: Themes.ColorApp2,
@@ -300,8 +337,8 @@ class CompanyDetails extends StatelessWidget {
                             width: widthValue * .2,
                           ),
                           Text(
-                            '${myCurrentOrderModel!.qtyM}',
-                            style: TextStyle(
+                            '${myCurrentOrderModel!.flatArea}',
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                               color: Themes.ColorApp1,
@@ -313,7 +350,7 @@ class CompanyDetails extends StatelessWidget {
                   ),
                   Text(
                     '#${myCurrentOrderModel!.orderNumber}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
                       color: Themes.ColorApp2,

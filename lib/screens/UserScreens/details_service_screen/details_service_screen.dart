@@ -194,7 +194,8 @@ class DetailsServiceScreen extends StatelessWidget {
                                 ),),
                             ),
                             SizedBox(height: height * 3.5,),
-                            CustomButtonImage(title: 'request_price2'.tr, hight: 50, onTap: () => Get.to(const RequestMyServiceScreen())),
+                            CustomButtonImage(title: 'request_price2'.tr, hight: 50, onTap: () => Get.to(RequestMyServiceScreen(
+                              companyId: state.showProductResponseDetails?.id.toString(),))),
                             SizedBox(height: height * 1,),
                           ],
                         ),

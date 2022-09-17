@@ -1,17 +1,26 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
+import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_previous_order_screen/details_previous_order_screen.dart';
 import 'package:pain_appertment/business_logic/user_controller/my_previous_order_controller.dart';
 
+import '../../../../business_logic/user_controller/orders_cubit/orders_cubit.dart';
+import '../../../../business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 
-class MyPreviousOrderScreen extends StatelessWidget {
+class MyPreviousOrderScreen extends StatefulWidget {
   const MyPreviousOrderScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MyPreviousOrderScreen> createState() => _MyPreviousOrderScreenState();
+}
+
+class _MyPreviousOrderScreenState extends State<MyPreviousOrderScreen> {
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -21,45 +30,62 @@ class MyPreviousOrderScreen extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async{
-         // myPreviousOrderController.getPreviousMyOrderUser();
+          loadData();
         },
         child: SafeArea(
             child: SingleChildScrollView(
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: GetBuilder<MyPreviousOrderController>(
-                    init: MyPreviousOrderController(),
-                    builder: (controller) {
-                      if(controller.Loading){
-                        return LoadingWidget(data: '');
-                      }else {
-                        return controller.previousOrder.isNotEmpty ?
+                  child: BlocBuilder<PreviousOrdersCubit,PreviousOrdersState>(
+                    builder: (context, state) {
+                      if(state is PreviousOrdersSuccessfullyState){
+                        return state.orderResponseModel!.isNotEmpty ?
                         ListView.builder(
-                          itemCount: controller.previousOrder.length,
+                          itemCount: state.orderResponseModel!.length,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                              child: MyPreviousOrderItem(previousOrder: controller.previousOrder[index],
+                              child: MyPreviousOrderItem(previousOrder: state.orderResponseModel![index],
                                   heightValue: heightValue, widthValue: widthValue),
                             );
-                          },) : NoItemOFList();
+                          },): NoItemOFList();
+                      }else if (state is PreviousOrdersErrorState){
+                        return Container(
+                          width: Get.width,
+                          height: Get.height,
+                          child:  const Center(
+                            child:Text(''),
+                          ),
+                        );
                       }
-                    },),
+                      return  Container(
+                        width: Get.width,
+                        height: Get.height,
+                        child: const Center(
+                          child: CircularProgressIndicator(color: Themes.ColorApp1,),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            )),
+              ),)
+        ),
       ),
     );
+  }
+
+  void loadData(){
+    BlocProvider.of<PreviousOrdersCubit>(context).getPreviousOrderUser();
   }
 }
 
 class MyPreviousOrderItem extends StatelessWidget {
   MyPreviousOrderItem({Key? key,required this.previousOrder,required this.heightValue,required this.widthValue}) : super(key: key);
   double heightValue,widthValue;
-  MyWaitingOrderModel previousOrder;
+  OrderResponseModel previousOrder;
   String? statusOrder;
 
   @override
@@ -94,11 +120,11 @@ class MyPreviousOrderItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                         //  Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
-                          const Icon(Icons.timer,size: 15,color: Themes.ColorApp1,),
+                          const Icon(null,size: 15,color: Themes.ColorApp1,),
                           SizedBox(width: widthValue * 1,),
-                          Text(
-                            '${previousOrder.executionDate}',
-                            style: const TextStyle(
+                          const Text(
+                            '',
+                            style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                               color: Themes.ColorApp1,
@@ -188,7 +214,7 @@ class NoItemOFList extends StatelessWidget {
 class CompanyDetails extends StatelessWidget {
   CompanyDetails(this.myCurrentOrderModel);
 
-  MyWaitingOrderModel? myCurrentOrderModel;
+  OrderResponseModel? myCurrentOrderModel;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -219,9 +245,9 @@ class CompanyDetails extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: widthValue *1,),
-                  Text(
-                    '${myCurrentOrderModel!.company}',
-                    style: const TextStyle(
+                  const Text(
+                    'شطب شقتك',
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: Themes.ColorApp1,
@@ -289,7 +315,7 @@ class CompanyDetails extends StatelessWidget {
                       ),
                       SizedBox(width: widthValue * .2,),
                       Text(
-                        '${myCurrentOrderModel!.castingType}',
+                        '${myCurrentOrderModel!.service ?? ''}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,

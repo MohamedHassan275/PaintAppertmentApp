@@ -9,7 +9,8 @@ import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
 
 class RequestMyServiceScreen extends StatelessWidget {
-  const RequestMyServiceScreen({Key? key}) : super(key: key);
+   RequestMyServiceScreen({Key? key,required this.companyId}) : super(key: key);
+   String? companyId;
 
   @override
   Widget build(BuildContext context) {

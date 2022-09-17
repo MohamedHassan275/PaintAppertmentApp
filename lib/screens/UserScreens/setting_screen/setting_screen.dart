@@ -141,7 +141,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                               SizedBox(height: heightValue*.5,),
                                Text(
-                                '$mobilePhoneList',
+                                '${mobilePhoneList !=null ? 'لا يوجد ارقام حاليا' : mobilePhoneList}',
                                 style: const TextStyle(
                                   color: Themes.ColorApp1,
                                   fontSize: 17,

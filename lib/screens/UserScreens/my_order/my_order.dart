@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_screen/details_service_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_current_order_screen/my_current_order_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_previous_order_screen/my_previous_order_screen.dart';
@@ -8,6 +10,7 @@ import 'package:pain_appertment/screens/UserScreens/my_order/my_waiting_order_sc
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/setting_screen/setting_screen.dart';
 
+import '../../../business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 import '../../../utils/constant/Themes.dart';
 import '../request_service_screen/request_service_screen.dart';
 
@@ -19,6 +22,21 @@ class MyOrder extends StatefulWidget {
 }
 
 class _MyOrderState extends State<MyOrder> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   setState(() {
+    // loadData();
+   });
+  }
+
+ void loadData(){
+   BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
+   BlocProvider.of<CurrentOrdersCubit>(context).getCurrentOrderUser();
+   BlocProvider.of<OrdersCubit>(context).getPreviousOrderUser();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

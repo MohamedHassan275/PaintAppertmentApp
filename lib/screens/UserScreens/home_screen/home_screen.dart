@@ -8,6 +8,7 @@ import 'package:pain_appertment/business_logic/user_controller/profile_cubit/pro
 import 'package:pain_appertment/model/home_model.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_image_screen/details_service_image_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_screen/details_service_screen.dart';
+import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/constant/Themes.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
 
@@ -47,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var width = Get.width * 0.024;
+    var widthValue = Get.width * 0.024;
     var height = Get.height * 0.024;
     return Scaffold(
         body: RefreshIndicator(
@@ -93,7 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     )),
                               ),
                             ),
-                            SizedBox(height: height * .5,),
+                            SizedBox(height: height * 1,),
+                            OrderPriceRequest(heightValue: height),
+                            SizedBox(height: height * 1,),
                             state.homeResponseModel!.categories!.isNotEmpty ?
                             SizedBox(
                               width: Get.width,
@@ -313,8 +316,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Container(
                         width: Get.width,
                         height: Get.height,
-                        child:  Center(
-                          child:Text('${state.error}'),
+                        child:  const Center(
+                          child:Text(''),
                         ),
                       );
                     }
@@ -329,5 +332,82 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ));
+  }
+}
+
+class OrderPriceRequest extends StatelessWidget {
+  OrderPriceRequest({required this.heightValue});
+
+  double heightValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Get.to(RequestMyServiceScreen(companyId: '', )),
+      child: Container(
+        width: Get.width,
+        height: 100,
+        decoration: BoxDecoration(
+          color: Themes.ColorApp14,
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(color: Themes.ColorApp1, width: 1.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    Assets.imagesOrderPriceImage,
+                    width: 35,
+                    height: 35,
+                    fit: BoxFit.contain,
+                  ),
+                  SizedBox(
+                    height: heightValue * .3,
+                  ),
+                  Text(
+                    'request_offer_price'.tr,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      color: Themes.ColorApp8,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Card(
+                color: Themes.whiteColor,
+                elevation: 2.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    child: const Center(
+                      child: Icon(
+                        Icons.keyboard_arrow_left,
+                        size: 25,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

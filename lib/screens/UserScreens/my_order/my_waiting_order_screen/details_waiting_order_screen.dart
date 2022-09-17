@@ -4,13 +4,14 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
 
 import '../../../../generated/assets.dart';
+import '../../../../model/order_model.dart';
 import '../../../../utils/constant/Themes.dart';
 import '../../../../utils/servies/storage_service.dart';
 import '../../home_main_screen/home_main_screen.dart';
 
 class DetailsWaitingOrderScreen extends StatefulWidget {
-   DetailsWaitingOrderScreen({Key? key,required this.newOrder}) : super(key: key);
-   MyWaitingOrderModel newOrder;
+   DetailsWaitingOrderScreen({Key? key,required this.orderResponseModel}) : super(key: key);
+   OrderResponseModel orderResponseModel;
 
   @override
   State<DetailsWaitingOrderScreen> createState() => _DetailsWaitingOrderScreenState();
@@ -54,34 +55,34 @@ class _DetailsWaitingOrderScreenState extends State<DetailsWaitingOrderScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              AddressDetailsOrder(newOrder: widget.newOrder,),
+                              AddressDetailsOrder(newOrder: widget.orderResponseModel,),
                               SizedBox(
                                 height: heightValue * .7,
                               ),
-                              Divider(
+                              const Divider(
                                 height: 10,
                                 color: Themes.ColorApp2,
                               ),
                               SizedBox(
                                 height: heightValue * .7,
                               ),
-                              DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.newOrder.castingType}'),
+                              DetailsOrder(widthValue, 'order_number'.tr, '#${widget.orderResponseModel.orderNumber}',''),
                               SizedBox(
                                 height: heightValue * .7,
                               ),
-                              DetailsOrder(widthValue, 'execution_date'.tr, '${widget.newOrder.executionDate}'),
+                              DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.orderResponseModel.service ?? '----'}',''),
                               SizedBox(
                                 height: heightValue * .7,
                               ),
-                              DetailsOrder(widthValue, 'quantity'.tr, '${widget.newOrder.qtyM}'),
+                              DetailsOrder(widthValue, 'quantity'.tr, '${widget.orderResponseModel.flatArea}','متر'),
                               SizedBox(
                                 height: heightValue * .7,
                               ),
-                              DetailsOrder(widthValue, 'mix_type'.tr, '${widget.newOrder.mixType}'),
+                              DetailsOrder(widthValue, 'mix_type'.tr, '${widget.orderResponseModel.rooms}','غرفة نوم'),
                               SizedBox(
                                 height: heightValue * .7,
                               ),
-                              DetailsOrder(widthValue, 'cement_type'.tr, '${widget.newOrder.cementType}'),
+                              DetailsOrder(widthValue, 'cement_type'.tr, '${widget.orderResponseModel.bathrooms}','حمام'),
                               SizedBox(
                                 height: heightValue * .7,
                               ),
@@ -96,7 +97,7 @@ class _DetailsWaitingOrderScreenState extends State<DetailsWaitingOrderScreen> {
                                   child: Center(
                                     child: Text(
                                       'Please_wait_request'.tr,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 15,
                                         color: Themes.ColorApp8,
@@ -135,7 +136,7 @@ class AppbarDetailsOrder extends StatelessWidget {
         Container(
           width: Get.width,
           height: 119,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Themes.ColorApp14,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(35),
@@ -143,7 +144,7 @@ class AppbarDetailsOrder extends StatelessWidget {
           child: Center(
             child: Text(
               'contract_details'.tr,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Themes.ColorApp15,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -155,7 +156,7 @@ class AppbarDetailsOrder extends StatelessWidget {
           top: heightValue * 2.3,
           left: heightValue * 1.5,
           child: GestureDetector(
-            onTap: () => Get.off(HomeMainScreen()),
+            onTap: () => Get.off(const HomeMainScreen()),
             child: const CircleAvatar(
               backgroundColor: Themes.ColorApp5,
               child: Icon(
@@ -173,9 +174,9 @@ class AppbarDetailsOrder extends StatelessWidget {
 }
 
 class AddressDetailsOrder extends StatelessWidget {
-  AddressDetailsOrder({required this.newOrder});
+  AddressDetailsOrder({Key? key, required this.newOrder}) : super(key: key);
 
-  MyWaitingOrderModel newOrder;
+  OrderResponseModel newOrder;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -193,7 +194,7 @@ class AddressDetailsOrder extends StatelessWidget {
                 color: Themes.ColorApp14,
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Center(
+              child: const Center(
                 child: Image(
                   image: AssetImage(Assets.iconsDistanceIcon),
                   fit: BoxFit.contain,
@@ -208,8 +209,8 @@ class AddressDetailsOrder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${newOrder.address}',
-                    style: TextStyle(
+                    '${newOrder.governorate} ${newOrder.city}',
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
                       color: Themes.ColorApp1,
@@ -226,10 +227,10 @@ class AddressDetailsOrder extends StatelessWidget {
 }
 
 class DetailsOrder extends StatelessWidget {
-  DetailsOrder(this.widthValue,this.title,this.details);
+  DetailsOrder(this.widthValue,this.title,this.details,this.title2);
 
-  double widthValue;
-  String title, details;
+ late double widthValue;
+ late String title, details,title2;
 
   @override
   Widget build(BuildContext context) {
@@ -238,18 +239,29 @@ class DetailsOrder extends StatelessWidget {
       children: [
         Text(
           '$title : ',
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14,
             color: Themes.ColorApp8,
           ),
         ),
         SizedBox(
-          width: widthValue * .7,
+          width: widthValue * .5,
         ),
         Text(
           details,
-          style: TextStyle(
+          style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: Themes.ColorApp1,
+          ),
+        ),
+        SizedBox(
+          width: widthValue * .5,
+        ),
+        Text(
+          title2,
+          style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14,
             color: Themes.ColorApp1,

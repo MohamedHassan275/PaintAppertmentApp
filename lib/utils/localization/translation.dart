@@ -74,6 +74,7 @@ class MyTranslation extends Translations{
       "save" : "حفظ",
       "type_of_casting" : "نوع الخدمة",
       "execution_date" : "تاريخ تنفيذ الخدمة",
+      "order_number" : "رقم الطلب",
       "mix_type" : "عدد غرف النوم",
       "cement_type" : "عدد الحمامات ",
       "stone_size" : "مقاس الحجر",
