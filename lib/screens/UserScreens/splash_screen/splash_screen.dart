@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print('tokenSession ${AppConstants.tokenSession}');
     Timer(const Duration(seconds: 5), ()=> Get.offAll(AppConstants.tokenSession != ""
         ? const HomeMainScreen()
         : const OnBoardingScreen()));

@@ -44,7 +44,7 @@ class TextFieldMobileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FromTextShared(
         labelText: 'mobile_number'.tr,
-        maxLength: 12,
+        maxLength: 11,
         isPassword: false,
         onChanged: (value) {
           value = value;

@@ -50,7 +50,7 @@ class AuthService{
 
     try {
 
-      Response response = await APIService.postData(uri: ApiConstants.login,data: {
+      Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.register,data: {
         "phone" : phone,
         "firstname" : firstName,
         "lastname" : lastName,
@@ -88,7 +88,7 @@ class AuthService{
 
     try {
 
-      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.register,token: AppConstants.tokenSession);
+      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.logout,token: AppConstants.tokenSession);
 
       //   print(AppLocalStorage.token);
       if(response.statusCode == 200){

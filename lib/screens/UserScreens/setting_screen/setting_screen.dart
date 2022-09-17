@@ -103,7 +103,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   ),
                                   SettingCategory(
                                       onTap: () {
-                                        BlocProvider.of<AuthCubit>(context).setLogout();
+                                        BlocProvider.of<AuthCubit>(context).setLogout(context);
                                       },
                                       title: 'logout'.tr,
                                       imageTitle: Assets.iconsLanguageImage,

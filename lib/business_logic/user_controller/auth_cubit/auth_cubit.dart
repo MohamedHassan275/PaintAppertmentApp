@@ -1,11 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pain_appertment/model/login_model.dart';
 import 'package:pain_appertment/model/response_user_model.dart';
+import 'package:pain_appertment/screens/UserScreens/login_screen/login_screen.dart';
 import 'package:pain_appertment/utils/constant/custom_toast.dart';
 import 'package:pain_appertment/webservices/api_services/auth_service.dart';
+
+import '../../../utils/servies/storage_service.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -18,8 +22,8 @@ class AuthCubit extends Cubit<AuthState> {
     AuthService.setLogin(phone, password, fcmToken).then((value){
       if(value?.success == true){
         emit(LoginSuccessState(value?.data));
-        CustomFlutterToast(value?.message);
-        CustomFlutterToast(value?.data?.accesstoken);
+        // CustomFlutterToast(value?.message);
+        // CustomFlutterToast(value?.data?.accesstoken);
       }else {
         emit(ErrorLoginState(value?.message));
       }
@@ -31,20 +35,22 @@ class AuthCubit extends Cubit<AuthState> {
     AuthService.setRegister(firstName, lastName, phone, email, password, fcmToken).then((value){
       if(value?.success == true){
         emit(LoginSuccessState(value?.data));
-        CustomFlutterToast(value?.message);
-        CustomFlutterToast(value?.data?.accesstoken);
+        // CustomFlutterToast(value?.message);
+        // CustomFlutterToast(value?.data?.accesstoken);
       }else {
         emit(ErrorLoginState(value?.message));
       }
     });
   }
 
-  setLogout(){
+  setLogout(BuildContext context){
     emit(LoginLoadingState());
     AuthService.logout().then((value){
       if(value?.success == true){
         emit(LoginoutSuccessState(value?.message));
         CustomFlutterToast(value?.message);
+        Get.find<StorageService>().clear();
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
       }else {
         emit(ErrorLoginState(value?.message));
       }
