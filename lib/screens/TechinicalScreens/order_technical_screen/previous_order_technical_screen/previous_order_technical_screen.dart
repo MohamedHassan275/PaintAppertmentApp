@@ -1,7 +1,10 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
+import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/previous_order_technical_screen/details_previous_order_technical_screen.dart';
 import 'package:pain_appertment/business_logic/technical_controller/previous_order_technical_controller.dart';
 
@@ -11,9 +14,21 @@ import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 import '../../../UserScreens/my_order/my_previous_order_screen/details_previous_order_screen.dart';
 
-class PreviousOrderTechnicalScreen extends StatelessWidget {
+class PreviousOrderTechnicalScreen extends StatefulWidget {
   const PreviousOrderTechnicalScreen({Key? key}) : super(key: key);
 
+  @override
+  State<PreviousOrderTechnicalScreen> createState() => _PreviousOrderTechnicalScreenState();
+}
+
+class _PreviousOrderTechnicalScreenState extends State<PreviousOrderTechnicalScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<PreviousOrdersCubit>(context).getPreviousOrderUser();
+  }
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -22,35 +37,31 @@ class PreviousOrderTechnicalScreen extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async{
-          // myPreviousOrderController.getPreviousMyOrderUser();
+          BlocProvider.of<PreviousOrdersCubit>(context).getPreviousOrderUser();
         },
         child: SafeArea(
             child: SingleChildScrollView(
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: GetBuilder<PreviousOrderTechnicalController>(
-                    init: PreviousOrderTechnicalController(),
-                    builder: (controller) {
-                      if(controller.Loading){
-                        return LoadingWidget(data: '');
-                      }else {
-                        return controller.previousOrder.isNotEmpty ?
-                        ListView.builder(
-                          itemCount: controller.previousOrder.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                              child: MyPreviousOrderItem(previousOrder: controller.previousOrder[index],
-                                  heightValue: heightValue, widthValue: widthValue),
-                            );
-                          },) : NoItemOFList();
-                      }
-                    },),
-                ),
-              ),
+              child: BlocBuilder<PreviousOrdersCubit,PreviousOrdersState>(
+                  builder: (context, state) {
+                    PreviousOrdersCubit previousOrdersCubit = PreviousOrdersCubit.get(context);
+                    if(state is PreviousOrdersSuccessfullyState){
+                      return state.orderResponseModel!.isNotEmpty ?
+                      ListView.builder(
+                        itemCount: state.orderResponseModel!.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                            child: MyPreviousOrderItem(previousOrder: state.orderResponseModel![index],
+                                heightValue: heightValue, widthValue: widthValue),
+                          );
+                        },) : NoItemOFList();
+                    }else if(state is PreviousOrdersErrorState){
+                      return LoadingWidget(data: state.error);
+                    }
+                    return LoadingWidget(data: '');
+                  },)
             )),
       ),
     );
@@ -60,7 +71,7 @@ class PreviousOrderTechnicalScreen extends StatelessWidget {
 class MyPreviousOrderItem extends StatelessWidget {
   MyPreviousOrderItem({Key? key,required this.previousOrder,required this.heightValue,required this.widthValue}) : super(key: key);
   double heightValue,widthValue;
-  MyWaitingOrderModel previousOrder;
+  OrderResponseModel previousOrder;
   String? statusOrder;
 
   @override
@@ -95,11 +106,11 @@ class MyPreviousOrderItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                          // Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
-                          const Icon(Icons.timer,size: 15,color: Themes.ColorApp1,),
+                          const Icon(null,size: 15,color: Themes.ColorApp1,),
                           SizedBox(width: widthValue * 1,),
-                          Text(
-                            '${previousOrder.executionDate}',
-                            style: const TextStyle(
+                          const Text(
+                            '',
+                            style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                               color: Themes.ColorApp1,
@@ -189,7 +200,7 @@ class NoItemOFList extends StatelessWidget {
 class CompanyDetails extends StatelessWidget {
   CompanyDetails(this.myCurrentOrderModel);
 
-  MyWaitingOrderModel? myCurrentOrderModel;
+  OrderResponseModel? myCurrentOrderModel;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -220,9 +231,9 @@ class CompanyDetails extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: widthValue *1,),
-                  Text(
-                    '${myCurrentOrderModel!.company}',
-                    style: const TextStyle(
+                  const Text(
+                    'شطب شقتك',
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: Themes.ColorApp1,
@@ -259,9 +270,9 @@ class CompanyDetails extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
-                    const Text(
-                      'محمد احمد',
-                      style: TextStyle(
+                     Text(
+                      '${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                      style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                         color: Themes.ColorApp1,
@@ -338,7 +349,7 @@ class CompanyDetails extends StatelessWidget {
                   ),
                   SizedBox(width: widthValue * .2,),
                   Text(
-                    '${myCurrentOrderModel!.castingType}',
+                    '${myCurrentOrderModel!.service ?? '---'}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,

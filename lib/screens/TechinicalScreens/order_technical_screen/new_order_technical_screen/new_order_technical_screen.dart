@@ -1,8 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/new_order_technical_screen/details_new_order_technical_screen.dart';
 
+import '../../../../business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import '../../../../generated/assets.dart';
 import '../../../../business_logic/technical_controller/current_order_technical_controller.dart';
 import '../../../../model/MyWaitingOrderModel.dart';
@@ -10,39 +13,70 @@ import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 import '../../../UserScreens/my_order/my_current_order_screen/details_current_order_screen.dart';
 
-class NewOrderTechnicalScreen extends StatelessWidget {
+class NewOrderTechnicalScreen extends StatefulWidget {
   const NewOrderTechnicalScreen({Key? key}) : super(key: key);
+
+  @override
+  State<NewOrderTechnicalScreen> createState() => _NewOrderTechnicalScreenState();
+}
+
+class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
+  }
 
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
     var widthValue = Get.width * 0.024;
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: GetBuilder<CurrentOrderTechnicalController>(
-                  init: CurrentOrderTechnicalController(),
-                  builder: (controller) {
-                    if(controller.Loading){
-                      return LoadingWidget(data: '');
-                    }
-                    return controller.currentOrder.isNotEmpty ?
+      body: RefreshIndicator(
+        onRefresh: () async{
+          print('refresh');
+          BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
+        },
+        child: SafeArea(
+            child: SingleChildScrollView(
+              child: BlocBuilder<OrdersCubit,OrdersState>(
+                builder: (context, state) {
+                  if(state is OrdersSuccessfullyState){
+                    OrdersCubit ordersCubit = OrdersCubit.get(context);
+                    return state.orderResponseModel!.isNotEmpty ?
                     ListView.builder(
-                      itemCount: controller.currentOrder.length,
+                      itemCount: state.orderResponseModel!.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                          child: MySendOrderListItem(currentOrder: controller.currentOrder[index], heightValue: heightValue,widthValue: widthValue,),
+                          child: MySendOrderListItem(currentOrder: state.orderResponseModel![index],
+                            heightValue: heightValue,widthValue: widthValue,),
                         );
-                      },) : NoItemOFList();
-                  },),
+                      },): NoItemOFList();
+                  }else if (state is OrdersErrorState){
+                    return Container(
+                      width: Get.width,
+                      height: Get.height,
+                      child:  const Center(
+                        child:Text(''),
+                      ),
+                    );
+                  }
+                  return  Container(
+                    width: Get.width,
+                    height: Get.height,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Themes.ColorApp1,),
+                    ),
+                  );
+                },
               ),
-            ),)
+            )
+        ),
       ),
     );
   }
@@ -51,7 +85,7 @@ class NewOrderTechnicalScreen extends StatelessWidget {
 class MySendOrderListItem extends StatelessWidget {
   MySendOrderListItem({Key? key,required this.currentOrder,required this.widthValue,required this.heightValue}) : super(key: key);
   double heightValue,widthValue;
-  MyWaitingOrderModel currentOrder;
+  OrderResponseModel currentOrder;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -186,7 +220,7 @@ class NoItemOFList extends StatelessWidget {
 class CompanyDetails extends StatelessWidget {
   CompanyDetails(this.myCurrentOrderModel);
 
-  MyWaitingOrderModel? myCurrentOrderModel;
+  OrderResponseModel? myCurrentOrderModel;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -217,9 +251,9 @@ class CompanyDetails extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: widthValue *1,),
-                  Text(
-                    '${myCurrentOrderModel!.company}',
-                    style: const TextStyle(
+                  const Text(
+                    'شطب شقتك',
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: Themes.ColorApp1,
@@ -257,7 +291,7 @@ class CompanyDetails extends StatelessWidget {
                   ),
                   SizedBox(width: widthValue * .2,),
                   Text(
-                    '${myCurrentOrderModel!.castingType}',
+                    '${myCurrentOrderModel!.service ?? '----' }',
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -279,7 +313,7 @@ class CompanyDetails extends StatelessWidget {
                   ),
                   SizedBox(width: widthValue * .2,),
                   Text(
-                    '${myCurrentOrderModel!.qtyM}',
+                    '${myCurrentOrderModel!.flatArea}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,

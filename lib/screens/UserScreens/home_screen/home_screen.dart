@@ -11,6 +11,7 @@ import 'package:pain_appertment/screens/UserScreens/details_service_screen/detai
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/constant/Themes.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../generated/assets.dart';
 import '../../../utils/constant/custom_toast.dart';
@@ -109,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     Categories category = state.homeResponseModel!.categories![index];
                                     return Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 5),
+                                        padding:  const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
                                         child: GestureDetector(
                                           onTap: (){
                                               CustomFlutterToast(category.services![index].id.toString());
@@ -219,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (context, index) {
                                     return Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 5),
+                                        padding:  const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
                                         child: GestureDetector(
                                           onTap: (){
                                             //  CustomFlutterToast('${homeUserResponseModel!.categories!.length}');
@@ -267,7 +268,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(height: height* .7,),
                                               SizedBox(
                                                   height: 150,
                                                   child: ListView.builder(
@@ -281,8 +281,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         elevation: 2,
                                                         color: Themes.whiteColor,
                                                         child: Container(
-                                                          height: 200,
-                                                          width: 250,
+                                                          height: 150,
+                                                          width: 200,
                                                           decoration: BoxDecoration(
                                                             borderRadius: BorderRadius.circular(15),
                                                           ),
@@ -291,8 +291,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             child: FadeInImage(
                                                               image: NetworkImage('${state.homeResponseModel!.gallery![index].images![index].image}'),
                                                               fit: BoxFit.fill,
-                                                              height: 100,
-                                                              width: 150,
+                                                              height: 150,
+                                                              width: 200,
                                                               placeholder:  const AssetImage(Assets.imagesLogoApp),
                                                             ),
                                                           ),

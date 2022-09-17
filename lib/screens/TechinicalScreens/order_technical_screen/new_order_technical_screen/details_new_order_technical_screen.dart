@@ -5,7 +5,9 @@ import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_sc
 
 import '../../../../generated/assets.dart';
 import '../../../../model/MyWaitingOrderModel.dart';
+import '../../../../model/order_model.dart';
 import '../../../../utils/componant/CustomButtonWidget.dart';
+import '../../../../utils/componant/CustomTextFieldWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 import '../../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../../utils/widget/custom_phone_and_password_widget.dart';
@@ -13,7 +15,7 @@ import '../../../UserScreens/home_main_screen/home_main_screen.dart';
 
 class DetailsNewOrderTechnicalScreen extends StatefulWidget {
    DetailsNewOrderTechnicalScreen({Key? key,required this.newOrder}) : super(key: key);
-   MyWaitingOrderModel newOrder;
+   OrderResponseModel newOrder;
 
   @override
   State<DetailsNewOrderTechnicalScreen> createState() => _DetailsNewOrderTechnicalScreenState();
@@ -23,6 +25,8 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
 
 
   TextEditingController valueOrder = TextEditingController();
+
+  GlobalKey<FormState> formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -64,50 +68,64 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.newOrder.castingType}'),
+                                DetailsOrder(widthValue, 'order_number'.tr, '#${widget.newOrder.orderNumber}',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'execution_date'.tr, '${widget.newOrder.executionDate}'),
+                                DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.newOrder.service ?? '-----'}',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'quantity'.tr, '${widget.newOrder.qtyM}'),
+                                DetailsOrder(widthValue, 'quantity'.tr, '${widget.newOrder.flatArea}','متر'),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'mix_type'.tr, '${widget.newOrder.mixType}'),
+                                DetailsOrder(widthValue, 'mix_type'.tr, '${widget.newOrder.rooms}','غرفة نوم'),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'cement_type'.tr, '${widget.newOrder.cementType}'),
+                                DetailsOrder(widthValue, 'cement_type'.tr, '${widget.newOrder.bathrooms}','حمام'),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'name_client'.tr, 'احمد محمد'),
+                                DetailsOrder(widthValue, 'name_client'.tr, '${widget.newOrder.firstname} ${widget.newOrder.lastname}',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'mobile_number'.tr, '0115043662'),
+                                DetailsOrder(widthValue, 'mobile_number'.tr, '${widget.newOrder.phone}',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
                                 SizedBox(height: heightValue * .7,),
-                                CustomTextFieldWidget(title: 'value_order', keyboardType: TextInputType.text, textEditingController: valueOrder),
+                                Form(
+                                  key: formKey,
+                                  child: FromTextShared2(
+                                      labelText: 'value_order'.tr,
+                                      maxLength: 5,
+                                      onChanged: (value) {
+                                        value = value;
+                                      },
+                                      onSaved: (String? value){
+                                        value = value!;
+                                      },
+                                      onTapValidator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'must_not_empty'.tr;
+                                        }
+                                        return null;
+                                      },
+                                      keyboardType: TextInputType.text,
+                                      Controller: valueOrder,
+                                      hintText: 'value_order'.tr),
+                                ),
                                 SizedBox(height: heightValue * .5,),
                                 CirclerProgressIndicatorWidget(isLoading:  false),
                                 SizedBox(height: heightValue * .7,),
                                 CustomButtonImage(title: 'button_value_order'.tr, hight: 50, onTap: (){
-                                  // CustomFlutterToast(currentOrder.id.toString());
-                                  // CustomFlutterToast(currentOrder.executionDate);
-                                  // CustomFlutterToast(myCurrentOrderController.formattedDateCurrent);
-                                  // if ((currentOrder.executionDate!.compareTo(myCurrentOrderController.formattedDateCurrent!) <= 0 &&
-                                  //     currentOrder.executionDate!.compareTo(myCurrentOrderController.formattedDateCurrent!) >= 0)){
-                                  //   Get.find<MyCurrentOrderController>().ReceivedOrder('${currentOrder.id}');
-                                  // }else {
-                                  //   CustomFlutterToast('operation_cannot_be_completed'.tr);
-                                  // }
-                                  Get.to(const HomeTechincalMainScreen());
+                                  if(formKey.currentState!.validate()){
+                                    Get.to(const HomeTechincalMainScreen());
+                                  }
+
                                 }),
                                 SizedBox(height: heightValue * 1,),
                               ],
@@ -177,7 +195,7 @@ class AppbarDetailsOrder extends StatelessWidget {
 class AddressDetailsOrder extends StatelessWidget {
   AddressDetailsOrder({required this.newOrder});
 
-  MyWaitingOrderModel newOrder;
+  OrderResponseModel newOrder;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -210,7 +228,7 @@ class AddressDetailsOrder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${newOrder.address}',
+                    '${newOrder.governorate} ${newOrder.city}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
@@ -228,10 +246,10 @@ class AddressDetailsOrder extends StatelessWidget {
 }
 
 class DetailsOrder extends StatelessWidget {
-  DetailsOrder(this.widthValue,this.title,this.details);
+  DetailsOrder(this.widthValue,this.title,this.details,this.title2);
 
-  double widthValue;
-  String title, details;
+  late double widthValue;
+  late String title, details,title2;
 
   @override
   Widget build(BuildContext context) {
@@ -247,10 +265,21 @@ class DetailsOrder extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: widthValue * .7,
+          width: widthValue * .5,
         ),
         Text(
           details,
+          style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: Themes.ColorApp1,
+          ),
+        ),
+        SizedBox(
+          width: widthValue * .5,
+        ),
+        Text(
+          title2,
           style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14,

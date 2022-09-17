@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/technical_controller/current_order_technical_controller.dart';
+import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
+import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/current_order_technical_screen/details_current_order_technical_screen.dart';
 
 import '../../../../generated/assets.dart';
@@ -10,9 +13,21 @@ import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 import '../../../UserScreens/my_order/my_current_order_screen/details_current_order_screen.dart';
 
-class CurrentOrderTechnicalScreen extends StatelessWidget {
+class CurrentOrderTechnicalScreen extends StatefulWidget {
   const CurrentOrderTechnicalScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CurrentOrderTechnicalScreen> createState() => _CurrentOrderTechnicalScreenState();
+}
+
+class _CurrentOrderTechnicalScreenState extends State<CurrentOrderTechnicalScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<CurrentOrdersCubit>(context).getCurrentOrderUser();
+  }
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -20,29 +35,25 @@ class CurrentOrderTechnicalScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: GetBuilder<CurrentOrderTechnicalController>(
-                  init: CurrentOrderTechnicalController(),
-                  builder: (controller) {
-                    if(controller.Loading){
-                      return LoadingWidget(data: '');
-                    }
-                    return controller.currentOrder.isNotEmpty ?
-                    ListView.builder(
-                      itemCount: controller.currentOrder.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                          child: MySendOrderListItem(currentOrder: controller.currentOrder[index], heightValue: heightValue,widthValue: widthValue,),
-                        );
-                      },) : NoItemOFList();
-                  },),
-              ),
-            ),)
+            child: BlocBuilder<CurrentOrdersCubit,CurrentOrdersState>(builder: (context, state) {
+              CurrentOrdersCubit currentOrdersCubit = CurrentOrdersCubit.get(context);
+              if(state is CurrentOrdersSuccessfullyState){
+                return state.orderResponseModel!.isNotEmpty ?
+                ListView.builder(
+                  itemCount: state.orderResponseModel!.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                      child: MySendOrderListItem(currentOrder: state.orderResponseModel![index], heightValue: heightValue,widthValue: widthValue,),
+                    );
+                  },) : NoItemOFList();
+              }else if(state is CurrentOrdersErrorState){
+                return LoadingWidget(data: state.error);
+              }
+              return LoadingWidget(data: '');
+            },),)
       ),
     );
   }
@@ -51,7 +62,7 @@ class CurrentOrderTechnicalScreen extends StatelessWidget {
 class MySendOrderListItem extends StatelessWidget {
   MySendOrderListItem({Key? key,required this.currentOrder,required this.widthValue,required this.heightValue}) : super(key: key);
   double heightValue,widthValue;
-  MyWaitingOrderModel currentOrder;
+  OrderResponseModel currentOrder;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -218,7 +229,7 @@ class NoItemOFList extends StatelessWidget {
 class CompanyDetails extends StatelessWidget {
   CompanyDetails(this.myCurrentOrderModel);
 
-  MyWaitingOrderModel? myCurrentOrderModel;
+  OrderResponseModel? myCurrentOrderModel;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -249,9 +260,9 @@ class CompanyDetails extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: widthValue *1,),
-                  Text(
-                    '${myCurrentOrderModel!.company}',
-                    style: const TextStyle(
+                  const Text(
+                    'شطب شقتك',
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: Themes.ColorApp1,
@@ -289,7 +300,7 @@ class CompanyDetails extends StatelessWidget {
                   ),
                   SizedBox(width: widthValue * .2,),
                   Text(
-                    '${myCurrentOrderModel!.castingType}',
+                    '${myCurrentOrderModel!.service ?? '---'}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -311,7 +322,7 @@ class CompanyDetails extends StatelessWidget {
                   ),
                   SizedBox(width: widthValue * .2,),
                   Text(
-                    '${myCurrentOrderModel!.qtyM}',
+                    '${myCurrentOrderModel!.flatArea}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,

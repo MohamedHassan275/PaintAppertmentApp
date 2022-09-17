@@ -5,12 +5,13 @@ import 'package:pain_appertment/generated/assets.dart';
 import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
 
+import '../../../../model/order_model.dart';
 import '../../../../utils/componant/CustomButtonWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 
 class DetailsPreviousOrderTechnicalScreen extends StatelessWidget {
   DetailsPreviousOrderTechnicalScreen({Key? key,required this.previousOrder}) : super(key: key);
-  MyWaitingOrderModel previousOrder;
+  OrderResponseModel previousOrder;
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -59,31 +60,31 @@ class DetailsPreviousOrderTechnicalScreen extends StatelessWidget {
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'type_of_casting'.tr, '${previousOrder.castingType}'),
+                                  DetailsOrder(widthValue, 'order_number'.tr, '#${previousOrder.orderNumber}',''),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'execution_date'.tr, '${previousOrder.executionDate}'),
+                                  DetailsOrder(widthValue, 'type_of_casting'.tr, '${previousOrder.service ?? '---'}',''),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'quantity'.tr, '${previousOrder.qtyM}'),
+                                  DetailsOrder(widthValue, 'quantity'.tr, '${previousOrder.flatArea}','متر'),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'mix_type'.tr, '${previousOrder.mixType}'),
+                                  DetailsOrder(widthValue, 'mix_type'.tr, '${previousOrder.rooms}','غرفة نوم'),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'cement_type'.tr, '${previousOrder.cementType}'),
+                                  DetailsOrder(widthValue, 'cement_type'.tr, '${previousOrder.bathrooms}','حمام'),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'name_client'.tr, 'احمد محمد'),
+                                  DetailsOrder(widthValue, 'name_client'.tr, '${previousOrder.firstname} ${previousOrder.firstname}',''),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'mobile_number'.tr, '0115043662'),
+                                  DetailsOrder(widthValue, 'mobile_number'.tr, '${previousOrder.phone}',''),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
@@ -232,7 +233,7 @@ class AppbarDetailsOrder extends StatelessWidget {
 class AddressDetailsOrder extends StatelessWidget {
   AddressDetailsOrder({required this.previousOrder});
 
-  MyWaitingOrderModel previousOrder;
+  OrderResponseModel previousOrder;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -265,7 +266,7 @@ class AddressDetailsOrder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${previousOrder.address}',
+                    '${previousOrder.governorate} ${previousOrder.city}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
@@ -283,10 +284,10 @@ class AddressDetailsOrder extends StatelessWidget {
 }
 
 class DetailsOrder extends StatelessWidget {
-  DetailsOrder(this.widthValue,this.title,this.details);
+  DetailsOrder(this.widthValue,this.title,this.details,this.title2);
 
-  double widthValue;
-  String title, details;
+  late double widthValue;
+  late String title, details,title2;
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +295,7 @@ class DetailsOrder extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          title,
+          '$title : ',
           style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14,
@@ -302,10 +303,21 @@ class DetailsOrder extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: widthValue * .7,
+          width: widthValue * .5,
         ),
         Text(
           details,
+          style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: Themes.ColorApp1,
+          ),
+        ),
+        SizedBox(
+          width: widthValue * .5,
+        ),
+        Text(
+          title2,
           style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14,

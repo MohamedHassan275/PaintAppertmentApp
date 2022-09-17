@@ -30,13 +30,13 @@ class _DetailsServiceImageScreenState extends State<DetailsServiceImageScreen> {
             child: Column(
               children: [
                 Appbarwidget(width: width, height: height, gallery: widget.gallery,),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ListView.builder(
-                      itemCount: widget.gallery?.images!.length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => Card(
+                ListView.builder(
+                    itemCount: widget.gallery?.images!.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                      child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -59,8 +59,8 @@ class _DetailsServiceImageScreenState extends State<DetailsServiceImageScreen> {
                             ),
                           ),
                         ),
-                      )),
-                ),
+                      ),
+                    )),
               ],
             ),
           ),
@@ -80,7 +80,7 @@ class Appbarwidget extends StatelessWidget {
     return  Stack(
       children: [
         Container(
-          height: 119,
+          height: 75,
           width: Get.width,
           decoration: const BoxDecoration(
               color: Themes.ColorApp14,
@@ -99,7 +99,7 @@ class Appbarwidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: height * 2.3,
+          top: height * 1.2,
           left: width * 1.5,
           child: GestureDetector(
             onTap: () => Get.off(const HomeMainScreen()),

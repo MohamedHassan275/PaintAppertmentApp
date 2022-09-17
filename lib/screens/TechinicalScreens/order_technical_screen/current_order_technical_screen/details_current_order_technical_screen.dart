@@ -5,13 +5,14 @@ import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_sc
 
 import '../../../../generated/assets.dart';
 import '../../../../model/MyWaitingOrderModel.dart';
+import '../../../../model/order_model.dart';
 import '../../../../utils/componant/CustomButtonWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 import '../../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 
 class DetailsCurrentOrderTechnicalScreen extends StatefulWidget {
    DetailsCurrentOrderTechnicalScreen({Key? key,required this.newOrder}) : super(key: key);
-   MyWaitingOrderModel newOrder;
+   OrderResponseModel newOrder;
 
   @override
   State<DetailsCurrentOrderTechnicalScreen> createState() => _DetailsCurrentOrderTechnicalScreenState();
@@ -59,31 +60,31 @@ class _DetailsCurrentOrderTechnicalScreenState extends State<DetailsCurrentOrder
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.newOrder.castingType}'),
+                                DetailsOrder(widthValue, 'order_number'.tr, '#${widget.newOrder.orderNumber}',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'execution_date'.tr, '${widget.newOrder.executionDate}'),
+                                DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.newOrder.service ?? '---'}',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'quantity'.tr, '${widget.newOrder.qtyM}'),
+                                DetailsOrder(widthValue, 'quantity'.tr, '${widget.newOrder.flatArea}','متر'),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'mix_type'.tr, '${widget.newOrder.mixType}'),
+                                DetailsOrder(widthValue, 'mix_type'.tr, '${widget.newOrder.rooms}','غرفة نوم'),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'cement_type'.tr, '${widget.newOrder.cementType}'),
+                                DetailsOrder(widthValue, 'cement_type'.tr, '${widget.newOrder.bathrooms}','حمام'),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'name_client'.tr, 'احمد محمد'),
+                                DetailsOrder(widthValue, 'name_client'.tr, '${widget.newOrder.firstname} ${widget.newOrder.lastname}',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'mobile_number'.tr, '0115043662'),
+                                DetailsOrder(widthValue, 'mobile_number'.tr, '${widget.newOrder.phone}',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
@@ -109,8 +110,8 @@ class _DetailsCurrentOrderTechnicalScreenState extends State<DetailsCurrentOrder
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
-                                              '${25}',
+                                             Text(
+                                              '${widget.newOrder.offerCost}',
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 16,
@@ -135,36 +136,36 @@ class _DetailsCurrentOrderTechnicalScreenState extends State<DetailsCurrentOrder
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'order_will_be_received'.tr,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 15,
-                                            color: Themes.ColorApp8,
-                                          ),
-                                        ),
-                                        SizedBox(width: widthValue * .5,),
-                                        Text(
-                                          '${widget.newOrder.executionDate}',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 15,
-                                            color: Themes.ColorApp8,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: heightValue * .6,
-                                    ),
-                                  ],
-                                ),
+                                // Column(
+                                //   crossAxisAlignment: CrossAxisAlignment.center,
+                                //   children: [
+                                //     Row(
+                                //       mainAxisAlignment: MainAxisAlignment.center,
+                                //       children: [
+                                //         Text(
+                                //           'order_will_be_received'.tr,
+                                //           style: const TextStyle(
+                                //             fontWeight: FontWeight.w500,
+                                //             fontSize: 15,
+                                //             color: Themes.ColorApp8,
+                                //           ),
+                                //         ),
+                                //         SizedBox(width: widthValue * .5,),
+                                //         Text(
+                                //           '${widget.newOrder.executionDate}',
+                                //           style: const TextStyle(
+                                //             fontWeight: FontWeight.w500,
+                                //             fontSize: 15,
+                                //             color: Themes.ColorApp8,
+                                //           ),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     SizedBox(
+                                //       height: heightValue * .6,
+                                //     ),
+                                //   ],
+                                // ),
                                 CirclerProgressIndicatorWidget(isLoading:  false),
                                 SizedBox(height: heightValue * .7,),
                                 CustomButtonImage(title: 'received_order'.tr, hight: 50, onTap: (){
@@ -189,7 +190,7 @@ class _DetailsCurrentOrderTechnicalScreenState extends State<DetailsCurrentOrder
                                     //   Get.find<MyCurrentOrderController>().CancelOrder('${currentOrder.id}');
                                     Get.to(const HomeTechincalMainScreen());
                                   },
-                                  child: Container(
+                                  child: SizedBox(
                                     width: Get.width,
                                     height: 50,
                                     child: Center(
@@ -223,7 +224,7 @@ class _DetailsCurrentOrderTechnicalScreenState extends State<DetailsCurrentOrder
 }
 
 class AppbarDetailsOrder extends StatelessWidget {
-  AppbarDetailsOrder(this.widthValue,this.heightValue);
+  AppbarDetailsOrder(this.widthValue,this.heightValue, {Key? key}) : super(key: key);
   double heightValue,widthValue;
   @override
   Widget build(BuildContext context) {
@@ -270,9 +271,9 @@ class AppbarDetailsOrder extends StatelessWidget {
 }
 
 class AddressDetailsOrder extends StatelessWidget {
-  AddressDetailsOrder({required this.newOrder});
+  AddressDetailsOrder({Key? key, required this.newOrder}) : super(key: key);
 
-  MyWaitingOrderModel newOrder;
+  OrderResponseModel newOrder;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
   @override
@@ -305,7 +306,7 @@ class AddressDetailsOrder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${newOrder.address}',
+                    '${newOrder.governorate} ${newOrder.city}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
@@ -323,10 +324,10 @@ class AddressDetailsOrder extends StatelessWidget {
 }
 
 class DetailsOrder extends StatelessWidget {
-  DetailsOrder(this.widthValue,this.title,this.details);
+  DetailsOrder(this.widthValue,this.title,this.details,this.title2);
 
-  double widthValue;
-  String title, details;
+  late double widthValue;
+  late String title, details,title2;
 
   @override
   Widget build(BuildContext context) {
@@ -342,10 +343,21 @@ class DetailsOrder extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: widthValue * .7,
+          width: widthValue * .5,
         ),
         Text(
           details,
+          style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: Themes.ColorApp1,
+          ),
+        ),
+        SizedBox(
+          width: widthValue * .5,
+        ),
+        Text(
+          title2,
           style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14,

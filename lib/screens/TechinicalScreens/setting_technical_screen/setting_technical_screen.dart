@@ -1,12 +1,17 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/change_profile_technical_screen/change_profile_technical_screen.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
+import '../../../business_logic/user_controller/profile_cubit/profile_cubit.dart';
+import '../../../business_logic/user_controller/setting_cubit/setting_cubit.dart';
 import '../../../generated/assets.dart';
+import '../../../model/setting_model.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
 import '../../../utils/constant/Themes.dart';
 import '../../UserScreens/change_profile_user_screen/change_profile_user_screen.dart';
@@ -21,100 +26,163 @@ class  SettingTechnicalScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: Get.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: heightValue * 1.5,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
+              child: BlocBuilder<SettingCubit,SettingState>(
+                builder: (context, state) {
+                  if( state is SettingSuccessfullyState){
+                    var mobilePhoneList = '${state.settingResponseModel?.socialmedia![0].phoneNumbers}'.split(',');
+                    return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SettingCategory(
-                                onTap: () {},
-                                title: 'share_app'.tr,
-                                imageTitle: Assets.iconsShare,
-                                heightValue: heightValue),
-                            SizedBox(
-                              width: widthValue * 1.5,
-                            ),
-                            SettingCategory(
-                                onTap: () => Get.to(const HomeTechincalMainScreen()),
-                                title: 'terms_and_conditions'.tr,
-                                imageTitle: Assets.iconsTermsConditionsImage,
-                                heightValue: heightValue),
-                            SizedBox(
-                              width: widthValue * 1.5,
-                            ),
-                            SettingCategory(
-                                onTap: () =>
-                                    Get.to(const HomeTechincalMainScreen()),
-                                title: 'privacy_policy'.tr,
-                                imageTitle: Assets.imagesPrivacyImage,
-                                heightValue: heightValue),
-                          ],
+                        SizedBox(
+                          height: heightValue * 1.5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SettingCategory(
+                                      onTap: () {},
+                                      title: 'share_app'.tr,
+                                      imageTitle: Assets.iconsShare,
+                                      heightValue: heightValue),
+                                  SizedBox(
+                                    width: widthValue * 1.5,
+                                  ),
+                                  SettingCategory(
+                                      onTap: () => Get.to(const HomeTechincalMainScreen()),
+                                      title: 'terms_and_conditions'.tr,
+                                      imageTitle: Assets.iconsTermsConditionsImage,
+                                      heightValue: heightValue),
+                                  SizedBox(
+                                    width: widthValue * 1.5,
+                                  ),
+                                  SettingCategory(
+                                      onTap: () =>
+                                          Get.to(const HomeTechincalMainScreen()),
+                                      title: 'privacy_policy'.tr,
+                                      imageTitle: Assets.imagesPrivacyImage,
+                                      heightValue: heightValue),
+                                ],
+                              ),
+                              SizedBox(
+                                height: heightValue * 1,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SettingCategory(
+                                      onTap: () => Get.to(const HomeTechincalMainScreen()),
+                                      title: 'about_app'.tr,
+                                      imageTitle: Assets.imagesAboutAppImage,
+                                      heightValue: heightValue),
+                                  SizedBox(
+                                    width: widthValue * 1.5,
+                                  ),
+                                  SettingCategory(
+                                      onTap: (){
+                                        BlocProvider.of<ProfileCubit>(context).showUserDetails();
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ChangeProfileTechnicalScreen()));
+                                      },
+                                      title: 'profile_setting'.tr,
+                                      imageTitle: Assets.imagesProfileMenuIcon,
+                                      heightValue: heightValue),
+                                  SizedBox(
+                                    width: widthValue * 1.5,
+                                  ),
+                                  SettingCategory(
+                                      onTap: () {
+                                        BlocProvider.of<AuthCubit>(context).setLogout(context);
+                                      },
+                                      title: 'logout'.tr,
+                                      imageTitle: Assets.iconsLanguageImage,
+                                      heightValue: heightValue),
+
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: heightValue * 1,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // SettingCategory(
-                            //     onTap: () {
-                            //       Get.bottomSheet(
-                            //         ChangeLanguageBottomSheetItem(heightValue: heightValue),
-                            //         backgroundColor: Themes.whiteColor,
-                            //         shape: RoundedRectangleBorder(
-                            //             borderRadius: BorderRadius.only(
-                            //                 topLeft: Radius.circular(25),
-                            //                 topRight: const Radius.circular(
-                            //                     25))),
-                            //         elevation: 2.0,
-                            //       );
-                            //     },
-                            //     title: 'language'.tr,
-                            //     imageTitle: Assets.iconsLanguageImage,
-                            //     heightValue: heightValue),
-                            // SizedBox(
-                            //   width: widthValue * 1.5,
-                            // ),
-                            SettingCategory(
-                                onTap: () =>
-                                    Get.off(const ChangeProfileTechnicalScreen()),
-                                title: 'profile_setting'.tr,
-                                imageTitle: Assets.imagesProfileMenuIcon,
-                                heightValue: heightValue),
-                            SizedBox(
-                              width: widthValue * 1.5,
-                            ),
-                            SettingCategory(
-                                onTap: () => Get.to(const HomeTechincalMainScreen()),
-                                title: 'about_app'.tr,
-                                imageTitle: Assets.imagesAboutAppImage,
-                                heightValue: heightValue),
-                          ],
+                        const Divider(height: 10, color: Themes.ColorApp8),
+                        SizedBox(
+                          height: heightValue * 1,
                         ),
+                        ContactWithUs(
+                          heightValue: heightValue, widthValue: widthValue, settingResponseModel: state.settingResponseModel,),
+                        SizedBox(height: heightValue * 1.5,),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child:  Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:  [
+                              Text(
+                                'to_communicate_payment'.tr,
+                                style: const TextStyle(
+                                  color: Themes.ColorApp8,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              SizedBox(height: heightValue*.5,),
+                              Text(
+                                '${mobilePhoneList !=null ? 'لا يوجد ارقام حاليا' : mobilePhoneList}',
+                                style: const TextStyle(
+                                  color: Themes.ColorApp1,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              // SizedBox(height: heightValue*.5,),
+                              // const Text(
+                              //   '011560333232',
+                              //   style: TextStyle(
+                              //     color: Themes.ColorApp1,
+                              //     fontSize: 17,
+                              //     fontWeight: FontWeight.w400,
+                              //   ),
+                              // ),
+                              // SizedBox(height: heightValue*.5,),
+                              // const Text(
+                              //   '011560333232',
+                              //   style: TextStyle(
+                              //     color: Themes.ColorApp1,
+                              //     fontSize: 17,
+                              //     fontWeight: FontWeight.w400,
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: heightValue * 1,),
                       ],
+                    );
+                  }else if (state is SettingErrorState){
+                    return Container(
+                      width: Get.width,
+                      height: Get.height,
+                      child:  Center(
+                        child:Text('${state.error}'),
+                      ),
+                    );
+                  }
+                  return  Container(
+                    width: Get.width,
+                    height: Get.height,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Themes.ColorApp1,),
                     ),
-                  ),
-                  SizedBox(
-                    height: heightValue * 1,
-                  ),
-                  const Divider(height: 10, color: Themes.ColorApp8),
-                  SizedBox(
-                    height: heightValue * 1,
-                  ),
-                  ContactWithUs(
-                      heightValue: heightValue, widthValue: widthValue),
-                ],
+                  );
+                },
               ),
             ),
           )),
@@ -171,10 +239,10 @@ class SettingCategory extends StatelessWidget {
 }
 
 class ContactWithUs extends StatelessWidget {
-  ContactWithUs({required this.heightValue, required this.widthValue});
+  ContactWithUs({required this.heightValue, required this.widthValue,required this.settingResponseModel});
 
   double? heightValue, widthValue;
-
+  SettingResponseModel? settingResponseModel;
   _launchURL(url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -211,7 +279,7 @@ class ContactWithUs extends StatelessWidget {
 
                   if (whatsapp) {
                     await FlutterLaunch.launchWhatsapp(
-                        phone: '01099323104',message: '');
+                        phone: '${settingResponseModel?.socialmedia![0].whatsapp}',message: '');
                   } else {
                     print("Whatsapp não instalado");
                   }
@@ -223,7 +291,7 @@ class ContactWithUs extends StatelessWidget {
               ContactWithUsItem(
                 imageTitle: Assets.iconsInstagramImage,
                 onTap: (){
-                  // _launchURL(controller.settingResponseModel!.socialmedia![0].instagram)
+                   _launchURL(settingResponseModel?.socialmedia![0].instagram);
                 },
               ),
               SizedBox(
@@ -232,7 +300,7 @@ class ContactWithUs extends StatelessWidget {
               ContactWithUsItem(
                 imageTitle: Assets.iconsTwitterImage,
                 onTap: () {
-                  // _launchURL(controller.settingResponseModel!.socialmedia![0].twitter)
+                  _launchURL(settingResponseModel?.socialmedia![0].twitter);
                 },
               ),
               SizedBox(
@@ -241,7 +309,7 @@ class ContactWithUs extends StatelessWidget {
               ContactWithUsItem(
                 imageTitle: Assets.imagesSnapshatImage,
                 onTap: () {
-                  // _launchURL(controller.settingResponseModel!.socialmedia![0].snapchat)
+                  _launchURL(settingResponseModel?.socialmedia![0].snapchat);
                 } ,
               ),
             ],
