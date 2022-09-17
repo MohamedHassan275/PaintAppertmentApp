@@ -8,8 +8,10 @@ import 'package:pain_appertment/business_logic/user_controller/profile_cubit/pro
 import '../../../business_logic/user_controller/RequestMyServiceController.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
 import '../../../utils/constant/Themes.dart';
+import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
+import '../home_main_screen/home_main_screen.dart';
 
 class RequestMyServiceScreen extends StatefulWidget {
    RequestMyServiceScreen({Key? key,required this.companyId}) : super(key: key);
@@ -24,6 +26,7 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
   TextEditingController distanceAppermentController = TextEditingController();
   TextEditingController roomNumberController = TextEditingController();
   TextEditingController restRoomController = TextEditingController();
+  TextEditingController detailsOrderController = TextEditingController();
   TextEditingController governmentController = TextEditingController();
   TextEditingController cityController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
@@ -45,7 +48,11 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
     var width = Get.width * 0.024;
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<AddOrderCubit,AddOrderState>(builder: (context, state) {
+        child: BlocConsumer<AddOrderCubit,AddOrderState>(
+          listener: (context, state) {
+            _handleLoginListener(context, state);
+          },
+          builder: (context, state) {
           AddOrderCubit addOrderCubit = AddOrderCubit.get(context);
           if(stateProfile is ProfileSuccessState){
             firstNameController.text = stateProfile.profileResponseModel?.firstname ?? ' ';
@@ -69,12 +76,11 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
                       ),
                     ),
                     SizedBox(height: height * 1.5,),
-                    Row(
-                      children: [
-                        Expanded(child: CustomTextFieldWidget(title: 'first_name', keyboardType: TextInputType.text, textEditingController: firstNameController)),
-                        Expanded(child: CustomTextFieldWidget(title: 'last_name', keyboardType: TextInputType.text, textEditingController: lastNameController)),
-                      ],
+                    CustomTextFieldWidget(title: 'first_name', keyboardType: TextInputType.text, textEditingController: firstNameController),
+                    SizedBox(
+                      height: height * 1,
                     ),
+                    CustomTextFieldWidget(title: 'last_name', keyboardType: TextInputType.text, textEditingController: lastNameController),
                     SizedBox(
                       height: height * 1,
                     ),
@@ -107,7 +113,7 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
                     SizedBox(
                       height: height * 1,
                     ),
-                    CustomTextFieldWidget(title: 'details_service', keyboardType: TextInputType.text, textEditingController: restRoomController),
+                    CustomTextFieldWidget(title: 'details_service', keyboardType: TextInputType.text, textEditingController: detailsOrderController),
                     SizedBox(
                       height: height * 1,
                     ),
@@ -141,4 +147,30 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
 
     );
   }
+
+  void _handleLoginListener(BuildContext context, AddOrderState state) {
+    if (state is AddOrderErrorState) {
+      CustomFlutterToast(state.addOrderStatus);
+    } else if (state is AddOrderSuccessfullyState) {
+      CustomFlutterToast(state.addOrderStatus);
+      _clearFormData();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+              (_) => false);
+    }
+  }
+
+  void _clearFormData() {
+    firstNameController.clear();
+    lastNameController.clear();
+    mobilePhoneController.clear();
+    governmentController.clear();
+    cityController.clear();
+    distanceAppermentController.clear();
+    roomNumberController.clear();
+    restRoomController.clear();
+    detailsOrderController.clear();
+  }
+
 }
