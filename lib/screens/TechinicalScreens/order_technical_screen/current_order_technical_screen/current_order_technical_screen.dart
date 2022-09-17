@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/business_logic/technical_controller/current_order_technical_controller.dart';
 import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/current_order_technical_screen/details_current_order_technical_screen.dart';

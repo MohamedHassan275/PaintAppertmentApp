@@ -2,15 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_previous_order_screen/details_previous_order_screen.dart';
-import 'package:pain_appertment/business_logic/user_controller/my_previous_order_controller.dart';
-
-import '../../../../business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import '../../../../business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
 import '../../../../generated/assets.dart';
-import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 
 class MyPreviousOrderScreen extends StatefulWidget {
@@ -25,7 +20,6 @@ class _MyPreviousOrderScreenState extends State<MyPreviousOrderScreen> {
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
     var widthValue = Get.width * 0.024;
-    MyPreviousOrderController myPreviousOrderController = Get.put(MyPreviousOrderController());
 
     return Scaffold(
       body: RefreshIndicator(

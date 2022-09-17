@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
-import 'package:pain_appertment/model/MyWaitingOrderModel.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_current_order_screen/details_current_order_screen.dart';
-
-import '../../../../business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import '../../../../generated/assets.dart';
-import '../../../../business_logic/user_controller/my_current_order_controller.dart';
-import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
 
 class MyCurrentOrderScreen extends StatefulWidget {

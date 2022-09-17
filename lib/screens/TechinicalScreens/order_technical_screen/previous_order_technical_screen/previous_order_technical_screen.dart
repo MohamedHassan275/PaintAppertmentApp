@@ -6,13 +6,10 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/previous_order_technical_screen/details_previous_order_technical_screen.dart';
-import 'package:pain_appertment/business_logic/technical_controller/previous_order_technical_controller.dart';
 
 import '../../../../generated/assets.dart';
-import '../../../../model/MyWaitingOrderModel.dart';
 import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
-import '../../../UserScreens/my_order/my_previous_order_screen/details_previous_order_screen.dart';
 
 class PreviousOrderTechnicalScreen extends StatefulWidget {
   const PreviousOrderTechnicalScreen({Key? key}) : super(key: key);

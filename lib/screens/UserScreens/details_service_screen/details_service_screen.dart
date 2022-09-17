@@ -8,8 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/generated/assets.dart';
-import 'package:pain_appertment/business_logic/user_controller/details_service_controller.dart';
-import 'package:pain_appertment/model/home_model.dart';
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 

@@ -7,11 +7,7 @@ import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen
 
 import '../../../../business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import '../../../../generated/assets.dart';
-import '../../../../business_logic/technical_controller/current_order_technical_controller.dart';
-import '../../../../model/MyWaitingOrderModel.dart';
-import '../../../../utils/componant/LoadingWidget.dart';
 import '../../../../utils/constant/Themes.dart';
-import '../../../UserScreens/my_order/my_current_order_screen/details_current_order_screen.dart';
 
 class NewOrderTechnicalScreen extends StatefulWidget {
   const NewOrderTechnicalScreen({Key? key}) : super(key: key);
