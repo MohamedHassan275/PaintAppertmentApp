@@ -27,7 +27,7 @@ class _MyWaitingOrderScreenState extends State<MyWaitingOrderScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadData();
+    BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
   }
   @override
   Widget build(BuildContext context) {
@@ -36,54 +36,52 @@ class _MyWaitingOrderScreenState extends State<MyWaitingOrderScreen> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async{
-          loadData();
+          print('refresh');
+          BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
         },
         child: SafeArea(
             child: SingleChildScrollView(
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: BlocBuilder<OrdersCubit,OrdersState>(
-                    builder: (context, state) {
-                      if(state is OrdersSuccessfullyState){
-                        return state.orderResponseModel!.isNotEmpty ?
-                        ListView.builder(
-                          itemCount: state.orderResponseModel!.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                              child: MyWaitingOrderItem(MyNewOder: state.orderResponseModel![index],
-                                heightValue: heightValue,widthValue: widthValue,),
-                            );
-                          },): NoItemOFList();
-                      }else if (state is OrdersErrorState){
-                        return Container(
-                          width: Get.width,
-                          height: Get.height,
-                          child:  const Center(
-                            child:Text(''),
-                          ),
+              child: BlocBuilder<OrdersCubit,OrdersState>(
+                builder: (context, state) {
+                  if(state is OrdersSuccessfullyState){
+                    OrdersCubit ordersCubit = OrdersCubit.get(context);
+                    return state.orderResponseModel!.isNotEmpty ?
+                    ListView.builder(
+                      itemCount: state.orderResponseModel!.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          child: MyWaitingOrderItem(MyNewOder: state.orderResponseModel![index],
+                            heightValue: heightValue,widthValue: widthValue,),
                         );
-                      }
-                      return  Container(
-                        width: Get.width,
-                        height: Get.height,
-                        child: const Center(
-                          child: CircularProgressIndicator(color: Themes.ColorApp1,),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),)
+                      },): NoItemOFList();
+                  }else if (state is OrdersErrorState){
+                    return Container(
+                      width: Get.width,
+                      height: Get.height,
+                      child:  const Center(
+                        child:Text(''),
+                      ),
+                    );
+                  }
+                  return  Container(
+                    width: Get.width,
+                    height: Get.height,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Themes.ColorApp1,),
+                    ),
+                  );
+                },
+              ),
+            )
         ),
       ),
     );
   }
   void loadData(){
-    BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
+
   }
 }
 

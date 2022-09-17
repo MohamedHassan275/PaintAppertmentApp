@@ -35,7 +35,7 @@ class DetailsServiceScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Appbarwidget(width: width, height: height),
+                      Appbarwidget(width: width, height: height,name : '${state.showProductResponseDetails?.name}'),
                       SizedBox(height: height*1.5,),
                       FadeInImage(
                         height: 135,
@@ -228,24 +228,25 @@ class DetailsServiceScreen extends StatelessWidget {
 }
 
 class Appbarwidget extends StatelessWidget {
-  Appbarwidget({Key? key,required this.width, required this.height}) : super(key: key);
+  Appbarwidget({Key? key,required this.width, required this.height,required this.name}) : super(key: key);
   double height,width;
+  String name;
   @override
   Widget build(BuildContext context) {
     return  Stack(
       children: [
         Container(
-          height: 119,
+          height: 75,
           width: Get.width,
           decoration: const BoxDecoration(
               color: Themes.ColorApp14,
               borderRadius: BorderRadius.only(
                   topRight:  Radius.circular(25),
                   topLeft: Radius.circular(25))),
-          child: const Center(
+          child:  Center(
             child: Text(
-              'كهرباء',
-              style: TextStyle(
+              name,
+              style: const TextStyle(
                 color: Themes.ColorApp15,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -254,7 +255,7 @@ class Appbarwidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: height * 2.3,
+          top: height * 1.2,
           left: width * 1.5,
           child: GestureDetector(
             onTap: () => Get.off(const HomeMainScreen()),

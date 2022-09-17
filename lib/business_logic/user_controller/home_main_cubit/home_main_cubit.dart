@@ -35,7 +35,7 @@ class HomeMainCubit extends Cubit<HomeMainState> {
         icon: Image.asset(Assets.imagesIconHome2,
             width: 30, height: 30, color: Themes.ColorApp11),
         label: 'home'.tr,
-        activeIcon: Image.asset(Assets.imagesMyOrderHome2,
+        activeIcon: Image.asset(Assets.iconsHomeIcon,
             width: 30, height: 30, color: Themes.ColorApp1)),
     BottomNavigationBarItem(
         icon: Image.asset(Assets.imagesMyOrderHome, width: 30, height: 30),

@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: RefreshIndicator(
           onRefresh: ()async {
             loadData();
+            print('refresh');
           },
           child: SafeArea(
             child: SingleChildScrollView(
@@ -106,13 +107,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   physics: const NeverScrollableScrollPhysics(),
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (context, index) {
+                                    Categories category = state.homeResponseModel!.categories![index];
                                     return Padding(
                                         padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 5),
                                         child: GestureDetector(
                                           onTap: (){
-                                              CustomFlutterToast(state.homeResponseModel!.categories![index].services![index].id.toString());
+                                              CustomFlutterToast(category.services![index].id.toString());
 
-                                            homeCubit.showProductDetails(state.homeResponseModel!.categories![index].services![index].id.toString());
+                                            homeCubit.showProductDetails(category.services![index].id.toString());
                                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsServiceScreen()));
                                           },
                                           child: Column(
@@ -129,9 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                   ),
                                                   GestureDetector(
-                                                    onTap: () => Get.to(DetailsServiceImageScreen(gallery: state.homeResponseModel?.gallery![index],)),
+                                                   // onTap: () => Get.to(DetailsServiceImageScreen(gallery: state.homeResponseModel?.gallery![index],)),
                                                     child: const Text(
-                                                      'المزيد',
+                                                      '',
                                                       maxLines: 3,
                                                       overflow: TextOverflow.fade,
                                                       style: TextStyle(
@@ -150,11 +152,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   width: Get.width,
                                                   child: ListView.builder(
                                                       shrinkWrap: true,
-                                                      itemCount: 3,
+                                                      itemCount: category.services!.length,
                                                       scrollDirection: Axis.horizontal,
                                                       itemBuilder: (context, index){
-                                                        List<Categories> categoriesList = state.homeResponseModel!.categories!;
-                                                        Categories categories = state.homeResponseModel!.categories![index];
                                                         return Card(
                                                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                                           color: Themes.whiteColor,
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   ClipRRect(
                                                                     borderRadius: BorderRadius.circular(15),
                                                                     child: FadeInImage(
-                                                                      image: NetworkImage('${categoriesList[index].services![index].image}'),
+                                                                      image: NetworkImage('${category.services![index].image}'),
                                                                       fit: BoxFit.fill,
                                                                       height: 100,
                                                                       width: 150,
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   ),
                                                                   Expanded(
                                                                     child: Text(
-                                                                      '${state.homeResponseModel!.categories![index].services![index].name}',
+                                                                      '${category.services![index].name}',
                                                                       style: const TextStyle(
                                                                         fontWeight: FontWeight.w400,
                                                                         fontSize: 15,
