@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 import 'package:pain_appertment/utils/servies/storage_service.dart';
@@ -135,14 +136,25 @@ class _LoginScreenState extends State<LoginScreen> {
     if (state is ErrorLoginState) {
       CustomFlutterToast(state.error);
     } else if (state is LoginSuccessState) {
-      CustomFlutterToast(state.loginResponseModel?.accesstoken);
+
       Get.find<StorageService>()
-          .SetToken('${state.loginResponseModel?.accesstoken}');
+          .setToken('${state.loginResponseModel?.accesstoken}');
+      Get.find<StorageService>()
+          .setType('${state.loginResponseModel?.type}');
+      // CustomFlutterToast(state.loginResponseModel?.accesstoken);
+      // CustomFlutterToast(state.loginResponseModel?.type);
       _clearFormData();
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeMainScreen()),
-          (_) => false);
+     if(state.loginResponseModel!.type!.contains('0')){
+       Navigator.pushAndRemoveUntil(
+           context,
+           MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+               (_) => false);
+     }else if(state.loginResponseModel!.type!.contains('1')){
+       Navigator.pushAndRemoveUntil(
+           context,
+           MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
+               (_) => false);
+     }
     }
   }
 

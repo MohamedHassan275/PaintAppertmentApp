@@ -12,12 +12,12 @@ import 'package:pain_appertment/screens/TechinicalScreens/setting_technical_scre
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
 
-part 'home_main_state.dart';
+part 'home_main_technical_state.dart';
 
-class HomeMainCubit extends Cubit<HomeMainState> {
-  HomeMainCubit() : super(HomeMainInitial());
+class HomeMainTechnicalCubit extends Cubit<HomeMainTechnicalState> {
+  HomeMainTechnicalCubit() : super(HomeMainTechnicalInitial());
 
-  static HomeMainCubit get(BuildContext context) => BlocProvider.of(context);
+  static HomeMainTechnicalCubit get(BuildContext context) => BlocProvider.of(context);
 
   int index = 0;
   List<Widget> screenList = [

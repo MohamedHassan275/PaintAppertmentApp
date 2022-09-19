@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/business_logic/technical_controller/home_main_cubit/home_main_cubit.dart';
 
+import '../../../business_logic/technical_controller/home_main_technical_cubit/home_main_technical_cubit.dart';
 import '../../../business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
@@ -16,97 +16,97 @@ class HomeTechincalMainScreen extends StatefulWidget {
 }
 
 class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
+  }
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
     var widthValue = Get.width * 0.024;
-    return BlocBuilder<HomeMainCubit,HomeMainState>(builder: (context, state){
-      HomeMainCubit homeMainCubit = HomeMainCubit.get(context);
+    return BlocBuilder<HomeMainTechnicalCubit,HomeMainTechnicalState>(builder: (context, state){
+      HomeMainTechnicalCubit homeMainCubit = HomeMainTechnicalCubit.get(context);
       return  Scaffold(
         appBar: AppBar(
             backgroundColor: Themes.ColorApp1,
             toolbarHeight: 75,
             title: SizedBox(
-              height: 75,
-              child: Row(
-                children: [
-                  BlocBuilder<ProfileCubit,ProfileState>(builder: (context, state) {
-                    if (state is ProfileSuccessState) {
-                      return     SizedBox(
-                        height: 75,
-                        child: Row(
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                    // onTap: () => PickImage(),
-                                    child: SizedBox(
-                                      width: 45,
-                                      height: 45,
-                                      child: CircleAvatar(
-                                        backgroundColor: Themes.whiteColor,
-                                        child: ClipOval(
-                                          child: Image.asset(
-                                            Assets.imagesLogoApp,
-                                            fit: BoxFit.contain,
-                                            height: 45,
-                                            width: 45,
-                                          ),
-                                        ),
+              child:   BlocBuilder<ProfileCubit,ProfileState>(builder: (context, state) {
+                if (state is ProfileSuccessState) {
+                  return  SizedBox(
+                    height: 75,
+                    child: Row(
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                // onTap: () => PickImage(),
+                                child: SizedBox(
+                                  width: 45,
+                                  height: 45,
+                                  child: CircleAvatar(
+                                    backgroundColor: Themes.whiteColor,
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        Assets.imagesLogoApp,
+                                        fit: BoxFit.contain,
+                                        height: 45,
+                                        width: 45,
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 15,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'welcome_back'.tr,
+                                    style: const TextStyle(fontSize: 15, color: Colors.white),
                                   ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
+                                  SizedBox(
+                                    height: heightValue * .2,
+                                  ),
+                                  Row(
+                                    children:  [
                                       Text(
-                                        'welcome_back'.tr,
-                                        style: const TextStyle(fontSize: 15, color: Colors.white),
+                                        '${state.profileResponseModel?.firstname} ${state.profileResponseModel?.lastname}',
+                                        style: TextStyle(fontSize: 13, color: Colors.white),
                                       ),
-                                      SizedBox(
-                                        height: heightValue * .2,
-                                      ),
-                                      Row(
-                                        children:  [
-                                          Text(
-                                            '${state.profileResponseModel?.firstname} ${state.profileResponseModel?.lastname}',
-                                            style: TextStyle(fontSize: 13, color: Colors.white),
-                                          ),
-                                        ],
-                                      )
                                     ],
                                   )
-                                ])
-                          ],
-                        ),
-                      );
-                    } else if (state is ProfileErrorState) {
-                      return Container(
-                        width: Get.width,
-                        height: Get.height,
-                        child: Center(
-                          child: Text('${state.error}'),
-                        ),
-                      );
-                    }
-                    return Container(
-                      width: Get.width,
-                      height: Get.height,
-                      child: const Center(
-                        child: CircularProgressIndicator(
-                          color: Themes.ColorApp1,
-                        ),
-                      ),
-                    );
+                                ],
+                              )
+                            ])
+                      ],
+                    ),
+                  );
+                } else if (state is ProfileErrorState) {
+                  return Container(
+                    width: Get.width,
+                    child: Center(
+                      child: Text('${state.error}'),
+                    ),
+                  );
+                }
+                return Container(
+                  width: Get.width,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: Themes.ColorApp1,
+                    ),
+                  ),
+                );
 
-                  },),
-                ],
-              ),
+              },),
             ),
             leading: Builder(
               builder: (context) => IconButton(

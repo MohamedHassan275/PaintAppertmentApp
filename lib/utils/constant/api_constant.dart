@@ -27,6 +27,13 @@ class ApiConstants {
   static const String receivedOrder = "/order/received";
 
 
+  /// technical service api
+
+  static const String newTechnicalOrders = "/technical/orders";
+  static const String currentTechnicalOrders = "/technical/currentorders";
+  static const String previousTechnicalOrders = "/technical/previousorders";
+  static const String receivedTechnicalOrder = "/technical/order/add_price_offer";
+
 }
 
 

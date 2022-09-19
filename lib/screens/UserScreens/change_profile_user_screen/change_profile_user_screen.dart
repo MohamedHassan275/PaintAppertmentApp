@@ -147,7 +147,7 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
   }
 
   void _handleLoginListener(BuildContext context, ProfileState state) {
-    if (state is ProfileErrorState) {
+    if (state is UpdateProfileErrorState) {
       CustomFlutterToast(state.error);
     } else if (state is UpdateProfileSuccessState) {
       CustomFlutterToast(state.changeProfileSuccessfully);

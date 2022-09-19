@@ -5,6 +5,7 @@ import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/change_profile_technical_screen/change_profile_technical_screen.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
+import 'package:pain_appertment/utils/componant/LoadingWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
@@ -167,21 +168,9 @@ class  SettingTechnicalScreen extends StatelessWidget {
                       ],
                     );
                   }else if (state is SettingErrorState){
-                    return Container(
-                      width: Get.width,
-                      height: Get.height,
-                      child:  Center(
-                        child:Text('${state.error}'),
-                      ),
-                    );
+                    return LoadingWidget(data: state.error);
                   }
-                  return  Container(
-                    width: Get.width,
-                    height: Get.height,
-                    child: const Center(
-                      child: CircularProgressIndicator(color: Themes.ColorApp1,),
-                    ),
-                  );
+                  return  LoadingWidget(data: '');
                 },
               ),
             ),

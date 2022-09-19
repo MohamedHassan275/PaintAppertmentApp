@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/generated/assets.dart';
+import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/on_boarding_screen/on_boarding_screen.dart';
 
@@ -24,9 +25,20 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     print('tokenSession ${AppConstants.tokenSession}');
-    Timer(const Duration(seconds: 5), ()=> Get.offAll(AppConstants.tokenSession != ""
-        ? const HomeMainScreen()
-        : const OnBoardingScreen()));
+    print('typeSession ${AppConstants.typeSession}');
+    Timer(const Duration(seconds: 3), (){
+      if(AppConstants.tokenSession != ''){
+        if(Get.find<StorageService>().getType.contains('0')){
+          Get.offAll(const HomeMainScreen());
+        }else if(Get.find<StorageService>().getType.contains('1')){
+          Get.offAll(const HomeTechincalMainScreen());
+        }else {
+          Get.offAll(const HomeMainScreen());
+        }
+      }else {
+        Get.offAll(const OnBoardingScreen());
+      }
+    });
   }
   @override
   Widget build(BuildContext context) {

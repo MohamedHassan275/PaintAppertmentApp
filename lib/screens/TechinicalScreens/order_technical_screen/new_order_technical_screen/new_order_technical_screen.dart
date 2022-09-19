@@ -2,12 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/technical_controller/orders_technical_cubit/orders_technical_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
-import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/new_order_technical_screen/details_new_order_technical_screen.dart';
+import 'package:pain_appertment/utils/componant/LoadingWidget.dart';
 
-import '../../../../business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utils/constant/Themes.dart';
+import 'details_new_order_technical_screen.dart';
 
 class NewOrderTechnicalScreen extends StatefulWidget {
   const NewOrderTechnicalScreen({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
+    BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
   }
 
   @override
@@ -33,14 +34,14 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
       body: RefreshIndicator(
         onRefresh: () async{
           print('refresh');
-          BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
+          BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
         },
         child: SafeArea(
             child: SingleChildScrollView(
-              child: BlocBuilder<OrdersCubit,OrdersState>(
+              child: BlocBuilder<OrdersTechnicalCubit,OrdersTechnicalState>(
                 builder: (context, state) {
                   if(state is OrdersSuccessfullyState){
-                    OrdersCubit ordersCubit = OrdersCubit.get(context);
+                    OrdersTechnicalCubit ordersCubit = OrdersTechnicalCubit.get(context);
                     return state.orderResponseModel!.isNotEmpty ?
                     ListView.builder(
                       itemCount: state.orderResponseModel!.length,
@@ -54,21 +55,9 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
                         );
                       },): NoItemOFList();
                   }else if (state is OrdersErrorState){
-                    return Container(
-                      width: Get.width,
-                      height: Get.height,
-                      child:  const Center(
-                        child:Text(''),
-                      ),
-                    );
+                    return LoadingWidget(data: state.error);
                   }
-                  return  Container(
-                    width: Get.width,
-                    height: Get.height,
-                    child: const Center(
-                      child: CircularProgressIndicator(color: Themes.ColorApp1,),
-                    ),
-                  );
+                  return  LoadingWidget(data: '');
                 },
               ),
             )

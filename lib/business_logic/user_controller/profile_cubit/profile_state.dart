@@ -10,6 +10,7 @@ class ProfileSuccessState extends ProfileState {
   ProfileResponseModel? profileResponseModel;
   ProfileSuccessState(this.profileResponseModel);
 }
+
 class ProfileErrorState extends ProfileState {
   String? error;
   ProfileErrorState(this.error);
@@ -20,4 +21,9 @@ class UpdateProfileLoadingState extends ProfileState {}
 class UpdateProfileSuccessState extends ProfileState {
   String? changeProfileSuccessfully;
   UpdateProfileSuccessState(this.changeProfileSuccessfully);
+}
+
+class UpdateProfileErrorState extends ProfileState {
+  String? error;
+  UpdateProfileErrorState(this.error);
 }

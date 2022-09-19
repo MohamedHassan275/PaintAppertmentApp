@@ -113,7 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         padding:  const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
                                         child: GestureDetector(
                                           onTap: (){
+                                              CustomFlutterToast(category.id.toString());
                                               CustomFlutterToast(category.services![index].id.toString());
+                                              CustomFlutterToast(category.services![index].name);
 
                                          //   homeCubit.showProductDetails(category.services![index].id.toString());
                                           //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsServiceScreen()));

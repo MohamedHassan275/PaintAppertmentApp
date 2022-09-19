@@ -24,16 +24,19 @@ class LoginModel {
 
 class LoginResponseModel {
   String? accesstoken;
+  String? type;
 
-  LoginResponseModel({this.accesstoken});
+  LoginResponseModel({this.accesstoken,this.type});
 
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
     accesstoken = json['accesstoken'];
+    type = json['type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['accesstoken'] = this.accesstoken;
+    data['type'] = this.type;
     return data;
   }
 }

@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/technical_controller/add_price_order/add_price_order_cubit.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
 
 import '../../../../generated/assets.dart';
@@ -9,6 +11,7 @@ import '../../../../model/order_model.dart';
 import '../../../../utils/componant/CustomButtonWidget.dart';
 import '../../../../utils/componant/CustomTextFieldWidget.dart';
 import '../../../../utils/constant/Themes.dart';
+import '../../../../utils/constant/custom_toast.dart';
 import '../../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../../utils/widget/custom_phone_and_password_widget.dart';
 import '../../../UserScreens/home_main_screen/home_main_screen.dart';
@@ -26,7 +29,7 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
 
   TextEditingController valueOrder = TextEditingController();
 
-  GlobalKey<FormState> formKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -34,115 +37,139 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
-            width: Get.width,
-            child: Column(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: BlocConsumer<AddPriceOrderCubit,AddPriceOrderState>(
+            listener: (context, state) {
+              _handleOrderListener(context, state);
+            },
+            builder: (context, state) {
+              AddPriceOrderCubit addPriceOrderCubit = AddPriceOrderCubit.get(context);
+              return Container(
+                width: Get.width,
+                child: Column(
                   children: [
-                    AppbarDetailsOrder(widthValue, heightValue),
-                    SizedBox(
-                      height: heightValue * 1.2,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Card(
-                        elevation: 2.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                AddressDetailsOrder(newOrder: widget.newOrder,),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                const Divider(
-                                  height: 10,
-                                  color: Themes.ColorApp2,
-                                ),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                DetailsOrder(widthValue, 'order_number'.tr, '#${widget.newOrder.orderNumber}',''),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.newOrder.service ?? '-----'}',''),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                DetailsOrder(widthValue, 'quantity'.tr, '${widget.newOrder.flatArea}','متر'),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                DetailsOrder(widthValue, 'mix_type'.tr, '${widget.newOrder.rooms}','غرفة نوم'),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                DetailsOrder(widthValue, 'cement_type'.tr, '${widget.newOrder.bathrooms}','حمام'),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                DetailsOrder(widthValue, 'name_client'.tr, '${widget.newOrder.firstname} ${widget.newOrder.lastname}',''),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                DetailsOrder(widthValue, 'mobile_number'.tr, '${widget.newOrder.phone}',''),
-                                SizedBox(
-                                  height: heightValue * .7,
-                                ),
-                                SizedBox(height: heightValue * .7,),
-                                Form(
-                                  key: formKey,
-                                  child: FromTextShared2(
-                                      labelText: 'value_order'.tr,
-                                      maxLength: 5,
-                                      onChanged: (value) {
-                                        value = value;
-                                      },
-                                      onSaved: (String? value){
-                                        value = value!;
-                                      },
-                                      onTapValidator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'must_not_empty'.tr;
-                                        }
-                                        return null;
-                                      },
-                                      keyboardType: TextInputType.text,
-                                      Controller: valueOrder,
-                                      hintText: 'value_order'.tr),
-                                ),
-                                SizedBox(height: heightValue * .5,),
-                                CirclerProgressIndicatorWidget(isLoading:  false),
-                                SizedBox(height: heightValue * .7,),
-                                CustomButtonImage(title: 'button_value_order'.tr, hight: 50, onTap: (){
-                                  if(formKey.currentState!.validate()){
-                                    Get.to(const HomeTechincalMainScreen());
-                                  }
-
-                                }),
-                                SizedBox(height: heightValue * 1,),
-                              ],
-                            ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppbarDetailsOrder(widthValue, heightValue),
+                        SizedBox(
+                          height: heightValue * 1.2,
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Card(
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  AddressDetailsOrder(newOrder: widget.newOrder,),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  const Divider(
+                                    height: 10,
+                                    color: Themes.ColorApp2,
+                                  ),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  DetailsOrder(widthValue, 'order_number'.tr, '#${widget.newOrder.orderNumber}',''),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.newOrder.service ?? '-----'}',''),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  DetailsOrder(widthValue, 'quantity'.tr, '${widget.newOrder.flatArea}','متر'),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  DetailsOrder(widthValue, 'mix_type'.tr, '${widget.newOrder.rooms}','غرفة نوم'),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  DetailsOrder(widthValue, 'cement_type'.tr, '${widget.newOrder.bathrooms}','حمام'),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  DetailsOrder(widthValue, 'name_client'.tr, '${widget.newOrder.firstname} ${widget.newOrder.lastname}',''),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  DetailsOrder(widthValue, 'mobile_number'.tr, '${widget.newOrder.phone}',''),
+                                  SizedBox(
+                                    height: heightValue * .7,
+                                  ),
+                                  SizedBox(height: heightValue * .7,),
+                                  Form(
+                                    key: addPriceOrderCubit.fromKey,
+                                    child: FromTextShared2(
+                                        labelText: 'value_order'.tr,
+                                        maxLength: 5,
+                                        onChanged: (value) {
+                                          value = value;
+                                        },
+                                        onSaved: (String? value){
+                                          value = value!;
+                                        },
+                                        onTapValidator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'must_not_empty'.tr;
+                                          }
+                                          return null;
+                                        },
+                                        keyboardType: TextInputType.number,
+                                        Controller: valueOrder,
+                                        hintText: 'value_order'.tr),
+                                  ),
+                                  SizedBox(height: heightValue * .5,),
+                                  state is AddPriceOrderLoadingState ?
+                                  CirclerProgressIndicatorWidget(isLoading:  true) :
+                                      Container(),
+                                  SizedBox(height: heightValue * .7,),
+                                  CustomButtonImage(title: 'button_value_order'.tr, hight: 50, onTap: (){
+                                    if(addPriceOrderCubit.fromKey.currentState!.validate()){
+                                      addPriceOrderCubit.addPriceOfferOrderTechnical(widget.newOrder.id.toString(), valueOrder.text);
+                                      Get.to(const HomeTechincalMainScreen());
+                                    }
+
+                                  }),
+                                  SizedBox(height: heightValue * 1,),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                    SizedBox(height: heightValue * 2,),
                   ],
                 ),
-                SizedBox(height: heightValue * 2,),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),
     );
   }
+
+  void _handleOrderListener(BuildContext context, AddPriceOrderState state) {
+    if (state is AddPriceOrderErrorState) {
+      CustomFlutterToast(state.statusResponse);
+    } else if (state is AddPriceOrderSuccessfullyState) {
+      CustomFlutterToast(state.statusResponse);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
+              (_) => false);
+    }
+  }
+
 }
 
 class AppbarDetailsOrder extends StatelessWidget {

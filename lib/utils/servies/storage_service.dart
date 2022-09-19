@@ -11,6 +11,7 @@ abstract class StorageKeys {
 
   //Declare all storage keys here & create its correpsonding setters & getters
   static const String token = "TOKEN";
+  static const String type = "TYPE";
   static const String activeLocale = "ACTIVE_LOCAL";
 
 }
@@ -24,12 +25,19 @@ class StorageService extends GetxService {
   }
 
   //TOKEN
-   get GetToken {
+   get getToken {
     return _prefs.getString(StorageKeys.token) ?? "";
   }
 
-   SetToken(String token) {
+   setToken(String token) {
     _prefs.setString(StorageKeys.token, token);
+  }
+  get getType {
+    return _prefs.getString(StorageKeys.type) ?? "";
+  }
+
+   setType(String token) {
+    _prefs.setString(StorageKeys.type, token);
   }
 
   Locale get activeLocale {

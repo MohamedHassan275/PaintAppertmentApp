@@ -26,7 +26,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
     super.initState();
     setState(() {
       loadData();
-      AppConstants.tokenSession = Get.find<StorageService>().GetToken != null ? AppConstants.tokenSession = Get.find<StorageService>().GetToken : '';
+      AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
       print('token is ${AppConstants.tokenSession}');
     });
   }
@@ -88,8 +88,13 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                                 ),
                                 Row(
                                   children:  [
+                                    state.profileResponseModel?.firstname != null ?
                                     Text(
                                       '${state.profileResponseModel?.firstname} ${state.profileResponseModel?.lastname}',
+                                      style: TextStyle(fontSize: 13, color: Colors.white),
+                                    ) :
+                                    Text(
+                                      '',
                                       style: TextStyle(fontSize: 13, color: Colors.white),
                                     ),
                                   ],
@@ -103,7 +108,6 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
               } else if (state is ProfileErrorState) {
                 return Container(
                   width: Get.width,
-                  height: Get.height,
                   child: Center(
                     child: Text('${state.error}'),
                   ),
@@ -111,7 +115,6 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
               }
               return Container(
                 width: Get.width,
-                height: Get.height,
                 child: const Center(
                   child: CircularProgressIndicator(
                     color: Themes.ColorApp1,

@@ -1,6 +1,6 @@
 
 import 'package:dio/dio.dart';
-import 'package:pain_appertment/model/response_user_model.dart';
+import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
 
 import '../../model/login_model.dart';
@@ -8,31 +8,17 @@ import '../../shared/network/api_helper.dart';
 import '../../utils/constant/api_constant.dart';
 import '../../utils/constant/custom_toast.dart';
 
-class AuthService{
+class OrdersTechnicalService{
   
-  static Future<LoginModel?> setLogin(String phone,String password,String fcmToken) async {
-    LoginModel? loginModel;
-
+  static Future<OrderModel?> getNewTechnicalSOrderUser() async {
+    OrderModel? orderModel;
     try {
-      print('response is ');
-      print('${phone}');
-      print('${password}');
-
-      Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.login,data: {
-        "phone" : phone,
-        "password" : password,
-        "fcm_token" : fcmToken,
-      });
-
-      print('response is ');
-      print('${response.statusCode}');
-      print('${response.data}');
+      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.newTechnicalOrders,token: AppConstants.tokenSession,lang: 'ar');
       if(response.statusCode == 200){
         print(response.data);
-        return LoginModel.fromJson(response.data);
+        return OrderModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
-        CustomFlutterToast(response.data['message']);
       }
     }on DioError catch (e){
       if (e.response != null) {
@@ -46,31 +32,18 @@ class AuthService{
         print(e.message);
       }
     }
-    return loginModel;
+    return orderModel;
   }
 
-
-  static Future<LoginModel?> setRegister(String firstName,String lastName,String phone,String email,String password,String fcmToken) async {
-    LoginModel? loginModel;
-
+  static Future<OrderModel?> getCurrentTechnicalSOrderUser() async {
+    OrderModel? orderModel;
     try {
-
-      Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.register,data: {
-        "phone" : phone,
-        "firstname" : firstName,
-        "lastname" : lastName,
-        "email" : email,
-        "fcm_token" : fcmToken,
-        "password" : password,
-      });
-
-      //   print(AppLocalStorage.token);
+      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.currentTechnicalOrders,token: AppConstants.tokenSession,lang: 'ar');
       if(response.statusCode == 200){
         print(response.data);
-        return LoginModel.fromJson(response.data);
+        return OrderModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
-        CustomFlutterToast(response.data['message']);
       }
     }on DioError catch (e){
       if (e.response != null) {
@@ -84,24 +57,18 @@ class AuthService{
         print(e.message);
       }
     }
-    return loginModel;
+    return orderModel;
   }
 
-
-  static Future<ResponseUserModel?> logout() async {
-    ResponseUserModel? responseUserModel;
-
+  static Future<OrderModel?> getPreviousTechnicalSOrderUser() async {
+    OrderModel? orderModel;
     try {
-
-      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.logout,token: AppConstants.tokenSession);
-
-      //   print(AppLocalStorage.token);
+      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.previousTechnicalOrders,token: AppConstants.tokenSession,lang: 'ar');
       if(response.statusCode == 200){
         print(response.data);
-        return ResponseUserModel.fromJson(response.data);
+        return OrderModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
-        CustomFlutterToast(response.data['message']);
       }
     }on DioError catch (e){
       if (e.response != null) {
@@ -115,7 +82,9 @@ class AuthService{
         print(e.message);
       }
     }
-    return responseUserModel;
+    return orderModel;
   }
+
+
 
 }

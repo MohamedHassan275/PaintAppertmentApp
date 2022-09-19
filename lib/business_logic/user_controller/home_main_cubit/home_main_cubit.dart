@@ -9,8 +9,6 @@ import 'package:pain_appertment/screens/UserScreens/my_order/my_previous_order_s
 import 'package:pain_appertment/screens/UserScreens/my_order/my_waiting_order_screen/my_waiting_order_screen.dart';
 
 import '../../../screens/UserScreens/home_screen/home_screen.dart';
-import '../../../screens/UserScreens/my_order/my_order.dart';
-import '../../../screens/UserScreens/request_service_screen/request_service_screen.dart';
 import '../../../screens/UserScreens/setting_screen/setting_screen.dart';
 import '../../../utils/constant/Themes.dart';
 

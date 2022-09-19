@@ -17,6 +17,8 @@ class ProfileCubit extends Cubit<ProfileState> {
 
  static ProfileCubit get(BuildContext context) => BlocProvider.of(context);
 
+  bool isLoading = false;
+
   showUserDetails(){
     emit(ProfileLoadingState());
     ProfileService.showUserDetails().then((value){
@@ -30,13 +32,16 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   updateProfileUser(String firstName,String lastName,String phone,String email,String governorate,String city){
+    isLoading = true;
     emit(UpdateProfileLoadingState());
     ProfileService.changeProfileUser(firstName, lastName, phone, email,governorate,city).then((value){
       if(value?.success == true){
         CustomFlutterToast(value?.message);
+        isLoading = false;
         emit(UpdateProfileSuccessState(value?.message));
       }else {
-        emit(ProfileErrorState(value?.message));
+        isLoading = false;
+        emit(UpdateProfileErrorState(value?.message));
       }
     });
   }

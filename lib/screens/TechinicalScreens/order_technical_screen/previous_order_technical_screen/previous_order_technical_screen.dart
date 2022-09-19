@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pain_appertment/business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
+import 'package:pain_appertment/business_logic/technical_controller/previous_technical_orders_cubit/previous_technical_orders_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/order_technical_screen/previous_order_technical_screen/details_previous_order_technical_screen.dart';
 
@@ -24,7 +24,7 @@ class _PreviousOrderTechnicalScreenState extends State<PreviousOrderTechnicalScr
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<PreviousOrdersCubit>(context).getPreviousOrderUser();
+    BlocProvider.of<PreviousOrdersTechnicalCubit>(context).getPreviousTechnicalOrderUser();
   }
   @override
   Widget build(BuildContext context) {
@@ -34,13 +34,13 @@ class _PreviousOrderTechnicalScreenState extends State<PreviousOrderTechnicalScr
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async{
-          BlocProvider.of<PreviousOrdersCubit>(context).getPreviousOrderUser();
+          BlocProvider.of<PreviousOrdersTechnicalCubit>(context).getPreviousTechnicalOrderUser();
         },
         child: SafeArea(
             child: SingleChildScrollView(
-              child: BlocBuilder<PreviousOrdersCubit,PreviousOrdersState>(
+              child: BlocBuilder<PreviousOrdersTechnicalCubit,PreviousOrdersTechnicalState>(
                   builder: (context, state) {
-                    PreviousOrdersCubit previousOrdersCubit = PreviousOrdersCubit.get(context);
+                    PreviousOrdersTechnicalCubit previousOrdersCubit = PreviousOrdersTechnicalCubit.get(context);
                     if(state is PreviousOrdersSuccessfullyState){
                       return state.orderResponseModel!.isNotEmpty ?
                       ListView.builder(

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/technical_controller/add_price_order/add_price_order_cubit.dart';
+import 'package:pain_appertment/business_logic/technical_controller/current_technical_orders_cubit/current_technical_orders_cubit.dart';
+import 'package:pain_appertment/business_logic/technical_controller/orders_technical_cubit/orders_technical_cubit.dart';
+import 'package:pain_appertment/business_logic/technical_controller/previous_technical_orders_cubit/previous_technical_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/add_order_cubit/add_order_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
@@ -19,6 +23,7 @@ import 'package:pain_appertment/utils/servies/storage_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'business_logic/technical_controller/home_main_technical_cubit/home_main_technical_cubit.dart';
 import 'business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 
 void main() async {
@@ -29,7 +34,12 @@ void main() async {
   LoggerHelper.init();
   await SharedPreferences.getInstance();
 
-  AppConstants.tokenSession = Get.find<StorageService>().GetToken != null ? AppConstants.tokenSession = Get.find<StorageService>().GetToken : '';
+  print('typeSession ${Get.find<StorageService>().getType}');
+  print('typeSession ${Get.find<StorageService>().getToken}');
+  print('typeSession ${AppConstants.tokenSession}');
+  print('typeSession ${Get.find<StorageService>().getToken}');
+
+   AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
 
   runApp(const MyApp());
 }
@@ -41,6 +51,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
+      BlocProvider(
+        create: (context) => AddPriceOrderCubit(),
+      ),
+      BlocProvider(
+        create: (context) => OrdersTechnicalCubit(),
+      ),
+      BlocProvider(
+        create: (context) => CurrentTechnicalOrdersCubit(),
+      ),
+      BlocProvider(
+        create: (context) => PreviousOrdersTechnicalCubit(),
+      ),
+      BlocProvider(
+        create: (context) => HomeMainTechnicalCubit(),
+      ),
+      BlocProvider(
+        create: (context) => AddOrderCubit(),
+      ),
       BlocProvider(
         create: (context) => AddOrderCubit(),
       ),

@@ -45,7 +45,6 @@ class _ChangeProfileTechnicalScreenState extends State<ChangeProfileTechnicalScr
           },
           builder: (context, state) {
             ProfileCubit profileCubit = ProfileCubit.get(context);
-
             if (state is ProfileSuccessState) {
               firstNameController.text = state.profileResponseModel?.firstname ?? '';
               lastNameController.text = state.profileResponseModel?.lastname ?? '';
@@ -56,7 +55,6 @@ class _ChangeProfileTechnicalScreenState extends State<ChangeProfileTechnicalScr
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    Appbarwidget(width: width, height: height),
                     SizedBox(
                       height: height * 1,
                     ),
@@ -92,14 +90,9 @@ class _ChangeProfileTechnicalScreenState extends State<ChangeProfileTechnicalScr
                     SizedBox(
                       height: height * .5,
                     ),
-                    SizedBox(
-                      height: height * 2.5,
-                    ),
-                    state is UpdateProfileLoadingState
-                        ? const CircularProgressIndicator(
-                      color: Themes.ColorApp1,
-                    )
-                        : Container(),
+                    state is UpdateProfileLoadingState ?
+                    CirclerProgressIndicatorWidget(isLoading: true) :
+                         Container(),
                     SizedBox(
                       height: height * 1,
                     ),
@@ -155,7 +148,6 @@ class _ChangeProfileTechnicalScreenState extends State<ChangeProfileTechnicalScr
       CustomFlutterToast(state.error);
     } else if (state is UpdateProfileSuccessState) {
       CustomFlutterToast(state.changeProfileSuccessfully);
-      _clearFormData();
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
