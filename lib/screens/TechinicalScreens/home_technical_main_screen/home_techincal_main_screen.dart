@@ -6,6 +6,7 @@ import '../../../business_logic/technical_controller/home_main_technical_cubit/h
 import '../../../business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
+import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 
 class HomeTechincalMainScreen extends StatefulWidget {
   const HomeTechincalMainScreen({Key? key}) : super(key: key);
@@ -64,6 +65,10 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> {
                               const SizedBox(
                                 width: 15,
                               ),
+                              state is ProfileLoadingState ?
+                              const CircularProgressIndicator(
+                                color: Themes.whiteColor,
+                              ) :
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +83,7 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> {
                                   Row(
                                     children:  [
                                       Text(
-                                        '${state.profileResponseModel?.firstname} ${state.profileResponseModel?.lastname}',
+                                        '${state.profileResponseModel?.firstname ?? ' '} ${state.profileResponseModel?.lastname ?? ' '}',
                                         style: TextStyle(fontSize: 13, color: Colors.white),
                                       ),
                                     ],

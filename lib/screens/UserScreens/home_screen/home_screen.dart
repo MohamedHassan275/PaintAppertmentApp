@@ -39,11 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
     BlocProvider.of<HomeCubit>(context, listen: false).getHomeUser();
     BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
 
-    // BlocProvider.of<AddProductCubit>(context, listen: false)
-    //     .getMyProducts(refresh: true);
-
-    // BlocProvider.of<AddProductCubit>(context, listen: false)
-    //     .getMyProductUser();
 
   }
 
@@ -113,9 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         padding:  const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
                                         child: GestureDetector(
                                           onTap: (){
-                                              CustomFlutterToast(category.id.toString());
-                                              CustomFlutterToast(category.services![index].id.toString());
-                                              CustomFlutterToast(category.services![index].name);
+                                              // CustomFlutterToast(category.name);
+                                              // print('service ${category.id}');
+                                              // CustomFlutterToast(category.services![category.id!].name);
+                                              // CustomFlutterToast(category.services![index].name);
 
                                          //   homeCubit.showProductDetails(category.services![index].id.toString());
                                           //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsServiceScreen()));
@@ -158,44 +154,55 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       itemCount: category.services!.length,
                                                       scrollDirection: Axis.horizontal,
                                                       itemBuilder: (context, index){
-                                                        return Card(
-                                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                                                          color: Themes.whiteColor,
-                                                          elevation: 2,
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                                                            child: SizedBox(
-                                                              width: 150,
-                                                              height: 150,
-                                                              child: Column(
-                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                                children: [
-                                                                  ClipRRect(
-                                                                    borderRadius: BorderRadius.circular(15),
-                                                                    child: FadeInImage(
-                                                                      image: NetworkImage('${category.services![index].image}'),
-                                                                      fit: BoxFit.fill,
-                                                                      height: 100,
-                                                                      width: 150,
-                                                                      placeholder:  const AssetImage(Assets.imagesLogoApp),
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: height * .5,
-                                                                  ),
-                                                                  Expanded(
-                                                                    child: Text(
-                                                                      '${category.services![index].name}',
-                                                                      style: const TextStyle(
-                                                                        fontWeight: FontWeight.w400,
-                                                                        fontSize: 15,
-                                                                        overflow: TextOverflow.fade,
-                                                                        color: Themes.ColorApp8,
+                                                        return GestureDetector(
+                                                          onTap: (){
+                                                            // CustomFlutterToast(category.name);
+                                                            // print('service ${category.id}');
+                                                            // CustomFlutterToast(category.services![index].id.toString());
+                                                            // CustomFlutterToast(category.services![index].name);
+
+                                                              homeCubit.showProductDetails(category.services![index].id.toString());
+                                                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsServiceScreen()));
+                                                          },
+                                                          child: Card(
+                                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                                            color: Themes.whiteColor,
+                                                            elevation: 2,
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                                                              child: SizedBox(
+                                                                width: 150,
+                                                                height: 150,
+                                                                child: Column(
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(15),
+                                                                      child: FadeInImage(
+                                                                        image: NetworkImage('${category.services![index].image}'),
+                                                                        fit: BoxFit.fill,
+                                                                        height: 100,
+                                                                        width: 150,
+                                                                        placeholder:  const AssetImage(Assets.imagesLogoApp),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                                ],
+                                                                    SizedBox(
+                                                                      height: height * .5,
+                                                                    ),
+                                                                    Expanded(
+                                                                      child: Text(
+                                                                        '${category.services![index].name}',
+                                                                        style: const TextStyle(
+                                                                          fontWeight: FontWeight.w400,
+                                                                          fontSize: 15,
+                                                                          overflow: TextOverflow.fade,
+                                                                          color: Themes.ColorApp8,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),

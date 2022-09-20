@@ -84,7 +84,7 @@ class DetailsPreviousOrderTechnicalScreen extends StatelessWidget {
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'mobile_number'.tr, '${previousOrder.phone}',''),
+                                  DetailsOrder(widthValue, 'order_details'.tr, previousOrder.description ?? 'لا يوجد تفاصيل للطلب',''),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),

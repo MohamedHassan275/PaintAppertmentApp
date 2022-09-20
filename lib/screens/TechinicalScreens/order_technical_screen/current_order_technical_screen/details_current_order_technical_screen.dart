@@ -84,7 +84,7 @@ class _DetailsCurrentOrderTechnicalScreenState extends State<DetailsCurrentOrder
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'mobile_number'.tr, '${widget.newOrder.phone}',''),
+                                DetailsOrder(widthValue, 'order_details'.tr, widget.newOrder.description ?? 'لا يوجد تفاصيل للطلب',''),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),

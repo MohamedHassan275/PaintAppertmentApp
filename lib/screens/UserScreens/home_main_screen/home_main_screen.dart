@@ -10,6 +10,7 @@ import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
 import '../../../utils/constant/constant.dart';
 import '../../../utils/servies/storage_service.dart';
+import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 
 class HomeMainScreen extends StatefulWidget {
   const HomeMainScreen({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
     // TODO: implement initState
     super.initState();
     setState(() {
+      BlocProvider.of<ProfileCubit>(context).showUserDetails();
       loadData();
       AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
       print('token is ${AppConstants.tokenSession}');
@@ -75,6 +77,10 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                             const SizedBox(
                               width: 15,
                             ),
+                            state is ProfileLoadingState ?
+                            const CircularProgressIndicator(
+                              color: Themes.whiteColor,
+                            ) :
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,15 +94,9 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                                 ),
                                 Row(
                                   children:  [
-                                    state.profileResponseModel?.firstname != null ?
                                     Text(
-                                      '${state.profileResponseModel?.firstname} ${state.profileResponseModel?.lastname}',
-                                      style: TextStyle(fontSize: 13, color: Colors.white),
-                                    ) :
-                                    Text(
-                                      '',
-                                      style: TextStyle(fontSize: 13, color: Colors.white),
-                                    ),
+                                      '${state.profileResponseModel?.firstname ?? ''} ${state.profileResponseModel?.lastname ?? ' '}',
+                                      style: TextStyle(fontSize: 13, color: Colors.white),)
                                   ],
                                 )
                               ],
@@ -175,11 +175,6 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
   loadData() {
     BlocProvider.of<HomeCubit>(context, listen: false).getHomeUser();
     BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
-    // BlocProvider.of<AddProductCubit>(context, listen: false)
-    //     .getMyProducts(refresh: true);
-
-    // BlocProvider.of<AddProductCubit>(context, listen: false)
-    //     .getMyProductUser();
 
   }
 }

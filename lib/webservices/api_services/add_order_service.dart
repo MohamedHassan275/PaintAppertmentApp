@@ -11,7 +11,7 @@ import '../../utils/constant/custom_toast.dart';
 class AddOrderService{
   
   static Future<ResponseUserModel?> addOrderUser(String serviceId,String flatArea,String rooms,
-      String bathrooms,String firstName,String lastName,String phone,String governorate,String city) async {
+      String bathrooms,String firstName,String lastName,String phone,String governorate,String city,String description) async {
     ResponseUserModel? responseUserModel;
     try {
       Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.addOrder,token: AppConstants.tokenSession,
@@ -26,6 +26,7 @@ class AddOrderService{
         "phone" : phone,
         "governorate" : governorate,
         "city" : city,
+        "description" : description,
       });
 
    //   print(AppLocalStorage.token);

@@ -48,11 +48,12 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return Padding(
+                        return state.orderResponseModel![index].offer == 0 ?
+                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                           child: MySendOrderListItem(currentOrder: state.orderResponseModel![index],
                             heightValue: heightValue,widthValue: widthValue,),
-                        );
+                        ) : Container();
                       },): NoItemOFList();
                   }else if (state is OrdersErrorState){
                     return LoadingWidget(data: state.error);

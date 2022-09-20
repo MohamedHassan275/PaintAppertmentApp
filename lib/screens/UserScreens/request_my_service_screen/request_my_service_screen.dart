@@ -124,7 +124,7 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
                         addOrderCubit.addOrderUser('${widget.companyId}', distanceAppermentController.text,
                             roomNumberController.text, restRoomController.text, firstNameController.text,
                             lastNameController.text, mobilePhoneController.text,
-                            governmentController.text, cityController.text);
+                            governmentController.text, cityController.text,detailsOrderController.text);
                       }
                     }),
                     SizedBox(height: height * 1,),

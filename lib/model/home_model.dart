@@ -114,7 +114,7 @@ class Categories {
 }
 
 class Services {
-  String? id;
+  int? id;
   String? name;
   String? image;
 
@@ -168,12 +168,12 @@ class Images {
   int? id;
   String? image;
 
-  Images({this.id ,this.image});
+  Images({this.id, this.image});
 
   Images.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     image = json['image'];
-    }
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

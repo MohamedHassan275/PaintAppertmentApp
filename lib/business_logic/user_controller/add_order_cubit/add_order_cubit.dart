@@ -12,9 +12,9 @@ class AddOrderCubit extends Cubit<AddOrderState> {
  static AddOrderCubit get(BuildContext context) => BlocProvider.of(context);
 
  addOrderUser(String serviceId,String flatArea,String rooms,
-     String bathrooms,String firstName,String lastName,String phone,String governorate,String city){
+     String bathrooms,String firstName,String lastName,String phone,String governorate,String city,String description){
   emit(AddOrderLoadingState());
-   AddOrderService.addOrderUser(serviceId, flatArea, rooms, bathrooms, firstName, lastName, phone, governorate, city).then((value){
+   AddOrderService.addOrderUser(serviceId, flatArea, rooms, bathrooms, firstName, lastName, phone, governorate, city,description).then((value){
      if(value?.success == true){
        emit(AddOrderSuccessfullyState(value?.message));
      }else {

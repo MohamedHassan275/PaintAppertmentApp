@@ -24,7 +24,7 @@ class LoginModel {
 
 class LoginResponseModel {
   String? accesstoken;
-  String? type;
+  int? type;
 
   LoginResponseModel({this.accesstoken,this.type});
 

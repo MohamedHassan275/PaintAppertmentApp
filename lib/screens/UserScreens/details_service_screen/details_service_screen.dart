@@ -10,6 +10,7 @@ import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_c
 import 'package:pain_appertment/generated/assets.dart';
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
+import 'package:pain_appertment/utils/constant/custom_toast.dart';
 
 import '../../../utils/constant/Themes.dart';
 import '../home_main_screen/home_main_screen.dart';
@@ -170,7 +171,7 @@ class DetailsServiceScreen extends StatelessWidget {
                                         SizedBox(height: height * .5,),
                                         StarRating(
                                           color: Themes.ColorApp13,
-                                          onRatingChanged: (rating) => state.showProductResponseDetails?.rates![index].rate = rating.toString(),
+                                          onRatingChanged: (rating) => state.showProductResponseDetails?.rates![index].rate = rating,
                                           rating: double.parse('${state.showProductResponseDetails?.rates![index].rate!}'),
                                         ),
                                         SizedBox(height: height * .5,),
@@ -192,8 +193,11 @@ class DetailsServiceScreen extends StatelessWidget {
                                 ),),
                             ),
                             SizedBox(height: height * 3.5,),
-                            CustomButtonImage(title: 'request_price2'.tr, hight: 50, onTap: () => Get.to(RequestMyServiceScreen(
-                              companyId: state.showProductResponseDetails?.id.toString(),))),
+                            CustomButtonImage(title: 'request_price2'.tr, hight: 50, onTap: (){
+                              CustomFlutterToast(state.showProductResponseDetails?.id.toString());
+                              Get.to(RequestMyServiceScreen(
+                                companyId: state.showProductResponseDetails?.id.toString(),));
+                            }),
                             SizedBox(height: height * 1,),
                           ],
                         ),

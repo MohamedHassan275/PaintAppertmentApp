@@ -41,7 +41,9 @@ class OrderResponseModel {
   String? governorate;
   String? city;
   dynamic offerCost;
-  String? status;
+  dynamic status;
+  dynamic offer;
+  String? description;
 
   OrderResponseModel(
       {this.id,
@@ -56,6 +58,8 @@ class OrderResponseModel {
         this.phone,
         this.governorate,
         this.city,
+        this.description,
+        this.offer,
         this.offerCost,
         this.status});
 
@@ -72,6 +76,8 @@ class OrderResponseModel {
     phone = json['phone'];
     governorate = json['governorate'];
     city = json['city'];
+    description = json['description'];
+    offer = json['offer'];
     offerCost = json['offer_cost'];
     status = json['status'];
   }
@@ -84,6 +90,7 @@ class OrderResponseModel {
     data['order_number'] = this.orderNumber;
     data['flat_area'] = this.flatArea;
     data['rooms'] = this.rooms;
+    data['offer'] = this.offer;
     data['bathrooms'] = this.bathrooms;
     data['firstname'] = this.firstname;
     data['lastname'] = this.lastname;
@@ -91,6 +98,7 @@ class OrderResponseModel {
     data['governorate'] = this.governorate;
     data['city'] = this.city;
     data['offer_cost'] = this.offerCost;
+    data['description'] = this.description;
     data['status'] = this.status;
     return data;
   }

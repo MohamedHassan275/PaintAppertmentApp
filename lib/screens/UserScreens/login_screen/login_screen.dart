@@ -144,12 +144,12 @@ class _LoginScreenState extends State<LoginScreen> {
       // CustomFlutterToast(state.loginResponseModel?.accesstoken);
       // CustomFlutterToast(state.loginResponseModel?.type);
       _clearFormData();
-     if(state.loginResponseModel!.type!.contains('0')){
+     if(state.loginResponseModel!.type! == 0){
        Navigator.pushAndRemoveUntil(
            context,
            MaterialPageRoute(builder: (context) => const HomeMainScreen()),
                (_) => false);
-     }else if(state.loginResponseModel!.type!.contains('1')){
+     }else if(state.loginResponseModel!.type! == 1){
        Navigator.pushAndRemoveUntil(
            context,
            MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),

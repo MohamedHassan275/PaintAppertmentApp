@@ -89,7 +89,7 @@ class Images {
 class Rates {
   int? id;
   String? name;
-  String? rate;
+  dynamic rate;
   String? date;
   String? comment;
 

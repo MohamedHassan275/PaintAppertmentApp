@@ -10,7 +10,7 @@ part 'orders_technical_state.dart';
 
 class OrdersTechnicalCubit extends Cubit<OrdersTechnicalState> {
   OrdersTechnicalCubit() : super(OrdersTechnicalInitial()){
-    getNewTechnicalOrderUser();
+  //  getNewTechnicalOrderUser();
   }
 
  static OrdersTechnicalCubit get(BuildContext context) => BlocProvider.of(context);
