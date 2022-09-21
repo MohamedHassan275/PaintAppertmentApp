@@ -6,6 +6,8 @@ import '../../../business_logic/technical_controller/home_main_technical_cubit/h
 import '../../../business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
+import '../../../utils/constant/constant.dart';
+import '../../../utils/servies/storage_service.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 
 class HomeTechincalMainScreen extends StatefulWidget {
@@ -22,6 +24,8 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
+    print('token is ${AppConstants.tokenSession}');
     BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
   }
   @override

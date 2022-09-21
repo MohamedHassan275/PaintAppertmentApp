@@ -297,7 +297,7 @@ class CompanyDetails extends StatelessWidget {
                   ),
                   SizedBox(width: widthValue * .2,),
                   Text(
-                    '${myCurrentOrderModel!.service ?? '---'}',
+                    '${myCurrentOrderModel!.service ?? '----' }',
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -326,6 +326,15 @@ class CompanyDetails extends StatelessWidget {
                       color: Themes.ColorApp1,
                     ),
                   ),
+                  SizedBox(width: widthValue * .2,),
+                  const Text(
+                    'متر',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp1,
+                    ),
+                  ),
                 ],
               ),
 
@@ -333,57 +342,56 @@ class CompanyDetails extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'name_client'.tr,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp2,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'name_client'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp2,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: widthValue * .5,),
-                  const Text(
-                    'محمد احمد',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp1,
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: heightValue * .7,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'mobile_number'.tr,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp2,
+                  ],
+                ),
+                SizedBox(height: heightValue * .2,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Your_location'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp2,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: widthValue * .5,),
-                  const Text(
-                    '0115604362',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp1,
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          )
+                  ],
+                ),
+              ],
+            )
         ),
       ],
     );

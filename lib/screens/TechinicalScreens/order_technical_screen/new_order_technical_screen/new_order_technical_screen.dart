@@ -6,6 +6,7 @@ import 'package:pain_appertment/business_logic/technical_controller/orders_techn
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/utils/componant/LoadingWidget.dart';
+import 'package:pain_appertment/utils/constant/constant.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../utils/constant/Themes.dart';
@@ -24,6 +25,8 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print('tokenSession');
+    print(AppConstants.tokenSession);
     BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
   }
 
@@ -35,6 +38,7 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
       body: RefreshIndicator(
         onRefresh: () async{
           print('refresh');
+          print('${AppConstants.typeSession}');
           BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
           BlocProvider.of<ProfileCubit>(context).showUserDetails();
         },

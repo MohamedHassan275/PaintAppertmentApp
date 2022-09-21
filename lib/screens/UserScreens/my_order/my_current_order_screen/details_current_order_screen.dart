@@ -116,11 +116,11 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                         ),
                                       ),
                                       SizedBox(width: widthValue * .2,),
-                                      const  Expanded(
+                                        Expanded(
                                         child: Text(
-                                          'تفاصيل تفاصيل تفاصيل تفاصيل تفاصيل تفاصيل',
+                                          '${widget.newOrder.description}',
                                            maxLines: 2,
-                                          style:  TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 16,
                                             color: Themes.ColorApp1,
@@ -134,36 +134,36 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                               SizedBox(
                                 height: heightValue * .7,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'order_will_be_received'.tr,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Themes.ColorApp8,
-                                        ),
-                                      ),
-                                      SizedBox(width: widthValue * .5,),
-                                      Text(
-                                        '${widget.newOrder.flatArea}',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Themes.ColorApp8,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: heightValue * .6,
-                                  ),
-                                ],
-                              ),
+                              // Column(
+                              //   crossAxisAlignment: CrossAxisAlignment.center,
+                              //   children: [
+                              //     Row(
+                              //       mainAxisAlignment: MainAxisAlignment.center,
+                              //       children: [
+                              //         Text(
+                              //           'order_will_be_received'.tr,
+                              //           style: const TextStyle(
+                              //             fontWeight: FontWeight.w500,
+                              //             fontSize: 15,
+                              //             color: Themes.ColorApp8,
+                              //           ),
+                              //         ),
+                              //         SizedBox(width: widthValue * .5,),
+                              //         Text(
+                              //           '${widget.newOrder.flatArea}',
+                              //           style: const TextStyle(
+                              //             fontWeight: FontWeight.w500,
+                              //             fontSize: 15,
+                              //             color: Themes.ColorApp8,
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     SizedBox(
+                              //       height: heightValue * .6,
+                              //     ),
+                              //   ],
+                              // ),
                               SizedBox(height: heightValue * .7,),
                               CustomTextFieldWidget(title: 'rate_technical', keyboardType: TextInputType.text, textEditingController: rateTechnical),
                               SizedBox(height: heightValue * .5,),

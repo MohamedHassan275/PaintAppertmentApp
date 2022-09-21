@@ -328,23 +328,23 @@ class CompanyDetails extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.city}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: Themes.ColorApp1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Container(
+              //   child: Center(
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Text(
+              //           '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.city}',
+              //           style: const TextStyle(
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: 12,
+              //             color: Themes.ColorApp1,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         )
