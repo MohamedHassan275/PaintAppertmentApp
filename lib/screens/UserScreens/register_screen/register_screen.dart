@@ -295,6 +295,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // CustomFlutterToast(state.loginResponseModel?.accesstoken);
       Get.find<StorageService>()
           .setToken('${state.loginResponseModel?.accesstoken}');
+      AppConstants.tokenSession = '${state.loginResponseModel?.type}';
+      CustomFlutterToast(AppConstants.tokenSession);
       _clearFormData();
       Navigator.pushAndRemoveUntil(
           context,

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
+import 'package:pain_appertment/utils/constant/constant.dart';
 import 'package:pain_appertment/utils/servies/storage_service.dart';
 import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import '../../../generated/assets.dart';
@@ -86,16 +87,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const ForgetPasswordWidget(),
                           SizedBox(
-                            height: heightValue * .2,
-                          ),
-                          CirclerProgressIndicatorWidget(isLoading: false),
-                          SizedBox(
                             height: heightValue * 1,
                           ),
                           state is LoginLoadingState
-                              ? const CircularProgressIndicator(
-                                  color: Themes.ColorApp1,
-                                )
+                              ? CirclerProgressIndicatorWidget(isLoading: true)
                               : Container(),
                           SizedBox(
                             height: heightValue * 1,
@@ -141,6 +136,8 @@ class _LoginScreenState extends State<LoginScreen> {
           .setToken('${state.loginResponseModel?.accesstoken}');
       Get.find<StorageService>()
           .setType('${state.loginResponseModel?.type}');
+      AppConstants.tokenSession = '${state.loginResponseModel?.type}';
+       CustomFlutterToast(AppConstants.tokenSession);
       // CustomFlutterToast(state.loginResponseModel?.accesstoken);
       // CustomFlutterToast(state.loginResponseModel?.type);
       _clearFormData();

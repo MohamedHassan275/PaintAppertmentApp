@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
@@ -270,9 +271,8 @@ class CompanyDetails extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: heightValue* .5,),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding:  EdgeInsets.symmetric(horizontal: widthValue *0,vertical: heightValue*.3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -286,7 +286,7 @@ class CompanyDetails extends StatelessWidget {
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
-                          color: Themes.ColorApp2,
+                          color: Themes.ColorApp8,
                         ),
                       ),
                       SizedBox(width: widthValue * .2,),
@@ -312,7 +312,7 @@ class CompanyDetails extends StatelessWidget {
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
-                          color: Themes.ColorApp2,
+                          color: Themes.ColorApp8,
                         ),
                       ),
                       SizedBox(width: widthValue * .2,),
@@ -324,21 +324,93 @@ class CompanyDetails extends StatelessWidget {
                           color: Themes.ColorApp1,
                         ),
                       ),
+                      SizedBox(width: widthValue * .2,),
+                      const Text(
+                        'متر',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: Themes.ColorApp8,
+                        ),
+                      ),
                     ],
                   ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal: widthValue *0,vertical: heightValue*.3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'technical_name'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: Themes.ColorApp8,
+                        ),
+                      ),
+                      SizedBox(width: widthValue * .2,),
+                      SizedBox(
+                        child: Text(
+                          ' : ${myCurrentOrderModel!.technicalName}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Themes.ColorApp1,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const Text(
+                '',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: Themes.ColorApp8,
                 ),
               ),
               // Container(
               //   child: Center(
               //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.center,
               //       children: [
-              //         Text(
-              //           '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.city}',
-              //           style: const TextStyle(
+              //         const Text(
+              //           '',
+              //           style: TextStyle(
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: 12,
+              //             color: Themes.ColorApp8,
+              //           ),
+              //         ),
+              //         SizedBox(width: widthValue * .2,),
+              //         const Text(
+              //           '',
+              //           style: TextStyle(
               //             fontWeight: FontWeight.w400,
               //             fontSize: 12,
               //             color: Themes.ColorApp1,
+              //           ),
+              //         ),
+              //         SizedBox(width: widthValue * .2,),
+              //         const Text(
+              //           '',
+              //           style: TextStyle(
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: 12,
+              //             color: Themes.ColorApp8,
               //           ),
               //         ),
               //       ],

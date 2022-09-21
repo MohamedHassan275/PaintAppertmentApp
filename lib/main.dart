@@ -6,6 +6,7 @@ import 'package:pain_appertment/business_logic/technical_controller/current_tech
 import 'package:pain_appertment/business_logic/technical_controller/orders_technical_cubit/orders_technical_cubit.dart';
 import 'package:pain_appertment/business_logic/technical_controller/previous_technical_orders_cubit/previous_technical_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/add_order_cubit/add_order_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/add_rate_cubit/add_rate_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_main_cubit/home_main_cubit.dart';
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
+      BlocProvider(
+        create: (context) => AddRateCubit(),
+      ),
       BlocProvider(
         create: (context) => AddPriceOrderCubit(),
       ),

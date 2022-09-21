@@ -34,6 +34,7 @@ class MyTranslation extends Translations{
       "resend_code" : "اعاده ارسال الكود ؟",
       "account_information" : "معلومات الحساب",
       "first_name" : "الاسم الاول",
+      "technical_name" : "اسم العامل",
       "last_name" : "اسم العائله",
       "email_address" : "البريد الالكتروني",
       "agree_to_terms" : "الموافقه علي الشروط والاحكام",
