@@ -108,7 +108,7 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
-                                    DetailsOrder(widthValue, 'name'.tr, '${widget.newOrder.technicalName}',''),
+                                    DetailsOrder(widthValue, 'technical_name'.tr, '${widget.newOrder.technicalName}',''),
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),

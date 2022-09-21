@@ -267,7 +267,7 @@ class CompanyDetails extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
-                  color: Themes.ColorApp1,
+                  color: Themes.ColorApp8,
                 ),
               ),
             ],
@@ -294,7 +294,7 @@ class CompanyDetails extends StatelessWidget {
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
-                              color: Themes.ColorApp2,
+                              color: Themes.ColorApp8,
                             ),
                           ),
                           SizedBox(
@@ -322,7 +322,7 @@ class CompanyDetails extends StatelessWidget {
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
-                              color: Themes.ColorApp2,
+                              color: Themes.ColorApp8,
                             ),
                           ),
                           SizedBox(
@@ -331,6 +331,17 @@ class CompanyDetails extends StatelessWidget {
                           Text(
                             '${myCurrentOrderModel!.flatArea}',
                             style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: Themes.ColorApp1,
+                            ),
+                          ),
+                          SizedBox(
+                            width: widthValue * .2,
+                          ),
+                         const Text(
+                            'متر',
+                            style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                               color: Themes.ColorApp1,
@@ -345,7 +356,7 @@ class CompanyDetails extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Themes.ColorApp2,
+                      color: Themes.ColorApp8,
                     ),
                   ),
                 ],
