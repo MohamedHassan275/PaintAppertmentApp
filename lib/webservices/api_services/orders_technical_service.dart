@@ -15,6 +15,7 @@ class OrdersTechnicalService{
     try {
       Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.newTechnicalOrders,token: AppConstants.tokenSession,lang: 'ar');
       if(response.statusCode == 200){
+        print('response is ');
         print(response.data);
         return OrderModel.fromJson(response.data);
       }else if(response.statusCode == 404){

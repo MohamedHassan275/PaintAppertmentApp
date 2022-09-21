@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/technical_controller/orders_technical_cubit/orders_technical_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/utils/componant/LoadingWidget.dart';
 
@@ -35,6 +36,7 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
         onRefresh: () async{
           print('refresh');
           BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
+          BlocProvider.of<ProfileCubit>(context).showUserDetails();
         },
         child: SafeArea(
             child: SingleChildScrollView(
@@ -306,6 +308,15 @@ class CompanyDetails extends StatelessWidget {
                       color: Themes.ColorApp1,
                     ),
                   ),
+                  SizedBox(width: widthValue * .2,),
+                  const Text(
+                    'متر',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp1,
+                    ),
+                  ),
                 ],
               ),
 
@@ -314,8 +325,7 @@ class CompanyDetails extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -329,9 +339,9 @@ class CompanyDetails extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: widthValue * .5,),
-                  const Text(
-                    'محمد احمد',
-                    style: TextStyle(
+                   Text(
+                    ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                    style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
                       color: Themes.ColorApp1,
@@ -339,12 +349,12 @@ class CompanyDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: heightValue * .7,),
+              SizedBox(height: heightValue * .2,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'mobile_number'.tr,
+                    'Your_location'.tr,
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -352,9 +362,9 @@ class CompanyDetails extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: widthValue * .5,),
-                  const Text(
-                    '0115604362',
-                    style: TextStyle(
+                    Text(
+                    '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                    style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
                       color: Themes.ColorApp1,

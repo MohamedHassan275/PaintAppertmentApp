@@ -17,6 +17,7 @@ class OrdersTechnicalCubit extends Cubit<OrdersTechnicalState> {
 
   getNewTechnicalOrderUser(){
     emit(OrdersLoadingState());
+    print('response is ');
     OrdersTechnicalService.getNewTechnicalSOrderUser().then((value){
       if(value?.success == true){
         emit(OrdersSuccessfullyState(value?.data));

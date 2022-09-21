@@ -29,21 +29,21 @@ class OrderModel {
 
 class OrderResponseModel {
   int? id;
-  dynamic service;
-  dynamic technicalName;
+  String? service;
+  String? technicalName;
   String? orderNumber;
   String? flatArea;
   String? rooms;
   String? bathrooms;
+  String? description;
   String? firstname;
   String? lastname;
   String? phone;
   String? governorate;
   String? city;
   dynamic offerCost;
-  dynamic status;
-  dynamic offer;
-  String? description;
+  int? status;
+  int? offer;
 
   OrderResponseModel(
       {this.id,
@@ -53,15 +53,15 @@ class OrderResponseModel {
         this.flatArea,
         this.rooms,
         this.bathrooms,
+        this.description,
         this.firstname,
         this.lastname,
         this.phone,
         this.governorate,
         this.city,
-        this.description,
-        this.offer,
         this.offerCost,
-        this.status});
+        this.status,
+        this.offer});
 
   OrderResponseModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -71,15 +71,15 @@ class OrderResponseModel {
     flatArea = json['flat_area'];
     rooms = json['rooms'];
     bathrooms = json['bathrooms'];
+    description = json['description'];
     firstname = json['firstname'];
     lastname = json['lastname'];
     phone = json['phone'];
     governorate = json['governorate'];
     city = json['city'];
-    description = json['description'];
-    offer = json['offer'];
     offerCost = json['offer_cost'];
     status = json['status'];
+    offer = json['offer'];
   }
 
   Map<String, dynamic> toJson() {
@@ -90,16 +90,16 @@ class OrderResponseModel {
     data['order_number'] = this.orderNumber;
     data['flat_area'] = this.flatArea;
     data['rooms'] = this.rooms;
-    data['offer'] = this.offer;
     data['bathrooms'] = this.bathrooms;
+    data['description'] = this.description;
     data['firstname'] = this.firstname;
     data['lastname'] = this.lastname;
     data['phone'] = this.phone;
     data['governorate'] = this.governorate;
     data['city'] = this.city;
     data['offer_cost'] = this.offerCost;
-    data['description'] = this.description;
     data['status'] = this.status;
+    data['offer'] = this.offer;
     return data;
   }
 }
