@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -21,7 +24,9 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
+  late StreamSubscription onTokenRefreshListen;
+  String? fcmToken;
   bool showProgressbar = true;
   bool isPassword = true;
   TextEditingController mobilePhoneController = new TextEditingController();
@@ -102,10 +107,37 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hight: 55,
                                 onTap: () {
                                   if (form.currentState!.validate()) {
-                                    authCubit.setLoginUser(
-                                        mobilePhoneController.text,
-                                        passwordController.text,
-                                        '');
+                                    FirebaseMessaging.instance.getToken().then((value) {
+                                      if (value != null) {
+                                        if (fcmToken == null) {
+                                          //   HalalLocationCubit.get(context).updateFCMToken(value);
+                                          authCubit.setLoginUser(
+                                              mobilePhoneController.text,
+                                              passwordController.text, value);
+                                          //    BlocProvider.of<AuthCubit>(context).updateFCMToken(fcmToken);
+                                              print('token device');
+                                              CustomFlutterToast(value);
+                                          print(value);
+                                        }
+                                      }
+                                    });
+
+                                    print('token is ${AppConstants.tokenSession}');
+
+                                    ///when token expires from firebase
+                                    onTokenRefreshListen =
+                                        FirebaseMessaging.instance.onTokenRefresh.listen((value) {
+                                          authCubit.setLoginUser(
+                                              mobilePhoneController.text,
+                                              passwordController.text, value);
+                                          Get.find<StorageService>().setType(value);
+                                          print('token device');
+                                          CustomFlutterToast(value);
+                                          print(value);
+                                          //  HalalLocationCubit.get(context).updateFCMToken(value);
+                                        });
+
+
                                   }
                                 }),
                           ),

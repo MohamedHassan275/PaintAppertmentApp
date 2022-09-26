@@ -13,6 +13,7 @@ abstract class StorageKeys {
   static const String token = "TOKEN";
   static const String type = "TYPE";
   static const String activeLocale = "ACTIVE_LOCAL";
+  static const String tokenDevice = "tokenDevice";
 
 }
 
@@ -39,6 +40,15 @@ class StorageService extends GetxService {
    setType(String token) {
     _prefs.setString(StorageKeys.type, token);
   }
+
+  get getTokenDevice {
+    return _prefs.getString(StorageKeys.tokenDevice) ?? "";
+  }
+
+  setTokenDevice(String tokenDevice) {
+    _prefs.setString(StorageKeys.tokenDevice, tokenDevice);
+  }
+
 
   Locale get activeLocale {
     return Locale(_prefs.getString(StorageKeys.activeLocale) ??

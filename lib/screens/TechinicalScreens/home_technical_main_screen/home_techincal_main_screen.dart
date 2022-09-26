@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import '../../../business_logic/user_controller/profile_cubit/profile_cubit.dart
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
 import '../../../utils/constant/constant.dart';
+import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/servies/storage_service.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 
@@ -18,7 +20,33 @@ class HomeTechincalMainScreen extends StatefulWidget {
       _HomeTechincalMainScreenState();
 }
 
-class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> {
+class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with WidgetsBindingObserver {
+
+  Future<void> setupInteractedMessage() async {
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.data['type'] == 'Renew') {
+        //  OrdersCubit.get(context).getAllOrders();
+        if (message.notification!.body != null) {
+          Get.offAll(const HomeTechincalMainScreen());
+        } else {
+          CustomFlutterToast('Du hast eine neue Bestellung');
+
+        }
+      }
+
+      FirebaseMessaging.onMessageOpenedApp.listen((message) {
+        if (message.data['type'] == 'Renew') {
+          //  OrdersCubit.get(context).getAllOrders();
+          if (message.notification!.body != null) {
+            Get.offAll(const HomeTechincalMainScreen());
+          } else {
+            CustomFlutterToast('Du hast eine neue Bestellung');
+          }
+        }
+      });
+    });
+
+  }
 
   @override
   void initState() {
@@ -27,6 +55,14 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> {
     AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
     print('token is ${AppConstants.tokenSession}');
     BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
+
+    FirebaseMessaging.instance.getInitialMessage();
+
+    //FCM messages
+    setupInteractedMessage();
+
+    WidgetsBinding.instance.addObserver(this);
+
   }
   @override
   Widget build(BuildContext context) {

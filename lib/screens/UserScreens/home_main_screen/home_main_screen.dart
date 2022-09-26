@@ -1,16 +1,19 @@
 
+import 'dart:async';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_main_cubit/home_main_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
+import 'package:pain_appertment/utils/constant/custom_toast.dart';
 
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
 import '../../../utils/constant/constant.dart';
 import '../../../utils/servies/storage_service.dart';
-import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 
 class HomeMainScreen extends StatefulWidget {
   const HomeMainScreen({Key? key}) : super(key: key);
@@ -19,7 +22,34 @@ class HomeMainScreen extends StatefulWidget {
   _HomeMainScreenState createState() => _HomeMainScreenState();
 }
 
-class _HomeMainScreenState extends State<HomeMainScreen> {
+class _HomeMainScreenState extends State<HomeMainScreen> with WidgetsBindingObserver{
+
+
+  Future<void> setupInteractedMessage() async {
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.data['type'] == 'Renew') {
+        //  OrdersCubit.get(context).getAllOrders();
+        if (message.notification!.body != null) {
+         Get.offAll(const HomeMainScreen());
+        } else {
+          CustomFlutterToast('Du hast eine neue Bestellung');
+
+        }
+      }
+
+      FirebaseMessaging.onMessageOpenedApp.listen((message) {
+        if (message.data['type'] == 'Renew') {
+          //  OrdersCubit.get(context).getAllOrders();
+          if (message.notification!.body != null) {
+            Get.offAll(const HomeMainScreen());
+          } else {
+            CustomFlutterToast('Du hast eine neue Bestellung');
+          }
+        }
+      });
+    });
+
+  }
 
   @override
   void initState() {
@@ -30,7 +60,18 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
       loadData();
       AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
       print('token is ${AppConstants.tokenSession}');
+      print('tokenDevice is ${Get.find<StorageService>().getTokenDevice}');
     });
+
+
+
+    FirebaseMessaging.instance.getInitialMessage();
+
+    //FCM messages
+    setupInteractedMessage();
+
+    WidgetsBinding.instance.addObserver(this);
+
   }
 
 

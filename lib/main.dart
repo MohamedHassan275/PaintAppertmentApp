@@ -1,3 +1,7 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -27,6 +31,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'business_logic/technical_controller/home_main_technical_cubit/home_main_technical_cubit.dart';
 import 'business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
@@ -34,6 +40,21 @@ void main() async {
   APIService.init();
   LoggerHelper.init();
   await SharedPreferences.getInstance();
+  await Firebase.initializeApp(
+    // options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: true,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
 
   print('typeSession ${Get.find<StorageService>().getType}');
   print('typeSession ${Get.find<StorageService>().getToken}');
@@ -42,12 +63,12 @@ void main() async {
 
    AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+   MyApp({Key? key}) : super(key: key);
+  final FirebaseAnalytics analytics = FirebaseAnalytics();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -102,6 +123,9 @@ class MyApp extends StatelessWidget {
       ),
     ],
     child: GetMaterialApp(
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
       debugShowCheckedModeBanner: false,
       translations: MyTranslation(),
       locale: const Locale('ar'),

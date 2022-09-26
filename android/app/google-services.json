@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "531491873296",
+    "project_id": "paintappartmentapp",
+    "storage_bucket": "paintappartmentapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531491873296:android:374464b5aea84755bc2095",
+        "android_client_info": {
+          "package_name": "com.appertment.pain_appertment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531491873296-lsg20kkdbmt4ep3rsqt6revtapg90jlu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appertment.pain_appertment",
+            "certificate_hash": "a03905749843118f6c547ded9777c481f8e60479"
+          }
+        },
+        {
+          "client_id": "531491873296-9fmsbkdo77eq7e4v9jh5nkruq8ati7if.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlqywLiiOUx-b-IvwEMRf685KOnAf2o5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531491873296-9fmsbkdo77eq7e4v9jh5nkruq8ati7if.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
