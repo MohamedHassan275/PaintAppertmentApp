@@ -6,27 +6,35 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_current_order_screen/details_current_order_screen.dart';
+import 'package:pain_appertment/utils/constant/custom_toast.dart';
+import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utils/constant/Themes.dart';
+import '../../../business_logic/notification_cubit/notification_cubit.dart';
+import '../../../business_logic/user_controller/add_rate_cubit/add_rate_cubit.dart';
+import '../../../utils/componant/CustomButtonWidget.dart';
+import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
+import '../../../utils/widget/custom_phone_and_password_widget.dart';
+import '../home_main_screen/home_main_screen.dart';
 
-class MyCurrentOrderScreen extends StatefulWidget {
-  const MyCurrentOrderScreen({Key? key}) : super(key: key);
+class MyNotificationScreen extends StatefulWidget {
+  const MyNotificationScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyCurrentOrderScreen> createState() => _MyCurrentOrderScreenState();
+  State<MyNotificationScreen> createState() => _MyNotificationScreenState();
 }
 
-class _MyCurrentOrderScreenState extends State<MyCurrentOrderScreen> {
+class _MyNotificationScreenState extends State<MyNotificationScreen> {
 
   void loadData(){
-    BlocProvider.of<CurrentOrdersCubit>(context).getCurrentOrderUser();
+    BlocProvider.of<NotificationCubit>(context).getNotification();
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadData();
+   // loadData();
   }
   @override
   Widget build(BuildContext context) {
@@ -42,37 +50,43 @@ class _MyCurrentOrderScreenState extends State<MyCurrentOrderScreen> {
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: BlocBuilder<CurrentOrdersCubit,CurrentOrdersState>(
-                    builder: (context, state) {
-                      if(state is CurrentOrdersSuccessfullyState){
-                        return state.orderResponseModel!.isNotEmpty ?
-                        ListView.builder(
-                          itemCount: state.orderResponseModel!.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                              child: MySendOrderListItem(currentOrder: state.orderResponseModel![index], heightValue: heightValue,widthValue: widthValue,),
+                  child: Column(
+                    children: [
+                      Appbarwidget(width: widthValue, height: heightValue),
+                      SizedBox(height: heightValue * .5,),
+                      BlocBuilder<NotificationCubit,NotificationState>(
+                        builder: (context, state) {
+                          if(state is NotificationSuccessfullyState){
+                            return state.orderResponseModel!.isNotEmpty ?
+                            ListView.builder(
+                              itemCount: state.orderResponseModel!.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                  child: MySendOrderListItem(currentOrder: state.orderResponseModel![index], heightValue: heightValue,widthValue: widthValue,),
+                                );
+                              },) : NoItemOFList();
+                          }else if (state is NotificationErrorState){
+                            return Container(
+                              width: Get.width,
+                              height: Get.height,
+                              child:  const Center(
+                                child:Text(''),
+                              ),
                             );
-                          },) : NoItemOFList();
-                      }else if (state is CurrentOrdersErrorState){
-                        return Container(
-                          width: Get.width,
-                          height: Get.height,
-                          child:  const Center(
-                            child:Text(''),
-                          ),
-                        );
-                      }
-                      return  Container(
-                        width: Get.width,
-                        height: Get.height,
-                        child: const Center(
-                          child: CircularProgressIndicator(color: Themes.ColorApp1,),
-                        ),
-                      );
-                    },
+                          }
+                          return  Container(
+                            width: Get.width,
+                            height: Get.height,
+                            child: const Center(
+                              child: CircularProgressIndicator(color: Themes.ColorApp1,),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ),)
@@ -138,7 +152,20 @@ class MySendOrderListItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: GestureDetector(
                   onTap: (){
-                    Get.to(DetailsMyCurrentOrder(newOrder: currentOrder));
+                    if(currentOrder.status == 0){
+                      Get.bottomSheet(
+                        ChangeLanguageBottomSheetItem(heightValue: heightValue,orderResponseModel: currentOrder),
+                        backgroundColor: Themes.whiteColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: const Radius.circular(
+                                    25))),
+                        elevation: 2.0,
+                      );
+                    }else {
+                      CustomFlutterToast('لقد قمت بتقييم هذا العامل');
+                    }
                   },
                   child: Container(
                     width: Get.width,
@@ -149,7 +176,7 @@ class MySendOrderListItem extends StatelessWidget {
                     ),
                     child: Center(
                       child:  Text(
-                        'order_details'.tr,
+                       currentOrder.status == 0 ? 'تقييم العامل' : 'قمت بتقيم هذا العامل',
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
@@ -165,6 +192,158 @@ class MySendOrderListItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ChangeLanguageBottomSheetItem extends StatefulWidget {
+  double? heightValue;
+  OrderResponseModel orderResponseModel;
+  ChangeLanguageBottomSheetItem({Key? key, required this.heightValue,required this.orderResponseModel}) : super(key: key);
+
+  @override
+  State<ChangeLanguageBottomSheetItem> createState() => _ChangeLanguageBottomSheetItemState();
+}
+
+class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomSheetItem> {
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  var rating = 0.0;
+  TextEditingController rateTechnicalTextController = TextEditingController();
+  TextEditingController rateTechnicalNumberController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AddRateCubit,AddRateState>(
+      listener: (context, state) {
+        _handleAddRateToTechnical(context, state);
+      },
+      builder: (context, state) {
+        AddRateCubit addRateCubit = AddRateCubit.get(context);
+        return SizedBox(
+          width: Get.width,
+          height: 325,
+          child: Padding(
+            padding: const EdgeInsets.all(7.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment:
+                CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: widget.heightValue! * 2.5,
+                  ),
+                  Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          SmoothStarRating(
+                            rating: rating,
+                            size: 30,
+                            starCount: 5,
+                            borderColor: Themes.ColorApp13,
+                            color: Themes.ColorApp13,
+                            onRatingChanged: (value) {
+                              setState(() {
+                                rating = value;
+                                print('rating');
+                                print(rating);
+                              });
+                            },
+                          ),
+                          // CustomTextFieldWidget(title: 'rate_technical', maxLength: 2,keyboardType: TextInputType.number,
+                          //     textEditingController: rateTechnicalNumberController),
+                          SizedBox(height: widget.heightValue! * 1.5,),
+                          CustomTextFieldWidget(title: 'rate_technical',keyboardType: TextInputType.text,
+                              textEditingController: rateTechnicalTextController),
+                          SizedBox(height: widget.heightValue! * .5,),
+                          state is AddRateLoadingState
+                              ? CirclerProgressIndicatorWidget(isLoading: true)
+                              : Container(),
+                          SizedBox(height: widget.heightValue! * .7,),
+                          CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
+                            if(formKey.currentState!.validate()){
+                              // CustomFlutterToast(widget.newOrder.id.toString());
+                              // CustomFlutterToast(rateTechnicalTextController.text);
+                              // print('rating');
+                              // print(rating);
+                              addRateCubit.addRateToTechnicalFromUser(widget.orderResponseModel.id.toString(), rating,
+                                  rateTechnicalTextController.text);
+                            }
+                          }),
+                          SizedBox(height: widget.heightValue! * 2,)
+                        ],
+                      )),
+                  SizedBox(
+                    height: widget.heightValue! * 1.5,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+  }
+}
+
+void _handleAddRateToTechnical(BuildContext context, AddRateState state) {
+  if(state is AddRateErrorState){
+    CustomFlutterToast(state.statusResponse);
+  }else if(state is AddRateSuccessState){
+    CustomFlutterToast(state.statusResponse);
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeMainScreen()));
+  }
+}
+
+class Appbarwidget extends StatelessWidget {
+  Appbarwidget({Key? key, required this.width, required this.height}) : super(key: key);
+  double height,width;
+  @override
+  Widget build(BuildContext context) {
+    return  Stack(
+      children: [
+        Container(
+          height: 75,
+          width: Get.width,
+          decoration: const BoxDecoration(
+              color: Themes.ColorApp14,
+              borderRadius: BorderRadius.only(
+                  topRight:  Radius.circular(25),
+                  topLeft: Radius.circular(25))),
+          child:  const Center(
+            child: Text(
+              'الاشعارات',
+              style: TextStyle(
+                color: Themes.ColorApp15,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: height * 1.2,
+          left: width * 1.5,
+          child: GestureDetector(
+            onTap: () => Get.off(const HomeMainScreen()),
+            child: const CircleAvatar(
+              backgroundColor: Themes.ColorApp5,
+              child:  Icon(
+                // Get.find<StorageService>()
+                //     .activeLocale
+                //     .languageCode ==
+                //     "en"
+                //     ? Icons.keyboard_arrow_right:
+                Icons.keyboard_arrow_left,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

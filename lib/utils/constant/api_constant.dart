@@ -25,6 +25,7 @@ class ApiConstants {
   static const String previousOrders = "/previousorders";
   static const String acceptOrder = "/order/accept";
   static const String receivedOrder = "/order/received";
+  static const String notifications = "/notifications";
 
 
   /// technical service api

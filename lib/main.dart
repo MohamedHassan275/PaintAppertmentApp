@@ -28,6 +28,7 @@ import 'package:pain_appertment/utils/servies/storage_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'business_logic/notification_cubit/notification_cubit.dart';
 import 'business_logic/technical_controller/home_main_technical_cubit/home_main_technical_cubit.dart';
 import 'business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 
@@ -73,6 +74,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
+      BlocProvider(
+        create: (context) => NotificationCubit(),
+      ),
       BlocProvider(
         create: (context) => AddRateCubit(),
       ),

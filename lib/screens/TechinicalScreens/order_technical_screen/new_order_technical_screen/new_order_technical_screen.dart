@@ -235,7 +235,7 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Image(
-                        image: AssetImage(Assets.imagesFactoryNamIcon),
+                        image: const AssetImage(Assets.imagesFactoryNamIcon),
                         fit: BoxFit.contain,
                         width: 35,
                         height: 35,
@@ -254,7 +254,7 @@ class CompanyDetails extends StatelessWidget {
                 ],
               ),
               Text(
-                '${myCurrentOrderModel!.orderNumber}#',
+                '#${myCurrentOrderModel!.orderNumber}',
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 13,
@@ -268,7 +268,7 @@ class CompanyDetails extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -327,65 +327,71 @@ class CompanyDetails extends StatelessWidget {
             ],
           ),
         ),
+        SizedBox(height: heightValue * .3,),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'name_client'.tr,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp2,
-                    ),
-                  ),
-                  SizedBox(width: widthValue * .5,),
-                   Text(
-                    ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp1,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: heightValue * .2,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Your_location'.tr,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp2,
-                    ),
-                  ),
-                  SizedBox(width: widthValue * .5,),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     Text(
-                    '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp1,
+                      'name_client'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp2,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          )
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        ),
+        SizedBox(height: heightValue * .3,),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Your_location'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp2,
+                      ),
+                    ),
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
         ),
       ],
     );
   }
 }
-
-class $ {
-}
-
 
 

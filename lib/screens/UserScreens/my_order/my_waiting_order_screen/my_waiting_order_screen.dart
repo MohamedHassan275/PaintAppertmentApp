@@ -232,138 +232,149 @@ class CompanyDetails extends StatelessWidget {
   OrderResponseModel? myCurrentOrderModel;
   var heightValue = Get.height * 0.024;
   var widthValue = Get.width * 0.024;
-
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Themes.ColorApp14,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: const Center(
-                  child: Image(
-                    image: AssetImage(Assets.imagesFactoryNamIcon),
-                    fit: BoxFit.contain,
-                    width: 35,
-                    height: 35,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: widthValue * 1,
-              ),
-              const Text(
-                'شطب شقتك',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: Themes.ColorApp8,
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: heightValue * .5,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'request_type'.tr,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp8,
-                            ),
-                          ),
-                          SizedBox(
-                            width: widthValue * .2,
-                          ),
-                          Text(
-                            '${myCurrentOrderModel!.service ?? '----'}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp1,
-                            ),
-                          ),
-                        ],
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Themes.ColorApp14,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: const Center(
+                      child: Image(
+                        image: const AssetImage(Assets.imagesFactoryNamIcon),
+                        fit: BoxFit.contain,
+                        width: 35,
+                        height: 35,
                       ),
                     ),
                   ),
-                  Container(
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'quantity'.tr,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp8,
-                            ),
-                          ),
-                          SizedBox(
-                            width: widthValue * .2,
-                          ),
-                          Text(
-                            '${myCurrentOrderModel!.flatArea}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp1,
-                            ),
-                          ),
-                          SizedBox(
-                            width: widthValue * .2,
-                          ),
-                         const Text(
-                            'متر',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '#${myCurrentOrderModel!.orderNumber}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp8,
+                  SizedBox(width: widthValue *1,),
+                  const Text(
+                    'شطب شقتك',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Themes.ColorApp1,
                     ),
                   ),
                 ],
-              )
+              ),
+              Text(
+                '#${myCurrentOrderModel!.orderNumber}',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 13,
+                  color: Themes.ColorApp2,
+                ),
+              ),
             ],
           ),
-        )
+        ),
+        SizedBox(height: heightValue* .5,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'request_type'.tr,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp2,
+                    ),
+                  ),
+                  SizedBox(width: widthValue * .2,),
+                  Text(
+                    '${myCurrentOrderModel!.service ?? '----' }',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp1,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'quantity'.tr,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp2,
+                    ),
+                  ),
+                  SizedBox(width: widthValue * .2,),
+                  Text(
+                    '${myCurrentOrderModel!.flatArea}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp1,
+                    ),
+                  ),
+                  SizedBox(width: widthValue * .2,),
+                  const Text(
+                    'متر',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp1,
+                    ),
+                  ),
+                ],
+              ),
+
+            ],
+          ),
+        ),
+        SizedBox(height: heightValue * .3,),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'name_client'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp2,
+                      ),
+                    ),
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        ),
       ],
     );
   }

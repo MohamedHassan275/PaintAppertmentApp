@@ -135,7 +135,7 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                             SizedBox(width: widthValue * .2,),
                                             Expanded(
                                               child: Text(
-                                                '${widget.newOrder.description}',
+                                                '${widget.newOrder.description ?? ''}',
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: const TextStyle(
@@ -152,48 +152,50 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
-                                    SizedBox(height: heightValue * .7,),
-                                    Form(
-                                        key: formKey,
-                                        child: Column(
-                                          children: [
-                                            SmoothStarRating(
-                                              rating: rating,
-                                              size: 30,
-                                              starCount: 5,
-                                              borderColor: Themes.ColorApp13,
-                                              color: Themes.ColorApp13,
-                                              onRatingChanged: (value) {
-                                                setState(() {
-                                                  rating = value;
-                                                  print('rating');
-                                                  print(rating);
-                                                });
-                                              },
-                                            ),
-                                            // CustomTextFieldWidget(title: 'rate_technical', maxLength: 2,keyboardType: TextInputType.number,
-                                            //     textEditingController: rateTechnicalNumberController),
-                                            SizedBox(height: heightValue * 1.5,),
-                                            CustomTextFieldWidget(title: 'rate_technical',keyboardType: TextInputType.text,
-                                                textEditingController: rateTechnicalTextController),
-                                            SizedBox(height: heightValue * .5,),
-                                            state is AddRateLoadingState
-                                                ? CirclerProgressIndicatorWidget(isLoading: true)
-                                                : Container(),
-                                            SizedBox(height: heightValue * .7,),
-                                            CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
-                                              if(formKey.currentState!.validate()){
-                                                // CustomFlutterToast(widget.newOrder.id.toString());
-                                                // CustomFlutterToast(rateTechnicalTextController.text);
-                                                // print('rating');
-                                                // print(rating);
-                                                addRateCubit.addRateToTechnicalFromUser(widget.newOrder.id.toString(), rating,
-                                                    rateTechnicalTextController.text);
-                                              }
-                                            }),
-                                            SizedBox(height: heightValue * 2,)
-                                          ],
-                                        )),
+
+                                    /// Rate technical from user
+                                    // SizedBox(height: heightValue * .7,),
+                                    // Form(
+                                    //     key: formKey,
+                                    //     child: Column(
+                                    //       children: [
+                                    //         SmoothStarRating(
+                                    //           rating: rating,
+                                    //           size: 30,
+                                    //           starCount: 5,
+                                    //           borderColor: Themes.ColorApp13,
+                                    //           color: Themes.ColorApp13,
+                                    //           onRatingChanged: (value) {
+                                    //             setState(() {
+                                    //               rating = value;
+                                    //               print('rating');
+                                    //               print(rating);
+                                    //             });
+                                    //           },
+                                    //         ),
+                                    //         // CustomTextFieldWidget(title: 'rate_technical', maxLength: 2,keyboardType: TextInputType.number,
+                                    //         //     textEditingController: rateTechnicalNumberController),
+                                    //         SizedBox(height: heightValue * 1.5,),
+                                    //         CustomTextFieldWidget(title: 'rate_technical',keyboardType: TextInputType.text,
+                                    //             textEditingController: rateTechnicalTextController),
+                                    //         SizedBox(height: heightValue * .5,),
+                                    //         state is AddRateLoadingState
+                                    //             ? CirclerProgressIndicatorWidget(isLoading: true)
+                                    //             : Container(),
+                                    //         SizedBox(height: heightValue * .7,),
+                                    //         CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
+                                    //           if(formKey.currentState!.validate()){
+                                    //             // CustomFlutterToast(widget.newOrder.id.toString());
+                                    //             // CustomFlutterToast(rateTechnicalTextController.text);
+                                    //             // print('rating');
+                                    //             // print(rating);
+                                    //             addRateCubit.addRateToTechnicalFromUser(widget.newOrder.id.toString(), rating,
+                                    //                 rateTechnicalTextController.text);
+                                    //           }
+                                    //         }),
+                                    //         SizedBox(height: heightValue * 2,)
+                                    //       ],
+                                    //     )),
                                   ],
                                 )
                             ),

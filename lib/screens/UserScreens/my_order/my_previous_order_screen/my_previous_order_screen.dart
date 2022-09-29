@@ -105,51 +105,25 @@ class MyPreviousOrderItem extends StatelessWidget {
                 child: Divider(height: 10, color: Themes.ColorApp2,),
               ),
               SizedBox(height: heightValue * .5,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        //  Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
-                          const Icon(null,size: 15,color: Themes.ColorApp1,),
-                          SizedBox(width: widthValue * 1,),
-                          const Text(
-                            '',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp1,
-                            ),
-                          ),
-                        ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
+                    SizedBox(width: widthValue * 1,),
+                    Text(
+                      'received'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
                       ),
                     ),
-                  ),
-                  SizedBox(width: widthValue * 3.5,),
-                  Container(
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
-                          SizedBox(width: widthValue * 1,),
-                          Text(
-                            'received'.tr,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: Themes.ColorApp1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Icon(Icons.subdirectory_arrow_left,color: Themes.ColorApp1,size: 25,)
-                ],
+                    SizedBox(width: widthValue * 1,),
+                    const Icon(Icons.subdirectory_arrow_left,color: Themes.ColorApp1,size: 25,)
+                  ],
+                ),
               ),
               SizedBox(height: heightValue * 1,)
             ],
@@ -264,65 +238,127 @@ class CompanyDetails extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
-                      SizedBox(width: widthValue * .5,),
-                      const Text(
-                        '${350}' ,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: Themes.ColorApp1,
-                        ),
-                      ),
-                      SizedBox(width: widthValue * .5,),
-                      Text(
-                        'sar'.tr,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: Themes.ColorApp1,
-                        ),
-                      ),
-                    ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'request_type'.tr,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp2,
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'request_type'.tr,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: Themes.ColorApp2,
-                        ),
-                      ),
-                      SizedBox(width: widthValue * .2,),
-                      Text(
-                        '${myCurrentOrderModel!.service ?? ''}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: Themes.ColorApp1,
-                        ),
-                      ),
-                    ],
+                  SizedBox(width: widthValue * .2,),
+                  Text(
+                    '${myCurrentOrderModel!.service ?? '----' }',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp1,
+                    ),
                   ),
-                ),
+                ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'quantity'.tr,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp2,
+                    ),
+                  ),
+                  SizedBox(width: widthValue * .2,),
+                  Text(
+                    '${myCurrentOrderModel!.flatArea}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp1,
+                    ),
+                  ),
+                  SizedBox(width: widthValue * .2,),
+                  const Text(
+                    'متر',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Themes.ColorApp1,
+                    ),
+                  ),
+                ],
+              ),
+
             ],
           ),
-        )
+        ),
+        SizedBox(height: heightValue * .3,),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'name_client'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp2,
+                      ),
+                    ),
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        ),
+        SizedBox(height: heightValue * .3,),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Your_location'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp2,
+                      ),
+                    ),
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        ),
       ],
     );
   }

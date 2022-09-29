@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/screens/TechinicalScreens/my_notification_technical_screen/my_notification_technical_screen.dart';
 
 import '../../../business_logic/technical_controller/home_main_technical_cubit/home_main_technical_cubit.dart';
 import '../../../business_logic/user_controller/profile_cubit/profile_cubit.dart';
@@ -165,7 +166,7 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
             actions: [
               InkWell(
                   onTap: (){
-                    // MyNavigator.NavigatorToPage(context, SearchSessionUserPage());
+                   Get.to(const MyNotificationTechnicalScreen());
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(7.0),

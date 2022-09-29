@@ -166,46 +166,46 @@ class _DetailsCurrentOrderTechnicalScreenState extends State<DetailsCurrentOrder
                                 //     ),
                                 //   ],
                                 // ),
-                                CirclerProgressIndicatorWidget(isLoading:  false),
-                                SizedBox(height: heightValue * .7,),
-                                CustomButtonImage(title: 'received_order'.tr, hight: 50, onTap: (){
-                                  // CustomFlutterToast(currentOrder.id.toString());
-                                  // CustomFlutterToast(currentOrder.executionDate);
-                                  // CustomFlutterToast(myCurrentOrderController.formattedDateCurrent);
-                                  // if ((currentOrder.executionDate!.compareTo(myCurrentOrderController.formattedDateCurrent!) <= 0 &&
-                                  //     currentOrder.executionDate!.compareTo(myCurrentOrderController.formattedDateCurrent!) >= 0)){
-                                  //   Get.find<MyCurrentOrderController>().ReceivedOrder('${currentOrder.id}');
-                                  // }else {
-                                  //   CustomFlutterToast('operation_cannot_be_completed'.tr);
-                                  // }
-                                  Get.to(const HomeTechincalMainScreen());
-                                }),
-                                SizedBox(height: heightValue * 1,),
-                                GestureDetector(
-                                  onTap: (){
-                                    //   CustomFlutterToast(currentOrder.id.toString());
-                                    // CustomFlutterToast(currentOrder.executionDate);
-                                    // CustomFlutterToast(myCurrentOrderController.formattedDateCurrent);
-                                    //  controller.CancelOrder(currentOrder.id.toString());
-                                    //   Get.find<MyCurrentOrderController>().CancelOrder('${currentOrder.id}');
-                                    Get.to(const HomeTechincalMainScreen());
-                                  },
-                                  child: SizedBox(
-                                    width: Get.width,
-                                    height: 50,
-                                    child: Center(
-                                      child:  Text(
-                                        'cancel_order'.tr,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16,
-                                          color: Themes.ColorApp9,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: heightValue * 2,)
+                                // CirclerProgressIndicatorWidget(isLoading:  false),
+                                // SizedBox(height: heightValue * .7,),
+                                // CustomButtonImage(title: 'received_order'.tr, hight: 50, onTap: (){
+                                //   // CustomFlutterToast(currentOrder.id.toString());
+                                //   // CustomFlutterToast(currentOrder.executionDate);
+                                //   // CustomFlutterToast(myCurrentOrderController.formattedDateCurrent);
+                                //   // if ((currentOrder.executionDate!.compareTo(myCurrentOrderController.formattedDateCurrent!) <= 0 &&
+                                //   //     currentOrder.executionDate!.compareTo(myCurrentOrderController.formattedDateCurrent!) >= 0)){
+                                //   //   Get.find<MyCurrentOrderController>().ReceivedOrder('${currentOrder.id}');
+                                //   // }else {
+                                //   //   CustomFlutterToast('operation_cannot_be_completed'.tr);
+                                //   // }
+                                //   Get.to(const HomeTechincalMainScreen());
+                                // }),
+                                // SizedBox(height: heightValue * 1,),
+                                // GestureDetector(
+                                //   onTap: (){
+                                //     //   CustomFlutterToast(currentOrder.id.toString());
+                                //     // CustomFlutterToast(currentOrder.executionDate);
+                                //     // CustomFlutterToast(myCurrentOrderController.formattedDateCurrent);
+                                //     //  controller.CancelOrder(currentOrder.id.toString());
+                                //     //   Get.find<MyCurrentOrderController>().CancelOrder('${currentOrder.id}');
+                                //     Get.to(const HomeTechincalMainScreen());
+                                //   },
+                                //   child: SizedBox(
+                                //     width: Get.width,
+                                //     height: 50,
+                                //     child: Center(
+                                //       child:  Text(
+                                //         'cancel_order'.tr,
+                                //         style: const TextStyle(
+                                //           fontWeight: FontWeight.w500,
+                                //           fontSize: 16,
+                                //           color: Themes.ColorApp9,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                                // SizedBox(height: heightValue * 2,)
                               ],
                             )
                         ),

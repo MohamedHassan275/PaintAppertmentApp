@@ -169,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
       Get.find<StorageService>()
           .setType('${state.loginResponseModel?.type}');
       AppConstants.tokenSession = '${state.loginResponseModel?.type}';
-       CustomFlutterToast(AppConstants.tokenSession);
+     //  CustomFlutterToast(AppConstants.tokenSession);
       // CustomFlutterToast(state.loginResponseModel?.accesstoken);
       // CustomFlutterToast(state.loginResponseModel?.type);
       _clearFormData();

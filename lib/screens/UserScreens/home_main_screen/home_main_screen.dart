@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_main_cubit/home_main_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
+import 'package:pain_appertment/screens/UserScreens/my_notification_screen/my_notification_screen.dart';
 import 'package:pain_appertment/utils/constant/custom_toast.dart';
 
 import '../../../generated/assets.dart';
@@ -176,7 +177,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> with WidgetsBindingObse
             actions: [
               InkWell(
                   onTap: (){
-                    // MyNavigator.NavigatorToPage(context, SearchSessionUserPage());
+                     Get.to(const MyNotificationScreen());
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(7.0),
