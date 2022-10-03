@@ -112,43 +112,51 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
-                                    Container(
-                                      height: 60,
-                                      decoration: BoxDecoration(
-                                          color: Themes.ColorApp14,
-                                          borderRadius: BorderRadius.circular(25)
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'details'.tr,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 17,
-                                                color: Themes.ColorApp17,
-                                              ),
-                                            ),
-                                            SizedBox(width: widthValue * .2,),
-                                            Expanded(
-                                              child: Text(
-                                                '${widget.newOrder.description ?? ''}',
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15,
-                                                  color: Themes.ColorApp1,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                    DetailsOrder(widthValue, 'request_price'.tr, '${widget.newOrder.offerCost}','sar'.tr),
+                                    SizedBox(
+                                      height: heightValue * .7,
                                     ),
+                                    DetailsOrder(widthValue, 'details'.tr, '${widget.newOrder.description}',''),
+                                    SizedBox(
+                                      height: heightValue * .7,
+                                    ),
+                                    // Container(
+                                    //   height: 60,
+                                    //   decoration: BoxDecoration(
+                                    //       color: Themes.ColorApp14,
+                                    //       borderRadius: BorderRadius.circular(25)
+                                    //   ),
+                                    //   child: Padding(
+                                    //     padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    //     child: Row(
+                                    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    //       crossAxisAlignment: CrossAxisAlignment.center,
+                                    //       children: [
+                                    //         Text(
+                                    //           'details'.tr,
+                                    //           style: const TextStyle(
+                                    //             fontWeight: FontWeight.w500,
+                                    //             fontSize: 17,
+                                    //             color: Themes.ColorApp17,
+                                    //           ),
+                                    //         ),
+                                    //         SizedBox(width: widthValue * .2,),
+                                    //         Expanded(
+                                    //           child: Text(
+                                    //             '${widget.newOrder.description ?? ''}',
+                                    //             maxLines: 2,
+                                    //             overflow: TextOverflow.ellipsis,
+                                    //             style: const TextStyle(
+                                    //               fontWeight: FontWeight.w500,
+                                    //               fontSize: 15,
+                                    //               color: Themes.ColorApp1,
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ],
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
@@ -348,6 +356,8 @@ class DetailsOrder extends StatelessWidget {
         ),
         Text(
           details,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14,

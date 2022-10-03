@@ -26,6 +26,7 @@ class Assets {
   static const String imagesLogoApp = 'assets/images/logo_app.png';
   static const String imagesMyOrderHome = 'assets/images/my_order_home.png';
   static const String imagesMyOrderHome2 = 'assets/images/my_order_home2.png';
+  static const String imagesNetworkDisConnection = 'assets/images/network_dis_connection.png';
   static const String imagesOfferPrice = 'assets/images/offer_price.png';
   static const String imagesOrderPriceImage = 'assets/images/order_price_image.png';
   static const String imagesPrivacyImage = 'assets/images/privacy_image.png';
