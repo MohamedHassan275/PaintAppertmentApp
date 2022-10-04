@@ -3,6 +3,7 @@
 
 import 'dart:ffi';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -36,12 +37,18 @@ class DetailsServiceScreen extends StatelessWidget {
                     children: [
                       Appbarwidget(width: width, height: height,name : '${state.showProductResponseDetails?.name}'),
                       SizedBox(height: height*1.5,),
-                      FadeInImage(
-                        height: 135,
-                        width: Get.width,
-                        fit: BoxFit.fill,
-                        image: NetworkImage('${state.showProductResponseDetails?.image}'),
-                        placeholder: AssetImage(Assets.imagesLogoApp),
+                      Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: width * 1),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: FadeInImage(
+                            height: 150,
+                            width: Get.width,
+                            fit: BoxFit.fill,
+                            image: NetworkImage('${state.showProductResponseDetails?.image}'),
+                            placeholder: AssetImage(Assets.imagesLogoApp),
+                          ),
+                        ),
                       ),
                       // Image.asset(Assets.imagesLogoApp,
                       // height: 135,
@@ -59,7 +66,7 @@ class DetailsServiceScreen extends StatelessWidget {
                               style: const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 15,
-                                overflow: TextOverflow.fade,
+                                overflow: TextOverflow.ellipsis,
                                 color: Themes.ColorApp15,
                               ),
                             ),
@@ -87,7 +94,24 @@ class DetailsServiceScreen extends StatelessWidget {
                                 color: Themes.ColorApp15,
                               ),
                             ),
-                            SizedBox(height: height* .7,),
+                            SizedBox(height: height* 1,),
+                            state.showProductResponseDetails!.images!.isEmpty ?
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  'لا يوجد صور في الوقت الحالي ',
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15,
+                                    overflow: TextOverflow.fade,
+                                    color: Themes.ColorApp15,
+                                  ),
+                                ),
+                              ],
+                            ) :
                             SizedBox(
                                 height: 215,
                                 child: ListView.builder(
@@ -127,7 +151,24 @@ class DetailsServiceScreen extends StatelessWidget {
                                 color: Themes.ColorApp15,
                               ),
                             ),
-                            SizedBox(height: height * .7,),
+                            SizedBox(height: height * 1,),
+                            state.showProductResponseDetails!.images!.isEmpty ?
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  'لا يوجد تقييمات في الوقت الحالي ',
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15,
+                                    overflow: TextOverflow.fade,
+                                    color: Themes.ColorApp15,
+                                  ),
+                                ),
+                              ],
+                            ) :
                             SizedBox(
                               height: 215,
                               child: ListView.builder(

@@ -33,7 +33,7 @@ class HomeCubit extends Cubit<HomeState> {
     HomeService.showProductDetails(productId).then((value){
       if(value?.success == true){
         emit(ShowDetailsSuccessState(value?.data));
-        CustomFlutterToast(value?.data?.name);
+      //  CustomFlutterToast(value?.data?.name);
       }else {
         emit(ShowDetailsErrorState(value?.message));
       }

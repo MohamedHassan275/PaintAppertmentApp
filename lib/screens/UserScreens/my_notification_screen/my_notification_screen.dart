@@ -26,9 +26,6 @@ class MyNotificationScreen extends StatefulWidget {
 
 class _MyNotificationScreenState extends State<MyNotificationScreen> {
 
-  void loadData(){
-    BlocProvider.of<NotificationCubit>(context).getNotification();
-  }
 
   @override
   void initState() {
@@ -43,7 +40,7 @@ class _MyNotificationScreenState extends State<MyNotificationScreen> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async{
-          loadData();
+          BlocProvider.of<NotificationCubit>(context).getNotification();
         },
         child: SafeArea(
             child: SingleChildScrollView(
@@ -264,11 +261,11 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
                           SizedBox(height: widget.heightValue! * .7,),
                           CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
                             if(formKey.currentState!.validate()){
-                              // CustomFlutterToast(widget.newOrder.id.toString());
-                              // CustomFlutterToast(rateTechnicalTextController.text);
-                              // print('rating');
-                              // print(rating);
-                              addRateCubit.addRateToTechnicalFromUser(widget.orderResponseModel.id.toString(), rating,
+                              CustomFlutterToast(widget.orderResponseModel.orderId.toString());
+                              CustomFlutterToast(rateTechnicalTextController.text);
+                              print('rating');
+                              print(rating);
+                              addRateCubit.addRateToTechnicalFromUser(widget.orderResponseModel.orderId.toString(), rating,
                                   rateTechnicalTextController.text);
                             }
                           }),

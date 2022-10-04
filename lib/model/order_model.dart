@@ -29,6 +29,7 @@ class OrderModel {
 
 class OrderResponseModel {
   int? id;
+  int? orderId;
   String? service;
   String? technicalName;
   String? orderNumber;
@@ -47,6 +48,7 @@ class OrderResponseModel {
 
   OrderResponseModel(
       {this.id,
+        this.orderId,
         this.service,
         this.technicalName,
         this.orderNumber,
@@ -65,6 +67,7 @@ class OrderResponseModel {
 
   OrderResponseModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    orderId = json['order_id'];
     service = json['service'];
     technicalName = json['technical_name'];
     orderNumber = json['order_number'];
@@ -85,6 +88,7 @@ class OrderResponseModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['order_id'] = this.orderId;
     data['service'] = this.service;
     data['technical_name'] = this.technicalName;
     data['order_number'] = this.orderNumber;

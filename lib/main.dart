@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/app_layout_cubit/app_layout_cubit.dart';
 import 'package:pain_appertment/business_logic/technical_controller/add_price_order/add_price_order_cubit.dart';
 import 'package:pain_appertment/business_logic/technical_controller/current_technical_orders_cubit/current_technical_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/technical_controller/orders_technical_cubit/orders_technical_cubit.dart';
@@ -121,6 +122,9 @@ class MyApp extends StatelessWidget {
       ),
       BlocProvider(
         create: (context) => AuthCubit(),
+      ),
+      BlocProvider(
+        create: (context) => AppLayoutCubit(),
       ),
       BlocProvider(
         create: (context) => HomeCubit(),

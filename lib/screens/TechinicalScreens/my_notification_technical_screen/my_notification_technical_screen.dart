@@ -24,9 +24,6 @@ class MyNotificationTechnicalScreen extends StatefulWidget {
 
 class _MyNotificationTechnicalScreenState extends State<MyNotificationTechnicalScreen> {
 
-  void loadData(){
-    BlocProvider.of<NotificationCubit>(context).getNotification();
-  }
 
   @override
   void initState() {
@@ -41,7 +38,7 @@ class _MyNotificationTechnicalScreenState extends State<MyNotificationTechnicalS
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async{
-          loadData();
+          BlocProvider.of<NotificationCubit>(context).getNotification();
         },
         child: SafeArea(
             child: SingleChildScrollView(
