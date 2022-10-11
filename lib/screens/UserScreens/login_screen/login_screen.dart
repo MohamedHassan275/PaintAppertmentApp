@@ -150,7 +150,11 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
                     const CreateAccountFromLoginWidget(),
                     SizedBox(
                       height: heightValue * 1,
-                    )
+                    ),
+                    const CreateAccountFromLoginTechnicalWidget(),
+                    SizedBox(
+                      height: heightValue * 1,
+                    ),
                   ],
                 );
               },
@@ -220,6 +224,54 @@ class ForgetPasswordWidget extends StatelessWidget {
   }
 }
 
+
+class CreateAccountFromLoginTechnicalWidget extends StatelessWidget {
+  const CreateAccountFromLoginTechnicalWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Container(
+        width: Get.width,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'not_account'.tr,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Themes.ColorApp2,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              InkWell(
+                onTap: () => Get.to(const RegisterScreen()),
+                child: Text(
+                  'register_technical'.tr,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Themes.ColorApp6,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class CreateAccountFromLoginWidget extends StatelessWidget {
   const CreateAccountFromLoginWidget({Key? key}) : super(key: key);
 
@@ -231,7 +283,6 @@ class CreateAccountFromLoginWidget extends StatelessWidget {
         width: Get.width,
         height: 50,
         decoration: BoxDecoration(
-          color: Themes.ColorApp7,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(

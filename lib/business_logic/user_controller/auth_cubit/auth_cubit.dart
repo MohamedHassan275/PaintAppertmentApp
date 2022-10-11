@@ -30,9 +30,9 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  setRegisterUser(String firstName,String lastName,String phone,String email,String password,String fcmToken){
+  setRegisterUser(String firstName,String lastName,String phone,String email,String password,String fcmToken,String type){
     emit(LoginLoadingState());
-    AuthService.setRegister(firstName, lastName, phone, email, password, fcmToken).then((value){
+    AuthService.setRegister(firstName, lastName, phone, email, password, fcmToken,type).then((value){
       if(value?.success == true){
         emit(LoginSuccessState(value?.data));
         // CustomFlutterToast(value?.message);

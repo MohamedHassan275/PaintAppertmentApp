@@ -13,16 +13,17 @@ import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/servies/storage_service.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
-import '../home_main_screen/home_main_screen.dart';
+import '../../UserScreens/home_main_screen/home_main_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class RegisterTechnicalScreen extends StatefulWidget {
+  const RegisterTechnicalScreen({Key? key}) : super(key: key);
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _RegisterTechnicalScreenState createState() => _RegisterTechnicalScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
+
   TextEditingController FirstName = TextEditingController();
   TextEditingController MobilePhone = TextEditingController();
   TextEditingController LastName = TextEditingController();
@@ -262,7 +263,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       MobilePhone.text,
                                       Email.text,
                                       Password.text,
-                                      '','0');
+                                      '','1');
                                   // CustomFlutterToast('تم تسجيلك بنجاح');
                                 } else {
                                   CustomFlutterToast('agree_to_terms2'.tr);

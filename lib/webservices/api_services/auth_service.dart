@@ -50,7 +50,8 @@ class AuthService{
   }
 
 
-  static Future<LoginModel?> setRegister(String firstName,String lastName,String phone,String email,String password,String fcmToken) async {
+  static Future<LoginModel?> setRegister(String firstName,String lastName,String phone,String email,
+      String password,String fcmToken,String type) async {
     LoginModel? loginModel;
 
     try {
@@ -62,6 +63,7 @@ class AuthService{
         "email" : email,
         "fcm_token" : fcmToken,
         "password" : password,
+        "type" : type,
       });
 
       //   print(AppLocalStorage.token);
