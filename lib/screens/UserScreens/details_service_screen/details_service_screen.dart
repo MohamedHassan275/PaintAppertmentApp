@@ -12,6 +12,7 @@ import 'package:pain_appertment/generated/assets.dart';
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 import 'package:pain_appertment/utils/constant/custom_toast.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../../utils/constant/Themes.dart';
 import '../home_main_screen/home_main_screen.dart';
@@ -71,15 +72,17 @@ class DetailsServiceScreen extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: height* .5,),
-                             Text(
-                               '${state.showProductResponseDetails?.about}',
-                              maxLines: 3,
-                              overflow: TextOverflow.fade,
+                            ReadMoreText(
+                              '${state.showProductResponseDetails?.about}',
+                              trimLines: 2,
+                              colorClickableText: Themes.ColorApp1,
+                              trimMode: TrimMode.Line,
+                              trimCollapsedText: 'عرض المزيد',
+                              trimExpandedText: 'عرض أقل',
                               style: const TextStyle(
-                                fontWeight: FontWeight.w400,
+                                color: Themes.ColorApp6,
+                                fontWeight: FontWeight.w300,
                                 fontSize: 15,
-                                overflow: TextOverflow.fade,
-                                color: Themes.ColorApp15,
                               ),
                             ),
                             SizedBox(height: height* .7,),

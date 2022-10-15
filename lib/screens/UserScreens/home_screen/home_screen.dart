@@ -301,6 +301,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   physics: const NeverScrollableScrollPhysics(),
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (context, index) {
+                                    Gallery gallery = state
+                                        .homeResponseModel!.gallery![index];
                                     return Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 15, horizontal: 5),
@@ -396,7 +398,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     child:
                                                                         FadeInImage(
                                                                       image: NetworkImage(
-                                                                          '${state.homeResponseModel!.gallery![index].images![index].image}'),
+                                                                          '${gallery.images![index].image}'),
                                                                       fit: BoxFit
                                                                           .fill,
                                                                       height:

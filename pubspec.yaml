@@ -41,6 +41,7 @@ dependencies:
  ## permission_handler: ^9.2.0
   shared_preferences:
   url_launcher:
+  readmore: ^2.2.0
   cached_network_image: ^3.2.2
   carousel_slider: ^4.0.0
   easy_localization: ^3.0.0
