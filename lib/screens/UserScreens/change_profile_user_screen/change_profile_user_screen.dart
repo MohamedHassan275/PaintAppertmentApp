@@ -33,6 +33,10 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
   TextEditingController City = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey();
+  bool shouldPop = true;
+
+  void _moveToScreen2(BuildContext context) =>
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const HomeMainScreen()));
 
   @override
   Widget build(BuildContext context) {
