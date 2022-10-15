@@ -36,7 +36,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(UpdateProfileLoadingState());
     ProfileService.changeProfileUser(firstName, lastName, phone, email,governorate,city).then((value){
       if(value?.success == true){
-        CustomFlutterToast(value?.message);
+      //  CustomFlutterToast(value?.message);
         isLoading = false;
         emit(UpdateProfileSuccessState(value?.message));
       }else {

@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import '../../../utils/componant/CustomTextFieldWidget.dart';
 import '../../../utils/constant/Themes.dart';
 import '../../../utils/constant/constant.dart';
 import '../../../utils/constant/custom_toast.dart';
+import '../../../utils/constant/style.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 
 class ChangeProfileTechnicalScreen extends StatefulWidget {
@@ -145,13 +147,49 @@ class _ChangeProfileTechnicalScreenState extends State<ChangeProfileTechnicalScr
 
   void _handleLoginListener(BuildContext context, ProfileState state) {
     if (state is ProfileErrorState) {
-      CustomFlutterToast(state.error);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.rightSlide,
+        title: 'خطاء',
+        desc: state.error,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+         Navigator.pop(context);
+        },
+        btnOkOnPress: () {
+          Navigator.pop(context);
+        },
+      ).show();
     } else if (state is UpdateProfileSuccessState) {
-      CustomFlutterToast(state.changeProfileSuccessfully);
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
-              (_) => false);
+    //  CustomFlutterToast(state.changeProfileSuccessfully);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.warning,
+        animType: AnimType.rightSlide,
+        title: 'نجاح',
+        desc: state.changeProfileSuccessfully,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
+                  (_) => false);
+        },
+        btnOkOnPress: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
+                  (_) => false);
+        },
+      ).show();
+
     }
   }
 

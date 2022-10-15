@@ -224,10 +224,10 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
 
   void _handleAddRateToTechnical(BuildContext context, AddRateState state) {
     if(state is AddRateErrorState){
-      CustomFlutterToast(state.statusResponse);
+   //   CustomFlutterToast(state.statusResponse);
     }else if(state is AddRateSuccessState){
-      CustomFlutterToast(state.statusResponse);
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeMainScreen()));
+    //  CustomFlutterToast(state.statusResponse);
+    //  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeMainScreen()));
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -237,7 +238,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: heightValue * .2,
                       ),
-                      state is LoginLoadingState
+                      authCubit.loading
                           ? const CircularProgressIndicator(
                               color: Themes.ColorApp1,
                             )
@@ -257,6 +258,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               if (form.currentState!.validate()) {
                                 if (isCheckAccepted == true) {
                                   authCubit.setRegisterUser(
+                                      context,
                                       FirstName.text,
                                       LastName.text,
                                       MobilePhone.text,
@@ -290,18 +292,51 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _handleLoginListener(BuildContext context, AuthState state) {
     if (state is ErrorLoginState) {
-      CustomFlutterToast(state.error);
+    //  CustomFlutterToast(state.error);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.rightSlide,
+        title: 'خطأ',
+        desc: state.error,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pop(context);
+        },
+        btnOkOnPress: () {
+          Navigator.pop(context);
+        },
+      ).show();
     } else if (state is LoginSuccessState) {
-      // CustomFlutterToast(state.loginResponseModel?.accesstoken);
-      Get.find<StorageService>()
-          .setToken('${state.loginResponseModel?.accesstoken}');
-      AppConstants.tokenSession = '${state.loginResponseModel?.type}';
-      CustomFlutterToast(AppConstants.tokenSession);
-      _clearFormData();
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-              (_) => false);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'نجاح',
+        desc: 'تم اشتراكك برجاء تسجيل الدخول',
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          _clearFormData();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (_) => false);
+        },
+        btnOkOnPress: () {
+          _clearFormData();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (_) => false);
+        },
+      ).show();
+
     }
   }
 

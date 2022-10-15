@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import '../business_logic/app_layout_cubit/app_layout_cubit.dart';
 import 'constant/Themes.dart';
@@ -12,6 +13,8 @@ class NoInternetConnectionScreen extends StatelessWidget {
   AppLayoutState appLayoutState;
   NoInternetConnectionScreen({Key? key,required this.appLayoutState}) : super(key: key);
 
+  var heightValue = Get.height * 0.024;
+  var widthValue = Get.width * 0.024;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +30,11 @@ class NoInternetConnectionScreen extends StatelessWidget {
               height: 200,
               fit: BoxFit.contain,
               width: 200,
-              color: Themes.ColorApp1,
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(height: heightValue * .7,),
             Shimmer.fromColors(
               baseColor: Colors.red,
-              highlightColor: Themes.ColorApp1,
+              highlightColor: Themes.ColorApp9,
                child: Text(
                 'أُووبس! الرجاء التحقق من اتصال الانترنت الخاص بك',
                 textAlign: TextAlign.center,
@@ -42,7 +44,7 @@ class NoInternetConnectionScreen extends StatelessWidget {
                 ),
             ),
              ),
-            SizedBox(height: 5.h,),
+            SizedBox(height: heightValue * .7,),
             // Center(
             //   child: Padding(
             //     padding: const EdgeInsets.all(15),

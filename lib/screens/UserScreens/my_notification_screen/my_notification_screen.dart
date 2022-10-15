@@ -1,4 +1,5 @@
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -261,8 +262,8 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
                           SizedBox(height: widget.heightValue! * .7,),
                           CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
                             if(formKey.currentState!.validate()){
-                              CustomFlutterToast(widget.orderResponseModel.orderId.toString());
-                              CustomFlutterToast(rateTechnicalTextController.text);
+                             // CustomFlutterToast(widget.orderResponseModel.orderId.toString());
+                            //  CustomFlutterToast(rateTechnicalTextController.text);
                               print('rating');
                               print(rating);
                               addRateCubit.addRateToTechnicalFromUser(widget.orderResponseModel.orderId.toString(), rating,
@@ -288,10 +289,42 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
 
 void _handleAddRateToTechnical(BuildContext context, AddRateState state) {
   if(state is AddRateErrorState){
-    CustomFlutterToast(state.statusResponse);
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.error,
+      animType: AnimType.rightSlide,
+      title: 'خطأ',
+      desc: state.statusResponse,
+      btnCancelText: 'الغاء',
+      btnOkText: 'موافق',
+      btnCancelColor: Themes.ColorApp9,
+      btnOkColor: Themes.ColorApp17,
+      btnCancelOnPress: () {
+        Navigator.pop(context);
+      },
+      btnOkOnPress: () {
+        Navigator.pop(context);
+      },
+    ).show();
   }else if(state is AddRateSuccessState){
-    CustomFlutterToast(state.statusResponse);
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeMainScreen()));
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.rightSlide,
+      title: 'نجاح',
+      desc: state.statusResponse,
+      btnCancelText: 'الغاء',
+      btnOkText: 'موافق',
+      btnCancelColor: Themes.ColorApp9,
+      btnOkColor: Themes.ColorApp17,
+      btnCancelOnPress: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeMainScreen()));
+      },
+      btnOkOnPress: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeMainScreen()));
+      },
+    ).show();
+
   }
 }
 

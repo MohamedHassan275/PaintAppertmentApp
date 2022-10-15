@@ -1,4 +1,5 @@
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -53,11 +54,11 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
           builder: (context, state) {
           AddOrderCubit addOrderCubit = AddOrderCubit.get(context);
           if(stateProfile is ProfileSuccessState){
-            firstNameController.text = stateProfile.profileResponseModel?.firstname ?? ' ';
-            lastNameController.text = stateProfile.profileResponseModel?.lastname ?? ' ';
-            mobilePhoneController.text = stateProfile.profileResponseModel?.phone ?? ' ';
-            governmentController.text = stateProfile.profileResponseModel?.governorate ?? ' ';
-            cityController.text = stateProfile.profileResponseModel?.city ?? ' ';
+            firstNameController.text = stateProfile.profileResponseModel?.firstname ?? '';
+            lastNameController.text = stateProfile.profileResponseModel?.lastname ?? '';
+            mobilePhoneController.text = stateProfile.profileResponseModel?.phone ?? '';
+            governmentController.text = stateProfile.profileResponseModel?.governorate ?? '';
+            cityController.text = stateProfile.profileResponseModel?.city ?? '';
             return SingleChildScrollView(
               child: Form(
                 key: formKey,
@@ -121,7 +122,7 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
                     SizedBox(height: height * 1,),
                     CustomButtonImage(title: 'request_price2', hight: 50, onTap: (){
                       if(formKey.currentState!.validate()){
-                        addOrderCubit.addOrderUser('${widget.companyId}', distanceAppermentController.text,
+                        addOrderCubit.addOrderUser(context,'${widget.companyId}', distanceAppermentController.text,
                             roomNumberController.text, restRoomController.text, firstNameController.text,
                             lastNameController.text, mobilePhoneController.text,
                             governmentController.text, cityController.text,detailsOrderController.text);
@@ -148,14 +149,52 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
 
   void _handleLoginListener(BuildContext context, AddOrderState state) {
     if (state is AddOrderErrorState) {
-      CustomFlutterToast(state.addOrderStatus);
+    //  CustomFlutterToast(state.addOrderStatus);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.rightSlide,
+        title: 'خطأ',
+        desc: state.addOrderStatus,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pop(context);
+        },
+        btnOkOnPress: () {
+          Navigator.pop(context);
+        },
+      ).show();
     } else if (state is AddOrderSuccessfullyState) {
-      CustomFlutterToast(state.addOrderStatus);
-      _clearFormData();
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeMainScreen()),
-              (_) => false);
+    //  CustomFlutterToast(state.addOrderStatus);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'نجاح',
+        desc: state.addOrderStatus,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          _clearFormData();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+                  (_) => false);
+        },
+        btnOkOnPress: () {
+          _clearFormData();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+                  (_) => false);
+        },
+      ).show();
+
     }
   }
 

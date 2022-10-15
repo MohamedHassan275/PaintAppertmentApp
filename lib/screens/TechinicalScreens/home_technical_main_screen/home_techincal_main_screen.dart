@@ -95,7 +95,7 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
                         backgroundColor: Themes.ColorApp1,
                         toolbarHeight: 75,
                         title: SizedBox(
-                          child:   BlocBuilder<ProfileCubit,ProfileState>(builder: (context, state) {
+                          child: BlocBuilder<ProfileCubit,ProfileState>(builder: (context, state) {
                             if (state is ProfileSuccessState) {
                               return  SizedBox(
                                 height: 75,
@@ -226,6 +226,7 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
               );
             }
           }, builder: (context, state) {
+        AppLayoutCubit appLayoutCubit = AppLayoutCubit.get(context);
         if (state is ConnectionFailure) {
           return NoInternetConnectionScreen(
             appLayoutState: state,
@@ -367,7 +368,7 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
               body: Center(
                 child: AnimatedTextKit(
                   animatedTexts: [
-                    WavyAnimatedText('Markety',
+                    WavyAnimatedText('شطب شقتك',
                         textStyle: const TextStyle(
                             fontSize: 20.0,
                             color: Themes.ColorApp13,

@@ -9,7 +9,7 @@ import '../../utils/constant/api_constant.dart';
 import '../../utils/constant/custom_toast.dart';
 
 class AuthService{
-  
+
   static Future<LoginModel?> setLogin(String phone,String password,String fcmToken) async {
     LoginModel? loginModel;
 
@@ -50,19 +50,18 @@ class AuthService{
   }
 
 
-  static Future<LoginModel?> setRegister(String firstName,String lastName,String phone,String email,
-      String password,String fcmToken,String type) async {
+  static Future<LoginModel?> setRegister(String firstName,String lastName,String phone,String email,String password,String fcmToken,String type) async {
     LoginModel? loginModel;
 
     try {
 
       Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.register,data: {
-        "phone" : phone,
         "firstname" : firstName,
         "lastname" : lastName,
+        "phone" : phone,
         "email" : email,
-        "fcm_token" : fcmToken,
         "password" : password,
+        "fcm_token" : fcmToken,
         "type" : type,
       });
 

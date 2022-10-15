@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/model/response_user_model.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
@@ -11,7 +12,7 @@ import '../../utils/constant/custom_toast.dart';
 
 class AddPriceOrdersTechnicalService{
   
-  static Future<ResponseUserModel?> addPriceOfferOrderTechnicalService(String orderId,String price) async {
+  static Future<ResponseUserModel?> addPriceOfferOrderTechnicalService(BuildContext context,String orderId,String price) async {
     ResponseUserModel? responseUserModel;
 
     try {

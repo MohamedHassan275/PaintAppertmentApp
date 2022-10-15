@@ -7,6 +7,7 @@ import 'package:pain_appertment/business_logic/user_controller/profile_cubit/pro
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/utils/componant/LoadingWidget.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
+import 'package:pain_appertment/utils/constant/custom_toast.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../utils/constant/Themes.dart';
@@ -34,15 +35,15 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
     var widthValue = Get.width * 0.024;
-    return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async{
-          print('refresh');
-          print('${AppConstants.typeSession}');
-          BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
-          BlocProvider.of<ProfileCubit>(context).showUserDetails();
-        },
-        child: SafeArea(
+    return RefreshIndicator(
+      onRefresh: () async{
+        print('refresh');
+        print('${AppConstants.typeSession}');
+        BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
+        BlocProvider.of<ProfileCubit>(context).showUserDetails();
+      },
+      child: Scaffold(
+        body: SafeArea(
             child: SingleChildScrollView(
               child: BlocBuilder<OrdersTechnicalCubit,OrdersTechnicalState>(
                 builder: (context, state) {
@@ -54,12 +55,11 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return state.orderResponseModel![index].offer == 0 ?
-                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                          child: MySendOrderListItem(currentOrder: state.orderResponseModel![index],
-                            heightValue: heightValue,widthValue: widthValue,),
-                        ) : Container();
+                      return   Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        child: MySendOrderListItem(currentOrder: state.orderResponseModel![index],
+                          heightValue: heightValue,widthValue: widthValue,),
+                      );
                       },): NoItemOFList();
                   }else if (state is OrdersErrorState){
                     return LoadingWidget(data: state.error);
@@ -101,7 +101,32 @@ class MySendOrderListItem extends StatelessWidget {
                 child: Divider(height: 10, color: Themes.ColorApp2,),
               ),
               SizedBox(height: heightValue * .5,),
+              currentOrder.offer == 1 ?
               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 15,
+                      height: 15,
+                      child:  CircleAvatar(
+                        backgroundColor: Themes.ColorApp13,
+                      ),
+                    ),
+                    SizedBox(
+                      width: widthValue * 1,
+                    ),
+                    const Text(
+                      'لقد قمت بعرض السعر لهذه الخدمة',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                        color: Themes.ColorApp9,
+                      ),
+                    ),
+                  ],
+                ),
+              ) : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Row(
                   children: [
@@ -268,60 +293,26 @@ class CompanyDetails extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'request_type'.tr,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp2,
-                    ),
-                  ),
-                  SizedBox(width: widthValue * .2,),
-                  Text(
-                    '${myCurrentOrderModel!.service ?? '----' }',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp1,
-                    ),
-                  ),
-                ],
+              Text(
+                'request_type'.tr,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: Themes.ColorApp2,
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'quantity'.tr,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp2,
-                    ),
-                  ),
-                  SizedBox(width: widthValue * .2,),
-                  Text(
-                    '${myCurrentOrderModel!.flatArea}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp1,
-                    ),
-                  ),
-                  SizedBox(width: widthValue * .2,),
-                  const Text(
-                    'متر',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Themes.ColorApp1,
-                    ),
-                  ),
-                ],
+              SizedBox(width: widthValue * .5,),
+              Text(
+                myCurrentOrderModel!.service ?? '----',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: Themes.ColorApp1,
+                ),
               ),
 
             ],

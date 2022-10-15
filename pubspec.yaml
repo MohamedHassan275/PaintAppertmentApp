@@ -41,9 +41,10 @@ dependencies:
  ## permission_handler: ^9.2.0
   shared_preferences:
   url_launcher:
+  cached_network_image: ^3.2.2
   carousel_slider: ^4.0.0
   easy_localization: ^3.0.0
-  awesome_dialog:
+  awesome_dialog: ^3.0.2
   flutter_launch: ^0.3.0
   flutter_screenutil: ^5.0.0+2
   flutter_shimmer: ^2.1.2

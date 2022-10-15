@@ -24,7 +24,7 @@ class ProfileModel {
 
 class ProfileResponseModel {
   int? id;
-  int? type;
+  String? type;
   dynamic service;
   String? firstname;
   String? lastname;

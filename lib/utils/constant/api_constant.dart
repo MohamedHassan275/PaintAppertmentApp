@@ -5,7 +5,7 @@ import 'package:pain_appertment/utils/constant/Themes.dart';
 
 class ApiConstants {
   // Api Endpoints
-  static const String baseUrl = 'https://shatb-shaqtek.com/backend/api/v2';
+  static const String baseUrl = 'https://shatb-shaqtek.com/api/v2';
 
   static const  String login = '/login';
   static const String register = '/register';

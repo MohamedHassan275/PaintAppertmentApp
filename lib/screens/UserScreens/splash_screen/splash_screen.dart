@@ -24,8 +24,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print('tokenSession ${AppConstants.tokenSession}');
     print('typeSession ${Get.find<StorageService>().getType}');
+    print('typeSession ${Get.find<StorageService>().getToken}');
+    print('typeSession ${AppConstants.tokenSession}');
+    print('typeSession ${Get.find<StorageService>().getToken}');
+
     Timer(const Duration(seconds: 3), (){
       if(AppConstants.tokenSession != ''){
         if(Get.find<StorageService>().getType.contains('0')){

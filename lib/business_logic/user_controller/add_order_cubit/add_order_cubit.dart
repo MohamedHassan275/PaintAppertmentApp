@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +12,10 @@ class AddOrderCubit extends Cubit<AddOrderState> {
 
  static AddOrderCubit get(BuildContext context) => BlocProvider.of(context);
 
- addOrderUser(String serviceId,String flatArea,String rooms,
+ addOrderUser(BuildContext context,String serviceId,String flatArea,String rooms,
      String bathrooms,String firstName,String lastName,String phone,String governorate,String city,String description){
   emit(AddOrderLoadingState());
-   AddOrderService.addOrderUser(serviceId, flatArea, rooms, bathrooms, firstName, lastName, phone, governorate, city,description).then((value){
+   AddOrderService.addOrderUser(context,serviceId, flatArea, rooms, bathrooms, firstName, lastName, phone, governorate, city,description).then((value){
      if(value?.success == true){
        emit(AddOrderSuccessfullyState(value?.message));
      }else {

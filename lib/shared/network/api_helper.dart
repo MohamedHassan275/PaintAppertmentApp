@@ -38,24 +38,30 @@ class APIService {
 
   static Future<Response> postData(
       {required String uri,
-        Map<String, dynamic>? data,
+        dynamic data,
         String? lang ,
         String? token = '',
         Map<String, dynamic>? query}) async {
 
     LoggerHelper.loggerNoStack.i('Api Call : ' + uri);
-    dio.options.headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Accept-Language': lang,
-      'Authorization': 'Bearer ' + token!,
-    };
+    if (token!.isNotEmpty) {
+      dio.options.headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      };
+    } else {
+      dio.options.headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      };
+    }
     return dio.post(uri, data: data, queryParameters: query);
   }
 
   static Future<Response> putData(
       {required String uri,
-        Map<String, dynamic>? data,
+        dynamic data,
         String? lang ,
         Map<String, dynamic>? query}) async {
     LoggerHelper.loggerNoStack.i('Api Call :' + uri);

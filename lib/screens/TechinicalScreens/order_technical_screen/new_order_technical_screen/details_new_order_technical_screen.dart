@@ -1,9 +1,11 @@
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/technical_controller/add_price_order/add_price_order_cubit.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
+import 'package:pain_appertment/utils/constant/style.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../model/MyWaitingOrderModel.dart';
@@ -133,10 +135,28 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                   SizedBox(height: heightValue * .7,),
                                   CustomButtonImage(title: 'button_value_order'.tr, hight: 50, onTap: (){
                                     if(addPriceOrderCubit.fromKey.currentState!.validate()){
-                                      addPriceOrderCubit.addPriceOfferOrderTechnical(widget.newOrder.id.toString(), valueOrder.text);
-                                      Get.to(const HomeTechincalMainScreen());
+                                      if(widget.newOrder.offer == 1){
+                                        AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.warning,
+                                          animType: AnimType.rightSlide,
+                                          title: 'عرض سعر الخدمة',
+                                          desc: 'لقد قمت بعرض السعر لهذه الخدمة',
+                                          btnCancelText: 'الغاء',
+                                          btnOkText: 'موافق',
+                                          btnCancelColor: Themes.ColorApp9,
+                                          btnOkColor: Themes.ColorApp17,
+                                          btnCancelOnPress: () {
+                                            Navigator.pop(context);
+                                          },
+                                          btnOkOnPress: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ).show();
+                                      }else if(widget.newOrder.offer == 0){
+                                        addPriceOrderCubit.addPriceOfferOrderTechnical(context,widget.newOrder.id.toString(), valueOrder.text);
+                                      }
                                     }
-
                                   }),
                                   SizedBox(height: heightValue * 1,),
                                 ],
@@ -159,13 +179,49 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
 
   void _handleOrderListener(BuildContext context, AddPriceOrderState state) {
     if (state is AddPriceOrderErrorState) {
-      CustomFlutterToast(state.statusResponse);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.rightSlide,
+        title: 'عرض سعر الخدمة',
+        desc: state.statusResponse,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pop(context);
+        },
+        btnOkOnPress: () {
+          Navigator.pop(context);
+        },
+      ).show();
     } else if (state is AddPriceOrderSuccessfullyState) {
-      CustomFlutterToast(state.statusResponse);
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
-              (_) => false);
+
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'عرض سعر الخدمة',
+        desc: state.statusResponse,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
+                  (_) => false);
+        },
+        btnOkOnPress: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
+                  (_) => false);
+        },
+      ).show();
+
     }
   }
 
@@ -284,6 +340,8 @@ class DetailsOrder extends StatelessWidget {
       children: [
         Text(
           '$title : ',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14,

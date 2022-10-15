@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -39,108 +40,112 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
     var width = Get.width * 0.024;
     return Scaffold(
       body: SafeArea(
-        child: BlocConsumer<ProfileCubit, ProfileState>(
-          listener: (context, state) {
-            _handleLoginListener(context, state);
-          },
-          builder: (context, state) {
-            ProfileCubit profileCubit = ProfileCubit.get(context);
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Appbarwidget(width: width, height: height),
+              SizedBox(
+                height: height * 1,
+              ),
+              BlocConsumer<ProfileCubit, ProfileState>(
+                listener: (context, state) {
+                  _handleLoginListener(context, state);
+                },
+                builder: (context, state) {
+                  ProfileCubit profileCubit = ProfileCubit.get(context);
 
-            if (state is ProfileSuccessState) {
-              FirstName.text = state.profileResponseModel?.firstname ?? '';
-              LastName.text = state.profileResponseModel?.lastname ?? '';
-              MobilePhone.text = state.profileResponseModel?.phone ?? '';
-              Email.text = state.profileResponseModel?.email ?? '';
-              Government.text = state.profileResponseModel?.governorate ?? '';
-              City.text = state.profileResponseModel?.city ?? '';
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Appbarwidget(width: width, height: height),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    Stack(
+                  if (state is ProfileSuccessState) {
+                    FirstName.text = state.profileResponseModel?.firstname ?? '';
+                    LastName.text = state.profileResponseModel?.lastname ?? '';
+                    MobilePhone.text = state.profileResponseModel?.phone ?? '';
+                    Email.text = state.profileResponseModel?.email ?? '';
+                    Government.text = state.profileResponseModel?.governorate ?? '';
+                    City.text = state.profileResponseModel?.city ?? '';
+                    return Column(
                       children: [
-                        GestureDetector(
-                          // onTap: () => PickImage(),
-                          child: CircleAvatar(
-                            backgroundColor: Themes.whiteColor,
-                            radius: 75,
-                            child: ClipOval(
-                              child: Image.asset(
-                                Assets.imagesLogoApp,
-                                fit: BoxFit.fill,
+                        Stack(
+                          children: [
+                            GestureDetector(
+                              // onTap: () => PickImage(),
+                              child: CircleAvatar(
+                                backgroundColor: Themes.whiteColor,
+                                radius: 75,
+                                child: ClipOval(
+                                  child: Image.asset(
+                                    Assets.imagesLogoApp,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
+                        SizedBox(
+                          height: height * 1.5,
+                        ),
+                        UserDetailsWidget(
+                          heightValue: height,
+                          widthValue: width,
+                          FirstName: FirstName,
+                          LastName: LastName,
+                          Email: Email,
+                          MobilePhone: MobilePhone, formKey: formKey,
+                          Country: Government, State: City,
+                        ),
+                        SizedBox(
+                          height: height * .5,
+                        ),
+                        SizedBox(
+                          height: height * 2.5,
+                        ),
+                        state is UpdateProfileLoadingState
+                            ? const CircularProgressIndicator(
+                          color: Themes.ColorApp1,
+                        )
+                            : Container(),
+                        SizedBox(
+                          height: height * 1,
+                        ),
+                        CustomButtonImage(
+                            title: 'save'.tr,
+                            hight: 50,
+                            onTap: () {
+                              if(formKey.currentState!.validate()){
+                                print('user details');
+                                print(AppConstants.tokenSession);
+                                print(FirstName.text);
+                                print(LastName.text);
+                                print(MobilePhone.text);
+                                print(Email.text);
+                                profileCubit.updateProfileUser(FirstName.text, LastName.text, MobilePhone.text, Email.text,
+                                Government.text,City.text);
+                              }
+                            }),
+                        SizedBox(height: height *1,)
                       ],
+                    );
+                  } else if (state is ProfileErrorState) {
+                    return Container(
+                      width: Get.width,
+                      height: Get.height,
+                      child: Center(
+                        child: Text('${state.error}'),
+                      ),
+                    );
+                  }
+                  return Container(
+                    width: Get.width,
+                    height: Get.height,
+                    child: const Center(
+                      child: CircularProgressIndicator(
+                        color: Themes.ColorApp1,
+                      ),
                     ),
-                    SizedBox(
-                      height: height * 1.5,
-                    ),
-                    UserDetailsWidget(
-                      heightValue: height,
-                      widthValue: width,
-                      FirstName: FirstName,
-                      LastName: LastName,
-                      Email: Email,
-                      MobilePhone: MobilePhone, formKey: formKey,
-                      Country: Government, State: City,
-                    ),
-                    SizedBox(
-                      height: height * .5,
-                    ),
-                    SizedBox(
-                      height: height * 2.5,
-                    ),
-                    state is UpdateProfileLoadingState
-                        ? const CircularProgressIndicator(
-                      color: Themes.ColorApp1,
-                    )
-                        : Container(),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    CustomButtonImage(
-                        title: 'save'.tr,
-                        hight: 50,
-                        onTap: () {
-                          if(formKey.currentState!.validate()){
-                            print('user details');
-                            print(AppConstants.tokenSession);
-                            print(FirstName.text);
-                            print(LastName.text);
-                            print(MobilePhone.text);
-                            print(Email.text);
-                            profileCubit.updateProfileUser(FirstName.text, LastName.text, MobilePhone.text, Email.text,
-                            Government.text,City.text);
-                          }
-                        }),
-                    SizedBox(height: height *1,)
-                  ],
-                ),
-              );
-            } else if (state is ProfileErrorState) {
-              return Container(
-                width: Get.width,
-                height: Get.height,
-                child: Center(
-                  child: Text('${state.error}'),
-                ),
-              );
-            }
-            return Container(
-              width: Get.width,
-              height: Get.height,
-              child: const Center(
-                child: CircularProgressIndicator(
-                  color: Themes.ColorApp1,
-                ),
+                  );
+                },
               ),
-            );
-          },
+            ],
+          ),
         ),
       ),
     );
@@ -148,14 +153,50 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
 
   void _handleLoginListener(BuildContext context, ProfileState state) {
     if (state is UpdateProfileErrorState) {
-      CustomFlutterToast(state.error);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.rightSlide,
+        title: 'خطأ',
+        desc: state.error,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pop(context);
+        },
+        btnOkOnPress: () {
+          Navigator.pop(context);
+        },
+      ).show();
     } else if (state is UpdateProfileSuccessState) {
-      CustomFlutterToast(state.changeProfileSuccessfully);
-      _clearFormData();
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeMainScreen()),
-              (_) => false);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'نجاح',
+        desc: state.changeProfileSuccessfully,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          _clearFormData();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+                  (_) => false);
+        },
+        btnOkOnPress: () {
+          _clearFormData();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+                  (_) => false);
+        },
+      ).show();
+
     }
   }
 

@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pain_appertment/model/response_user_model.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
 
@@ -10,7 +11,7 @@ import '../../utils/constant/custom_toast.dart';
 
 class AddOrderService{
   
-  static Future<ResponseUserModel?> addOrderUser(String serviceId,String flatArea,String rooms,
+  static Future<ResponseUserModel?> addOrderUser(BuildContext context,String serviceId,String flatArea,String rooms,
       String bathrooms,String firstName,String lastName,String phone,String governorate,String city,String description) async {
     ResponseUserModel? responseUserModel;
     try {

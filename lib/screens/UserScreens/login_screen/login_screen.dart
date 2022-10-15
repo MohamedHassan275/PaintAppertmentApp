@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
+import 'package:pain_appertment/screens/TechinicalScreens/register_technical_screen/register_technical_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/utils/componant/CustomButtonWidget.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
@@ -110,13 +112,11 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
                                     FirebaseMessaging.instance.getToken().then((value) {
                                       if (value != null) {
                                         if (fcmToken == null) {
-                                          //   HalalLocationCubit.get(context).updateFCMToken(value);
                                           authCubit.setLoginUser(
                                               mobilePhoneController.text,
                                               passwordController.text, value);
-                                          //    BlocProvider.of<AuthCubit>(context).updateFCMToken(fcmToken);
                                               print('token device');
-                                              CustomFlutterToast(value);
+                                           //   CustomFlutterToast(value);
                                           print(value);
                                         }
                                       }
@@ -130,14 +130,9 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
                                           authCubit.setLoginUser(
                                               mobilePhoneController.text,
                                               passwordController.text, value);
-                                          Get.find<StorageService>().setType(value);
                                           print('token device');
-                                          CustomFlutterToast(value);
-                                          print(value);
-                                          //  HalalLocationCubit.get(context).updateFCMToken(value);
+                                        //  CustomFlutterToast(value);
                                         });
-
-
                                   }
                                 }),
                           ),
@@ -165,24 +160,34 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
 
   void _handleLoginListener(BuildContext context, AuthState state) {
     if (state is ErrorLoginState) {
-      CustomFlutterToast(state.error);
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.rightSlide,
+        title: 'خطأ',
+        desc: state.error,
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pop(context);
+        },
+        btnOkOnPress: () {
+          Navigator.pop(context);
+        },
+      ).show();
     } else if (state is LoginSuccessState) {
 
-      Get.find<StorageService>()
-          .setToken('${state.loginResponseModel?.accesstoken}');
-      Get.find<StorageService>()
-          .setType('${state.loginResponseModel?.type}');
-     // AppConstants.tokenSession = '${state.loginResponseModel?.type}';
-     //  CustomFlutterToast(AppConstants.tokenSession);
-      CustomFlutterToast(Get.find<StorageService>().getToken);
-      CustomFlutterToast(Get.find<StorageService>().getType);
+      Get.find<StorageService>().setToken('${state.loginModel?.data?.accesstoken}');
+      Get.find<StorageService>().setType('${state.loginModel?.data?.type}');
       _clearFormData();
-     if(state.loginResponseModel!.type! == 0){
+     if(state.loginModel!.data!.type!.contains('0')){
        Navigator.pushAndRemoveUntil(
            context,
            MaterialPageRoute(builder: (context) => const HomeMainScreen()),
                (_) => false);
-     }else if(state.loginResponseModel!.type! == 1){
+     }else if(state.loginModel!.data!.type!.contains('1')){
        Navigator.pushAndRemoveUntil(
            context,
            MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
@@ -254,7 +259,7 @@ class CreateAccountFromLoginTechnicalWidget extends StatelessWidget {
                 width: 5,
               ),
               InkWell(
-                onTap: () => Get.to(const RegisterScreen()),
+                onTap: () => Get.to(const RegisterTechnicalScreen()),
                 child: Text(
                   'register_technical'.tr,
                   style: const TextStyle(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -75,11 +76,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               items: state.homeResponseModel?.sliders
                                   ?.map((e) => ClipRRect(
                                         borderRadius: BorderRadius.circular(15),
-                                        child: Image(
-                                          image: NetworkImage(e.image!),
+                                        child:
+                                        FadeInImage(
+                                          image: NetworkImage(
+                                              '${e.image}'),
                                           height: 200,
                                           width: Get.width,
                                           fit: BoxFit.fill,
+                                          placeholder:
+                                          const AssetImage(Assets.imagesLoading),
                                         ),
                                       ))
                                   .toList(),
@@ -120,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .homeResponseModel!.categories![index];
                                     return Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            vertical: 15, horizontal: 5),
+                                            vertical: 15, horizontal: 0),
                                         child: GestureDetector(
                                           onTap: () {
                                             // CustomFlutterToast(category.name);
@@ -169,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               SizedBox(
                                                 height: height * .3,
                                               ),
+                                              category.services!.isNotEmpty ?
                                               SizedBox(
                                                   height: 150,
                                                   width: Get.width,
@@ -238,30 +244,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         width: Get
                                                                             .width,
                                                                         placeholder:
-                                                                            const AssetImage(Assets.imagesLogoApp),
+                                                                            const AssetImage(Assets.imagesLoading),
                                                                       ),
                                                                     ),
                                                                     SizedBox(
-                                                                      height:
-                                                                          height *
-                                                                              .5,
+                                                                      height: height * .5,
                                                                     ),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Text(
-                                                                        '${category.services![index].name}',
-                                                                        style:
-                                                                            const TextStyle(
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          fontSize:
-                                                                              15,
-                                                                          overflow:
-                                                                              TextOverflow.fade,
-                                                                          color:
-                                                                              Themes.ColorApp8,
+                                                                    Padding(
+                                                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                                      child: Text(
+                                                                          '${category.services![index].name}',
+                                                                          overflow: TextOverflow.ellipsis,
+                                                                          style:
+                                                                        const TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight.w400,
+                                                                      fontSize:
+                                                                          15,
+                                                                      overflow:
+                                                                          TextOverflow.fade,
+                                                                      color:
+                                                                          Themes.ColorApp8,
+                                                                          ),
                                                                         ),
-                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: height * .5,
                                                                     ),
                                                                   ],
                                                                 ),
@@ -269,14 +277,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             ),
                                                           ),
                                                         );
-                                                      })),
+                                                      }))  : const Center(
+                                                child: Text('لا يوجد خدامات حاليا'),
+                                              ),
                                             ],
                                           ),
                                         ));
                                   }),
                             )
                           : const Center(
-                              child: Text('not found'),
+                              child: Text('لا يوجد اقسام حاليا'),
                             ),
                       SizedBox(
                         height: height * 1.5,
@@ -395,7 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           200,
                                                                       placeholder:
                                                                           const AssetImage(
-                                                                              Assets.imagesLogoApp),
+                                                                              Assets.imagesLoading),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -406,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   }),
                             )
                           : const Center(
-                              child: Text('not found'),
+                              child: Text('لا يوجد صور حاليا'),
                             ),
                       SizedBox(
                         height: height * 1.5,

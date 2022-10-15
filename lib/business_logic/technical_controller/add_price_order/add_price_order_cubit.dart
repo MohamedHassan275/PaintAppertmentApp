@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,16 +18,14 @@ class AddPriceOrderCubit extends Cubit<AddPriceOrderState> {
 
  get fromKey => _formKey;
 
- addPriceOfferOrderTechnical(String orderId,String price){
+ addPriceOfferOrderTechnical(BuildContext context,String orderId,String price){
    emit(AddPriceOrderLoadingState());
    print('response is loading');
-   AddPriceOrdersTechnicalService.addPriceOfferOrderTechnicalService(orderId, price).then((value){
+   AddPriceOrdersTechnicalService.addPriceOfferOrderTechnicalService(context,orderId, price).then((value){
      if(value?.success == true){
        print('response is $value');
-       CustomFlutterToast(value?.message);
        emit(AddPriceOrderSuccessfullyState(value?.message));
      }else {
-       print('response is ${value?.message}');
        emit(AddPriceOrderErrorState(value?.message));
      }
    });

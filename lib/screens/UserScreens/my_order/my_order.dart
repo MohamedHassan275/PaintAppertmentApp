@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/business_logic/technical_controller/previous_technical_orders_cubit/previous_technical_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/orders_cubit/orders_cubit.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_screen/details_service_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_current_order_screen/my_current_order_screen.dart';
@@ -34,7 +35,7 @@ class _MyOrderState extends State<MyOrder> {
  void loadData(){
    BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
    BlocProvider.of<CurrentOrdersCubit>(context).getCurrentOrderUser();
-   BlocProvider.of<OrdersCubit>(context).getPreviousOrderUser();
+   BlocProvider.of<PreviousOrdersTechnicalCubit>(context).getPreviousTechnicalOrderUser();
   }
   @override
   Widget build(BuildContext context) {

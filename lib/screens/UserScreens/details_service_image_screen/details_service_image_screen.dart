@@ -55,7 +55,7 @@ class _DetailsServiceImageScreenState extends State<DetailsServiceImageScreen> {
                               width: 300,
                               fit: BoxFit.fill,
                               image: NetworkImage('${widget.gallery?.images![index].image}'),
-                              placeholder: const AssetImage(Assets.imagesLogoApp),
+                              placeholder: const AssetImage(Assets.imagesLoading),
                             ),
                           ),
                         ),

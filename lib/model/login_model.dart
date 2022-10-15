@@ -24,9 +24,9 @@ class LoginModel {
 
 class LoginResponseModel {
   String? accesstoken;
-  int? type;
+  String? type;
 
-  LoginResponseModel({this.accesstoken,this.type});
+  LoginResponseModel({this.accesstoken, this.type});
 
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
     accesstoken = json['accesstoken'];
@@ -40,4 +40,3 @@ class LoginResponseModel {
     return data;
   }
 }
-

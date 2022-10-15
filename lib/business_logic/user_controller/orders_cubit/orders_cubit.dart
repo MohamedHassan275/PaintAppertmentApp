@@ -25,18 +25,4 @@ class OrdersCubit extends Cubit<OrdersState> {
     });
   }
 
-
-
-
-  getPreviousOrderUser(){
-    emit(OrdersLoadingState());
-    OrdersService.getPreviousOrderUser().then((value){
-      if(value?.success == true){
-        emit(OrdersSuccessfullyState(value?.data));
-      }else {
-        emit(OrdersErrorState(value?.message));
-      }
-    });
-  }
-
 }

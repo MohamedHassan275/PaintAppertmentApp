@@ -46,7 +46,7 @@ class DetailsServiceScreen extends StatelessWidget {
                             width: Get.width,
                             fit: BoxFit.fill,
                             image: NetworkImage('${state.showProductResponseDetails?.image}'),
-                            placeholder: AssetImage(Assets.imagesLogoApp),
+                            placeholder: AssetImage(Assets.imagesLoading ),
                           ),
                         ),
                       ),
@@ -235,7 +235,7 @@ class DetailsServiceScreen extends StatelessWidget {
                             ),
                             SizedBox(height: height * 3.5,),
                             CustomButtonImage(title: 'request_price2'.tr, hight: 50, onTap: (){
-                              CustomFlutterToast(state.showProductResponseDetails?.id.toString());
+                            //  CustomFlutterToast(state.showProductResponseDetails?.id.toString());
                               Get.to(RequestMyServiceScreen(
                                 companyId: state.showProductResponseDetails?.id.toString(),));
                             }),
@@ -291,7 +291,7 @@ class Appbarwidget extends StatelessWidget {
               name,
               style: const TextStyle(
                 color: Themes.ColorApp15,
-                fontSize: 20,
+                fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),
             ),

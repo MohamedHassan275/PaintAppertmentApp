@@ -43,7 +43,7 @@ class OrderResponseModel {
   String? governorate;
   String? city;
   dynamic offerCost;
-  int? status;
+  dynamic status;
   int? offer;
 
   OrderResponseModel(

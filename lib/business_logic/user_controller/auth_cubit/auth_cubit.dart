@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'package:pain_appertment/screens/UserScreens/login_screen/login_screen.da
 import 'package:pain_appertment/utils/constant/custom_toast.dart';
 import 'package:pain_appertment/webservices/api_services/auth_service.dart';
 
+import '../../../utils/constant/constant.dart';
 import '../../../utils/servies/storage_service.dart';
 part 'auth_state.dart';
 
@@ -17,27 +19,53 @@ class AuthCubit extends Cubit<AuthState> {
 
   static AuthCubit get(BuildContext context) => BlocProvider.of(context);
 
+  LoginModel? loginModel;
+  bool loading = false;
   setLoginUser(String phone,String password,String fcmToken){
+    loading = true;
     emit(LoginLoadingState());
     AuthService.setLogin(phone, password, fcmToken).then((value){
       if(value?.success == true){
-        emit(LoginSuccessState(value?.data));
+        loading = false;
+        loginModel = value;
+        emit(LoginSuccessState(value));
         // CustomFlutterToast(value?.message);
         // CustomFlutterToast(value?.data?.accesstoken);
       }else {
+        loading = false;
         emit(ErrorLoginState(value?.message));
       }
     });
   }
 
-  setRegisterUser(String firstName,String lastName,String phone,String email,String password,String fcmToken,String type){
+
+  setRegisterUser(BuildContext context,String firstName,String lastName,String phone,String email,String password,String fcmToken,String type){
     emit(LoginLoadingState());
+    print('request register');
+    print(firstName);
+    print(lastName);
+    print(phone);
+    print(email);
+    print(password);
+    print(fcmToken);
+    print(type);
+    loading = true;
     AuthService.setRegister(firstName, lastName, phone, email, password, fcmToken,type).then((value){
       if(value?.success == true){
-        emit(LoginSuccessState(value?.data));
-        // CustomFlutterToast(value?.message);
+        loading = false;
+        loginModel = value;
+        emit(LoginSuccessState(value));
+        // Get.find<StorageService>()
+        //     .setToken('${value?.data?.accesstoken}');
+        // AppConstants.tokenSession = '${value?.data?.type}';
+        // CustomFlutterToast(AppConstants.tokenSession);
+        // Navigator.pushAndRemoveUntil(
+        //     context,
+        //     MaterialPageRoute(builder: (context) => const LoginScreen()),
+        //         (_) => false);
         // CustomFlutterToast(value?.data?.accesstoken);
       }else {
+        loading = false;
         emit(ErrorLoginState(value?.message));
       }
     });

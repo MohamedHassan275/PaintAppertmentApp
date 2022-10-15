@@ -8,8 +8,8 @@ class AuthInitial extends AuthState {}
 class LoginLoadingState extends AuthState {}
 
 class LoginSuccessState extends AuthState {
-  LoginResponseModel? loginResponseModel;
-  LoginSuccessState(this.loginResponseModel);
+  LoginModel? loginModel;
+  LoginSuccessState(this.loginModel);
 
 }
 class ErrorLoginState extends AuthState {
@@ -22,3 +22,5 @@ class LoginoutSuccessState extends AuthState {
   LoginoutSuccessState(this.changeProfileSuccessfully);
 
 }
+
+
