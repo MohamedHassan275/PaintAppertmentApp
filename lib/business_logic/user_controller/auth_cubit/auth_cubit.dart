@@ -55,15 +55,6 @@ class AuthCubit extends Cubit<AuthState> {
         loading = false;
         loginModel = value;
         emit(LoginSuccessState(value));
-        // Get.find<StorageService>()
-        //     .setToken('${value?.data?.accesstoken}');
-        // AppConstants.tokenSession = '${value?.data?.type}';
-        // CustomFlutterToast(AppConstants.tokenSession);
-        // Navigator.pushAndRemoveUntil(
-        //     context,
-        //     MaterialPageRoute(builder: (context) => const LoginScreen()),
-        //         (_) => false);
-        // CustomFlutterToast(value?.data?.accesstoken);
       }else {
         loading = false;
         emit(ErrorLoginState(value?.message));

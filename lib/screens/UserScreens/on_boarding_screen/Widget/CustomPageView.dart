@@ -19,7 +19,7 @@ class CustomPageView extends GetView<OnBoardingControllerImp> {
        CustomPageViewItem(title: 'title_boarding1'.tr,),
        CustomPageViewItem(title: 'title_boarding2'.tr,),
        CustomPageViewItem(title: 'title_boarding3'.tr,),
-       CustomPageViewItem(title: 'title_boarding4'.tr,),
+       CustomPageViewItem(title: 'title_boarding3'.tr,),
      ],
     );
   }

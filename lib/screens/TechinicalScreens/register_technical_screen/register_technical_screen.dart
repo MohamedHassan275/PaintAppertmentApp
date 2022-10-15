@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/login_screen/login_screen.dart';
-import 'package:pain_appertment/utils/constant/constant.dart';
-
 import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
@@ -12,9 +10,7 @@ import '../../../utils/componant/CustomTextFieldWidget.dart';
 import '../../../utils/constant/Themes.dart';
 import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/servies/storage_service.dart';
-import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
-import '../../UserScreens/home_main_screen/home_main_screen.dart';
 
 class RegisterTechnicalScreen extends StatefulWidget {
   const RegisterTechnicalScreen({Key? key}) : super(key: key);
@@ -304,41 +300,20 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
         btnCancelColor: Themes.ColorApp9,
         btnOkColor: Themes.ColorApp17,
         btnCancelOnPress: () {
-          Navigator.pop(context);
+        //  Navigator.pop(context);
         },
         btnOkOnPress: () {
-       Navigator.pop(context);
+      // Navigator.pop(context);
         },
       ).show();
     } else if (state is LoginSuccessState) {
-      Get.find<StorageService>()
-          .setToken('${state.loginModel?.data?.accesstoken}');
-      Get.find<StorageService>()
-          .setType('${state.loginModel?.data?.type}');
+      CustomFlutterToast('تم تسجيل اشتراكك . برجاء الانتظار لحين الاتصال بكم');
       _clearFormData();
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.success,
-        animType: AnimType.rightSlide,
-        title: 'تسجيل اشتراك',
-        desc: 'تم تسجيل اشتراكك . برجاء الانتظار لحين الاتصال بكم',
-        btnCancelText: 'الغاء',
-        btnOkText: 'موافق',
-        btnCancelColor: Themes.ColorApp9,
-        btnOkColor: Themes.ColorApp17,
-        btnCancelOnPress: () {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (_) => false);
-        },
-        btnOkOnPress: () {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (_) => false);
-        },
-      ).show();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+              (_) => false);
+
 
     }
   }

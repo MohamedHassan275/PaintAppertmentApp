@@ -7,8 +7,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../business_logic/OnBoardingController.dart';
 import '../../../../utils/constant/Themes.dart';
 
+
 class CustomDots extends StatelessWidget {
- const CustomDots();
+  const CustomDots();
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +26,17 @@ class CustomDots extends StatelessWidget {
           children: [
             ...List.generate(
                 4,
-                (index) => AnimatedContainer(
-                      margin: const EdgeInsets.all(2),
-                      child: Container(
-                        width: 3,
-                        height: controller.currentPage == index ? 20 : 12,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: controller.currentPage == index ? Themes.ColorApp1 : Themes.ColorApp11),
-                      ),
-                      duration: Duration(milliseconds: 900),
-                    ))
+                    (index) => AnimatedContainer(
+                  margin: const EdgeInsets.all(2),
+                  child: Container(
+                    width: 3,
+                    height: controller.currentPage == index ? 20 : 12,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: controller.currentPage == index ? Themes.ColorApp1 : Themes.ColorApp11),
+                  ),
+                  duration: Duration(milliseconds: 900),
+                ))
           ],
         ),
       ),

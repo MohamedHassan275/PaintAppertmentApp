@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../../utils/constant/Themes.dart';
 
 
-
 class CustomPageViewItem extends StatelessWidget {
 
   CustomPageViewItem({required this.title});
@@ -26,15 +25,15 @@ class CustomPageViewItem extends StatelessWidget {
             child: Container(
               width: Get.width,
               height: 185,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
               child: Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15 , vertical: doubleHeight),
                   child: Text(
                     title!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 17,
                       color: Themes.ColorApp8,
                       fontWeight: FontWeight.w500,

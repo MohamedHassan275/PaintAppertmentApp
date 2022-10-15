@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Get.offAll(const HomeMainScreen());
         }
       }else {
-        Get.offAll(const OnBoardingScreen());
+        Get.offAll(OnBoardingScreen());
       }
     });
   }

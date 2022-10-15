@@ -171,10 +171,10 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
         btnCancelColor: Themes.ColorApp9,
         btnOkColor: Themes.ColorApp17,
         btnCancelOnPress: () {
-          Navigator.pop(context);
+          //Navigator.canPop(context);
         },
         btnOkOnPress: () {
-          Navigator.pop(context);
+         // Navigator.canPop(context);
         },
       ).show();
     } else if (state is LoginSuccessState) {

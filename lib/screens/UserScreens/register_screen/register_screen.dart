@@ -311,32 +311,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
         },
       ).show();
     } else if (state is LoginSuccessState) {
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.success,
-        animType: AnimType.rightSlide,
-        title: 'نجاح',
-        desc: 'تم اشتراكك برجاء تسجيل الدخول',
-        btnCancelText: 'الغاء',
-        btnOkText: 'موافق',
-        btnCancelColor: Themes.ColorApp9,
-        btnOkColor: Themes.ColorApp17,
-        btnCancelOnPress: () {
-          _clearFormData();
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (_) => false);
-        },
-        btnOkOnPress: () {
-          _clearFormData();
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (_) => false);
-        },
-      ).show();
-
+      // CustomFlutterToast(state.loginResponseModel?.accesstoken);
+      Get.find<StorageService>()
+          .setToken('${state.loginModel?.data?.accesstoken}');
+      Get.find<StorageService>()
+          .setType('${state.loginModel?.data?.type}');
+    //  CustomFlutterToast(AppConstants.tokenSession);
+      _clearFormData();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeMainScreen()),
+              (_) => false);
     }
   }
 

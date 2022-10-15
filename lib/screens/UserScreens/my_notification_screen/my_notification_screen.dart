@@ -291,19 +291,19 @@ void _handleAddRateToTechnical(BuildContext context, AddRateState state) {
   if(state is AddRateErrorState){
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.error,
+      dialogType: DialogType.warning,
       animType: AnimType.rightSlide,
-      title: 'خطأ',
+      title: 'تقييم العامل',
       desc: state.statusResponse,
       btnCancelText: 'الغاء',
       btnOkText: 'موافق',
       btnCancelColor: Themes.ColorApp9,
       btnOkColor: Themes.ColorApp17,
       btnCancelOnPress: () {
-        Navigator.pop(context);
+     //   Navigator.pop(context);
       },
       btnOkOnPress: () {
-        Navigator.pop(context);
+      //  Navigator.pop(context);
       },
     ).show();
   }else if(state is AddRateSuccessState){
@@ -311,7 +311,7 @@ void _handleAddRateToTechnical(BuildContext context, AddRateState state) {
       context: context,
       dialogType: DialogType.success,
       animType: AnimType.rightSlide,
-      title: 'نجاح',
+      title: 'تقييم العامل',
       desc: state.statusResponse,
       btnCancelText: 'الغاء',
       btnOkText: 'موافق',

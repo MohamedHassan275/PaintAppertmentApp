@@ -147,10 +147,10 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                           btnCancelColor: Themes.ColorApp9,
                                           btnOkColor: Themes.ColorApp17,
                                           btnCancelOnPress: () {
-                                            Navigator.pop(context);
+                                           // Navigator.pop(context);
                                           },
                                           btnOkOnPress: () {
-                                            Navigator.pop(context);
+                                        //    Navigator.pop(context);
                                           },
                                         ).show();
                                       }else if(widget.newOrder.offer == 0){
@@ -190,10 +190,10 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
         btnCancelColor: Themes.ColorApp9,
         btnOkColor: Themes.ColorApp17,
         btnCancelOnPress: () {
-          Navigator.pop(context);
+        //  Navigator.pop(context);
         },
         btnOkOnPress: () {
-          Navigator.pop(context);
+        //  Navigator.pop(context);
         },
       ).show();
     } else if (state is AddPriceOrderSuccessfullyState) {

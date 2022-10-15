@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                               category.services!.isNotEmpty ?
                                               SizedBox(
-                                                  height: 150,
+                                                  height: 155,
                                                   width: Get.width,
                                                   child: ListView.builder(
                                                       shrinkWrap: true,
@@ -217,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   vertical: 0),
                                                               child: SizedBox(
                                                                 width: 175,
-                                                                height: 150,
+                                                                height: 155,
                                                                 child: Column(
                                                                   mainAxisAlignment:
                                                                       MainAxisAlignment
