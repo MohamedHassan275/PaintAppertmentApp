@@ -267,7 +267,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       '','0');
                                   // CustomFlutterToast('تم تسجيلك بنجاح');
                                 } else {
-                                  CustomFlutterToast('agree_to_terms2'.tr);
+                                  AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.warning,
+                                    animType: AnimType.rightSlide,
+                                    title: 'terms_and_conditions'.tr,
+                                    desc: 'agree_to_terms2'.tr,
+                                    btnCancelText: 'الغاء',
+                                    btnOkText: 'موافق',
+                                    btnCancelColor: Themes.ColorApp9,
+                                    btnOkColor: Themes.ColorApp17,
+                                    btnCancelOnPress: () {
+                                      //  Navigator.pop(context);
+                                    },
+                                    btnOkOnPress: () {
+                                      // Navigator.pop(context);
+                                    },
+                                  );
                                 }
                               }
                             }),
@@ -312,8 +328,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ).show();
     } else if (state is LoginSuccessState) {
       // CustomFlutterToast(state.loginResponseModel?.accesstoken);
-      Get.find<StorageService>()
-          .setToken('${state.loginModel?.data?.accesstoken}');
+      Get.find<StorageService>().setToken('${state.loginModel?.data?.accesstoken}');
       Get.find<StorageService>()
           .setType('${state.loginModel?.data?.type}');
     //  CustomFlutterToast(AppConstants.tokenSession);
