@@ -23,4 +23,14 @@ class LoginoutSuccessState extends AuthState {
 
 }
 
+class TechnicalRegisterSuccessState extends AuthState {
+  LoginModel? loginModel;
+  TechnicalRegisterSuccessState(this.loginModel);
+
+}
+class TechnicalRegisterErrorLoginState extends AuthState {
+  String? error;
+  TechnicalRegisterErrorLoginState(this.error);
+}
+
 

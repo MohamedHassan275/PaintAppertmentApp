@@ -216,7 +216,7 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.city}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -266,7 +266,7 @@ class MySendOrderListItem extends StatelessWidget {
                   children: [
                     const SizedBox(
                       child: Icon(
-                        Icons.location_on,
+                        Icons.account_balance_wallet,
                         color: Themes.ColorApp1,
                       ),
                     ),
@@ -274,7 +274,29 @@ class MySendOrderListItem extends StatelessWidget {
                       width: widthValue * .5,
                     ),
                     Text(
-                      '${currentOrder.governorate} ${currentOrder.city}',
+                      'request_price'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                        color: Themes.ColorApp15,
+                      ),
+                    ),
+                    SizedBox(
+                      width: widthValue * .5,
+                    ),
+                    Text(
+                      '${currentOrder.offerCost}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                        color: Themes.ColorApp15,
+                      ),
+                    ),
+                    SizedBox(
+                      width: widthValue * .5,
+                    ),
+                    Text(
+                      'sar'.tr,
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,

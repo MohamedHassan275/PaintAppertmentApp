@@ -181,7 +181,7 @@ class CompanyDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Your_location'.tr,
+                      'order_details'.tr,
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -190,7 +190,9 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                      '${myCurrentOrderModel?.description}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,

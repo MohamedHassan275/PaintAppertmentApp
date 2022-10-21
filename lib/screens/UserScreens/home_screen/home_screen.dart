@@ -188,18 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           (context, index) {
                                                         return GestureDetector(
                                                           onTap: () {
-                                                            // CustomFlutterToast(category.name);
-                                                            // print('service ${category.id}');
-                                                            // CustomFlutterToast(category.services![index].id.toString());
-                                                            // CustomFlutterToast(category.services![index].name);
 
-                                                            homeCubit.showProductDetails(category.services![index].id.toString());
-                                                            Navigator.of(
-                                                                    context)
-                                                                .push(MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            const DetailsServiceScreen()));
+                                                            Get.to(DetailsServiceScreen(services: category.services![index],));
                                                           },
                                                           child: Card(
                                                             shape: RoundedRectangleBorder(
@@ -432,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: Get.width,
                   height: Get.height,
                   child: const Center(
-                    child: Text(''),
+                    child: Text('ddddddd'),
                   ),
                 );
               }

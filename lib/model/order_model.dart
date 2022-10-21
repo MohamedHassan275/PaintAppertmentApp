@@ -29,7 +29,7 @@ class OrderModel {
 
 class OrderResponseModel {
   int? id;
-  int? orderId;
+  dynamic orderId;
   String? service;
   String? technicalName;
   String? orderNumber;

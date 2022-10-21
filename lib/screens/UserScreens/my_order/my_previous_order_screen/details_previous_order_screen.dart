@@ -103,8 +103,8 @@ class DetailsPreviousOrderScreen extends StatelessWidget {
                                           ),
                                           Row(
                                             children: [
-                                              const Text(
-                                                '${350}',
+                                               Text(
+                                                '${previousOrder.offerCost}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 16,

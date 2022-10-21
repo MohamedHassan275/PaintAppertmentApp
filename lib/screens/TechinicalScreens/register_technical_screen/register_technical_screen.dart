@@ -25,6 +25,8 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
   TextEditingController MobilePhone = TextEditingController();
   TextEditingController LastName = TextEditingController();
   TextEditingController Email = TextEditingController();
+  TextEditingController Country = TextEditingController();
+  TextEditingController State = TextEditingController();
   TextEditingController Password = TextEditingController();
   TextEditingController ConfirmPassword = TextEditingController();
   FocusNode? _focusNodePassword;
@@ -99,6 +101,24 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
                           keyboardType: TextInputType.number,
                           textEditingController: MobilePhone,
                           maxLength: 11),
+                      SizedBox(
+                        height: heightValue * 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                              child: CustomTextFieldWidget(
+                                  title: 'country'.tr,
+                                  keyboardType: TextInputType.text,
+                                  textEditingController: Country)),
+                          Expanded(
+                              child: CustomTextFieldWidget(
+                                  title: 'state'.tr,
+                                  keyboardType: TextInputType.text,
+                                  textEditingController: State)),
+                        ],
+                      ),
                       SizedBox(
                         height: heightValue * 1,
                       ),
@@ -254,12 +274,14 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
                               //     LastName.text, Email.text, Password.text) : CustomFlutterToast('agree_to_terms2'.tr);
                               if (form.currentState!.validate()) {
                                 if (isCheckAccepted == true) {
-                                  authCubit.setRegisterUser(
+                                  authCubit.setRegisterTechnical(
                                     context,
                                       FirstName.text,
                                       LastName.text,
                                       MobilePhone.text,
                                       Email.text,
+                                      Country.text,
+                                      State.text,
                                       Password.text,
                                       '','1');
                                   // CustomFlutterToast('تم تسجيلك بنجاح');
@@ -288,7 +310,7 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
   }
 
   void _handleLoginListener(BuildContext context, AuthState state) {
-    if (state is ErrorLoginState) {
+    if (state is TechnicalRegisterErrorLoginState) {
       AwesomeDialog(
         context: context,
         dialogType: DialogType.error,
@@ -306,14 +328,31 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
       // Navigator.pop(context);
         },
       ).show();
-    } else if (state is LoginSuccessState) {
-      CustomFlutterToast('تم تسجيل اشتراكك . برجاء الانتظار لحين الاتصال بكم');
+    } else if (state is TechnicalRegisterSuccessState) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'تم تسجيل اشتراكك',
+        desc: 'تم تسجيل اشتراكك . برجاء الانتظار لحين الاتصال بكم',
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (_) => false);
+        },
+        btnOkOnPress: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (_) => false);
+        },
+      ).show();
       _clearFormData();
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-              (_) => false);
-
 
     }
   }

@@ -39,7 +39,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
 
-  setRegisterUser(BuildContext context,String firstName,String lastName,String phone,String email,String password,String fcmToken,String type){
+  setRegisterUser(BuildContext context,String firstName,String lastName,String phone,String email,String governorate,String city,
+      String password,String fcmToken,String type){
     emit(LoginLoadingState());
     print('request register');
     print(firstName);
@@ -50,7 +51,7 @@ class AuthCubit extends Cubit<AuthState> {
     print(fcmToken);
     print(type);
     loading = true;
-    AuthService.setRegister(firstName, lastName, phone, email, password, fcmToken,type).then((value){
+    AuthService.setRegister(firstName, lastName, phone, email,governorate,city, password, fcmToken,type).then((value){
       if(value?.success == true){
         loading = false;
         loginModel = value;
@@ -61,6 +62,31 @@ class AuthCubit extends Cubit<AuthState> {
       }
     });
   }
+
+  setRegisterTechnical(BuildContext context,String firstName,String lastName,String phone,String email,String governorate,String city,
+      String password,String fcmToken,String type){
+    emit(LoginLoadingState());
+    print('request register');
+    print(firstName);
+    print(lastName);
+    print(phone);
+    print(email);
+    print(password);
+    print(fcmToken);
+    print(type);
+    loading = true;
+    AuthService.setRegister(firstName, lastName, phone, email,governorate,city, password, fcmToken,type).then((value){
+      if(value?.success == true){
+        loading = false;
+        loginModel = value;
+        emit(TechnicalRegisterSuccessState(value));
+      }else {
+        loading = false;
+        emit(TechnicalRegisterErrorLoginState(value?.message));
+      }
+    });
+  }
+
 
   setLogout(BuildContext context){
     emit(LoginLoadingState());

@@ -28,6 +28,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController MobilePhone = TextEditingController();
   TextEditingController LastName = TextEditingController();
   TextEditingController Email = TextEditingController();
+  TextEditingController Country = TextEditingController();
+  TextEditingController State = TextEditingController();
   TextEditingController Password = TextEditingController();
   TextEditingController ConfirmPassword = TextEditingController();
   FocusNode? _focusNodePassword;
@@ -120,6 +122,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           keyboardType: TextInputType.emailAddress,
                           Controller: Email,
                           hintText: 'email_address'.tr),
+                      SizedBox(
+                        height: heightValue * 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                              child: CustomTextFieldWidget(
+                                  title: 'country'.tr,
+                                  keyboardType: TextInputType.text,
+                                  textEditingController: Country)),
+                          Expanded(
+                              child: CustomTextFieldWidget(
+                                  title: 'state'.tr,
+                                  keyboardType: TextInputType.text,
+                                  textEditingController: State)),
+                        ],
+                      ),
                       SizedBox(
                         height: heightValue * 1,
                       ),
@@ -263,6 +283,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       LastName.text,
                                       MobilePhone.text,
                                       Email.text,
+                                      Country.text,
+                                      State.text,
                                       Password.text,
                                       '','0');
                                   // CustomFlutterToast('تم تسجيلك بنجاح');

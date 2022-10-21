@@ -34,6 +34,7 @@ class _MyNotificationScreenState extends State<MyNotificationScreen> {
     super.initState();
    // loadData();
   }
+
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
