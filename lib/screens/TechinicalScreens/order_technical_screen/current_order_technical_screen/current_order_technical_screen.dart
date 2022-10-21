@@ -181,7 +181,7 @@ class CompanyDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'order_details'.tr,
+                      'order_details2'.tr,
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -310,7 +310,7 @@ class MySendOrderListItem extends StatelessWidget {
                     ),
                     child: Center(
                       child:  Text(
-                        'order_details'.tr,
+                        'order_details2'.tr,
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,

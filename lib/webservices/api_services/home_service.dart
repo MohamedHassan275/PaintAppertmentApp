@@ -1,11 +1,15 @@
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/utils/servies/storage_service.dart';
 
 import '../../model/home_model.dart';
 import '../../model/login_model.dart';
 import '../../model/show_product_details.dart';
 import '../../shared/network/api_helper.dart';
+import '../../utils/constant/Themes.dart';
 import '../../utils/constant/api_constant.dart';
 import '../../utils/constant/constant.dart';
 import '../../utils/constant/custom_toast.dart';
@@ -41,7 +45,7 @@ class HomeService{
     return homeModel;
   }
 
-static Future<ShowProductDetails?> showProductDetails(String productId) async {
+static Future<ShowProductDetails?> showProductDetails(BuildContext context, String productId) async {
   ShowProductDetails? showProductDetails;
 
     try {
@@ -63,6 +67,25 @@ static Future<ShowProductDetails?> showProductDetails(String productId) async {
         print('HEADERS: ${e.response?.headers}');
       } else {
         // Error due to setting up or sending the request
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          animType: AnimType.rightSlide,
+          title: 'خطأ',
+          desc: 'خطا ف التحميل . حاول مرة اخري ',
+          btnCancelText: 'الغاء',
+          btnOkText: 'موافق',
+          btnCancelColor: Themes.ColorApp9,
+          btnOkColor: Themes.ColorApp17,
+          btnCancelOnPress: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder:
+            (context) => const HomeMainScreen()));
+          },
+          btnOkOnPress: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder:
+                (context) => const HomeMainScreen()));
+          },
+        ).show();
         print('Error sending request!');
         print(e.message);
       }

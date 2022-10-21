@@ -32,7 +32,7 @@ class _DetailsServiceScreenState extends State<DetailsServiceScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<HomeCubit>(context).showProductDetails(widget.services!.id.toString());
+    BlocProvider.of<HomeCubit>(context).showProductDetails(context,widget.services!.id.toString());
   }
 
   @override
@@ -135,7 +135,7 @@ class _DetailsServiceScreenState extends State<DetailsServiceScreen> {
                                 style: const TextStyle(
                                   color: blackColor,
                                   fontWeight: FontWeight.w300,
-                                  fontSize: 17,
+                                  fontSize: 15,
                                 ),
                               ),
                               SizedBox(

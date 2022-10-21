@@ -264,18 +264,17 @@ class MySendOrderListItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Row(
                   children: [
-                    const SizedBox(
-                      child: Icon(
-                        Icons.account_balance_wallet,
-                        color: Themes.ColorApp1,
-                      ),
-                    ),
-                    SizedBox(
-                      width: widthValue * .5,
-                    ),
                     Text(
                       'request_price'.tr,
                       style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                    const Text(
+                      ' : ',
+                      style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                         color: Themes.ColorApp15,
@@ -322,7 +321,7 @@ class MySendOrderListItem extends StatelessWidget {
                     ),
                     child: Center(
                       child:  Text(
-                        'order_details'.tr,
+                        'order_details2'.tr,
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,

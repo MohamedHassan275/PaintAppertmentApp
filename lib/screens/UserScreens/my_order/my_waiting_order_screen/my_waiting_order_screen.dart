@@ -213,7 +213,7 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.city}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -317,9 +317,11 @@ class MyWaitingOrderItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Row(
                   children: [
-                    const SizedBox(
-                      child: Icon(
-                          Icons.location_on,
+                    Text(
+                      'order_details2'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
                         color: Themes.ColorApp1,
                       ),
                     ),
@@ -327,7 +329,7 @@ class MyWaitingOrderItem extends StatelessWidget {
                       width: widthValue * .5,
                     ),
                     Text(
-                      '${MyNewOder.governorate} ${MyNewOder.city}',
+                      '${MyNewOder.description}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,

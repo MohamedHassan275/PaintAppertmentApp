@@ -422,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: Get.width,
                   height: Get.height,
                   child: const Center(
-                    child: Text('ddddddd'),
+                    child: Text(''),
                   ),
                 );
               }

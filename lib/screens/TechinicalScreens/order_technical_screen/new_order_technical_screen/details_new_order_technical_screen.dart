@@ -103,7 +103,7 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'order_details'.tr, widget.newOrder.description ?? 'لا يوجد تفاصيل للطلب',''),
+                                  DetailsOrder(widthValue, 'order_details2'.tr, widget.newOrder.description ?? 'لا يوجد تفاصيل للطلب',''),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),

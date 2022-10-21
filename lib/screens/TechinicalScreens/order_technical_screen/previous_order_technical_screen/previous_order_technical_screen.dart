@@ -199,7 +199,7 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                      '${myCurrentOrderModel?.governorate} - ${myCurrentOrderModel?.city}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -248,20 +248,45 @@ class MyPreviousOrderItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
-                    SizedBox(width: widthValue * 1,),
-                    Text(
-                      'received'.tr,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: Themes.ColorApp1,
-                      ),
+                    Row(
+                      children: [
+                        Image.asset(Assets.iconsWalletMenuIcon,width: 15,height: 15,fit: BoxFit.contain,),
+                        SizedBox(width: widthValue * .5,),
+                        Text(
+                          previousOrder.offerCost,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Themes.ColorApp1,
+                          ),
+                        ),
+                        SizedBox(width: widthValue * .5,),
+                        Text(
+                          'sar'.tr,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Themes.ColorApp1,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: widthValue * 1,),
-                    const Icon(Icons.subdirectory_arrow_left,color: Themes.ColorApp1,size: 25,)
+                    Row(
+                      children: [
+                        Text(
+                          'received'.tr,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Themes.ColorApp1,
+                          ),
+                        ),
+                        SizedBox(width: widthValue * .5,),
+                        const Icon(Icons.subdirectory_arrow_left,color: Themes.ColorApp1,size: 25,),
+                      ],
+                    )
                   ],
                 ),
               ),

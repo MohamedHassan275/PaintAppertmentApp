@@ -167,7 +167,7 @@ class MySendOrderListItem extends StatelessWidget {
                     ),
                     child: Center(
                       child:  Text(
-                        'order_details'.tr,
+                        'order_details2'.tr,
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
@@ -368,7 +368,7 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.governorate}',
+                      '${myCurrentOrderModel?.governorate} - ${myCurrentOrderModel?.city}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,

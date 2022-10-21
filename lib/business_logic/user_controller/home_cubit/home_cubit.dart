@@ -28,9 +28,9 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  showProductDetails(String productId){
+  showProductDetails(BuildContext context,String productId){
     emit(ShowDetailsLoadingState());
-    HomeService.showProductDetails(productId).then((value){
+    HomeService.showProductDetails(context,productId).then((value){
       if(value?.success == true){
         emit(ShowDetailsSuccessState(value?.data));
       //  CustomFlutterToast(value?.data?.name);

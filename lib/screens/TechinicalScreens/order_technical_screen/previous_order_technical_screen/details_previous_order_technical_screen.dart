@@ -110,9 +110,9 @@ class DetailsPreviousOrderTechnicalScreen extends StatelessWidget {
                                           ),
                                           Row(
                                             children: [
-                                              const Text(
-                                                '${350}',
-                                                style:  TextStyle(
+                                              Text(
+                                                '${previousOrder.offerCost}',
+                                                style:  const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 16,
                                                   color: Themes.ColorApp1,

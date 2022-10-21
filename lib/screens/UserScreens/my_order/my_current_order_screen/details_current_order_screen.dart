@@ -92,7 +92,8 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
-                                    DetailsOrder(widthValue, 'type_of_casting'.tr, '${widget.newOrder.service ?? '----'}',''),
+                                    DetailsOrder(widthValue, 'type_of_casting'.tr, widget.newOrder.service == null ? '----' :
+                                    '${widget.newOrder.service}',''),
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
@@ -116,7 +117,7 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
-                                    DetailsOrder(widthValue, 'details'.tr, '${widget.newOrder.description}',''),
+                                    DetailsOrder(widthValue, 'details2'.tr, '${widget.newOrder.description}',''),
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
