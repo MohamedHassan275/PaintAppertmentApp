@@ -10,19 +10,19 @@ class OrderModel {
     if (json['data'] != null) {
       data = <OrderResponseModel>[];
       json['data'].forEach((v) {
-        data!.add(new OrderResponseModel.fromJson(v));
+        data!.add(OrderResponseModel.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -30,6 +30,8 @@ class OrderModel {
 class OrderResponseModel {
   int? id;
   dynamic orderId;
+  String? title;
+  dynamic body;
   String? service;
   String? technicalName;
   String? orderNumber;
@@ -50,6 +52,8 @@ class OrderResponseModel {
       {this.id,
         this.orderId,
         this.service,
+        this.title,
+        this.body,
         this.technicalName,
         this.orderNumber,
         this.flatArea,
@@ -69,6 +73,8 @@ class OrderResponseModel {
     id = json['id'];
     orderId = json['order_id'];
     service = json['service'];
+    title = json['title'];
+    body = json['body'];
     technicalName = json['technical_name'];
     orderNumber = json['order_number'];
     flatArea = json['flat_area'];
@@ -86,24 +92,26 @@ class OrderResponseModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['order_id'] = this.orderId;
-    data['service'] = this.service;
-    data['technical_name'] = this.technicalName;
-    data['order_number'] = this.orderNumber;
-    data['flat_area'] = this.flatArea;
-    data['rooms'] = this.rooms;
-    data['bathrooms'] = this.bathrooms;
-    data['description'] = this.description;
-    data['firstname'] = this.firstname;
-    data['lastname'] = this.lastname;
-    data['phone'] = this.phone;
-    data['governorate'] = this.governorate;
-    data['city'] = this.city;
-    data['offer_cost'] = this.offerCost;
-    data['status'] = this.status;
-    data['offer'] = this.offer;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['order_id'] = orderId;
+    data['service'] = service;
+    data['title'] = title;
+    data['body'] = body;
+    data['technical_name'] = technicalName;
+    data['order_number'] = orderNumber;
+    data['flat_area'] = flatArea;
+    data['rooms'] = rooms;
+    data['bathrooms'] = bathrooms;
+    data['description'] = description;
+    data['firstname'] = firstname;
+    data['lastname'] = lastname;
+    data['phone'] = phone;
+    data['governorate'] = governorate;
+    data['city'] = city;
+    data['offer_cost'] = offerCost;
+    data['status'] = status;
+    data['offer'] = offer;
     return data;
   }
 }

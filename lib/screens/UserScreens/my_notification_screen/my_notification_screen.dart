@@ -106,10 +106,12 @@ class MySendOrderListItem extends StatelessWidget {
       //   Get.to(DetailsSenderOrderScreen());
       // },
       child: Card(
-        elevation: 2,
+        elevation: 3,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15)
         ),
+        shadowColor: Themes.whiteColor,
+        color: Themes.whiteColor,
         child: Padding(
           padding: const EdgeInsets.all(5.0),
           child: Column(
@@ -119,7 +121,7 @@ class MySendOrderListItem extends StatelessWidget {
               SizedBox(height: heightValue * 1,),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5),
-                child: Divider(height: 10, color: Themes.ColorApp2,),
+                child: Divider(height: 10, color: Themes.ColorApp8,),
               ),
               SizedBox(height: heightValue * .5,),
               Padding(
@@ -146,47 +148,53 @@ class MySendOrderListItem extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: heightValue * 1,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: GestureDetector(
-                  onTap: (){
-                    if(currentOrder.status == 0){
-                      Get.bottomSheet(
-                        ChangeLanguageBottomSheetItem(heightValue: heightValue,orderResponseModel: currentOrder),
-                        backgroundColor: Themes.whiteColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                topRight: const Radius.circular(
-                                    25))),
-                        elevation: 2.0,
-                      );
-                    }else {
-                      CustomFlutterToast('لقد قمت بتقييم هذا العامل');
-                    }
-                  },
-                  child: Container(
-                    width: Get.width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Themes.ColorApp14,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child:  Text(
-                       currentOrder.status == 0 ? 'تقييم العامل' : 'قمت بتقيم هذا العامل',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: Themes.ColorApp1,
+              currentOrder.title!.contains('قبول الطلب') ?
+                  Container() :
+              Column(
+                children: [
+                  SizedBox(height: heightValue * 1,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: GestureDetector(
+                      onTap: (){
+                        if(currentOrder.status == 0){
+                          Get.bottomSheet(
+                            ChangeLanguageBottomSheetItem(heightValue: heightValue,orderResponseModel: currentOrder),
+                            backgroundColor: Themes.whiteColor,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(25),
+                                    topRight: Radius.circular(
+                                        25))),
+                            elevation: 2.0,
+                          );
+                        }else {
+                          CustomFlutterToast('لقد قمت بتقييم هذا العامل');
+                        }
+                      },
+                      child: Container(
+                        width: Get.width,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Themes.ColorApp14,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Center(
+                          child:  Text(
+                           currentOrder.status == 0 ? 'تقييم العامل' : 'قمت بتقيم هذا العامل',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Themes.ColorApp1,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
-              SizedBox(height: heightValue * 1,)
+              SizedBox(height: heightValue * .5,)
             ],
           ),
         ),
@@ -437,6 +445,8 @@ class CompanyDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -454,10 +464,10 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Image(
-                        image: const AssetImage(Assets.imagesFactoryNamIcon),
-                        fit: BoxFit.contain,
-                        width: 35,
-                        height: 35,
+                        image: const AssetImage(Assets.imagesLogoApp),
+                        fit: BoxFit.fill,
+                        width: 50,
+                        height: 50,
                       ),
                     ),
                   ),
@@ -477,7 +487,7 @@ class CompanyDetails extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 13,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
             ],
@@ -497,7 +507,7 @@ class CompanyDetails extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Themes.ColorApp2,
+                      color: Themes.ColorApp8,
                     ),
                   ),
                   SizedBox(width: widthValue * .2,),
@@ -519,12 +529,12 @@ class CompanyDetails extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Themes.ColorApp2,
+                      color: Themes.ColorApp8,
                     ),
                   ),
                   SizedBox(width: widthValue * .2,),
                   Text(
-                    '${myCurrentOrderModel!.flatArea}',
+                    ':  ${myCurrentOrderModel!.flatArea}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -556,16 +566,16 @@ class CompanyDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'name_client'.tr,
+                      'name'.tr,
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Themes.ColorApp2,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                      '${myCurrentOrderModel?.technicalName}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -576,6 +586,49 @@ class CompanyDetails extends StatelessWidget {
                 ),
               ],
             )
+        ),
+        SizedBox(height: heightValue * .3,),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'status_order'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp8,
+                      ),
+                    ),
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      ' : ${myCurrentOrderModel?.title}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        ),
+        SizedBox(height: heightValue * .3,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            '${myCurrentOrderModel?.body}',
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 13,
+              color: Themes.ColorApp1,
+            ),
+          ),
         ),
       ],
     );

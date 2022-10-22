@@ -105,10 +105,10 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Image(
-                        image: const AssetImage(Assets.imagesFactoryNamIcon),
-                        fit: BoxFit.contain,
-                        width: 35,
-                        height: 35,
+                        image: const AssetImage(Assets.imagesLogoApp),
+                        fit: BoxFit.fill,
+                        width: 50,
+                        height: 50,
                       ),
                     ),
                   ),

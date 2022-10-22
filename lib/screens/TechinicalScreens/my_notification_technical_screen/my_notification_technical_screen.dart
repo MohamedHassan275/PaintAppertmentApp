@@ -286,6 +286,8 @@ class CompanyDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -303,10 +305,10 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Image(
-                        image: const AssetImage(Assets.imagesFactoryNamIcon),
-                        fit: BoxFit.contain,
-                        width: 35,
-                        height: 35,
+                        image: const AssetImage(Assets.imagesLogoApp),
+                        fit: BoxFit.fill,
+                        width: 50,
+                        height: 50,
                       ),
                     ),
                   ),
@@ -326,7 +328,7 @@ class CompanyDetails extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 13,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
             ],
@@ -346,7 +348,7 @@ class CompanyDetails extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Themes.ColorApp2,
+                      color: Themes.ColorApp8,
                     ),
                   ),
                   SizedBox(width: widthValue * .2,),
@@ -368,12 +370,12 @@ class CompanyDetails extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Themes.ColorApp2,
+                      color: Themes.ColorApp8,
                     ),
                   ),
                   SizedBox(width: widthValue * .2,),
                   Text(
-                    '${myCurrentOrderModel!.flatArea}',
+                    ':  ${myCurrentOrderModel!.flatArea}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -405,16 +407,16 @@ class CompanyDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'name_client'.tr,
+                      'name'.tr,
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Themes.ColorApp2,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                      ' : ${myCurrentOrderModel?.technicalName}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -425,6 +427,51 @@ class CompanyDetails extends StatelessWidget {
                 ),
               ],
             )
+        ),
+        SizedBox(height: heightValue * .3,),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'status_order'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp8,
+                      ),
+                    ),
+                    SizedBox(width: widthValue * .5,),
+                    Text(
+                      ' : ${myCurrentOrderModel?.title}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Themes.ColorApp1,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        ),
+        SizedBox(height: heightValue * .3,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            '${myCurrentOrderModel?.body}',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 15,
+              color: Themes.ColorApp8,
+            ),
+          ),
         ),
       ],
     );
