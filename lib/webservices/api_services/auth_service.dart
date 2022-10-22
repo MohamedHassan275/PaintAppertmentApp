@@ -50,7 +50,7 @@ class AuthService{
   }
 
 
-  static Future<LoginModel?> setRegister(String firstName,String lastName,String phone,String email,String governorate,String city,
+  static Future<LoginModel?> setRegister(String firstName,String lastName,String phone,String email,String service, String governorate,String city,
       String password,String fcmToken,String type) async {
     LoginModel? loginModel;
 
@@ -59,6 +59,7 @@ class AuthService{
       Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.register,data: {
         "firstname" : firstName,
         "lastname" : lastName,
+        "service" : service,
         "phone" : phone,
         "governorate" : governorate,
         "city" : city,

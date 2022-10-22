@@ -2,18 +2,22 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pain_appertment/screens/TechinicalScreens/chose_tehnical_service_screen/chose_tehnical_service_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/login_screen/login_screen.dart';
 import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
 import '../../../utils/componant/CustomTextFieldWidget.dart';
+import '../../../utils/componant/condition_widget.dart';
 import '../../../utils/constant/Themes.dart';
 import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/servies/storage_service.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
 
 class RegisterTechnicalScreen extends StatefulWidget {
-  const RegisterTechnicalScreen({Key? key}) : super(key: key);
+  const RegisterTechnicalScreen({Key? key,this.choseService,this.firstName,this.mobilePhone,this.lastName,
+    this.email,this.country,this.state,this.password,this.confirmPassword,this.choseServiceId}) : super(key: key);
+  final String? choseService,choseServiceId,firstName,mobilePhone,lastName,email,country,state,password,confirmPassword;
 
   @override
   _RegisterTechnicalScreenState createState() => _RegisterTechnicalScreenState();
@@ -37,6 +41,22 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
   bool isCheckAccepted = false;
   GlobalKey<FormState> form = GlobalKey<FormState>();
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    FirstName.text = widget.firstName == null ? '': '${widget.firstName}';
+    LastName.text = widget.lastName == null ? '': '${widget.lastName}';
+    MobilePhone.text = widget.mobilePhone == null ? '': '${widget.mobilePhone}';
+    Email.text = widget.email == null ? '': '${widget.email}';
+    Country.text = widget.country == null ? '': '${widget.country}';
+    State.text = widget.state == null ? '': '${widget.state}';
+    Password.text = widget.password == null ? '': '${widget.password}';
+    ConfirmPassword.text = widget.confirmPassword == null ? '': '${widget.confirmPassword}';
+
+
+  }
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
@@ -118,6 +138,20 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
                                   keyboardType: TextInputType.text,
                                   textEditingController: State)),
                         ],
+                      ),
+                      SizedBox(
+                        height: heightValue * 1,
+                      ),
+                      ConditionWidget(
+                        title: widget.choseService == null ? 'chose_service'.tr : '${widget.choseService}',
+                        color: Themes.whiteColor,
+                        textColor: Themes.ColorApp8,
+                        onTap: () {
+                          Get.to(ChoseTechnicalServiceScreen(
+                            firstName: FirstName.text,lastName: LastName.text,country: Country.text, email: Email.text,
+                            mobilePhone: MobilePhone.text,password: Password.text,state: State.text, choseService: widget.choseService,
+                            choseServiceId: widget.choseServiceId,confirmPassword: ConfirmPassword.text,));
+                        },
                       ),
                       SizedBox(
                         height: heightValue * 1,
@@ -274,17 +308,40 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
                               //     LastName.text, Email.text, Password.text) : CustomFlutterToast('agree_to_terms2'.tr);
                               if (form.currentState!.validate()) {
                                 if (isCheckAccepted == true) {
-                                  authCubit.setRegisterTechnical(
-                                    context,
-                                      FirstName.text,
-                                      LastName.text,
-                                      MobilePhone.text,
-                                      Email.text,
-                                      Country.text,
-                                      State.text,
-                                      Password.text,
-                                      '','1');
-                                  // CustomFlutterToast('تم تسجيلك بنجاح');
+                                  if(widget.choseService != null){
+                                    print('choseServiceId');
+                                    print(widget.choseServiceId);
+                                    authCubit.setRegisterTechnical(
+                                      context,
+                                        FirstName.text,
+                                        LastName.text,
+                                        MobilePhone.text,
+                                        Email.text,
+                                        '${widget.choseServiceId}',
+                                        Country.text,
+                                        State.text,
+                                        Password.text,
+                                        '','1');
+                                   // CustomFlutterToast('تم تسجيلك بنجاح');
+                                  }else {
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      animType: AnimType.rightSlide,
+                                      title: 'خطأ',
+                                      desc: 'من فصلك اختر الخدمة',
+                                      btnCancelText: 'الغاء',
+                                      btnOkText: 'موافق',
+                                      btnCancelColor: Themes.ColorApp9,
+                                      btnOkColor: Themes.ColorApp17,
+                                      btnCancelOnPress: () {
+                                        //  Navigator.pop(context);
+                                      },
+                                      btnOkOnPress: () {
+                                        // Navigator.pop(context);
+                                      },
+                                    ).show();
+                                  }
                                 } else {
                                   CustomFlutterToast('agree_to_terms2'.tr);
                                 }

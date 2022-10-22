@@ -39,7 +39,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
 
-  setRegisterUser(BuildContext context,String firstName,String lastName,String phone,String email,String governorate,String city,
+  setRegisterUser(BuildContext context,String firstName,String lastName,String phone,String email,String service, String governorate,String city,
       String password,String fcmToken,String type){
     emit(LoginLoadingState());
     print('request register');
@@ -51,7 +51,7 @@ class AuthCubit extends Cubit<AuthState> {
     print(fcmToken);
     print(type);
     loading = true;
-    AuthService.setRegister(firstName, lastName, phone, email,governorate,city, password, fcmToken,type).then((value){
+    AuthService.setRegister(firstName, lastName, phone, email,governorate,city, service,password, fcmToken,type).then((value){
       if(value?.success == true){
         loading = false;
         loginModel = value;
@@ -63,7 +63,7 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  setRegisterTechnical(BuildContext context,String firstName,String lastName,String phone,String email,String governorate,String city,
+  setRegisterTechnical(BuildContext context,String firstName,String lastName,String phone,String email,String service, String governorate,String city,
       String password,String fcmToken,String type){
     emit(LoginLoadingState());
     print('request register');
@@ -75,7 +75,7 @@ class AuthCubit extends Cubit<AuthState> {
     print(fcmToken);
     print(type);
     loading = true;
-    AuthService.setRegister(firstName, lastName, phone, email,governorate,city, password, fcmToken,type).then((value){
+    AuthService.setRegister(firstName, lastName, phone, email, service, governorate,city, password, fcmToken,type).then((value){
       if(value?.success == true){
         loading = false;
         loginModel = value;

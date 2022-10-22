@@ -12,9 +12,9 @@ class AddRateCubit extends Cubit<AddRateState> {
   static AddRateCubit get (BuildContext context) => BlocProvider.of(context);
 
 
-  addRateToTechnicalFromUser(String serviceId,double rate,String comment){
+  addRateToTechnicalFromUser(String serviceId,String orderId,double rate,String comment){
     emit(AddRateLoadingState());
-    AddRateService.addRateToTechnical(serviceId, rate, comment).then((value){
+    AddRateService.addRateToTechnical(serviceId, orderId, rate, comment).then((value){
       if(value?.success == true){
         emit(AddRateSuccessState(value?.message));
       }else {

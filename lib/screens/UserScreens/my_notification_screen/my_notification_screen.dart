@@ -267,8 +267,9 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
                             //  CustomFlutterToast(rateTechnicalTextController.text);
                               print('rating');
                               print(rating);
-                              addRateCubit.addRateToTechnicalFromUser(widget.orderResponseModel.orderId.toString(), rating,
-                                  rateTechnicalTextController.text);
+                              addRateCubit.addRateToTechnicalFromUser(widget.orderResponseModel.id.toString(),
+                                  widget.orderResponseModel.orderId.toString(),
+                                  rating, rateTechnicalTextController.text);
                             }
                           }),
                           SizedBox(height: widget.heightValue! * 2,)

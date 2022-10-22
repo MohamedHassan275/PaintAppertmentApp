@@ -25,173 +25,188 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<SettingCubit>(context).showUserDetails();
+  }
+
   @override
   Widget build(BuildContext context) {
     var widthValue = Get.width * 0.024;
     var heightValue = Get.height * 0.024;
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-            child: SizedBox(
-              width: Get.width,
-              child: BlocBuilder<SettingCubit,SettingState>(
-                builder: (context, state) {
-                  if( state is SettingSuccessfullyState){
-                    var mobilePhoneList = '${state.settingResponseModel?.socialmedia![0].phoneNumbers}'.split(',');
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: heightValue * 1.5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SettingCategory(
-                                      onTap: () {},
-                                      title: 'share_app'.tr,
-                                      imageTitle: Assets.iconsShare,
-                                      heightValue: heightValue),
-                                  SizedBox(
-                                    width: widthValue * 1.5,
-                                  ),
-                                  SettingCategory(
-                                      onTap: () => Get.to(const HomeMainScreen()),
-                                      title: 'terms_and_conditions'.tr,
-                                      imageTitle: Assets.iconsTermsConditionsImage,
-                                      heightValue: heightValue),
-                                  SizedBox(
-                                    width: widthValue * 1.5,
-                                  ),
-                                  SettingCategory(
-                                      onTap: () =>
-                                          Get.to(const HomeMainScreen()),
-                                      title: 'privacy_policy'.tr,
-                                      imageTitle: Assets.imagesPrivacyImage,
-                                      heightValue: heightValue),
-                                ],
-                              ),
-                              SizedBox(
-                                height: heightValue * 1,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SettingCategory(
-                                      onTap: () => Get.to(const HomeMainScreen()),
-                                      title: 'about_app'.tr,
-                                      imageTitle: Assets.imagesAboutAppImage,
-                                      heightValue: heightValue),
-                                  SizedBox(
-                                    width: widthValue * 1.5,
-                                  ),
-                                  SettingCategory(
-                                      onTap: (){
-                                        BlocProvider.of<ProfileCubit>(context).showUserDetails();
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ChangeProfileUserScreen()));
-                                      },
-                                      title: 'profile_setting'.tr,
-                                      imageTitle: Assets.imagesProfileMenuIcon,
-                                      heightValue: heightValue),
-                                  SizedBox(
-                                    width: widthValue * 1.5,
-                                  ),
-                                  SettingCategory(
-                                      onTap: () {
-                                        BlocProvider.of<AuthCubit>(context).setLogout(context);
-                                      },
-                                      title: 'logout'.tr,
-                                      imageTitle: Assets.iconsLanguageImage,
-                                      heightValue: heightValue),
-
-                                ],
-                              ),
-                            ],
+      body: RefreshIndicator(
+        onRefresh: () async{
+          BlocProvider.of<SettingCubit>(context).showUserDetails();
+        },
+        child: SafeArea(
+            child: SingleChildScrollView(
+              child: SizedBox(
+                width: Get.width,
+                child: BlocBuilder<SettingCubit,SettingState>(
+                  builder: (context, state) {
+                    if( state is SettingSuccessfullyState){
+                      var mobilePhoneList = '${state.settingResponseModel?.socialmedia![0].phoneNumbers}';
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: heightValue * 1.5,
                           ),
-                        ),
-                        SizedBox(
-                          height: heightValue * 1,
-                        ),
-                        const Divider(height: 10, color: Themes.ColorApp8),
-                        SizedBox(
-                          height: heightValue * 1,
-                        ),
-                        ContactWithUs(
-                            heightValue: heightValue, widthValue: widthValue, settingResponseModel: state.settingResponseModel,),
-                        SizedBox(height: heightValue * 1.5,),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SettingCategory(
+                                        onTap: () {
+                                          print(state.settingResponseModel?.socialmedia![0].phoneNumbers);
+                                        },
+                                        title: 'share_app'.tr,
+                                        imageTitle: Assets.iconsShare,
+                                        heightValue: heightValue),
+                                    SizedBox(
+                                      width: widthValue * 1.5,
+                                    ),
+                                    SettingCategory(
+                                        onTap: () => Get.to(const HomeMainScreen()),
+                                        title: 'terms_and_conditions'.tr,
+                                        imageTitle: Assets.iconsTermsConditionsImage,
+                                        heightValue: heightValue),
+                                    SizedBox(
+                                      width: widthValue * 1.5,
+                                    ),
+                                    SettingCategory(
+                                        onTap: () =>
+                                            Get.to(const HomeMainScreen()),
+                                        title: 'privacy_policy'.tr,
+                                        imageTitle: Assets.imagesPrivacyImage,
+                                        heightValue: heightValue),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: heightValue * 1,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SettingCategory(
+                                        onTap: () => Get.to(const HomeMainScreen()),
+                                        title: 'about_app'.tr,
+                                        imageTitle: Assets.imagesAboutAppImage,
+                                        heightValue: heightValue),
+                                    SizedBox(
+                                      width: widthValue * 1.5,
+                                    ),
+                                    SettingCategory(
+                                        onTap: (){
+                                          BlocProvider.of<ProfileCubit>(context).showUserDetails();
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ChangeProfileUserScreen()));
+                                        },
+                                        title: 'profile_setting'.tr,
+                                        imageTitle: Assets.imagesProfileMenuIcon,
+                                        heightValue: heightValue),
+                                    SizedBox(
+                                      width: widthValue * 1.5,
+                                    ),
+                                    SettingCategory(
+                                        onTap: () {
+                                          BlocProvider.of<AuthCubit>(context).setLogout(context);
+                                        },
+                                        title: 'logout'.tr,
+                                        imageTitle: Assets.iconsLanguageImage,
+                                        heightValue: heightValue),
 
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child:  Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:  [
-                              Text(
-                                'to_communicate_payment'.tr,
-                                style: const TextStyle(
-                                  color: Themes.ColorApp8,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w400,
+                                  ],
                                 ),
-                              ),
-                              SizedBox(height: heightValue*.5,),
-                               Text(
-                                '${mobilePhoneList !=null ? 'لا يوجد ارقام حاليا' : mobilePhoneList}',
-                                style: const TextStyle(
-                                  color: Themes.ColorApp1,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              // SizedBox(height: heightValue*.5,),
-                              // const Text(
-                              //   '011560333232',
-                              //   style: TextStyle(
-                              //     color: Themes.ColorApp1,
-                              //     fontSize: 17,
-                              //     fontWeight: FontWeight.w400,
-                              //   ),
-                              // ),
-                              // SizedBox(height: heightValue*.5,),
-                              // const Text(
-                              //   '011560333232',
-                              //   style: TextStyle(
-                              //     color: Themes.ColorApp1,
-                              //     fontSize: 17,
-                              //     fontWeight: FontWeight.w400,
-                              //   ),
-                              // ),
-                            ],
+                              ],
+                            ),
                           ),
+                          SizedBox(
+                            height: heightValue * 1,
+                          ),
+                          const Divider(height: 10, color: Themes.ColorApp8),
+                          SizedBox(
+                            height: heightValue * 1,
+                          ),
+                          ContactWithUs(
+                              heightValue: heightValue, widthValue: widthValue, settingResponseModel: state.settingResponseModel,),
+                          SizedBox(height: heightValue * 1.5,),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child:  Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:  [
+                                Text(
+                                  'to_communicate_payment'.tr,
+                                  style: const TextStyle(
+                                    color: Themes.ColorApp8,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: heightValue*.5,),
+                                 Text(
+                                  mobilePhoneList ==null ? 'لا يوجد ارقام حاليا' : mobilePhoneList,
+                                  style: const TextStyle(
+                                    color: Themes.ColorApp1,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                // SizedBox(height: heightValue*.5,),
+                                // const Text(
+                                //   '011560333232',
+                                //   style: TextStyle(
+                                //     color: Themes.ColorApp1,
+                                //     fontSize: 17,
+                                //     fontWeight: FontWeight.w400,
+                                //   ),
+                                // ),
+                                // SizedBox(height: heightValue*.5,),
+                                // const Text(
+                                //   '011560333232',
+                                //   style: TextStyle(
+                                //     color: Themes.ColorApp1,
+                                //     fontSize: 17,
+                                //     fontWeight: FontWeight.w400,
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: heightValue * 1,),
+                        ],
+                      );
+                    }else if (state is SettingErrorState){
+                      return Container(
+                        width: Get.width,
+                        height: Get.height,
+                        child:  Center(
+                          child:Text('${state.error}'),
                         ),
-                        SizedBox(height: heightValue * 1,),
-                      ],
-                    );
-                  }else if (state is SettingErrorState){
-                    return Container(
+                      );
+                    }
+                    return  Container(
                       width: Get.width,
                       height: Get.height,
-                      child:  Center(
-                        child:Text('${state.error}'),
+                      child: const Center(
+                        child: CircularProgressIndicator(color: Themes.ColorApp1,),
                       ),
                     );
-                  }
-                  return  Container(
-                    width: Get.width,
-                    height: Get.height,
-                    child: const Center(
-                      child: CircularProgressIndicator(color: Themes.ColorApp1,),
-                    ),
-                  );
-                },
+                  },
+                ),
               ),
-            ),
-          )),
+            )),
+      ),
     );
   }
 }

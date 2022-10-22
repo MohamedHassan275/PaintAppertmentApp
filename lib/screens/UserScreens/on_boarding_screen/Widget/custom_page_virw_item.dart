@@ -25,7 +25,7 @@ class CustomPageViewItem extends StatelessWidget {
             child: Container(
               width: Get.width,
               height: 185,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
               child: Center(
@@ -33,7 +33,7 @@ class CustomPageViewItem extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 15 , vertical: doubleHeight),
                   child: Text(
                     title!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 17,
                       color: Themes.ColorApp8,
                       fontWeight: FontWeight.w500,

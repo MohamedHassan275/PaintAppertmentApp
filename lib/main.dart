@@ -30,6 +30,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'business_logic/notification_cubit/notification_cubit.dart';
+import 'business_logic/technical_controller/chose_technical_service_cubit/chose_technical_service_cubit.dart';
 import 'business_logic/technical_controller/home_main_technical_cubit/home_main_technical_cubit.dart';
 import 'business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 
@@ -79,6 +80,9 @@ class MyApp extends StatelessWidget {
       ),
       BlocProvider(
         create: (context) => AddRateCubit(),
+      ),
+      BlocProvider(
+        create: (context) => ChoseTechnicalServiceCubit(),
       ),
       BlocProvider(
         create: (context) => AddPriceOrderCubit(),

@@ -30,6 +30,7 @@ class ApiConstants {
 
   /// technical service api
 
+  static const String choseServiceTechnical = "/service";
   static const String newTechnicalOrders = "/technical/orders";
   static const String currentTechnicalOrders = "/technical/currentorders";
   static const String previousTechnicalOrders = "/technical/previousorders";
