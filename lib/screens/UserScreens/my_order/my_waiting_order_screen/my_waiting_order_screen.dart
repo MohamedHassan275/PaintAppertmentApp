@@ -128,7 +128,7 @@ class CompanyDetails extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 13,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
             ],
@@ -145,7 +145,7 @@ class CompanyDetails extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
               SizedBox(width: widthValue * .5,),
@@ -177,7 +177,7 @@ class CompanyDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Themes.ColorApp2,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
@@ -208,7 +208,7 @@ class CompanyDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Themes.ColorApp2,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
@@ -307,7 +307,7 @@ class MyWaitingOrderItem extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 5),
                 child: Divider(
                   height: 10,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
               SizedBox(
@@ -318,22 +318,26 @@ class MyWaitingOrderItem extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      'order_details2'.tr,
+                      'order_details'.tr,
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
-                        color: Themes.ColorApp1,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(
                       width: widthValue * .5,
                     ),
-                    Text(
-                      '${MyNewOder.description}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 13,
-                        color: Themes.ColorApp15,
+                    Expanded(
+                      child: Text(
+                        '${MyNewOder.description}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13,
+                          color: Themes.ColorApp1,
+                        ),
                       ),
                     ),
                   ],
@@ -357,7 +361,7 @@ class MyWaitingOrderItem extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'order_details'.tr,
+                        'order_details2'.tr,
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,

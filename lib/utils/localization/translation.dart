@@ -80,7 +80,7 @@ class MyTranslation extends Translations{
       "mix_type" : "عدد غرف النوم",
       "cement_type" : "عدد الحمامات ",
       "stone_size" : "مقاس الحجر",
-      "name" : "اسم العامل : ",
+      "name" : "اسم الفني : ",
       "name_client" : "اسم العميل",
       "details" : "التفاصيل : ",
       "details2" : "التفاصيل ",

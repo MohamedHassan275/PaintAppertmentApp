@@ -84,7 +84,31 @@ class _DetailsCurrentOrderTechnicalScreenState extends State<DetailsCurrentOrder
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
-                                DetailsOrder(widthValue, 'order_details'.tr, widget.newOrder.description ?? 'لا يوجد تفاصيل للطلب',''),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'order_details'.tr,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Themes.ColorApp8,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: widthValue * .5,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        widget.newOrder.description  == null? 'لا يوجد تفاصيل للطلب' : '${widget.newOrder.description}',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Themes.ColorApp1,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 SizedBox(
                                   height: heightValue * .7,
                                 ),
@@ -333,6 +357,7 @@ class DetailsOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           '$title : ',

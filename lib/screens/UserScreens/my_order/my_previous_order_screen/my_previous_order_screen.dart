@@ -125,7 +125,7 @@ class CompanyDetails extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 13,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
             ],
@@ -142,7 +142,7 @@ class CompanyDetails extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
               SizedBox(width: widthValue * .5,),
@@ -174,7 +174,7 @@ class CompanyDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Themes.ColorApp2,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
@@ -205,7 +205,7 @@ class CompanyDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Themes.ColorApp2,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
@@ -253,7 +253,7 @@ class MyPreviousOrderItem extends StatelessWidget {
               SizedBox(height: heightValue * 1,),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5),
-                child: Divider(height: 10, color: Themes.ColorApp2,),
+                child: Divider(height: 10, color: Themes.ColorApp8,),
               ),
               SizedBox(height: heightValue * .5,),
               Padding(

@@ -117,7 +117,31 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),
-                                    DetailsOrder(widthValue, 'details2'.tr, '${widget.newOrder.description}',''),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'order_details'.tr,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14,
+                                            color: Themes.ColorApp8,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: widthValue * .5,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            widget.newOrder.description  == null? 'لا يوجد تفاصيل للطلب' : '${widget.newOrder.description}',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14,
+                                              color: Themes.ColorApp1,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                     SizedBox(
                                       height: heightValue * .7,
                                     ),

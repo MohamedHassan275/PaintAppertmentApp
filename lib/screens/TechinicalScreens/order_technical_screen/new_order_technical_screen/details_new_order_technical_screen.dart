@@ -103,7 +103,31 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'order_details2'.tr, widget.newOrder.description ?? 'لا يوجد تفاصيل للطلب',''),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'order_details'.tr,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Themes.ColorApp8,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: widthValue * .5,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          widget.newOrder.description  == null? 'لا يوجد تفاصيل للطلب' : '${widget.newOrder.description}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14,
+                                            color: Themes.ColorApp1,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),

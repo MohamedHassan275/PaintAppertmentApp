@@ -84,7 +84,31 @@ class DetailsPreviousOrderTechnicalScreen extends StatelessWidget {
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),
-                                  DetailsOrder(widthValue, 'order_details'.tr, previousOrder.description ?? 'لا يوجد تفاصيل للطلب',''),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'order_details'.tr,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Themes.ColorApp8,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: widthValue * .5,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          previousOrder.description  == null? 'لا يوجد تفاصيل للطلب' : '${previousOrder.description}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14,
+                                            color: Themes.ColorApp1,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                   SizedBox(
                                     height: heightValue * .7,
                                   ),

@@ -131,7 +131,7 @@ class CompanyDetails extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 13,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
             ],
@@ -148,12 +148,12 @@ class CompanyDetails extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
-                  color: Themes.ColorApp2,
+                  color: Themes.ColorApp8,
                 ),
               ),
               SizedBox(width: widthValue * .5,),
               Text(
-                myCurrentOrderModel!.service ?? '----',
+                myCurrentOrderModel!.service != null ? '${myCurrentOrderModel!.service}' : '----',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
@@ -180,7 +180,7 @@ class CompanyDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Themes.ColorApp2,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
@@ -211,12 +211,12 @@ class CompanyDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Themes.ColorApp2,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      '${myCurrentOrderModel?.governorate} ${myCurrentOrderModel?.city}',
+                      '${myCurrentOrderModel?.governorate} - ${myCurrentOrderModel?.city}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -257,7 +257,7 @@ class MySendOrderListItem extends StatelessWidget {
               SizedBox(height: heightValue * 1,),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5),
-                child: Divider(height: 10, color: Themes.ColorApp2,),
+                child: Divider(height: 10, color: Themes.ColorApp8,),
               ),
               SizedBox(height: heightValue * .5,),
               Padding(
@@ -269,7 +269,7 @@ class MySendOrderListItem extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
-                        color: Themes.ColorApp1,
+                        color: Themes.ColorApp8,
                       ),
                     ),
                     const Text(
@@ -288,7 +288,7 @@ class MySendOrderListItem extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
-                        color: Themes.ColorApp15,
+                        color: Themes.ColorApp1,
                       ),
                     ),
                     SizedBox(
