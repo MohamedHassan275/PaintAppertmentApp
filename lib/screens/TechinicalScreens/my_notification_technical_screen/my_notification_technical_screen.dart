@@ -464,12 +464,10 @@ class CompanyDetails extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             '${myCurrentOrderModel?.body}',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
-              color: Themes.ColorApp8,
+              fontWeight: FontWeight.w500,
+              fontSize: 13,
+              color: Themes.ColorApp1,
             ),
           ),
         ),

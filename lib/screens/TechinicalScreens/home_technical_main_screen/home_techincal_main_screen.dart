@@ -224,6 +224,23 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
               NoInternetConnectionScreen(
                 appLayoutState: state,
               );
+            }else {
+               Scaffold(
+                  body: Center(
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        WavyAnimatedText('شطب شقتك',
+                            textStyle: const TextStyle(
+                                fontSize: 20.0,
+                                color: Themes.ColorApp1,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Poppins-bold')),
+                      ],
+                      isRepeatingAnimation: true,
+                      totalRepeatCount: 6,
+                      onTap: () {},
+                    ),
+                  ));
             }
           }, builder: (context, state) {
         AppLayoutCubit appLayoutCubit = AppLayoutCubit.get(context);
@@ -371,7 +388,7 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
                     WavyAnimatedText('شطب شقتك',
                         textStyle: const TextStyle(
                             fontSize: 20.0,
-                            color: Themes.ColorApp13,
+                            color: Themes.ColorApp1,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Poppins-bold')),
                   ],
@@ -387,60 +404,3 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
   }
 }
 
-class UserProfileWithNotification extends StatelessWidget {
-  UserProfileWithNotification(
-      {Key? key, required this.heightValue, required this.widthValue}) : super(key: key);
-
-  // ProfileUserResponseModel? profileUserResponseModel;
-  double widthValue, heightValue;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          GestureDetector(
-            // onTap: () => PickImage(),
-            child: SizedBox(
-              width: 45,
-              height: 45,
-              child: CircleAvatar(
-                backgroundColor: Themes.whiteColor,
-                child: ClipOval(
-                  child: Image.asset(
-                    Assets.imagesLogoApp,
-                    fit: BoxFit.contain,
-                    height: 45,
-                    width: 45,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'welcome_back'.tr,
-                style: const TextStyle(fontSize: 15, color: Colors.white),
-              ),
-              SizedBox(
-                height: heightValue * .2,
-              ),
-              Row(
-                children: const [
-                  Text(
-                    'محمود جمال',
-                    style: TextStyle(fontSize: 13, color: Colors.white),
-                  ),
-                ],
-              )
-            ],
-          )
-        ]);
-  }
-}

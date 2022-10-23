@@ -19,8 +19,7 @@ class ChooseTechnicalService{
     
     try {
       
-      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.choseServiceTechnical,
-          token: '73|TlKnNa5iaTVZ8ej6lsFGFj5y2nxNaZy0XdSmoRXT',lang: 'ar');
+      Response response = await APIService.getData2(uri: ApiConstants.baseUrl+ApiConstants.choseServiceTechnical,lang: 'ar');
 
    //   print(AppLocalStorage.token);
       if(response.statusCode == 200){

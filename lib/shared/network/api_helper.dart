@@ -27,10 +27,26 @@ class APIService {
         String? token,
         Map<String, dynamic>? query}) async {
     LoggerHelper.loggerNoStack.i('Api Call : ' + uri);
+
     dio.options.headers = {
       'Content-Type': 'application/json',
       'Accept-Language': lang,
       'Authorization': 'Bearer ' + token!,
+      'Accept': 'application/json',
+    };
+    return await dio.get(uri, queryParameters: query);
+  }
+
+  static Future<Response> getData2(
+      {required String uri,
+        String? lang ,
+        String? token,
+        Map<String, dynamic>? query}) async {
+    LoggerHelper.loggerNoStack.i('Api Call : ' + uri);
+
+    dio.options.headers = {
+      'Content-Type': 'application/json',
+      'Accept-Language': lang,
       'Accept': 'application/json',
     };
     return await dio.get(uri, queryParameters: query);

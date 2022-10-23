@@ -5,6 +5,8 @@ import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/change_profile_technical_screen/change_profile_technical_screen.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
+import 'package:pain_appertment/screens/about_app_screen/about_app_screen.dart';
+import 'package:pain_appertment/screens/privacy_screen/privacy_screen.dart';
 import 'package:pain_appertment/utils/componant/LoadingWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -16,6 +18,7 @@ import '../../../model/setting_model.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
 import '../../../utils/constant/Themes.dart';
 import '../../UserScreens/change_profile_user_screen/change_profile_user_screen.dart';
+import '../../terms_condition_screen/terms_condition_screen.dart';
 
 class  SettingTechnicalScreen extends StatefulWidget {
   const  SettingTechnicalScreen({Key? key}) : super(key: key);
@@ -75,7 +78,8 @@ class _SettingTechnicalScreenState extends State<SettingTechnicalScreen> {
                                       width: widthValue * 1.5,
                                     ),
                                     SettingCategory(
-                                        onTap: () => Get.to(const HomeTechincalMainScreen()),
+                                        onTap: () => Get.to(TermsConditionScreen(intentData: 'TechnicalApp',
+                                          titleAboutUs: state.settingResponseModel?.policy?.policy,)),
                                         title: 'terms_and_conditions'.tr,
                                         imageTitle: Assets.iconsTermsConditionsImage,
                                         heightValue: heightValue),
@@ -83,8 +87,8 @@ class _SettingTechnicalScreenState extends State<SettingTechnicalScreen> {
                                       width: widthValue * 1.5,
                                     ),
                                     SettingCategory(
-                                        onTap: () =>
-                                            Get.to(const HomeTechincalMainScreen()),
+                                        onTap: () => Get.to(PrivacyScreen(intentData: 'TechnicalApp',
+                                          titleAboutUs: state.settingResponseModel?.privacy?.privacy,)),
                                         title: 'privacy_policy'.tr,
                                         imageTitle: Assets.imagesPrivacyImage,
                                         heightValue: heightValue),
@@ -97,7 +101,8 @@ class _SettingTechnicalScreenState extends State<SettingTechnicalScreen> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     SettingCategory(
-                                        onTap: () => Get.to(const HomeTechincalMainScreen()),
+                                        onTap: () => Get.to(AboutAppScreen(intentData: 'TechnicalApp',
+                                          titleAboutUs: state.settingResponseModel?.about?.about,)),
                                         title: 'about_app'.tr,
                                         imageTitle: Assets.imagesAboutAppImage,
                                         heightValue: heightValue),

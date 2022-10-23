@@ -10,6 +10,9 @@ import 'package:pain_appertment/business_logic/user_controller/profile_cubit/pro
 import 'package:pain_appertment/business_logic/user_controller/setting_cubit/setting_cubit.dart';
 import 'package:pain_appertment/model/setting_model.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
+import 'package:pain_appertment/screens/about_app_screen/about_app_screen.dart';
+import 'package:pain_appertment/screens/privacy_screen/privacy_screen.dart';
+import 'package:pain_appertment/screens/terms_condition_screen/terms_condition_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../generated/assets.dart';
@@ -66,7 +69,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   children: [
                                     SettingCategory(
                                         onTap: () {
-                                          print(state.settingResponseModel?.socialmedia![0].phoneNumbers);
+
                                         },
                                         title: 'share_app'.tr,
                                         imageTitle: Assets.iconsShare,
@@ -75,7 +78,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                       width: widthValue * 1.5,
                                     ),
                                     SettingCategory(
-                                        onTap: () => Get.to(const HomeMainScreen()),
+                                        onTap: () => Get.to(TermsConditionScreen(intentData: 'UserApp',
+                                          titleAboutUs: state.settingResponseModel?.policy?.policy,)),
                                         title: 'terms_and_conditions'.tr,
                                         imageTitle: Assets.iconsTermsConditionsImage,
                                         heightValue: heightValue),
@@ -83,8 +87,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                       width: widthValue * 1.5,
                                     ),
                                     SettingCategory(
-                                        onTap: () =>
-                                            Get.to(const HomeMainScreen()),
+                                        onTap: () => Get.to(PrivacyScreen(intentData: 'UserApp',
+                                          titleAboutUs: state.settingResponseModel?.privacy?.privacy,)),
                                         title: 'privacy_policy'.tr,
                                         imageTitle: Assets.imagesPrivacyImage,
                                         heightValue: heightValue),
@@ -97,7 +101,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     SettingCategory(
-                                        onTap: () => Get.to(const HomeMainScreen()),
+                                        onTap: () => Get.to(AboutAppScreen(intentData: 'UserApp',
+                                          titleAboutUs: state.settingResponseModel?.about?.about,)),
                                         title: 'about_app'.tr,
                                         imageTitle: Assets.imagesAboutAppImage,
                                         heightValue: heightValue),

@@ -238,6 +238,23 @@ class _HomeMainScreenState extends State<HomeMainScreen>
           NoInternetConnectionScreen(
             appLayoutState: state,
           );
+        }else {
+          Scaffold(
+              body: Center(
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    WavyAnimatedText('شطب شقتك',
+                        textStyle: const TextStyle(
+                            fontSize: 20.0,
+                            color: Themes.ColorApp1,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Poppins-bold')),
+                  ],
+                  isRepeatingAnimation: true,
+                  totalRepeatCount: 6,
+                  onTap: () {},
+                ),
+              ));
         }
       }, builder: (context, state) {
         if (state is ConnectionFailure) {
@@ -392,7 +409,7 @@ class _HomeMainScreenState extends State<HomeMainScreen>
                 WavyAnimatedText('Markety',
                     textStyle: const TextStyle(
                         fontSize: 20.0,
-                        color: Themes.ColorApp13,
+                        color: Themes.ColorApp1,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Poppins-bold')),
               ],
