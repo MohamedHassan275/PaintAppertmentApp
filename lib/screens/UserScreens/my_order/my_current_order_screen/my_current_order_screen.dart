@@ -176,7 +176,7 @@ class CompanyDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'name_client'.tr,
+                      'technical_name'.tr,
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -185,7 +185,7 @@ class CompanyDetails extends StatelessWidget {
                     ),
                     SizedBox(width: widthValue * .5,),
                     Text(
-                      ' : ${myCurrentOrderModel?.firstname} ${myCurrentOrderModel?.lastname}',
+                      ' : ${myCurrentOrderModel?.technicalName}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,

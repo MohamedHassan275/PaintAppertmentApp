@@ -113,15 +113,17 @@ class About {
 class Socialmedia {
   String? whatsapp;
   String? instagram;
+  String? facebook;
   String? twitter;
   String? snapchat;
   String? phoneNumbers;
 
-  Socialmedia({this.whatsapp, this.instagram, this.twitter, this.snapchat,this.phoneNumbers});
+  Socialmedia({this.whatsapp, this.instagram, this.twitter, this.facebook, this.snapchat,this.phoneNumbers});
 
   Socialmedia.fromJson(Map<String, dynamic> json) {
     whatsapp = json['whatsapp'];
     instagram = json['instagram'];
+    facebook = json['facebook'];
     twitter = json['twitter'];
     snapchat = json['snapchat'];
     phoneNumbers = json['phone_numbers'];
@@ -130,6 +132,7 @@ class Socialmedia {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['whatsapp'] = this.whatsapp;
+    data['facebook'] = this.facebook;
     data['instagram'] = this.instagram;
     data['twitter'] = this.twitter;
     data['snapchat'] = this.snapchat;

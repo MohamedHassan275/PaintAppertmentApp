@@ -1,6 +1,8 @@
 
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launch/flutter_launch.dart';
@@ -334,9 +336,9 @@ class ContactWithUs extends StatelessWidget {
                 width: widthValue! * 1.5,
               ),
               ContactWithUsItem(
-                imageTitle: Assets.imagesSnapshatImage,
-                onTap: () {
-                  _launchURL(settingResponseModel?.socialmedia![0].snapchat);
+                imageTitle: Assets.imagesFacebook,
+                onTap: () async{
+                  _launchURL(settingResponseModel?.socialmedia![0].facebook);
                 } ,
               ),
             ],

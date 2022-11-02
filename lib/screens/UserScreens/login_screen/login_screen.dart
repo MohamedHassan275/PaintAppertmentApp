@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ import 'package:pain_appertment/utils/servies/storage_service.dart';
 import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
-import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
 import '../register_screen/register_screen.dart';
@@ -38,7 +36,6 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
-    var widthValue = Get.width * 0.024;
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -232,7 +229,6 @@ class ForgetPasswordWidget extends StatelessWidget {
 
 class CreateAccountFromLoginTechnicalWidget extends StatelessWidget {
   const CreateAccountFromLoginTechnicalWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -279,7 +275,6 @@ class CreateAccountFromLoginTechnicalWidget extends StatelessWidget {
 
 class CreateAccountFromLoginWidget extends StatelessWidget {
   const CreateAccountFromLoginWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Padding(

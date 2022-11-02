@@ -21,6 +21,7 @@ class Assets {
   static const String imagesBackgroundIntro = 'assets/images/background_intro.png';
   static const String imagesButtonRegister = 'assets/images/button_register.png';
   static const String imagesCompleteRegister = 'assets/images/complete_register.png';
+  static const String imagesFacebook = 'assets/images/facebook.png';
   static const String imagesFactoryNamIcon = 'assets/images/factory_nam_icon.png';
   static const String imagesIconHome2 = 'assets/images/icon_home2.png';
   static const String imagesLoading = 'assets/images/loading.gif';

@@ -3,16 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/UserScreens/login_screen/login_screen.dart';
-import 'package:pain_appertment/utils/constant/constant.dart';
-
 import '../../../business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
 import '../../../utils/componant/CustomTextFieldWidget.dart';
 import '../../../utils/constant/Themes.dart';
-import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/servies/storage_service.dart';
-import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
 import '../home_main_screen/home_main_screen.dart';
 
@@ -43,7 +39,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     var heightValue = Get.height * 0.024;
-    var widthValue = Get.width * 0.024;
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -211,6 +206,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             isConfirmPassword = !isConfirmPassword;
                           });
                         },
+                        //////////////////// screen shot
                         keyboardType: TextInputType.text,
                         maxLines: 1,
                         Controller: ConfirmPassword,

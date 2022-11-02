@@ -321,9 +321,9 @@ class ContactWithUs extends StatelessWidget {
                 width: widthValue! * 1.5,
               ),
               ContactWithUsItem(
-                imageTitle: Assets.imagesSnapshatImage,
+                imageTitle: Assets.imagesFacebook,
                 onTap: () {
-                  _launchURL(settingResponseModel?.socialmedia![0].snapchat);
+                  _launchURL(settingResponseModel?.socialmedia![0].facebook);
                 } ,
               ),
             ],

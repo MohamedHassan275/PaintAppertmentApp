@@ -32,6 +32,7 @@ class OrderResponseModel {
   dynamic orderId;
   String? title;
   dynamic body;
+  String? serviceId;
   String? service;
   String? technicalName;
   String? orderNumber;
@@ -54,6 +55,7 @@ class OrderResponseModel {
         this.service,
         this.title,
         this.body,
+        this.serviceId,
         this.technicalName,
         this.orderNumber,
         this.flatArea,
@@ -74,6 +76,7 @@ class OrderResponseModel {
     orderId = json['order_id'];
     service = json['service'];
     title = json['title'];
+    serviceId = json['service_id'];
     body = json['body'];
     technicalName = json['technical_name'];
     orderNumber = json['order_number'];
@@ -98,6 +101,7 @@ class OrderResponseModel {
     data['service'] = service;
     data['title'] = title;
     data['body'] = body;
+    data['service_id'] = serviceId;
     data['technical_name'] = technicalName;
     data['order_number'] = orderNumber;
     data['flat_area'] = flatArea;

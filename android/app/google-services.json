@@ -1,42 +1,49 @@
 {
   "project_info": {
-    "project_number": "531491873296",
-    "project_id": "paintappartmentapp",
-    "storage_bucket": "paintappartmentapp.appspot.com"
+    "project_number": "758298190045",
+    "project_id": "shatbshaqtekapp",
+    "storage_bucket": "shatbshaqtekapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:531491873296:android:374464b5aea84755bc2095",
+        "mobilesdk_app_id": "1:758298190045:android:8cc16dac796729690afb34",
         "android_client_info": {
-          "package_name": "com.appertment.pain_appertment"
+          "package_name": "com.elsareh.shatbShaqtek"
         }
       },
       "oauth_client": [
         {
-          "client_id": "531491873296-lsg20kkdbmt4ep3rsqt6revtapg90jlu.apps.googleusercontent.com",
+          "client_id": "758298190045-2hbu9faqe1h28o9jl5osoq0831h99sn1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.appertment.pain_appertment",
+            "package_name": "com.elsareh.shatbShaqtek",
             "certificate_hash": "a03905749843118f6c547ded9777c481f8e60479"
           }
         },
         {
-          "client_id": "531491873296-9fmsbkdo77eq7e4v9jh5nkruq8ati7if.apps.googleusercontent.com",
+          "client_id": "758298190045-52733h72arpeo8guhctogjsg3mhehmug.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDlqywLiiOUx-b-IvwEMRf685KOnAf2o5c"
+          "current_key": "AIzaSyDt2T05QOXcFmTap2TDztOE9U525WJpWrk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "531491873296-9fmsbkdo77eq7e4v9jh5nkruq8ati7if.apps.googleusercontent.com",
+              "client_id": "758298190045-52733h72arpeo8guhctogjsg3mhehmug.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "758298190045-8f15n6a8tku0j4g1566fsc8iua24uhv3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.elsareh.com.elsareh.shatbShaqtek"
+              }
             }
           ]
         }

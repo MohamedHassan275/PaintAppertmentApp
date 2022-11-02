@@ -28,7 +28,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final double valueHight = Get.height * .024;
+    final double valueHeight = Get.height * .024;
     final double valueWidth = Get.width * .024;
     Get.put(OnBoardingControllerImp());
     return SafeArea(
@@ -43,10 +43,9 @@ class OnBoardingScreenState extends State<OnBoardingScreen>{
         child: Stack(
           children: [
             CustomPageView(),
-            CustomDots(),
-            //  Positioned(top: 100,child: Image.asset(Assets.imagesSkipBording,width: 100,height: 50,)),
+            const CustomDots(),
             Positioned(
-              top: valueHight * 7,
+              top: valueHeight * 7,
               right: 25,
               left: 25,
               child: CircleAvatar(

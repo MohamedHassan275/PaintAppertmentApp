@@ -14,12 +14,21 @@ class AddRateService{
     ResponseUserModel? responseUserModel;
     
     try {
-      
+
+      print('serviceId service');
+      print(serviceId);
+      print('orderId service');
+      print(orderId);
+      print('rating service');
+      print(rate);
+      print('comment service');
+      print(comment);
+
       Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.addRate,token: AppConstants.tokenSession,
       data: {
         'service_id' : serviceId,
-        'rate' : rate,
         'order_id' : orderId,
+        'rate' : rate,
         'comment' : comment,
       });
 
