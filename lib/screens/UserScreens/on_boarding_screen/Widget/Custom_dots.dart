@@ -7,10 +7,13 @@ class CustomDots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double valueHeight = Get.height * .024;
+    final double valueWidth = Get.width * .024;
     return GetBuilder<OnBoardingControllerImp>(
       init: OnBoardingControllerImp(),
       builder: (controller) => Positioned(
         bottom: valueHeight * 9.0,
+        left: valueWidth* 1,
+        right: valueWidth* 1,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

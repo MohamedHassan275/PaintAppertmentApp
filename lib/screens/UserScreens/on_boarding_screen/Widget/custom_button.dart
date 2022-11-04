@@ -7,9 +7,12 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double valueHeight = Get.height * .024;
+    final double valueWidth = Get.width * .024;
     return GetBuilder<OnBoardingControllerImp>(
         builder: (controller) => Positioned(
           bottom: valueHeight * 4.5,
+          left: valueWidth* 1,
+          right: valueWidth* 1,
           child: Material(
             type: MaterialType.transparency,
             child: Padding(

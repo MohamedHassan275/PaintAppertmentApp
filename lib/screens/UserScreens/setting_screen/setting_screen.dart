@@ -1,8 +1,3 @@
-
-// ignore_for_file: must_be_immutable
-
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launch/flutter_launch.dart';
@@ -11,7 +6,6 @@ import 'package:pain_appertment/business_logic/user_controller/auth_cubit/auth_c
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/setting_cubit/setting_cubit.dart';
 import 'package:pain_appertment/model/setting_model.dart';
-import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/screens/about_app_screen/about_app_screen.dart';
 import 'package:pain_appertment/screens/privacy_screen/privacy_screen.dart';
 import 'package:pain_appertment/screens/terms_condition_screen/terms_condition_screen.dart';

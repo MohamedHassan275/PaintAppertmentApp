@@ -160,7 +160,7 @@ class _SettingTechnicalScreenState extends State<SettingTechnicalScreen> {
                                 ),
                                 SizedBox(height: heightValue*.5,),
                                 Text(
-                                  mobilePhoneList !=null ? 'لا يوجد ارقام حاليا' : mobilePhoneList,
+                                  mobilePhoneList =='null' ? 'لا يوجد ارقام حاليا' : mobilePhoneList,
                                   style: const TextStyle(
                                     color: Themes.ColorApp1,
                                     fontSize: 17,

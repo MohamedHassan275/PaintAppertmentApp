@@ -1,4 +1,3 @@
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,14 +31,12 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
   TextEditingController mobilePhoneController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     BlocProvider.of<ProfileCubit>(context).showUserDetails();
   }
-
   @override
   Widget build(BuildContext context) {
    final stateProfile = context.watch<ProfileCubit>().state;
@@ -101,7 +98,8 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
                     ),
                     Row(
                       children: [
-                        Expanded(child: CustomTextFieldWidget(title: 'distance_appertment', keyboardType: TextInputType.number, textEditingController: distanceAppermentController)),
+                        Expanded(child: CustomTextFieldWidget(title: 'distance_appertment', keyboardType: TextInputType.number,
+                            textEditingController: distanceAppermentController)),
                         Expanded(child: CustomTextFieldWidget(title: 'room_number', keyboardType: TextInputType.number, textEditingController: roomNumberController)),
                       ],
                     ),

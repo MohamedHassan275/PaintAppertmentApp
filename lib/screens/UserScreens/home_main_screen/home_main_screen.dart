@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_c
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/screens/UserScreens/my_notification_screen/my_notification_screen.dart';
 import 'package:pain_appertment/utils/constant/custom_toast.dart';
-
 import '../../../business_logic/app_layout_cubit/app_layout_cubit.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/constant/Themes.dart';
@@ -38,7 +36,6 @@ class _HomeMainScreenState extends State<HomeMainScreen>
           CustomFlutterToast('Du hast eine neue Bestellung');
         }
       }
-
       FirebaseMessaging.onMessageOpenedApp.listen((message) {
         if (message.data['type'] == 'Renew') {
           //  OrdersCubit.get(context).getAllOrders();
@@ -422,7 +419,6 @@ class _HomeMainScreenState extends State<HomeMainScreen>
       }),
     );
   }
-
   loadData() {
     BlocProvider.of<HomeCubit>(context, listen: false).getHomeUser();
     BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
