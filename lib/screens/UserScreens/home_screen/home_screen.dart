@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -12,18 +11,13 @@ import 'package:pain_appertment/screens/UserScreens/details_service_screen/detai
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/constant/Themes.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
-import 'package:sizer/sizer.dart';
-
 import '../../../generated/assets.dart';
-import '../../../utils/constant/custom_toast.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
@@ -127,15 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 15, horizontal: 0),
                                         child: GestureDetector(
-                                          onTap: () {
-                                            // CustomFlutterToast(category.name);
-                                            // print('service ${category.id}');
-                                            // CustomFlutterToast(category.services![category.id!].name);
-                                            // CustomFlutterToast(category.services![index].name);
-
-                                            //   homeCubit.showProductDetails(category.services![index].id.toString());
-                                            //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsServiceScreen()));
-                                          },
+                                          onTap: () {},
                                           child: Column(
                                             children: [
                                               Row(

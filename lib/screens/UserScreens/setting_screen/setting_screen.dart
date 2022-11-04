@@ -139,7 +139,6 @@ class _SettingScreenState extends State<SettingScreen> {
                           ContactWithUs(
                               heightValue: heightValue, widthValue: widthValue, settingResponseModel: state.settingResponseModel,),
                           SizedBox(height: heightValue * 1.5,),
-
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child:  Column(
@@ -163,24 +162,6 @@ class _SettingScreenState extends State<SettingScreen> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                // SizedBox(height: heightValue*.5,),
-                                // const Text(
-                                //   '011560333232',
-                                //   style: TextStyle(
-                                //     color: Themes.ColorApp1,
-                                //     fontSize: 17,
-                                //     fontWeight: FontWeight.w400,
-                                //   ),
-                                // ),
-                                // SizedBox(height: heightValue*.5,),
-                                // const Text(
-                                //   '011560333232',
-                                //   style: TextStyle(
-                                //     color: Themes.ColorApp1,
-                                //     fontSize: 17,
-                                //     fontWeight: FontWeight.w400,
-                                //   ),
-                                // ),
                               ],
                             ),
                           ),
@@ -222,7 +203,6 @@ class SettingCategory extends StatelessWidget {
   double? heightValue;
   String? imageTitle, title;
   VoidCallback? onTap;
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -352,13 +332,6 @@ class ChangeLanguageBottomSheetItem extends StatefulWidget {
 }
 
 class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomSheetItem> {
-
-  // changelanguage(String codeCountry){
-  //   Locale myLocal = Locale(codeCountry);
-  //   Get.find<StorageService>().activeLocale;
-  //   Get.updateLocale(myLocal);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

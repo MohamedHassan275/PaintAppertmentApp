@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/generated/assets.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/home_main_screen/home_main_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/on_boarding_screen/on_boarding_screen.dart';
-
 import '../../../utils/constant/constant.dart';
 import '../../../utils/servies/storage_service.dart';
 import '../login_screen/login_screen.dart';
