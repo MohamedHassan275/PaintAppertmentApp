@@ -17,11 +17,27 @@ class ErrorLoginState extends AuthState {
   ErrorLoginState(this.error);
 }
 
+class RegisterLoadingState extends AuthState {}
+
+
+class RegisterSuccessState extends AuthState {
+  LoginModel? loginModel;
+  RegisterSuccessState(this.loginModel);
+
+}
+class RegisterErrorState extends AuthState {
+  String? error;
+  RegisterErrorState(this.error);
+}
+
+
 class LoginoutSuccessState extends AuthState {
   String? changeProfileSuccessfully;
   LoginoutSuccessState(this.changeProfileSuccessfully);
 
 }
+
+class TechnicalRegisterLoadingState extends AuthState {}
 
 class TechnicalRegisterSuccessState extends AuthState {
   LoginModel? loginModel;

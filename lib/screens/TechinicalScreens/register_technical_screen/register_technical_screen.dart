@@ -289,7 +289,7 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
                       SizedBox(
                         height: heightValue * .2,
                       ),
-                      state is LoginLoadingState
+                      state is TechnicalRegisterLoadingState
                           ? const CircularProgressIndicator(
                               color: Themes.ColorApp1,
                             )

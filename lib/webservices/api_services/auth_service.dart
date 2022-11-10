@@ -54,6 +54,17 @@ class AuthService{
       String password,String fcmToken,String type) async {
     LoginModel? loginModel;
 
+    print('request register 3');
+    print(firstName);
+    print(lastName);
+    print(phone);
+    print(email);
+    print(governorate);
+    print(city);
+    print(password);
+    print(fcmToken);
+    print(type);
+
     try {
 
       Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.register,data: {

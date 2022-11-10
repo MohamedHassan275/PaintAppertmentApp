@@ -8,6 +8,7 @@ import '../../../generated/assets.dart';
 import '../../../utils/componant/CustomButtonWidget.dart';
 import '../../../utils/componant/CustomTextFieldWidget.dart';
 import '../../../utils/constant/Themes.dart';
+import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/servies/storage_service.dart';
 import '../../../utils/widget/custom_phone_and_password_widget.dart';
 import '../home_main_screen/home_main_screen.dart';
@@ -224,7 +225,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     unselectedWidgetColor: Themes.ColorApp1),
                                 child: Checkbox(
                                     value: isCheckAccepted,
-                                    tristate: false,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5)),
                                     side: const BorderSide(
@@ -279,7 +279,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       LastName.text,
                                       MobilePhone.text,
                                       Email.text,
-                                      '',
+                                      '0',
                                       Country.text,
                                       State.text,
                                       Password.text,
@@ -326,7 +326,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _handleLoginListener(BuildContext context, AuthState state) {
-    if (state is ErrorLoginState) {
+    if (state is RegisterErrorState) {
     //  CustomFlutterToast(state.error);
       AwesomeDialog(
         context: context,
@@ -345,17 +345,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Navigator.pop(context);
         },
       ).show();
-    } else if (state is LoginSuccessState) {
-      // CustomFlutterToast(state.loginResponseModel?.accesstoken);
-      Get.find<StorageService>().setToken('${state.loginModel?.data?.accesstoken}');
-      Get.find<StorageService>()
-          .setType('${state.loginModel?.data?.type}');
-    //  CustomFlutterToast(AppConstants.tokenSession);
+    } else if (state is RegisterSuccessState) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'تم تسجيل اشتراكك',
+        desc: 'تم تسجيل اشتراكك . برجاء التسجيل لمشاهدة الخدمات',
+        btnCancelText: 'الغاء',
+        btnOkText: 'موافق',
+        btnCancelColor: Themes.ColorApp9,
+        btnOkColor: Themes.ColorApp17,
+        btnCancelOnPress: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (_) => false);
+        },
+        btnOkOnPress: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (_) => false);
+        },
+      ).show();
       _clearFormData();
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeMainScreen()),
-              (_) => false);
+
     }
   }
 

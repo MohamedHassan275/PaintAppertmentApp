@@ -41,31 +41,33 @@ class AuthCubit extends Cubit<AuthState> {
 
   setRegisterUser(BuildContext context,String firstName,String lastName,String phone,String email,String service, String governorate,String city,
       String password,String fcmToken,String type){
-    emit(LoginLoadingState());
+    emit(RegisterLoadingState());
     print('request register');
     print(firstName);
     print(lastName);
     print(phone);
     print(email);
+    print(governorate);
+    print(city);
     print(password);
     print(fcmToken);
     print(type);
     loading = true;
-    AuthService.setRegister(firstName, lastName, phone, email,governorate,city, service,password, fcmToken,type).then((value){
+    AuthService.setRegister(firstName, lastName, phone, email,service,governorate,city,password, fcmToken,type).then((value){
       if(value?.success == true){
         loading = false;
         loginModel = value;
-        emit(LoginSuccessState(value));
+        emit(RegisterSuccessState(value));
       }else {
         loading = false;
-        emit(ErrorLoginState(value?.message));
+        emit(RegisterErrorState(value?.message));
       }
     });
   }
 
   setRegisterTechnical(BuildContext context,String firstName,String lastName,String phone,String email,String service, String governorate,String city,
       String password,String fcmToken,String type){
-    emit(LoginLoadingState());
+    emit(TechnicalRegisterLoadingState());
     print('request register');
     print(firstName);
     print(lastName);
