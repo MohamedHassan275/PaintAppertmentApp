@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launch/flutter_launch.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/change_profile_technical_screen/change_profile_technical_screen.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
@@ -33,6 +34,14 @@ class _SettingTechnicalScreenState extends State<SettingTechnicalScreen> {
     // TODO: implement initState
     super.initState();
     BlocProvider.of<SettingCubit>(context).showUserDetails();
+  }
+
+  Future<void> share() async {
+    await FlutterShare.share(
+        title: 'مشاركة تطبيق شطب شقتك',
+        text: 'شارك اصحابك ومعارفك لاستخدام التطبيق وطلب الخدمات الموجودة ف التطبيق',
+        linkUrl: "https://play.google.com/store/apps/details?id=" + 'com.facebook.mlite',
+        chooserTitle: 'اختار صح');
   }
 
   @override
@@ -68,7 +77,7 @@ class _SettingTechnicalScreenState extends State<SettingTechnicalScreen> {
                                   children: [
                                     SettingCategory(
                                         onTap: () {
-                                          print(state.settingResponseModel?.socialmedia![0].phoneNumbers);
+                                          share();
                                         },
                                         title: 'share_app'.tr,
                                         imageTitle: Assets.iconsShare,

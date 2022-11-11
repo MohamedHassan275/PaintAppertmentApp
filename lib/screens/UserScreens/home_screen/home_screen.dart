@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/model/home_model.dart';
@@ -11,7 +16,10 @@ import 'package:pain_appertment/screens/UserScreens/details_service_screen/detai
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
 import 'package:pain_appertment/utils/constant/Themes.dart';
 import 'package:pain_appertment/utils/constant/constant.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../generated/assets.dart';
+
+enum Availability { loading, available, unavailable }
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,15 +27,51 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 class _HomeScreenState extends State<HomeScreen> {
+
+  final InAppReview _inAppReview = InAppReview.instance;
+    //com.elsareh.shatbShaqtek
+  String _appStoreId = 'com.facebook.mlite';
+  String _microsoftStoreId = '';
+  Availability _availability = Availability.loading;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      try {
+        final isAvailable = await _inAppReview.isAvailable();
+
+        setState(() {
+          // This plugin cannot be tested on Android by installing your app
+          // locally. See https://github.com/britannio/in_app_review#testing for
+          // more information.
+          _availability = isAvailable && !Platform.isAndroid
+              ? Availability.available
+              : Availability.unavailable;
+        });
+      } catch (e) {
+        setState(() => _availability = Availability.unavailable);
+      }
+    });
+
     print('token is ${AppConstants.tokenSession}');
     setState(() {
       loadData();
     });
   }
+
+  void _setAppStoreId(String id) => _appStoreId = id;
+
+  void _setMicrosoftStoreId(String id) => _microsoftStoreId = id;
+
+  Future<void> _requestReview() => _inAppReview.requestReview();
+
+  Future<void> _openStoreListing() => _inAppReview.openStoreListing(
+    appStoreId: _appStoreId,
+    microsoftStoreId: _microsoftStoreId,
+  );
+
 
   loadData() {
     BlocProvider.of<HomeCubit>(context, listen: false).getHomeUser();
@@ -340,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   height: 150,
                                                   child: ListView.builder(
                                                       shrinkWrap: true,
-                                                      itemCount: 3,
+                                                      itemCount: gallery.images!.length > 3 ? 3 : gallery.images!.length,
                                                       scrollDirection:
                                                           Axis.horizontal,
                                                       itemBuilder:

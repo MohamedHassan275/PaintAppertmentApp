@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launch/flutter_launch.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:pain_appertment/business_logic/user_controller/auth_cubit/auth_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
@@ -25,12 +26,22 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
 
+  Future<void> share() async {
+    await FlutterShare.share(
+        title: 'مشاركة تطبيق شطب شقتك',
+        text: 'شارك اصحابك ومعارفك لاستخدام التطبيق وطلب الخدمات الموجودة ف التطبيق',
+        linkUrl: "https://play.google.com/store/apps/details?id=" + 'com.facebook.mlite',
+        chooserTitle: 'اختار صح');
+  }
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     BlocProvider.of<SettingCubit>(context).showUserDetails();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +76,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   children: [
                                     SettingCategory(
                                         onTap: () {
-
+                                          share();
                                         },
                                         title: 'share_app'.tr,
                                         imageTitle: Assets.iconsShare,
