@@ -59,8 +59,8 @@ class _HomeMainScreenState extends State<HomeMainScreen>
       AppConstants.tokenSession = Get.find<StorageService>().getToken != null
           ? AppConstants.tokenSession = Get.find<StorageService>().getToken
           : '';
-      print('token is ${AppConstants.tokenSession}');
-      print('tokenDevice is ${Get.find<StorageService>().getTokenDevice}');
+      //print('token is ${AppConstants.tokenSession}');
+      //print('tokenDevice is ${Get.find<StorageService>().getTokenDevice}');
     });
 
     FirebaseMessaging.instance.getInitialMessage();
@@ -83,7 +83,7 @@ class _HomeMainScreenState extends State<HomeMainScreen>
           // loadData();
           // loadDataProduct();
           // loadDataProfile();
-          print("success service");
+          //print("success service");
           AppLayoutCubit appLayoutCubit = AppLayoutCubit.get(context);
           AnnotatedRegion<SystemUiOverlayStyle>(
             value: const SystemUiOverlayStyle(

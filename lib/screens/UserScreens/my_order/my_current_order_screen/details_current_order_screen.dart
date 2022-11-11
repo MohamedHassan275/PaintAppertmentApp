@@ -201,8 +201,8 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     //           onRatingChanged: (value) {
                                     //             setState(() {
                                     //               rating = value;
-                                    //               print('rating');
-                                    //               print(rating);
+                                    //               //print('rating');
+                                    //               //print(rating);
                                     //             });
                                     //           },
                                     //         ),
@@ -220,8 +220,8 @@ class _DetailsWaitingOrderScreenState extends State<DetailsMyCurrentOrder> {
                                     //           if(formKey.currentState!.validate()){
                                     //             // CustomFlutterToast(widget.newOrder.id.toString());
                                     //             // CustomFlutterToast(rateTechnicalTextController.text);
-                                    //             // print('rating');
-                                    //             // print(rating);
+                                    //             // //print('rating');
+                                    //             // //print(rating);
                                     //             addRateCubit.addRateToTechnicalFromUser(widget.newOrder.id.toString(), rating,
                                     //                 rateTechnicalTextController.text);
                                     //           }

@@ -20,10 +20,10 @@ class AddPriceOrderCubit extends Cubit<AddPriceOrderState> {
 
  addPriceOfferOrderTechnical(BuildContext context,String orderId,String price){
    emit(AddPriceOrderLoadingState());
-   print('response is loading');
+   //print('response is loading');
    AddPriceOrdersTechnicalService.addPriceOfferOrderTechnicalService(context,orderId, price).then((value){
      if(value?.success == true){
-       print('response is $value');
+       //print('response is $value');
        emit(AddPriceOrderSuccessfullyState(value?.message));
      }else {
        emit(AddPriceOrderErrorState(value?.message));

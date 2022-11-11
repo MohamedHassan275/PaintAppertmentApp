@@ -14,14 +14,14 @@ class AddRateCubit extends Cubit<AddRateState> {
 
   addRateToTechnicalFromUser(String serviceId,String orderId,double rate,String comment){
     emit(AddRateLoadingState());
-    print('serviceId cubit');
-    print(serviceId);
-    print('orderId cubit');
-    print(orderId);
-    print('rating cubit');
-    print(rate);
-    print('comment cubit');
-    print(comment);
+    //print('serviceId cubit');
+    //print(serviceId);
+    //print('orderId cubit');
+    //print(orderId);
+    //print('rating cubit');
+    //print(rate);
+    //print('comment cubit');
+    //print(comment);
     AddRateService.addRateToTechnical(serviceId, orderId, rate, comment).then((value){
       if(value?.success == true){
         emit(AddRateSuccessState(value?.message));

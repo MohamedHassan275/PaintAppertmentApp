@@ -26,8 +26,8 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print('tokenSession');
-    print(AppConstants.tokenSession);
+    //print('tokenSession');
+    //print(AppConstants.tokenSession);
     BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
   }
 
@@ -37,8 +37,8 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
     var widthValue = Get.width * 0.024;
     return RefreshIndicator(
       onRefresh: () async{
-        print('refresh');
-        print('${AppConstants.typeSession}');
+        //print('refresh');
+        //print('${AppConstants.typeSession}');
         BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
         BlocProvider.of<ProfileCubit>(context).showUserDetails();
       },

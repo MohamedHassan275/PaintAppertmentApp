@@ -23,23 +23,23 @@ class HomeService{
       
       Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.home,token: AppConstants.tokenSession,lang: 'ar');
 
-   //   print(AppLocalStorage.token);
+   //   //print(AppLocalStorage.token);
       if(response.statusCode == 200){
-        print(response.data);
+        //print(response.data);
         return HomeModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
       }
     }on DioError catch (e){
       if (e.response != null) {
-        print('Dio error!');
-        print('STATUS: ${e.response?.statusCode}');
-        print('DATA: ${e.response?.data}');
-        print('HEADERS: ${e.response?.headers}');
+        //print('Dio error!');
+        //print('STATUS: ${e.response?.statusCode}');
+        //print('DATA: ${e.response?.data}');
+        //print('HEADERS: ${e.response?.headers}');
       } else {
         // Error due to setting up or sending the request
-        print('Error sending request!');
-        print(e.message);
+        //print('Error sending request!');
+        //print(e.message);
       }
     }
     return homeModel;
@@ -52,19 +52,19 @@ static Future<ShowProductDetails?> showProductDetails(BuildContext context, Stri
 
       Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.showService+productId,token: AppConstants.tokenSession,lang: 'ar');
 
-   //   print(AppLocalStorage.token);
+   //   //print(AppLocalStorage.token);
       if(response.statusCode == 200){
-        print(response.data);
+        //print(response.data);
         return ShowProductDetails.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
       }
     }on DioError catch (e){
       if (e.response != null) {
-        print('Dio error!');
-        print('STATUS: ${e.response?.statusCode}');
-        print('DATA: ${e.response?.data}');
-        print('HEADERS: ${e.response?.headers}');
+        //print('Dio error!');
+        //print('STATUS: ${e.response?.statusCode}');
+        //print('DATA: ${e.response?.data}');
+        //print('HEADERS: ${e.response?.headers}');
       } else {
         // Error due to setting up or sending the request
         AwesomeDialog(
@@ -86,8 +86,8 @@ static Future<ShowProductDetails?> showProductDetails(BuildContext context, Stri
                 (context) => const HomeMainScreen()));
           },
         ).show();
-        print('Error sending request!');
-        print(e.message);
+        //print('Error sending request!');
+        //print(e.message);
       }
     }
     return showProductDetails;

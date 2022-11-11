@@ -14,9 +14,9 @@ class AuthService{
     LoginModel? loginModel;
 
     try {
-      print('response is ');
-      print('${phone}');
-      print('${password}');
+      //print('response is ');
+      //print('${phone}');
+      //print('${password}');
 
       Response response = await APIService.postData(uri: ApiConstants.baseUrl+ApiConstants.login,data: {
         "phone" : phone,
@@ -24,11 +24,11 @@ class AuthService{
         "fcm_token" : fcmToken,
       });
 
-      print('response is ');
-      print('${response.statusCode}');
-      print('${response.data}');
+      //print('response is ');
+      //print('${response.statusCode}');
+      //print('${response.data}');
       if(response.statusCode == 200){
-        print(response.data);
+        //print(response.data);
         return LoginModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
@@ -36,14 +36,14 @@ class AuthService{
       }
     }on DioError catch (e){
       if (e.response != null) {
-        print('Dio error!');
-        print('STATUS: ${e.response?.statusCode}');
-        print('DATA: ${e.response?.data}');
-        print('HEADERS: ${e.response?.headers}');
+        //print('Dio error!');
+        //print('STATUS: ${e.response?.statusCode}');
+        //print('DATA: ${e.response?.data}');
+        //print('HEADERS: ${e.response?.headers}');
       } else {
         // Error due to setting up or sending the request
-        print('Error sending request!');
-        print(e.message);
+        //print('Error sending request!');
+        //print(e.message);
       }
     }
     return loginModel;
@@ -54,16 +54,16 @@ class AuthService{
       String password,String fcmToken,String type) async {
     LoginModel? loginModel;
 
-    print('request register 3');
-    print(firstName);
-    print(lastName);
-    print(phone);
-    print(email);
-    print(governorate);
-    print(city);
-    print(password);
-    print(fcmToken);
-    print(type);
+    //print('request register 3');
+    //print(firstName);
+    //print(lastName);
+    //print(phone);
+    //print(email);
+    //print(governorate);
+    //print(city);
+    //print(password);
+    //print(fcmToken);
+    //print(type);
 
     try {
 
@@ -80,9 +80,9 @@ class AuthService{
         "type" : type,
       });
 
-      //   print(AppLocalStorage.token);
+      //   //print(AppLocalStorage.token);
       if(response.statusCode == 200){
-        print(response.data);
+        //print(response.data);
         return LoginModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
@@ -90,14 +90,14 @@ class AuthService{
       }
     }on DioError catch (e){
       if (e.response != null) {
-        print('Dio error!');
-        print('STATUS: ${e.response?.statusCode}');
-        print('DATA: ${e.response?.data}');
-        print('HEADERS: ${e.response?.headers}');
+        //print('Dio error!');
+        //print('STATUS: ${e.response?.statusCode}');
+        //print('DATA: ${e.response?.data}');
+        //print('HEADERS: ${e.response?.headers}');
       } else {
         // Error due to setting up or sending the request
-        print('Error sending request!');
-        print(e.message);
+        //print('Error sending request!');
+        //print(e.message);
       }
     }
     return loginModel;
@@ -111,9 +111,9 @@ class AuthService{
 
       Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.logout,token: AppConstants.tokenSession);
 
-      //   print(AppLocalStorage.token);
+      //   //print(AppLocalStorage.token);
       if(response.statusCode == 200){
-        print(response.data);
+        //print(response.data);
         return ResponseUserModel.fromJson(response.data);
       }else if(response.statusCode == 404){
         CustomFlutterToast(response.data['data']);
@@ -121,14 +121,14 @@ class AuthService{
       }
     }on DioError catch (e){
       if (e.response != null) {
-        print('Dio error!');
-        print('STATUS: ${e.response?.statusCode}');
-        print('DATA: ${e.response?.data}');
-        print('HEADERS: ${e.response?.headers}');
+        //print('Dio error!');
+        //print('STATUS: ${e.response?.statusCode}');
+        //print('DATA: ${e.response?.data}');
+        //print('HEADERS: ${e.response?.headers}');
       } else {
         // Error due to setting up or sending the request
-        print('Error sending request!');
-        print(e.message);
+        //print('Error sending request!');
+        //print(e.message);
       }
     }
     return responseUserModel;

@@ -5,10 +5,10 @@ class LoggerHelper {
   static late Logger loggerNoStack;
   static init() {
     logger = Logger(
-      printer: PrettyPrinter(),
+      //printer: Pretty//printer(),
     );
     loggerNoStack = Logger(
-      printer: PrettyPrinter(methodCount: 0),
+      //printer: Pretty//printer(methodCount: 0),
     );
   }
 }

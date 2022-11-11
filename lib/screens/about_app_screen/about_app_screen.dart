@@ -24,9 +24,9 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print('intentData');
-    print('${widget.intentData}');
-    print('${widget.titleAboutUs}');
+    //print('intentData');
+    //print('${widget.intentData}');
+    //print('${widget.titleAboutUs}');
     BlocProvider.of<SettingCubit>(context).showUserDetails();
   }
 

@@ -309,8 +309,8 @@ class _RegisterTechnicalScreenState extends State<RegisterTechnicalScreen> {
                               if (form.currentState!.validate()) {
                                 if (isCheckAccepted == true) {
                                   if(widget.choseService != null){
-                                    print('choseServiceId');
-                                    print(widget.choseServiceId);
+                                    //print('choseServiceId');
+                                    //print(widget.choseServiceId);
                                     authCubit.setRegisterTechnical(
                                       context,
                                         FirstName.text,

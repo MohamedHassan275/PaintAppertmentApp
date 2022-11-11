@@ -295,7 +295,7 @@ class ContactWithUs extends StatelessWidget {
                     await FlutterLaunch.launchWhatsapp(
                         phone: '${settingResponseModel?.socialmedia![0].whatsapp}',message: '');
                   } else {
-                    print("Whatsapp não instalado");
+                    //print("Whatsapp não instalado");
                   }
                 },
               ),

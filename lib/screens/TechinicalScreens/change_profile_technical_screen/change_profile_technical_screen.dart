@@ -103,14 +103,14 @@ class _ChangeProfileTechnicalScreenState extends State<ChangeProfileTechnicalScr
                         hight: 50,
                         onTap: () {
                           if(formKey.currentState!.validate()){
-                            print('user details');
-                            print(AppConstants.tokenSession);
-                            print(firstNameController.text);
-                            print(lastNameController.text);
-                            print(mobilePhoneController.text);
-                            print(emailController.text);
-                            print(governmentController.text);
-                            print(cityController.text);
+                            //print('user details');
+                            //print(AppConstants.tokenSession);
+                            //print(firstNameController.text);
+                            //print(lastNameController.text);
+                            //print(mobilePhoneController.text);
+                            //print(emailController.text);
+                            //print(governmentController.text);
+                            //print(cityController.text);
 
                             profileCubit.updateProfileUser(firstNameController.text, lastNameController.text, mobilePhoneController.text,
                                 emailController.text,

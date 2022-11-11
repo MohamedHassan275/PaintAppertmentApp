@@ -112,14 +112,14 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
                                           authCubit.setLoginUser(
                                               mobilePhoneController.text,
                                               passwordController.text, value);
-                                              print('token device');
+                                              //print('token device');
                                            //   CustomFlutterToast(value);
-                                          print(value);
+                                          //print(value);
                                         }
                                       }
                                     });
 
-                                    print('token is ${AppConstants.tokenSession}');
+                                    //print('token is ${AppConstants.tokenSession}');
 
                                     ///when token expires from firebase
                                     onTokenRefreshListen =
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver{
                                           authCubit.setLoginUser(
                                               mobilePhoneController.text,
                                               passwordController.text, value);
-                                          print('token device');
+                                          //print('token device');
                                         //  CustomFlutterToast(value);
                                         });
                                   }

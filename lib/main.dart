@@ -59,9 +59,9 @@ void main() async {
     sound: true,
   );
 
-  print('typeSession2 ${Get.find<StorageService>().getType}');
-  print('typeSession2 ${Get.find<StorageService>().getToken}');
-  print('typeSession2 ${AppConstants.tokenSession}');
+  //print('typeSession2 ${Get.find<StorageService>().getType}');
+  //print('typeSession2 ${Get.find<StorageService>().getToken}');
+  //print('typeSession2 ${AppConstants.tokenSession}');
 
    AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
 

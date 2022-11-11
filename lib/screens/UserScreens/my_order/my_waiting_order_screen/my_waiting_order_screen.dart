@@ -30,7 +30,7 @@ class _MyWaitingOrderScreenState extends State<MyWaitingOrderScreen> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async{
-          print('refresh');
+          //print('refresh');
           BlocProvider.of<OrdersCubit>(context).getSenderOrderUser();
         },
         child: SafeArea(

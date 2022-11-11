@@ -34,8 +34,8 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         activeConnection = true;
         T = "Turn off the data and repress again";
-        print(T);
-        print(activeConnection);
+        //print(T);
+        //print(activeConnection);
       //  CustomFlutterToast(T);
         // CustomFlutterToast(ActiveConnection.toString());
          emit(ConnectionSuccess());
@@ -43,8 +43,8 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
     } on SocketException catch (_) {
       activeConnection = true;
       T = "Turn off the data and repress again";
-      print(T);
-      print(activeConnection);
+      //print(T);
+      //print(activeConnection);
      // CustomFlutterToast(T);
       // CustomFlutterToast(ActiveConnection.toString());
        emit(ConnectionFailure());

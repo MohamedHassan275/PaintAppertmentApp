@@ -115,12 +115,12 @@ class _ChangeProfileUserScreenState extends State<ChangeProfileUserScreen> {
                             hight: 50,
                             onTap: () {
                               if(formKey.currentState!.validate()){
-                                print('user details');
-                                print(AppConstants.tokenSession);
-                                print(FirstName.text);
-                                print(LastName.text);
-                                print(MobilePhone.text);
-                                print(Email.text);
+                                //print('user details');
+                                //print(AppConstants.tokenSession);
+                                //print(FirstName.text);
+                                //print(LastName.text);
+                                //print(MobilePhone.text);
+                                //print(Email.text);
                                 profileCubit.updateProfileUser(FirstName.text, LastName.text, MobilePhone.text, Email.text,
                                 Government.text,City.text);
                               }

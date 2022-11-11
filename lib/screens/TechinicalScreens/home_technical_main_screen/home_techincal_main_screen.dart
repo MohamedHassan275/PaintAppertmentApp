@@ -58,7 +58,7 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
     // TODO: implement initState
     super.initState();
     AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
-    print('token is ${AppConstants.tokenSession}');
+    //print('token is ${AppConstants.tokenSession}');
     BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
 
     FirebaseMessaging.instance.getInitialMessage();
@@ -80,7 +80,7 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
               // loadData();
               // loadDataProduct();
               // loadDataProfile();
-              print("success service");
+              //print("success service");
               AppLayoutCubit appLayoutCubit = AppLayoutCubit.get(context);
               AnnotatedRegion<SystemUiOverlayStyle>(
                 value: const SystemUiOverlayStyle(

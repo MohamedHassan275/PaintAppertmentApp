@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
 
-    print('token is ${AppConstants.tokenSession}');
+    //print('token is ${AppConstants.tokenSession}');
     setState(() {
       loadData();
     });
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: RefreshIndicator(
       onRefresh: () async {
         loadData();
-        print('refresh');
+        //print('refresh');
       },
       child: SafeArea(
         child: SingleChildScrollView(

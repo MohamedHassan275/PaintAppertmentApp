@@ -254,8 +254,8 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
                             onRatingChanged: (value) {
                               setState(() {
                                 rating = value;
-                                print('rating');
-                                print(rating);
+                                //print('rating');
+                                //print(rating);
                               });
                             },
                           ),
@@ -273,14 +273,14 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
                             if(formKey.currentState!.validate()){
                              // CustomFlutterToast(widget.orderResponseModel.orderId.toString());
                             //  CustomFlutterToast(rateTechnicalTextController.text);
-                              print('serviceId');
-                              print(widget.orderResponseModel.serviceId);
-                              print('orderId');
-                              print(widget.orderResponseModel.orderId);
-                              print('rating');
-                              print(rating);
-                              print('comment');
-                              print(rateTechnicalTextController.text);
+                              //print('serviceId');
+                              //print(widget.orderResponseModel.serviceId);
+                              //print('orderId');
+                              //print(widget.orderResponseModel.orderId);
+                              //print('rating');
+                              //print(rating);
+                              //print('comment');
+                              //print(rateTechnicalTextController.text);
 
                               addRateCubit.addRateToTechnicalFromUser('${widget.orderResponseModel.serviceId}',
                                   widget.orderResponseModel.orderId.toString(),
