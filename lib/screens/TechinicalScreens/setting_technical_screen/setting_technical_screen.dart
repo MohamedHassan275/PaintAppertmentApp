@@ -39,8 +39,8 @@ class _SettingTechnicalScreenState extends State<SettingTechnicalScreen> {
   Future<void> share() async {
     await FlutterShare.share(
         title: 'مشاركة تطبيق شطب شقتك',
-        text: 'شارك اصحابك ومعارفك لاستخدام التطبيق وطلب الخدمات الموجودة ف التطبيق',
-        linkUrl: "https://play.google.com/store/apps/details?id=" + 'com.facebook.mlite',
+        text: 'شارك اصحابك ومعارفك التطبيق اللى هيريح ويسهل حياتهم من خلال طلب الخدمات من التطبيق بكل سهولة',
+        linkUrl: "https://play.google.com/store/apps/details?id=" + 'com.elsareh.shatbShaqtek',
         chooserTitle: 'اختار صح');
   }
 

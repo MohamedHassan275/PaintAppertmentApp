@@ -51,6 +51,17 @@ android {
         versionName flutterVersionName
     }
 
+//    signingConfigs {
+//        release {
+//            keyAlias keystoreProperties['shatebShatek']
+//            keyPassword keystoreProperties['123456000']
+//            storeFile keystoreProperties['F:\\Paint Appertment App\\shateb_shatek.jks'] ?
+//                    file(keystoreProperties['F:\\Paint Appertment App\\shateb_shatek.jks']) : null
+//            storePassword keystoreProperties['123456']
+//        }
+//    }
+
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
