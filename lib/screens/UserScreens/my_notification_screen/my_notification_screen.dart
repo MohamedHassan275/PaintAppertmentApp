@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/screens/UserScreens/my_order/my_current_order_screen/details_current_order_screen.dart';
@@ -334,11 +335,21 @@ void _handleAddRateToTechnical(BuildContext context, AddRateState state) {
       btnOkText: 'موافق',
       btnCancelColor: Themes.ColorApp9,
       btnOkColor: Themes.ColorApp17,
-      btnCancelOnPress: () {
+      btnCancelOnPress: () async{
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeMainScreen()));
+        final InAppReview inAppReview = InAppReview.instance;
+
+        if (await inAppReview.isAvailable()) {
+          inAppReview.requestReview();
+        }
       },
-      btnOkOnPress: () {
+      btnOkOnPress: () async{
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeMainScreen()));
+        final InAppReview inAppReview = InAppReview.instance;
+
+        if (await inAppReview.isAvailable()) {
+          inAppReview.requestReview();
+        }
       },
     ).show();
 

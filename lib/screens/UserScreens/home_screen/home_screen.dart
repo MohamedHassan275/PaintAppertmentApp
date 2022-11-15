@@ -34,11 +34,20 @@ class _HomeScreenState extends State<HomeScreen> {
   String _microsoftStoreId = '';
   Availability _availability = Availability.loading;
 
+  void rateUser() async{
+    final InAppReview inAppReview = InAppReview.instance;
+
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    rateUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       try {
         final isAvailable = await _inAppReview.isAvailable();
 
@@ -481,9 +490,16 @@ class OrderPriceRequest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(RequestMyServiceScreen(
-        companyId: '',
-      )),
+      onTap: () async{
+        Get.to(RequestMyServiceScreen(
+          companyId: '',
+        ));
+        // final InAppReview inAppReview = InAppReview.instance;
+        //
+        // if (await inAppReview.isAvailable()) {
+        // inAppReview.requestReview();
+        // }
+      },
       child: Container(
         width: Get.width,
         height: 100,
