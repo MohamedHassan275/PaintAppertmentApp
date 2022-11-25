@@ -39,331 +39,338 @@ class _DetailsServiceScreenState extends State<DetailsServiceScreen> {
   Widget build(BuildContext context) {
     var height = Get.height * 0.024;
     var width = Get.width * 0.024;
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Appbarwidget(
-                  width: width,
-                  height: height,
-                  name: '${widget.services?.name}'),
-              SizedBox(
-                height: height * 1.5,
-              ),
-              BlocBuilder<HomeCubit, HomeState>(
-                builder: (context, state) {
-                  if (state is ShowDetailsSuccessState) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: width * 1),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: FadeInImage(
-                              height: 150,
-                              width: Get.width,
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  '${state.showProductResponseDetails?.image}'),
-                              placeholder: const AssetImage(Assets.imagesLoading),
+    return WillPopScope(
+      onWillPop: () async{
+        print('back screen');
+        Get.to(const HomeMainScreen());
+        return false;
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Appbarwidget(
+                    width: width,
+                    height: height,
+                    name: '${widget.services?.name}'),
+                SizedBox(
+                  height: height * 1.5,
+                ),
+                BlocBuilder<HomeCubit, HomeState>(
+                  builder: (context, state) {
+                    if (state is ShowDetailsSuccessState) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: width * 1),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: FadeInImage(
+                                height: 150,
+                                width: Get.width,
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                    '${state.showProductResponseDetails?.image}'),
+                                placeholder: const AssetImage(Assets.imagesLoading),
+                              ),
                             ),
                           ),
-                        ),
-                        // Image.asset(Assets.imagesLogoApp,
-                        // height: 135,
-                        // width: Get.width,
-                        // fit: BoxFit.contain,),
-                        SizedBox(
-                          height: height * 1,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  const Text(
-                                    'اسم الخدمة : ',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 15,
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Themes.ColorApp1,
-                                    ),
-                                  ),
-                                  SizedBox(width: width * .3,),
-                                  Expanded(
-                                    child: Text(
-                                      '${state.showProductResponseDetails?.name}',
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
+                          // Image.asset(Assets.imagesLogoApp,
+                          // height: 135,
+                          // width: Get.width,
+                          // fit: BoxFit.contain,),
+                          SizedBox(
+                            height: height * 1,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Text(
+                                      'اسم الخدمة : ',
+                                      style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 15,
                                         overflow: TextOverflow.ellipsis,
-                                        color: blackColor,
+                                        color: Themes.ColorApp1,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: height * 1,
-                              ),
-                              const Text(
-                                'تفاصيل الخدمة : ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 15,
-                                  overflow: TextOverflow.ellipsis,
-                                  color: Themes.ColorApp1,
-                                ),
-                              ),
-                              SizedBox(width: width * 1.5,),
-                              ReadMoreText(
-                                '${state.showProductResponseDetails?.about}',
-                                trimLines: 2,
-                                colorClickableText: Themes.ColorApp9,
-                                trimMode: TrimMode.Length,
-                                trimCollapsedText: 'عرض المزيد',
-                                trimExpandedText: 'عرض أقل',
-                                style: const TextStyle(
-                                  color: blackColor,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 15,
-                                ),
-                              ),
-                              SizedBox(
-                                height: height * 1,
-                              ),
-                              const Text(
-                                ' صور الخدمة ',
-                                maxLines: 3,
-                                overflow: TextOverflow.fade,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 15,
-                                  overflow: TextOverflow.fade,
-                                  color: Themes.ColorApp1,
-                                ),
-                              ),
-                              SizedBox(
-                                height: height * 1,
-                              ),
-                              state.showProductResponseDetails!.images!.isEmpty
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Text(
-                                          'لا يوجد صور في الوقت الحالي ',
-                                          maxLines: 3,
+                                    SizedBox(width: width * .3,),
+                                    Expanded(
+                                      child: Text(
+                                        '${state.showProductResponseDetails?.name}',
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
                                           overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 15,
-                                            overflow: TextOverflow.fade,
-                                            color: Themes.ColorApp15,
-                                          ),
+                                          color: blackColor,
                                         ),
-                                      ],
-                                    )
-                                  : SizedBox(
-                                      height: 215,
-                                      child: ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: state.showProductResponseDetails?.images!.length,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) =>
-                                              Card(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                ),
-                                                elevation: 2,
-                                                color: Themes.whiteColor,
-                                                child: Container(
-                                                  height: 200,
-                                                  width: 300,
-                                                  decoration: BoxDecoration(
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: height * 1,
+                                ),
+                                const Text(
+                                  'تفاصيل الخدمة : ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15,
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Themes.ColorApp1,
+                                  ),
+                                ),
+                                SizedBox(width: width * 1.5,),
+                                ReadMoreText(
+                                  '${state.showProductResponseDetails?.about}',
+                                  trimLines: 2,
+                                  colorClickableText: Themes.ColorApp9,
+                                  trimMode: TrimMode.Length,
+                                  trimCollapsedText: 'عرض المزيد',
+                                  trimExpandedText: 'عرض أقل',
+                                  style: const TextStyle(
+                                    color: blackColor,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * 1,
+                                ),
+                                const Text(
+                                  ' صور الخدمة ',
+                                  maxLines: 3,
+                                  overflow: TextOverflow.fade,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15,
+                                    overflow: TextOverflow.fade,
+                                    color: Themes.ColorApp1,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * 1,
+                                ),
+                                state.showProductResponseDetails!.images!.isEmpty
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Text(
+                                            'لا يوجد صور في الوقت الحالي ',
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 15,
+                                              overflow: TextOverflow.fade,
+                                              color: Themes.ColorApp15,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : SizedBox(
+                                        height: 215,
+                                        child: ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: state.showProductResponseDetails?.images!.length,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) =>
+                                                Card(
+                                                  shape: RoundedRectangleBorder(
                                                     borderRadius: BorderRadius.circular(15),
                                                   ),
-                                                  child: ClipRRect(
-                                                    borderRadius: BorderRadius.circular(15),
-                                                    child: FadeInImage(
-                                                      height: 200,
-                                                      width: 300,
-                                                      fit: BoxFit.fill,
-                                                      image: NetworkImage('${state.showProductResponseDetails?.images![index].image}'),
-                                                      placeholder: const AssetImage(Assets.imagesLoading),
+                                                  elevation: 2,
+                                                  color: Themes.whiteColor,
+                                                  child: Container(
+                                                    height: 200,
+                                                    width: 300,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                    ),
+                                                    child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                      child: FadeInImage(
+                                                        height: 200,
+                                                        width: 300,
+                                                        fit: BoxFit.fill,
+                                                        image: NetworkImage('${state.showProductResponseDetails?.images![index].image}'),
+                                                        placeholder: const AssetImage(Assets.imagesLoading),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),)),
-                              SizedBox(
-                                height: height * 1,
-                              ),
-                              const Text(
-                                'تقييمات العميل',
-                                maxLines: 3,
-                                overflow: TextOverflow.fade,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 15,
-                                  overflow: TextOverflow.fade,
-                                  color: Themes.ColorApp1,
+                                                ),)),
+                                SizedBox(
+                                  height: height * 1,
                                 ),
-                              ),
-                              SizedBox(
-                                height: height * 1,
-                              ),
-                              state.showProductResponseDetails!.rates!.isEmpty
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Text(
-                                          'لا يوجد تقييمات في الوقت الحالي ',
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 15,
-                                            overflow: TextOverflow.fade,
-                                            color: Themes.ColorApp15,
+                                const Text(
+                                  'تقييمات العميل',
+                                  maxLines: 3,
+                                  overflow: TextOverflow.fade,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15,
+                                    overflow: TextOverflow.fade,
+                                    color: Themes.ColorApp1,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * 1,
+                                ),
+                                state.showProductResponseDetails!.rates!.isEmpty
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Text(
+                                            'لا يوجد تقييمات في الوقت الحالي ',
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 15,
+                                              overflow: TextOverflow.fade,
+                                              color: Themes.ColorApp15,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    )
-                                  : SizedBox(
-                                      height: 215,
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: state
-                                            .showProductResponseDetails
-                                            ?.rates!
-                                            .length,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) => Card(
-                                          elevation: 3,
-                                          color: Themes.whiteColor,
-                                          child: Container(
-                                            height: 200,
-                                            width: 200,
+                                        ],
+                                      )
+                                    : SizedBox(
+                                        height: 215,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: state
+                                              .showProductResponseDetails
+                                              ?.rates!
+                                              .length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) => Card(
+                                            elevation: 3,
                                             color: Themes.whiteColor,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  '${state.showProductResponseDetails?.rates![index].name}',
-                                                  maxLines: 3,
-                                                  overflow: TextOverflow.fade,
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 15,
+                                            child: Container(
+                                              height: 200,
+                                              width: 200,
+                                              color: Themes.whiteColor,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '${state.showProductResponseDetails?.rates![index].name}',
+                                                    maxLines: 3,
                                                     overflow: TextOverflow.fade,
-                                                    color: Themes.ColorApp15,
+                                                    style: const TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 15,
+                                                      overflow: TextOverflow.fade,
+                                                      color: Themes.ColorApp15,
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: height * .5,
-                                                ),
-                                                Text(
-                                                  '${state.showProductResponseDetails?.rates![index].date}',
-                                                  maxLines: 3,
-                                                  overflow: TextOverflow.fade,
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 15,
+                                                  SizedBox(
+                                                    height: height * .5,
+                                                  ),
+                                                  Text(
+                                                    '${state.showProductResponseDetails?.rates![index].date}',
+                                                    maxLines: 3,
                                                     overflow: TextOverflow.fade,
-                                                    color: Themes.ColorApp15,
+                                                    style: const TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 15,
+                                                      overflow: TextOverflow.fade,
+                                                      color: Themes.ColorApp15,
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: height * .5,
-                                                ),
-                                                StarRating(
-                                                  color: Themes.ColorApp13,
-                                                  onRatingChanged: (rating) => state
-                                                      .showProductResponseDetails
-                                                      ?.rates![index]
-                                                      .rate = rating,
-                                                  rating: double.parse(
-                                                      '${state.showProductResponseDetails?.rates![index].rate!}'),
-                                                ),
-                                                SizedBox(
-                                                  height: height * .5,
-                                                ),
-                                                Text(
-                                                  '${state.showProductResponseDetails?.rates![index].comment!}',
-                                                  maxLines: 3,
-                                                  overflow: TextOverflow.fade,
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 15,
+                                                  SizedBox(
+                                                    height: height * .5,
+                                                  ),
+                                                  StarRating(
+                                                    color: Themes.ColorApp13,
+                                                    onRatingChanged: (rating) => state
+                                                        .showProductResponseDetails
+                                                        ?.rates![index]
+                                                        .rate = rating,
+                                                    rating: double.parse(
+                                                        '${state.showProductResponseDetails?.rates![index].rate!}'),
+                                                  ),
+                                                  SizedBox(
+                                                    height: height * .5,
+                                                  ),
+                                                  Text(
+                                                    '${state.showProductResponseDetails?.rates![index].comment!}',
+                                                    maxLines: 3,
                                                     overflow: TextOverflow.fade,
-                                                    color: Themes.ColorApp15,
+                                                    style: const TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 15,
+                                                      overflow: TextOverflow.fade,
+                                                      color: Themes.ColorApp15,
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: height * 1.5,
-                                                ),
-                                              ],
+                                                  SizedBox(
+                                                    height: height * 1.5,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                              SizedBox(
-                                height: height * 3.5,
-                              ),
-                              CustomButtonImage(
-                                  title: 'request_price2'.tr,
-                                  hight: 50,
-                                  onTap: () {
-                                    //  CustomFlutterToast(state.showProductResponseDetails?.id.toString());
-                                    Get.to(RequestMyServiceScreen(
-                                      companyId: state
-                                          .showProductResponseDetails?.id
-                                          .toString(),
-                                    ));
-                                  }),
-                              SizedBox(
-                                height: height * 1,
-                              ),
-                            ],
+                                SizedBox(
+                                  height: height * 3.5,
+                                ),
+                                CustomButtonImage(
+                                    title: 'request_price2'.tr,
+                                    hight: 50,
+                                    onTap: () {
+                                      //  CustomFlutterToast(state.showProductResponseDetails?.id.toString());
+                                      Get.to(RequestMyServiceScreen(
+                                        companyId: state
+                                            .showProductResponseDetails?.id
+                                            .toString(),
+                                      ));
+                                    }),
+                                SizedBox(
+                                  height: height * 1,
+                                ),
+                              ],
+                            ),
                           ),
+                        ],
+                      );
+                    } else if (state is ShowDetailsErrorState) {
+                      return Container(
+                        width: Get.width,
+                        height: Get.height,
+                        child: Center(
+                          child: Text('${state.error}'),
                         ),
-                      ],
-                    );
-                  } else if (state is ShowDetailsErrorState) {
+                      );
+                    }
                     return Container(
                       width: Get.width,
                       height: Get.height,
-                      child: Center(
-                        child: Text('${state.error}'),
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          color: Themes.ColorApp1,
+                        ),
                       ),
                     );
-                  }
-                  return Container(
-                    width: Get.width,
-                    height: Get.height,
-                    child: const Center(
-                      child: CircularProgressIndicator(
-                        color: Themes.ColorApp1,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

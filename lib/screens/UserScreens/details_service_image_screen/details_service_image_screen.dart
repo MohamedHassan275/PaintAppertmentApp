@@ -22,50 +22,57 @@ class _DetailsServiceImageScreenState extends State<DetailsServiceImageScreen> {
   Widget build(BuildContext context) {
     var width = Get.width * 0.024;
     var height = Get.height * 0.024;
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Themes.whiteColor,
-            child: Column(
-              children: [
-                Appbarwidget(width: width, height: height, gallery: widget.gallery,),
-                ListView.builder(
-                    itemCount: widget.gallery?.images!.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        elevation: 2,
-                        color: Themes.whiteColor,
-                        child: Container(
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
+    return WillPopScope(
+      onWillPop: () async{
+        print('back screen');
+        Get.to(const HomeMainScreen());
+        return false;
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              color: Themes.whiteColor,
+              child: Column(
+                children: [
+                  Appbarwidget(width: width, height: height, gallery: widget.gallery,),
+                  ListView.builder(
+                      itemCount: widget.gallery?.images!.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: FadeInImage(
-                              height: 200,
-                              width: 300,
-                              fit: BoxFit.fill,
-                              image: NetworkImage('${widget.gallery?.images![index].image}'),
-                              placeholder: const AssetImage(Assets.imagesLoading),
+                          elevation: 2,
+                          color: Themes.whiteColor,
+                          child: Container(
+                            height: 200,
+                            width: 300,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: FadeInImage(
+                                height: 200,
+                                width: 300,
+                                fit: BoxFit.fill,
+                                image: NetworkImage('${widget.gallery?.images![index].image}'),
+                                placeholder: const AssetImage(Assets.imagesLoading),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    )),
-              ],
+                      )),
+                ],
+              ),
             ),
           ),
-        ),
-      )
+        )
+      ),
     );
   }
 }
