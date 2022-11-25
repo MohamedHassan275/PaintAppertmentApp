@@ -11,6 +11,7 @@ import 'package:pain_appertment/utils/constant/custom_toast.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../utils/constant/Themes.dart';
+import '../../../UserScreens/my_notification_screen/my_notification_screen.dart';
 import 'details_new_order_technical_screen.dart';
 
 class NewOrderTechnicalScreen extends StatefulWidget {
@@ -49,18 +50,146 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
                 builder: (context, state) {
                   if(state is OrdersSuccessfullyState){
                     OrdersTechnicalCubit ordersCubit = OrdersTechnicalCubit.get(context);
-                    return state.orderResponseModel!.isNotEmpty ?
-                    ListView.builder(
-                      itemCount: state.orderResponseModel!.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                      return   Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                        child: MySendOrderListItem(currentOrder: state.orderResponseModel![index],
-                          heightValue: heightValue,widthValue: widthValue,),
+                    if (state.orderResponseModel!.isNotEmpty) {
+                      return Column(
+                        children: [
+                          Container(
+                            width: Get.width,
+                            height: 75,
+                            decoration: BoxDecoration(
+                              color: Themes.ColorApp14,
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(color: Themes.ColorApp1, width: 1.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  BlocBuilder<ProfileCubit, ProfileState>(
+                                    builder: (context, state) {
+                                      if (state is ProfileSuccessState) {
+                                        return SizedBox(
+                                          height: 75,
+                                          child: Row(
+                                            children: [
+                                              Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    GestureDetector(
+                                                      // onTap: () => PickImage(),
+                                                      child: SizedBox(
+                                                        width: 45,
+                                                        height: 45,
+                                                        child: CircleAvatar(
+                                                          backgroundColor: Themes.whiteColor,
+                                                          child: ClipOval(
+                                                            child: Image.asset(
+                                                              Assets.imagesLogoApp,
+                                                              fit: BoxFit.contain,
+                                                              height: 45,
+                                                              width: 45,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 15,
+                                                    ),
+                                                    state is ProfileLoadingState
+                                                        ? const CircularProgressIndicator(
+                                                      color: Themes.ColorApp1,
+                                                    )
+                                                        : Column(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'welcome_back'.tr,
+                                                          style: const TextStyle(
+                                                              fontSize: 15,
+                                                              color: Themes.ColorApp1),
+                                                        ),
+                                                        SizedBox(
+                                                          height: heightValue * .2,
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              '${state.profileResponseModel?.firstname ?? ''} ${state.profileResponseModel?.lastname ?? ' '}',
+                                                              style: TextStyle(
+                                                                  fontSize: 13,
+                                                                  color: Themes.ColorApp1),
+                                                            )
+                                                          ],
+                                                        )
+                                                      ],
+                                                    )
+                                                  ])
+                                            ],
+                                          ),
+                                        );
+                                      } else if (state is ProfileErrorState) {
+                                        return Container(
+                                          width: Get.width,
+                                          child: Center(
+                                            child: Text('${state.error}'),
+                                          ),
+                                        );
+                                      }
+                                      return Container(
+                                        width: Get.width,
+                                        child: const Center(
+                                          child: CircularProgressIndicator(
+                                            color: Themes.ColorApp1,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        Get.to(const MyNotificationScreen());
+                                      },
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(7.0),
+                                        child: CircleAvatar(
+                                          backgroundColor: Themes.ColorApp1,
+                                          child: Center(
+                                              child: Icon(
+                                                Icons.notifications_none,
+                                                color: Themes.whiteColor,
+                                              )),
+                                        ),
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: heightValue * 1.5,
+                          ),
+                          ListView.builder(
+                          itemCount: state.orderResponseModel!.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                          return   Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                            child: MySendOrderListItem(currentOrder: state.orderResponseModel![index],
+                              heightValue: heightValue,widthValue: widthValue,),
+                          );
+                          },),
+                        ],
                       );
-                      },): NoItemOFList();
+                    }
+                    else {
+                      return NoItemOFList();
+                    }
                   }else if (state is OrdersErrorState){
                     return LoadingWidget(data: state.error);
                   }

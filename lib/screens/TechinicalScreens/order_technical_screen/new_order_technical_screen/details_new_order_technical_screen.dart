@@ -3,6 +3,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:pain_appertment/business_logic/technical_controller/add_price_order/add_price_order_cubit.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/home_technical_main_screen/home_techincal_main_screen.dart';
 import 'package:pain_appertment/utils/constant/style.dart';
@@ -232,17 +233,27 @@ class _DetailsNewOrderTechnicalScreenState extends State<DetailsNewOrderTechnica
         btnOkText: 'موافق',
         btnCancelColor: Themes.ColorApp9,
         btnOkColor: Themes.ColorApp17,
-        btnCancelOnPress: () {
+        btnCancelOnPress: () async{
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
                   (_) => false);
+          final InAppReview inAppReview = InAppReview.instance;
+
+          if (await inAppReview.isAvailable()) {
+          inAppReview.requestReview();
+          }
         },
-        btnOkOnPress: () {
+        btnOkOnPress: () async{
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const HomeTechincalMainScreen()),
                   (_) => false);
+          final InAppReview inAppReview = InAppReview.instance;
+
+          if (await inAppReview.isAvailable()) {
+          inAppReview.requestReview();
+          }
         },
       ).show();
 

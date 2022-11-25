@@ -339,10 +339,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         btnCancelColor: Themes.ColorApp9,
         btnOkColor: Themes.ColorApp17,
         btnCancelOnPress: () {
-          Navigator.pop(context);
+         // Navigator.pop(context);
         },
         btnOkOnPress: () {
-          Navigator.pop(context);
+        //  Navigator.pop(context);
         },
       ).show();
     } else if (state is RegisterSuccessState) {
