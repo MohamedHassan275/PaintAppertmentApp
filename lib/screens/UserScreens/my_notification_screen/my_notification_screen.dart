@@ -222,84 +222,91 @@ class _ChangeLanguageBottomSheetItemState extends State<ChangeLanguageBottomShee
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddRateCubit,AddRateState>(
-      listener: (context, state) {
-        _handleAddRateToTechnical(context, state);
+    return WillPopScope(
+      onWillPop: () async{
+        print('back screen');
+        Get.to(const HomeMainScreen());
+        return false;
       },
-      builder: (context, state) {
-        AddRateCubit addRateCubit = AddRateCubit.get(context);
-        return SizedBox(
-          width: Get.width,
-          height: 325,
-          child: Padding(
-            padding: const EdgeInsets.all(7.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment:
-                CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: widget.heightValue! * 2.5,
-                  ),
-                  Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          SmoothStarRating(
-                            rating: rating,
-                            size: 30,
-                            starCount: 5,
-                            borderColor: Themes.ColorApp13,
-                            color: Themes.ColorApp13,
-                            onRatingChanged: (value) {
-                              setState(() {
-                                rating = value;
+      child: BlocConsumer<AddRateCubit,AddRateState>(
+        listener: (context, state) {
+          _handleAddRateToTechnical(context, state);
+        },
+        builder: (context, state) {
+          AddRateCubit addRateCubit = AddRateCubit.get(context);
+          return SizedBox(
+            width: Get.width,
+            height: 325,
+            child: Padding(
+              padding: const EdgeInsets.all(7.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment:
+                  CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: widget.heightValue! * 2.5,
+                    ),
+                    Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            SmoothStarRating(
+                              rating: rating,
+                              size: 30,
+                              starCount: 5,
+                              borderColor: Themes.ColorApp13,
+                              color: Themes.ColorApp13,
+                              onRatingChanged: (value) {
+                                setState(() {
+                                  rating = value;
+                                  //print('rating');
+                                  //print(rating);
+                                });
+                              },
+                            ),
+                            // CustomTextFieldWidget(title: 'rate_technical', maxLength: 2,keyboardType: TextInputType.number,
+                            //     textEditingController: rateTechnicalNumberController),
+                            SizedBox(height: widget.heightValue! * 1.5,),
+                            CustomTextFieldWidget(title: 'rate_technical',keyboardType: TextInputType.text,
+                                textEditingController: rateTechnicalTextController),
+                            SizedBox(height: widget.heightValue! * .5,),
+                            state is AddRateLoadingState
+                                ? CirclerProgressIndicatorWidget(isLoading: true)
+                                : Container(),
+                            SizedBox(height: widget.heightValue! * .7,),
+                            CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
+                              if(formKey.currentState!.validate()){
+                               // CustomFlutterToast(widget.orderResponseModel.orderId.toString());
+                              //  CustomFlutterToast(rateTechnicalTextController.text);
+                                //print('serviceId');
+                                //print(widget.orderResponseModel.serviceId);
+                                //print('orderId');
+                                //print(widget.orderResponseModel.orderId);
                                 //print('rating');
                                 //print(rating);
-                              });
-                            },
-                          ),
-                          // CustomTextFieldWidget(title: 'rate_technical', maxLength: 2,keyboardType: TextInputType.number,
-                          //     textEditingController: rateTechnicalNumberController),
-                          SizedBox(height: widget.heightValue! * 1.5,),
-                          CustomTextFieldWidget(title: 'rate_technical',keyboardType: TextInputType.text,
-                              textEditingController: rateTechnicalTextController),
-                          SizedBox(height: widget.heightValue! * .5,),
-                          state is AddRateLoadingState
-                              ? CirclerProgressIndicatorWidget(isLoading: true)
-                              : Container(),
-                          SizedBox(height: widget.heightValue! * .7,),
-                          CustomButtonImage(title: 'rate_technical'.tr, hight: 50, onTap: (){
-                            if(formKey.currentState!.validate()){
-                             // CustomFlutterToast(widget.orderResponseModel.orderId.toString());
-                            //  CustomFlutterToast(rateTechnicalTextController.text);
-                              //print('serviceId');
-                              //print(widget.orderResponseModel.serviceId);
-                              //print('orderId');
-                              //print(widget.orderResponseModel.orderId);
-                              //print('rating');
-                              //print(rating);
-                              //print('comment');
-                              //print(rateTechnicalTextController.text);
+                                //print('comment');
+                                //print(rateTechnicalTextController.text);
 
-                              addRateCubit.addRateToTechnicalFromUser('${widget.orderResponseModel.serviceId}',
-                                  widget.orderResponseModel.orderId.toString(),
-                                  rating, rateTechnicalTextController.text);
-                            }
-                          }),
-                          SizedBox(height: widget.heightValue! * 2,)
-                        ],
-                      )),
-                  SizedBox(
-                    height: widget.heightValue! * 1.5,
-                  ),
-                ],
+                                addRateCubit.addRateToTechnicalFromUser('${widget.orderResponseModel.serviceId}',
+                                    widget.orderResponseModel.orderId.toString(),
+                                    rating, rateTechnicalTextController.text);
+                              }
+                            }),
+                            SizedBox(height: widget.heightValue! * 2,)
+                          ],
+                        )),
+                    SizedBox(
+                      height: widget.heightValue! * 1.5,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
 
   }

@@ -129,78 +129,72 @@ class _HomeScreenState extends State<HomeScreen> {
                                   if (state is ProfileSuccessState) {
                                     return SizedBox(
                                       height: 75,
-                                      child: Row(
-                                        children: [
-                                          Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                GestureDetector(
-                                                  // onTap: () => PickImage(),
-                                                  child: SizedBox(
-                                                    width: 45,
-                                                    height: 45,
-                                                    child: CircleAvatar(
-                                                      backgroundColor: Themes.whiteColor,
-                                                      child: ClipOval(
-                                                        child: Image.asset(
-                                                          Assets.imagesLogoApp,
-                                                          fit: BoxFit.contain,
-                                                          height: 45,
-                                                          width: 45,
-                                                        ),
-                                                      ),
+                                      child:  Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            GestureDetector(
+                                              // onTap: () => PickImage(),
+                                              child: SizedBox(
+                                                width: 45,
+                                                height: 45,
+                                                child: CircleAvatar(
+                                                  backgroundColor: Themes.whiteColor,
+                                                  child: ClipOval(
+                                                    child: Image.asset(
+                                                      Assets.imagesLogoApp,
+                                                      fit: BoxFit.contain,
+                                                      height: 45,
+                                                      width: 45,
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(
-                                                  width: 15,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            state is ProfileLoadingState
+                                                ? const CircularProgressIndicator(
+                                              color: Themes.ColorApp1,
+                                            )
+                                                : Column(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'welcome_back'.tr,
+                                                  style: const TextStyle(
+                                                      fontSize: 15,
+                                                      color: Themes.ColorApp1),
                                                 ),
-                                                state is ProfileLoadingState
-                                                    ? const CircularProgressIndicator(
-                                                  color: Themes.ColorApp1,
-                                                )
-                                                    : Column(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                SizedBox(
+                                                  height: height * .2,
+                                                ),
+                                                Row(
                                                   children: [
                                                     Text(
-                                                      'welcome_back'.tr,
-                                                      style: const TextStyle(
-                                                          fontSize: 15,
+                                                      '${state.profileResponseModel?.firstname ?? ''} ${state.profileResponseModel?.lastname ?? ' '}',
+                                                      style: TextStyle(
+                                                          fontSize: 13,
                                                           color: Themes.ColorApp1),
-                                                    ),
-                                                    SizedBox(
-                                                      height: height * .2,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          '${state.profileResponseModel?.firstname ?? ''} ${state.profileResponseModel?.lastname ?? ' '}',
-                                                          style: TextStyle(
-                                                              fontSize: 13,
-                                                              color: Themes.ColorApp1),
-                                                        )
-                                                      ],
                                                     )
                                                   ],
                                                 )
-                                              ])
-                                        ],
-                                      ),
+                                              ],
+                                            )
+                                          ]),
                                     );
                                   } else if (state is ProfileErrorState) {
                                     return Container(
-                                      width: Get.width,
                                       child: Center(
                                         child: Text('${state.error}'),
                                       ),
                                     );
                                   }
                                   return Container(
-                                    width: Get.width,
                                     child: const Center(
                                       child: CircularProgressIndicator(
                                         color: Themes.ColorApp1,

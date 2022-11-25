@@ -42,106 +42,113 @@ class _RequestMyServiceScreenState extends State<RequestMyServiceScreen> {
    final stateProfile = context.watch<ProfileCubit>().state;
     var height = Get.height * 0.024;
     var width = Get.width * 0.024;
-    return Scaffold(
-      body: SafeArea(
-        child: BlocConsumer<AddOrderCubit,AddOrderState>(
-          listener: (context, state) {
-            _handleLoginListener(context, state);
-          },
-          builder: (context, state) {
-          AddOrderCubit addOrderCubit = AddOrderCubit.get(context);
-          if(stateProfile is ProfileSuccessState){
-            firstNameController.text = stateProfile.profileResponseModel?.firstname ?? '';
-            lastNameController.text = stateProfile.profileResponseModel?.lastname ?? '';
-            mobilePhoneController.text = stateProfile.profileResponseModel?.phone ?? '';
-            governmentController.text = stateProfile.profileResponseModel?.governorate ?? '';
-            cityController.text = stateProfile.profileResponseModel?.city ?? '';
-            return SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    SizedBox(height: height * 1.5,),
-                    const Text(
-                      'طلب عرض سعر  لتكاليف شقتك',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 19,
-                        overflow: TextOverflow.fade,
-                        color: Themes.ColorApp15,
+    return WillPopScope(
+      onWillPop: () async{
+        print('back screen');
+        Get.to(const HomeMainScreen());
+        return false;
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocConsumer<AddOrderCubit,AddOrderState>(
+            listener: (context, state) {
+              _handleLoginListener(context, state);
+            },
+            builder: (context, state) {
+            AddOrderCubit addOrderCubit = AddOrderCubit.get(context);
+            if(stateProfile is ProfileSuccessState){
+              firstNameController.text = stateProfile.profileResponseModel?.firstname ?? '';
+              lastNameController.text = stateProfile.profileResponseModel?.lastname ?? '';
+              mobilePhoneController.text = stateProfile.profileResponseModel?.phone ?? '';
+              governmentController.text = stateProfile.profileResponseModel?.governorate ?? '';
+              cityController.text = stateProfile.profileResponseModel?.city ?? '';
+              return SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      SizedBox(height: height * 1.5,),
+                      const Text(
+                        'طلب عرض سعر  لتكاليف شقتك',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 19,
+                          overflow: TextOverflow.fade,
+                          color: Themes.ColorApp15,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: height * 1.5,),
-                    CustomTextFieldWidget(title: 'first_name', keyboardType: TextInputType.text, textEditingController: firstNameController),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    CustomTextFieldWidget(title: 'last_name', keyboardType: TextInputType.text, textEditingController: lastNameController),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    CustomTextFieldWidget(title: 'mobile_number', keyboardType: TextInputType.number, textEditingController: mobilePhoneController,maxLength: 11),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(child: CustomTextFieldWidget(title: 'country', keyboardType: TextInputType.text,
-                            textEditingController: governmentController)),
-                        Expanded(child: CustomTextFieldWidget(title: 'state', keyboardType: TextInputType.text,
-                            textEditingController: cityController)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(child: CustomTextFieldWidget(title: 'distance_appertment', keyboardType: TextInputType.number,
-                            textEditingController: distanceAppermentController)),
-                        Expanded(child: CustomTextFieldWidget(title: 'room_number', keyboardType: TextInputType.number, textEditingController: roomNumberController)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    CustomTextFieldWidget(title: 'rest_room', keyboardType: TextInputType.number, textEditingController: restRoomController),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    CustomTextFieldWidget(title: 'details_service', keyboardType: TextInputType.text, textEditingController: detailsOrderController),
-                    SizedBox(
-                      height: height * 1,
-                    ),
-                    state is AddOrderLoadingState ?
-                    CirclerProgressIndicatorWidget(isLoading: true) :
-                    Container(),
-                    SizedBox(height: height * 1,),
-                    CustomButtonImage(title: 'request_price2', hight: 50, onTap: (){
-                      if(formKey.currentState!.validate()){
-                        addOrderCubit.addOrderUser(context,'${widget.companyId}', distanceAppermentController.text,
-                            roomNumberController.text, restRoomController.text, firstNameController.text,
-                            lastNameController.text, mobilePhoneController.text,
-                            governmentController.text, cityController.text,detailsOrderController.text);
-                      }
-                    }),
-                    SizedBox(height: height * 1,),
-                  ],
+                      SizedBox(height: height * 1.5,),
+                      CustomTextFieldWidget(title: 'first_name', keyboardType: TextInputType.text, textEditingController: firstNameController),
+                      SizedBox(
+                        height: height * 1,
+                      ),
+                      CustomTextFieldWidget(title: 'last_name', keyboardType: TextInputType.text, textEditingController: lastNameController),
+                      SizedBox(
+                        height: height * 1,
+                      ),
+                      CustomTextFieldWidget(title: 'mobile_number', keyboardType: TextInputType.number, textEditingController: mobilePhoneController,maxLength: 11),
+                      SizedBox(
+                        height: height * 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(child: CustomTextFieldWidget(title: 'country', keyboardType: TextInputType.text,
+                              textEditingController: governmentController)),
+                          Expanded(child: CustomTextFieldWidget(title: 'state', keyboardType: TextInputType.text,
+                              textEditingController: cityController)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: height * 1,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(child: CustomTextFieldWidget(title: 'distance_appertment', keyboardType: TextInputType.number,
+                              textEditingController: distanceAppermentController)),
+                          Expanded(child: CustomTextFieldWidget(title: 'room_number', keyboardType: TextInputType.number, textEditingController: roomNumberController)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: height * 1,
+                      ),
+                      CustomTextFieldWidget(title: 'rest_room', keyboardType: TextInputType.number, textEditingController: restRoomController),
+                      SizedBox(
+                        height: height * 1,
+                      ),
+                      CustomTextFieldWidget(title: 'details_service', keyboardType: TextInputType.text, textEditingController: detailsOrderController),
+                      SizedBox(
+                        height: height * 1,
+                      ),
+                      state is AddOrderLoadingState ?
+                      CirclerProgressIndicatorWidget(isLoading: true) :
+                      Container(),
+                      SizedBox(height: height * 1,),
+                      CustomButtonImage(title: 'request_price2', hight: 50, onTap: (){
+                        if(formKey.currentState!.validate()){
+                          addOrderCubit.addOrderUser(context,'${widget.companyId}', distanceAppermentController.text,
+                              roomNumberController.text, restRoomController.text, firstNameController.text,
+                              lastNameController.text, mobilePhoneController.text,
+                              governmentController.text, cityController.text,detailsOrderController.text);
+                        }
+                      }),
+                      SizedBox(height: height * 1,),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }
-         return Container(
-           width: Get.width,
-           height: Get.height,
-           child: const Center(
-             child: CircularProgressIndicator(color: Themes.ColorApp1,),
-           ),
-         );
-        },),
-        ),
+              );
+            }
+           return Container(
+             width: Get.width,
+             height: Get.height,
+             child: const Center(
+               child: CircularProgressIndicator(color: Themes.ColorApp1,),
+             ),
+           );
+          },),
+          ),
 
+      ),
     );
   }
 

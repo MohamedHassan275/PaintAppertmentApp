@@ -146,6 +146,7 @@ class MyTranslation extends Translations{
       "you_have_offers" : "لديك من العروض",
       "offers" : "عروض",
       "watch" : "مشاهدة",
+      "refresh_data" : "تحديث البيانات",
       "no_requests_offers_have_added_before" : "لايوجد اي طلبات عروض تمت اضافتها من قبل",
       "no_requests_service_have_added_before" : "لايوجد اي طلبات خدامات تمت اضافتها من قبل",
       "no_company_have_favorite" : "لايوجد اي شركات في المفضلة",
