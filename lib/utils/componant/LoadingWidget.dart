@@ -15,15 +15,16 @@ class LoadingWidget extends StatelessWidget {
       width: Get.width,
       height: Get.height,
       decoration: const BoxDecoration(color: Colors.white),
-      child:  Center(
-          child: Column(
-            children: [
-              Text(data!),
-              SpinKitCircle(
+      child:  Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(data!),
+          SpinKitCircle(
         color: Themes.ColorApp1,
       ),
-            ],
-          )),
+        ],
+      ),
     );
   }
 }

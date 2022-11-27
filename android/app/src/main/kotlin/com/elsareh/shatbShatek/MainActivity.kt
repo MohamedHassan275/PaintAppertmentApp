@@ -1,4 +1,4 @@
-package com.elsareh.shatbShaqtek
+package com.elsareh.shatbShatek
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -32,7 +32,7 @@ class _SettingScreenState extends State<SettingScreen> {
     await FlutterShare.share(
         title: 'مشاركة تطبيق شطب شقتك',
         text: 'شارك اصحابك ومعارفك التطبيق اللى هيريح ويسهل حياتهم من خلال طلب الخدمات من التطبيق بكل سهولة',
-        linkUrl: "https://play.google.com/store/apps/details?id=" + 'com.elsareh.shatbShaqtek',
+        linkUrl: "https://play.google.com/store/apps/details?id=" + 'com.elsareh.shatbShatek',
         chooserTitle: 'اختار صح');
   }
 
@@ -251,9 +251,64 @@ class _SettingScreenState extends State<SettingScreen> {
                                         imageTitle: Assets.iconsLanguageImage,
                                         heightValue: heightValue),
 
+
                                   ],
                                 ),
                               ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: heightValue * 1,
+                          ),
+                          SizedBox(
+                            height: heightValue * 1,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Container(
+                              width: Get.width,
+                              height: 75,
+                              decoration: BoxDecoration(
+                                color: Themes.ColorApp14,
+                                borderRadius: BorderRadius.circular(25),
+                                border: Border.all(color: Themes.ColorApp1, width: 1.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: ()=>  BlocProvider.of<AuthCubit>(context).deleteAccount(context),
+                                      child: SizedBox(
+                                        height: 75,
+                                        child:  Row(
+                                            children: [
+                                              Text(
+                                                'delete_account'.tr,
+                                                style: const TextStyle(
+                                                    fontSize: 15,
+                                                    color: Themes.ColorApp1),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                    InkWell(
+                                        onTap: () => BlocProvider.of<AuthCubit>(context).deleteAccount(context),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(7.0),
+                                          child: CircleAvatar(
+                                            backgroundColor: Themes.ColorApp1,
+                                            child: Center(
+                                                child: Icon(
+                                                  Icons.delete_forever_rounded,
+                                                  color: Themes.whiteColor,
+                                                )),
+                                          ),
+                                        ))
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(

@@ -104,4 +104,18 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
+  deleteAccount(BuildContext context){
+    emit(LoginLoadingState());
+    AuthService.deleteAccount().then((value){
+      if(value?.success == true){
+        emit(LoginoutSuccessState(value?.message));
+        CustomFlutterToast(value?.message);
+        Get.find<StorageService>().clear();
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
+      }else {
+        emit(ErrorLoginState(value?.message));
+      }
+    });
+  }
+
 }

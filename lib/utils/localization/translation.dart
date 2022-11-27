@@ -16,6 +16,7 @@ class MyTranslation extends Translations{
       "title_boarding3" : "دلوقتي بضغطة زر تقدر تطلب خدمات كتير من غير ما تتعب نفسك وتدور علشان عندنا افضل الفنين في كل الخدمات ",
       "title_boarding4" : "دلوقتي انت لو صنيعي او فني او عامل ممكن تشترك معانا كمزود خدمة في اسفل التطبيق",
       "welcome_back" : "اهلا بيك",
+      "delete_account" : "حذف الحساب",
       "mobile_number" : "رقم الموبيل",
       "password" : "كلمة المرور",
       "logout" : "تسجيل خروج",

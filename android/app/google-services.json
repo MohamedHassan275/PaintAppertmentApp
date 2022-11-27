@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:758298190045:android:8cc16dac796729690afb34",
         "android_client_info": {
-          "package_name": "com.elsareh.shatbShaqtek"
+          "package_name": "com.elsareh.shatbShatek"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "758298190045-2hbu9faqe1h28o9jl5osoq0831h99sn1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.elsareh.shatbShaqtek",
+            "package_name": "com.elsareh.shatbShatek",
             "certificate_hash": "a03905749843118f6c547ded9777c481f8e60479"
           }
         },
@@ -42,7 +42,7 @@
               "client_id": "758298190045-8f15n6a8tku0j4g1566fsc8iua24uhv3.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.elsareh.com.elsareh.shatbShaqtek"
+                "bundle_id": "com.elsareh.com.elsareh.shatbShatek"
               }
             }
           ]

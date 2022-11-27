@@ -134,4 +134,34 @@ class AuthService{
     return responseUserModel;
   }
 
+  static Future<ResponseUserModel?> deleteAccount() async {
+    ResponseUserModel? responseUserModel;
+
+    try {
+
+      Response response = await APIService.getData(uri: ApiConstants.baseUrl+ApiConstants.deleteAccount,token: AppConstants.tokenSession);
+
+      //   //print(AppLocalStorage.token);
+      if(response.statusCode == 200){
+        //print(response.data);
+        return ResponseUserModel.fromJson(response.data);
+      }else if(response.statusCode == 404){
+        CustomFlutterToast(response.data['data']);
+        CustomFlutterToast(response.data['message']);
+      }
+    }on DioError catch (e){
+      if (e.response != null) {
+        //print('Dio error!');
+        //print('STATUS: ${e.response?.statusCode}');
+        //print('DATA: ${e.response?.data}');
+        //print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        //print('Error sending request!');
+        //print(e.message);
+      }
+    }
+    return responseUserModel;
+  }
+
 }

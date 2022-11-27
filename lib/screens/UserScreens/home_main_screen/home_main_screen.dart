@@ -446,7 +446,7 @@ class _HomeMainScreenState extends State<HomeMainScreen>
                 body: Center(
               child: AnimatedTextKit(
                 animatedTexts: [
-                  WavyAnimatedText('Markety',
+                  WavyAnimatedText('شطب شقتك',
                       textStyle: const TextStyle(
                           fontSize: 20.0,
                           color: Themes.ColorApp1,

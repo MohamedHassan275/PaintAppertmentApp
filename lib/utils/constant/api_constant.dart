@@ -10,6 +10,7 @@ class ApiConstants {
   static const  String login = '/login';
   static const String register = '/register';
   static const String logout = "/logout";
+  static const String deleteAccount = "/delete_account";
   static const String activeCode = "/activcode";
   static const String changePasswordForgetPassword = "/rechangepass";
   static const String profile = "/profile";
