@@ -8,9 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/orders_cubit/orders_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/model/home_model.dart';
+import 'package:pain_appertment/model/slider_model_local.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_image_screen/details_service_image_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/details_service_screen/details_service_screen.dart';
 import 'package:pain_appertment/screens/UserScreens/request_my_service_screen/request_my_service_screen.dart';
@@ -30,9 +34,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   final InAppReview _inAppReview = InAppReview.instance;
-    //com.elsareh.shatbShaqtek
-  String _appStoreId = 'com.facebook.mlite';
-  String _microsoftStoreId = '';
   Availability _availability = Availability.loading;
 
   void rateUser() async{
@@ -71,22 +72,21 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _setAppStoreId(String id) => _appStoreId = id;
-
-  void _setMicrosoftStoreId(String id) => _microsoftStoreId = id;
-
-  Future<void> _requestReview() => _inAppReview.requestReview();
-
-  Future<void> _openStoreListing() => _inAppReview.openStoreListing(
-    appStoreId: _appStoreId,
-    microsoftStoreId: _microsoftStoreId,
-  );
-
-
   loadData() {
     BlocProvider.of<HomeCubit>(context, listen: false).getHomeUser();
     BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
+    BlocProvider.of<OrdersCubit>(context, listen: false).getSenderOrderUser();
+    BlocProvider.of<CurrentOrdersCubit>(context, listen: false).getCurrentOrderUser();
+    BlocProvider.of<PreviousOrdersCubit>(context, listen: false).getPreviousOrderUser();
   }
+
+  List<SliderModelLocal> listSlider = [
+    SliderModelLocal(image: Assets.imagesLogoApp),
+    SliderModelLocal(image: Assets.imagesLogoApp),
+    SliderModelLocal(image: Assets.imagesLogoApp),
+    SliderModelLocal(image: Assets.imagesLogoApp),
+    SliderModelLocal(image: Assets.imagesLogoApp),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -225,6 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: height * 1.5,
                       ),
+                      state.homeResponseModel!.sliders!.isNotEmpty ?
                       Card(
                         color: Themes.whiteColor,
                         shape: RoundedRectangleBorder(
@@ -261,6 +262,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                 autoPlayInterval: const Duration(seconds: 3),
                                 autoPlayAnimationDuration:
                                     const Duration(seconds: 1),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                scrollDirection: Axis.horizontal,
+                              )),
+                        ),
+                      ) :
+                      Card(
+                        color: Themes.whiteColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: CarouselSlider(
+                              items: listSlider.map((e) => ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child:
+                                FadeInImage(
+                                  image: NetworkImage(
+                                      '${e.image}'),
+                                  height: 200,
+                                  width: Get.width,
+                                  fit: BoxFit.fill,
+                                  placeholder:
+                                  const AssetImage(Assets.imagesLoading),
+                                ),
+                              ))
+                                  .toList(),
+                              options: CarouselOptions(
+                                height: 200,
+                                aspectRatio: 2.0,
+                                viewportFraction: 1.0,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: const Duration(seconds: 3),
+                                autoPlayAnimationDuration:
+                                const Duration(seconds: 1),
                                 autoPlayCurve: Curves.fastOutSlowIn,
                                 scrollDirection: Axis.horizontal,
                               )),

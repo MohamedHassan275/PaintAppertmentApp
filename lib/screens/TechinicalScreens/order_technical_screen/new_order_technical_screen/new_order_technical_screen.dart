@@ -1,8 +1,15 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:pain_appertment/business_logic/technical_controller/current_technical_orders_cubit/current_technical_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/technical_controller/orders_technical_cubit/orders_technical_cubit.dart';
+import 'package:pain_appertment/business_logic/technical_controller/previous_technical_orders_cubit/previous_technical_orders_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/current_orders_cubit/current_orders_cubit.dart';
+import 'package:pain_appertment/business_logic/user_controller/previous_orders_cubit/previous_orders_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
 import 'package:pain_appertment/model/order_model.dart';
 import 'package:pain_appertment/utils/componant/LoadingWidget.dart';
@@ -11,6 +18,7 @@ import 'package:pain_appertment/utils/constant/custom_toast.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../utils/constant/Themes.dart';
+import '../../../UserScreens/home_screen/home_screen.dart';
 import '../../../UserScreens/my_notification_screen/my_notification_screen.dart';
 import 'details_new_order_technical_screen.dart';
 
@@ -23,13 +31,54 @@ class NewOrderTechnicalScreen extends StatefulWidget {
 
 class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
 
+  final InAppReview _inAppReview = InAppReview.instance;
+  Availability _availability = Availability.loading;
+
+  void rateUser() async{
+    final InAppReview inAppReview = InAppReview.instance;
+
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     //print('tokenSession');
     //print(AppConstants.tokenSession);
+    rateUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        final isAvailable = await _inAppReview.isAvailable();
+
+        setState(() {
+          // This plugin cannot be tested on Android by installing your app
+          // locally. See https://github.com/britannio/in_app_review#testing for
+          // more information.
+          _availability = isAvailable && !Platform.isAndroid
+              ? Availability.available
+              : Availability.unavailable;
+        });
+      } catch (e) {
+        setState(() => _availability = Availability.unavailable);
+      }
+    });
+
+    //print('token is ${AppConstants.tokenSession}');
+    setState(() {
+      loadData();
+    });
+
+
+  }
+
+  void loadData(){
     BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
+    BlocProvider.of<CurrentTechnicalOrdersCubit>(context).getCurrentTechnicalOrderUser();
+    BlocProvider.of<PreviousOrdersTechnicalCubit>(context).getPreviousTechnicalOrderUser();
+    BlocProvider.of<ProfileCubit>(context).showUserDetails();
   }
 
   @override
@@ -40,8 +89,8 @@ class _NewOrderTechnicalScreenState extends State<NewOrderTechnicalScreen> {
       onRefresh: () async{
         //print('refresh');
         //print('${AppConstants.typeSession}');
-        BlocProvider.of<OrdersTechnicalCubit>(context).getNewTechnicalOrderUser();
-        BlocProvider.of<ProfileCubit>(context).showUserDetails();
+        loadData();
+
       },
       child: Scaffold(
         body: SafeArea(

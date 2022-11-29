@@ -248,7 +248,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                           BlocProvider.of<AuthCubit>(context).setLogout(context);
                                         },
                                         title: 'logout'.tr,
-                                        imageTitle: Assets.iconsLanguageImage,
+                                        imageTitle: Assets.imagesLogout,
                                         heightValue: heightValue),
 
 
@@ -256,9 +256,6 @@ class _SettingScreenState extends State<SettingScreen> {
                                 ),
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            height: heightValue * 1,
                           ),
                           SizedBox(
                             height: heightValue * 1,

@@ -248,7 +248,7 @@ class _SettingTechnicalScreenState extends State<SettingTechnicalScreen> {
                                           BlocProvider.of<AuthCubit>(context).setLogout(context);
                                         },
                                         title: 'logout'.tr,
-                                        imageTitle: Assets.iconsLanguageImage,
+                                        imageTitle: Assets.imagesLogout,
                                         heightValue: heightValue),
 
                                   ],

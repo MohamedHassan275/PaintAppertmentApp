@@ -26,6 +26,7 @@ class Assets {
   static const String imagesIconHome2 = 'assets/images/icon_home2.png';
   static const String imagesLoading = 'assets/images/loading.gif';
   static const String imagesLogoApp = 'assets/images/logo_app.jpg';
+  static const String imagesLogout = 'assets/images/logout.png';
   static const String imagesMyOrderHome = 'assets/images/my_order_home.png';
   static const String imagesMyOrderHome2 = 'assets/images/my_order_home2.png';
   static const String imagesNetworkDisConnection = 'assets/images/network_dis_connection.png';
