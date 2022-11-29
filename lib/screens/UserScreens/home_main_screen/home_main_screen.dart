@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_main_cubit/home_main_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/home_cubit/home_cubit.dart';
 import 'package:pain_appertment/business_logic/user_controller/profile_cubit/profile_cubit.dart';
@@ -16,6 +18,7 @@ import '../../../utils/constant/Themes.dart';
 import '../../../utils/constant/constant.dart';
 import '../../../utils/no_internet.dart';
 import '../../../utils/servies/storage_service.dart';
+import '../home_screen/home_screen.dart';
 
 class HomeMainScreen extends StatefulWidget {
   const HomeMainScreen({Key? key}) : super(key: key);
@@ -26,6 +29,18 @@ class HomeMainScreen extends StatefulWidget {
 
 class _HomeMainScreenState extends State<HomeMainScreen>
     with WidgetsBindingObserver {
+
+  final InAppReview _inAppReview = InAppReview.instance;
+  Availability _availability = Availability.loading;
+
+  void rateUser() async{
+    final InAppReview inAppReview = InAppReview.instance;
+
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    }
+  }
+
   Future<void> setupInteractedMessage() async {
     FirebaseMessaging.onMessage.listen((message) {
       if (message.data['type'] == 'Renew') {
@@ -53,6 +68,23 @@ class _HomeMainScreenState extends State<HomeMainScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
+    rateUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        final isAvailable = await _inAppReview.isAvailable();
+
+        setState(() {
+          // This plugin cannot be tested on Android by installing your app
+          // locally. See https://github.com/britannio/in_app_review#testing for
+          // more information.
+          _availability = isAvailable && !Platform.isAndroid
+              ? Availability.available
+              : Availability.unavailable;
+        });
+      } catch (e) {
+        setState(() => _availability = Availability.unavailable);
+      }
+    });
     setState(() {
       BlocProvider.of<ProfileCubit>(context).showUserDetails();
       loadData();

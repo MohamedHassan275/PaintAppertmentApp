@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:pain_appertment/screens/TechinicalScreens/my_notification_technical_screen/my_notification_technical_screen.dart';
 
 import '../../../business_logic/app_layout_cubit/app_layout_cubit.dart';
@@ -16,6 +19,7 @@ import '../../../utils/constant/custom_toast.dart';
 import '../../../utils/no_internet.dart';
 import '../../../utils/servies/storage_service.dart';
 import '../../../utils/widget/custom_circler_progress_indicator_widget.dart';
+import '../../UserScreens/home_screen/home_screen.dart';
 
 class HomeTechincalMainScreen extends StatefulWidget {
   const HomeTechincalMainScreen({Key? key}) : super(key: key);
@@ -26,6 +30,17 @@ class HomeTechincalMainScreen extends StatefulWidget {
 }
 
 class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with WidgetsBindingObserver {
+
+  final InAppReview _inAppReview = InAppReview.instance;
+  Availability _availability = Availability.loading;
+
+  void rateUser() async{
+    final InAppReview inAppReview = InAppReview.instance;
+
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    }
+  }
 
   Future<void> setupInteractedMessage() async {
     FirebaseMessaging.onMessage.listen((message) {
@@ -57,6 +72,25 @@ class _HomeTechincalMainScreenState extends State<HomeTechincalMainScreen> with 
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    rateUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        final isAvailable = await _inAppReview.isAvailable();
+
+        setState(() {
+          // This plugin cannot be tested on Android by installing your app
+          // locally. See https://github.com/britannio/in_app_review#testing for
+          // more information.
+          _availability = isAvailable && !Platform.isAndroid
+              ? Availability.available
+              : Availability.unavailable;
+        });
+      } catch (e) {
+        setState(() => _availability = Availability.unavailable);
+      }
+    });
+
     AppConstants.tokenSession = Get.find<StorageService>().getToken != null ? AppConstants.tokenSession = Get.find<StorageService>().getToken : '';
     //print('token is ${AppConstants.tokenSession}');
     BlocProvider.of<ProfileCubit>(context, listen: false).showUserDetails();
